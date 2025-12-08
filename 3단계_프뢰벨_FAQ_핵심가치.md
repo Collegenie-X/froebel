@@ -312,10 +312,10 @@ graph TD
     F --> G[피상적 이해]
     G --> H[제한된 발전]
     
-    style A fill:#90EE90
-    style D fill:#FF69B4
-    style E fill:#FFA07A
-    style H fill:#FF6347
+    style A fill:#90EE90,color:#111
+    style D fill:#FF69B4,color:#111
+    style E fill:#FFA07A,color:#111
+    style H fill:#FF6347,color:#111
 ```
 
 #### 💡 **바쁜 부모를 위한 30분 루틴**
@@ -356,7 +356,7 @@ graph TD
     C --> D[학생부종합전형]
     
     B --> E[깊은 사고력]
-    E --> F[논술·면접]
+    E --> F[에세이·논술·면접]
     
     B --> G[창의적 문제 해결력]
     G --> H[특기자전형]
@@ -483,7 +483,7 @@ timeline
 
 ```mermaid
 graph TD
-    A{아이 나이는?} --> B[3-7세<br/>유아기]
+    A{아이 나이는?} --> B[2-7세<br/>유아기]
     A --> C[8-9세<br/>초등 저학년]
     A --> D[10-13세<br/>초등 고학년]
     A --> E[14세 이상<br/>중학생]
