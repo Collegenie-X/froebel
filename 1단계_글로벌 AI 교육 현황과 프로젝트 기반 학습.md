@@ -72,9 +72,9 @@ graph TD
     
     style A fill:#FF6B6B,color:#fff
     style G fill:#4ECDC4,color:#fff
-    style H fill:#95E1D3,color:#111
-    style I fill:#95E1D3,color:#111
-    style J fill:#95E1D3,color:#111
+    style H fill:#95E1D3,color:#fff
+    style I fill:#95E1D3,color:#fff
+    style J fill:#95E1D3,color:#fff
 ```
 
 ### 1.3 AI 리터러시 5대 핵심 역량
@@ -122,7 +122,7 @@ graph TB
     Global --> T3[실전 문제 해결]
     Global --> T4[창의성 중시]
     
-    style Global fill:#FFD93D,color:#111
+    style Global fill:#FFD93D,color:#fff
     style T1 fill:#6BCB77,color:#fff
     style T2 fill:#6BCB77,color:#fff
     style T3 fill:#6BCB77,color:#fff
@@ -227,7 +227,7 @@ graph LR
     
     style A fill:#FF6B6B,color:#fff
     style C fill:#4ECDC4,color:#fff
-    style D fill:#95E1D3,color:#111
+    style D fill:#95E1D3,color:#fff
 ```
 
 ### 2.1.4 AI4K12 5대 핵심 개념 심화
@@ -266,7 +266,7 @@ graph TD
     
     style A fill:#FF6B6B,color:#fff
     style E fill:#4ECDC4,color:#fff
-    style F fill:#FFD700,color:#111
+    style F fill:#FFD700,color:#fff
 ```
 
 **학령별 학습 활동**
@@ -347,7 +347,7 @@ graph LR
     
     style A fill:#FF6B6B,color:#fff
     style B fill:#4ECDC4,color:#fff
-    style E fill:#FFD700,color:#111
+    style E fill:#FFD700,color:#fff
 ```
 
 **바이브 코딩으로 머신러닝 프로젝트 만들기**
@@ -395,7 +395,7 @@ graph TD
     
     style A fill:#FF6B6B,color:#fff
     style D fill:#4ECDC4,color:#fff
-    style F fill:#FFD700,color:#111
+    style F fill:#FFD700,color:#fff
 ```
 
 **생성형 AI 시대의 NLP 프로젝트**
@@ -486,7 +486,7 @@ graph TD
     
     style A fill:#FF6B6B,color:#fff
     style E fill:#4ECDC4,color:#fff
-    style F fill:#FFD700,color:#111
+    style F fill:#FFD700,color:#fff
 ```
 
 #### 역량별 상세 설명
@@ -556,8 +556,8 @@ graph LR
     
     style A fill:#FF6B6B,color:#fff
     style B fill:#4ECDC4,color:#fff
-    style G fill:#FFD700,color:#111
-    style I fill:#95E1D3,color:#111
+    style G fill:#FFD700,color:#fff
+    style I fill:#95E1D3,color:#fff
 ```
 
 **바이브 코딩 (Vibe Coding) 실전 예시**
@@ -681,8 +681,8 @@ graph TD
     B4 --> D4[디버깅 시간 10%]
     B5 --> D5[언제나 도움]
     
-    style A fill:#FFA07A,color:#111
-    style B fill:#90EE90,color:#111
+    style A fill:#FFA07A,color:#fff
+    style B fill:#90EE90,color:#fff
 ```
 
 #### 혁명적 변화 비교표
@@ -857,7 +857,7 @@ graph TD
     
     style A fill:#FF6B6B,color:#fff
     style C fill:#4ECDC4,color:#fff
-    style D fill:#95E1D3,color:#111
+    style D fill:#95E1D3,color:#fff
 ```
 
 ### 2.2.1 일본 학령별 AI 교육 체계
@@ -950,7 +950,7 @@ graph TB
     
     style A fill:#FF6B6B,color:#fff
     style C fill:#4ECDC4,color:#fff
-    style D fill:#95E1D3,color:#111
+    style D fill:#95E1D3,color:#fff
 ```
 
 ### 2.3.1 중국 AI 교육 체계
@@ -1042,7 +1042,7 @@ graph LR
     
     style A fill:#FF6B6B,color:#fff
     style C fill:#4ECDC4,color:#fff
-    style D fill:#95E1D3,color:#111
+    style D fill:#95E1D3,color:#fff
 ```
 
 ---
@@ -1144,7 +1144,7 @@ graph LR
     
     style A fill:#FF6B6B,color:#fff
     style B fill:#4ECDC4,color:#fff
-    style E fill:#95E1D3,color:#111
+    style E fill:#95E1D3,color:#fff
 ```
 
 ---
@@ -1201,7 +1201,7 @@ graph TB
     
     E --> F[창의적 문제 해결 인재]
     
-    style 공통점 fill:#FFD93D,color:#111
+    style 공통점 fill:#FFD93D,color:#fff
     style E fill:#4ECDC4,color:#fff
     style F fill:#6BCB77,color:#fff
 ```
@@ -1267,7 +1267,7 @@ graph TD
     
     style A fill:#FF6B6B,color:#fff
     style C fill:#4ECDC4,color:#fff
-    style I fill:#95E1D3,color:#111
+    style I fill:#95E1D3,color:#fff
 ```
 
 ### 3.3 학령별 기업가정신 교육
@@ -1316,9 +1316,9 @@ graph TB
     D --> E3[의사소통]
     D --> E4[비판적 사고]
     
-    style 전통교육 fill:#FFA07A,color:#111
-    style PBL fill:#90EE90,color:#111
-    style D fill:#FFD700,color:#111
+    style 전통교육 fill:#FFA07A,color:#fff
+    style PBL fill:#90EE90,color:#fff
+    style D fill:#FFD700,color:#fff
 ```
 
 ### 4.2 프로젝트 기반 학습의 5대 핵심 요소
@@ -1391,7 +1391,7 @@ graph LR
     
     style A fill:#FF6B6B,color:#fff
     style E fill:#4ECDC4,color:#fff
-    style F fill:#FFD700,color:#111
+    style F fill:#FFD700,color:#fff
 ```
 
 ### 4.4 프로젝트 기반 학습과 AI의 결합
@@ -1560,7 +1560,7 @@ graph TD
     
     style A fill:#FF6B6B,color:#fff
     style C fill:#4ECDC4,color:#fff
-    style E fill:#95E1D3,color:#111
+    style E fill:#95E1D3,color:#fff
 ```
 
 ### 6.2 소크라테스식 질문법
@@ -1624,7 +1624,7 @@ graph LR
     
     style A fill:#FF6B6B,color:#fff
     style E fill:#4ECDC4,color:#fff
-    style G fill:#FFD700,color:#111
+    style G fill:#FFD700,color:#fff
 ```
 
 ### 6.4 미네르바 프로젝트 사례
@@ -1669,7 +1669,7 @@ graph TD
     
     style A fill:#FF6B6B,color:#fff
     style D fill:#4ECDC4,color:#fff
-    style F fill:#FFD700,color:#111
+    style F fill:#FFD700,color:#fff
 ```
 
 ### 6.6 토론식 교육의 효과
@@ -1781,10 +1781,10 @@ graph TD
     M --> M2[사회적 기업 창업]
     M --> M3[연구 혁신 리더]
     
-    style A fill:#FFE5E5,color:#111
-    style E fill:#E5F5FF,color:#111
-    style K fill:#E5CCFF,color:#111
-    style M fill:#FFD700,color:#111
+    style A fill:#FFE5E5,color:#fff
+    style E fill:#E5F5FF,color:#fff
+    style K fill:#E5CCFF,color:#fff
+    style M fill:#FFD700,color:#fff
 ```
 
 ### 7.5 프뢰벨 교육에서 배우는 미네르바 핵심 역량
@@ -1815,10 +1815,10 @@ graph LR
     
     style A fill:#FF6B6B,color:#fff
     style E fill:#4ECDC4,color:#fff
-    style F1 fill:#95E1D3,color:#111
-    style F2 fill:#95E1D3,color:#111
-    style F3 fill:#95E1D3,color:#111
-    style F4 fill:#95E1D3,color:#111
+    style F1 fill:#95E1D3,color:#fff
+    style F2 fill:#95E1D3,color:#fff
+    style F3 fill:#95E1D3,color:#fff
+    style F4 fill:#95E1D3,color:#fff
 ```
 
 ---
@@ -1913,10 +1913,10 @@ graph TD
     
     style A fill:#FF6B6B,color:#fff
     style E fill:#4ECDC4,color:#fff
-    style F1 fill:#FFD700,color:#111
-    style F2 fill:#FFD700,color:#111
-    style F3 fill:#FFD700,color:#111
-    style F4 fill:#FFD700,color:#111
+    style F1 fill:#FFD700,color:#fff
+    style F2 fill:#FFD700,color:#fff
+    style F3 fill:#FFD700,color:#fff
+    style F4 fill:#FFD700,color:#fff
 ```
 
 ---
@@ -2081,8 +2081,8 @@ graph TD
     
     style A fill:#FF6B6B,color:#fff
     style E fill:#4ECDC4,color:#fff
-    style F3 fill:#FFD700,color:#111
-    style H fill:#95E1D3,color:#111
+    style F3 fill:#FFD700,color:#fff
+    style H fill:#95E1D3,color:#fff
 ```
 
 ---

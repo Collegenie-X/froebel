@@ -26,9 +26,9 @@ graph TD
     
     F --> G[차별화된<br/>창의 역량]
     
-    style A fill:#FFD700,color:#111
-    style F fill:#90EE90,color:#111
-    style G fill:#FF69B4,color:#111
+    style A fill:#FFD700,color:#fff
+    style F fill:#90EE90,color:#fff
+    style G fill:#FF69B4,color:#fff
 ```
 
 #### 🎨 **"많이 본다"는 것의 교육적 의미**
@@ -187,9 +187,9 @@ graph TD
     
     L --> M[창의적 사고력<br/>폭발적 성장]
     
-    style A fill:#FFD700,color:#111
-    style L fill:#90EE90,color:#111
-    style M fill:#FF69B4,color:#111
+    style A fill:#FFD700,color:#fff
+    style L fill:#90EE90,color:#fff
+    style M fill:#FF69B4,color:#fff
 ```
 
 #### 🌈 **프뢰벨이 제공하는 다차원 자극**
@@ -259,10 +259,10 @@ graph LR
     J --> K[평생 역량]
     K --> L[창의적 인재]
     
-    style A fill:#FFA07A,color:#111
-    style F fill:#FF6347,color:#111
-    style G fill:#FFD700,color:#111
-    style L fill:#90EE90,color:#111
+    style A fill:#FFA07A,color:#fff
+    style F fill:#FF6347,color:#fff
+    style G fill:#FFD700,color:#fff
+    style L fill:#90EE90,color:#fff
 ```
 
 | 차원 | 일반 교육 (소비형) | 프뢰벨 교육 (생산형) | 10년 후 차이 |
@@ -312,10 +312,10 @@ graph TD
     F --> G[피상적 이해]
     G --> H[제한된 발전]
     
-    style A fill:#90EE90,color:#111
-    style D fill:#FF69B4,color:#111
-    style E fill:#FFA07A,color:#111
-    style H fill:#FF6347,color:#111
+    style A fill:#90EE90,color:#fff
+    style D fill:#FF69B4,color:#fff
+    style E fill:#FFA07A,color:#fff
+    style H fill:#FF6347,color:#fff
 ```
 
 #### 💡 **바쁜 부모를 위한 30분 루틴**
@@ -503,10 +503,10 @@ graph TD
     H --> J[차별화 포인트]
     I --> J[기본 역량 확보]
     
-    style B1 fill:#90EE90,color:#111
-    style C1 fill:#FFD700,color:#111
-    style D1 fill:#87CEEB,color:#111
-    style E1 fill:#FFA07A,color:#111
+    style B1 fill:#90EE90,color:#fff
+    style C1 fill:#FFD700,color:#fff
+    style D1 fill:#87CEEB,color:#fff
+    style E1 fill:#FFA07A,color:#fff
 ```
 
 #### 🚀 **늦게 시작해도 괜찮은 이유**
@@ -575,10 +575,10 @@ graph TD
     E --> L
     K --> L
     
-    style A fill:#FFD700,color:#111
-    style E fill:#90EE90,color:#111
-    style K fill:#87CEEB,color:#111
-    style L fill:#FF69B4,color:#111
+    style A fill:#FFD700,color:#fff
+    style E fill:#90EE90,color:#fff
+    style K fill:#87CEEB,color:#fff
+    style L fill:#FF69B4,color:#fff
 ```
 
 #### 📚 **교육 우선순위 피라미드**
@@ -643,12 +643,12 @@ graph LR
     C --> C1[작품 제작<br/>프로젝트 수행]
     D --> D1[사진·영상 촬영<br/>과정 기록]
     
-    style A fill:#FFE4E1,color:#111
-    style B fill:#FFD700,color:#111
-    style C fill:#90EE90,color:#111
-    style D fill:#87CEEB,color:#111
-    style E fill:#DDA0DD,color:#111
-    style F fill:#FF69B4,color:#111
+    style A fill:#FFE4E1,color:#fff
+    style B fill:#FFD700,color:#fff
+    style C fill:#90EE90,color:#fff
+    style D fill:#87CEEB,color:#fff
+    style E fill:#DDA0DD,color:#fff
+    style F fill:#FF69B4,color:#fff
 ```
 
 #### 📋 **극대화 4단계 상세 가이드**
@@ -735,9 +735,9 @@ graph TD
     E --> F[YouTube 비공개 업로드<br/>or 클라우드 저장]
     F --> G[입시 포트폴리오 활용]
     
-    style A fill:#FFD700,color:#111
-    style E fill:#90EE90,color:#111
-    style G fill:#FF69B4,color:#111
+    style A fill:#FFD700,color:#fff
+    style E fill:#90EE90,color:#fff
+    style G fill:#FF69B4,color:#fff
 ```
 
 **3. 10년 후 가치**
@@ -840,10 +840,10 @@ graph TD
     I --> J[가족 메이커 페어]
     J --> K[포트폴리오 기록]
     
-    style A fill:#FFD700,color:#111
-    style D fill:#87CEEB,color:#111
-    style F fill:#90EE90,color:#111
-    style I fill:#FF69B4,color:#111
+    style A fill:#FFD700,color:#fff
+    style D fill:#87CEEB,color:#fff
+    style F fill:#90EE90,color:#fff
+    style I fill:#FF69B4,color:#fff
 ```
 
 **실제 프로젝트 예시**
@@ -932,9 +932,9 @@ graph TD
     
     E --> F[프뢰벨의 핵심:<br/>놀이와 창조]
     
-    style A fill:#FFD700,color:#111
+    style A fill:#FFD700,color:#fff
     style E fill:#4ECDC4,color:#fff
-    style F fill:#FF69B4,color:#111
+    style F fill:#FF69B4,color:#fff
 ```
 
 #### 📚 프뢰벨 교육이 만든 세계적 인물들
@@ -1027,9 +1027,9 @@ graph LR
     F2 --> G2[실행력]
     G2 --> H2[입시 경쟁력]
     
-    style A fill:#FFD700,color:#111
+    style A fill:#FFD700,color:#fff
     style B fill:#4ECDC4,color:#fff
-    style H1 fill:#FF69B4,color:#111
+    style H1 fill:#FF69B4,color:#fff
 ```
 
 **본인 이준호 학생의 후기**
@@ -1116,7 +1116,7 @@ graph TD
     E --> E3[프로젝트 경험]
     E --> E4[창의적 문제 해결]
     
-    style A fill:#FFD700,color:#111
+    style A fill:#FFD700,color:#fff
     style B1 fill:#4ECDC4,color:#fff
     style C1 fill:#4ECDC4,color:#fff
 ```
@@ -1314,9 +1314,9 @@ graph TD
     J --> K2[특기자전형 78%]
     J --> K3[명문대 합격]
     
-    style A fill:#FFD700,color:#111
+    style A fill:#FFD700,color:#fff
     style B fill:#4ECDC4,color:#fff
-    style J fill:#FF69B4,color:#111
+    style J fill:#FF69B4,color:#fff
 ```
 
 **프뢰벨 교육이 입시에 강한 이유**
@@ -1425,10 +1425,10 @@ graph LR
     I --> J[다음 프로젝트]
     J --> A
     
-    style A fill:#FFE4E1,color:#111
-    style C fill:#FFD700,color:#111
-    style E fill:#90EE90,color:#111
-    style I fill:#FF69B4,color:#111
+    style A fill:#FFE4E1,color:#fff
+    style C fill:#FFD700,color:#fff
+    style E fill:#90EE90,color:#fff
+    style I fill:#FF69B4,color:#fff
 ```
 
 #### 📚 **연령별 메이커 프로젝트 가이드**
@@ -1515,8 +1515,8 @@ graph TD
     H --> J
     I --> J
     
-    style A fill:#FFD700,color:#111
-    style J fill:#FF69B4,color:#111
+    style A fill:#FFD700,color:#fff
+    style J fill:#FF69B4,color:#fff
 ```
 
 #### 💡 **메이커 프로젝트 시작 템플릿**
@@ -1652,10 +1652,10 @@ graph TD
     
     E --> F[학교 수학 우수]
     
-    style A fill:#FFD700,color:#111
-    style C fill:#90EE90,color:#111
-    style E fill:#87CEEB,color:#111
-    style F fill:#FF69B4,color:#111
+    style A fill:#FFD700,color:#fff
+    style C fill:#90EE90,color:#fff
+    style E fill:#87CEEB,color:#fff
+    style F fill:#FF69B4,color:#fff
 ```
 
 #### 📊 **공간 지각력 향상 프로그램**
@@ -1862,10 +1862,10 @@ graph TD
     
     K --> L[입시 자료 확보]
     
-    style A fill:#FFD700,color:#111
-    style G fill:#90EE90,color:#111
-    style K fill:#87CEEB,color:#111
-    style L fill:#FF69B4,color:#111
+    style A fill:#FFD700,color:#fff
+    style G fill:#90EE90,color:#fff
+    style K fill:#87CEEB,color:#fff
+    style L fill:#FF69B4,color:#fff
 ```
 
 ---
