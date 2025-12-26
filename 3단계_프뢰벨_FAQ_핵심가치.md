@@ -768,6 +768,9 @@ timeline
     section 6-7세 (초등 입학)
         공룡 프로젝트 시작 : 종이로 공룡 만들기
         첫 발표 : 유치원에서 공룡 발표
+```
+```mermaid
+timeline
     section 8-9세 (초등 저학년)
         본격 탐구 : 공룡 화석 조사
         과학관 탐방 : 매월 공룡 전시 방문
@@ -827,22 +830,22 @@ timeline
 **극대화 방법: 메이커 페어 프로세스**
 
 ```mermaid
-graph TD
-    A[프뢰벨 그림책] --> B[영감 얻기]
-    B --> C[문제 발견]
+graph LR
+    A[프뢰벨 <br>그림책] --> B[영감 <br>얻기]
+    B --> C[문제 <br> 발견]
     C --> D["무엇을 만들까?"<br/>아이디어 스케치]
-    D --> E[재료 준비]
-    E --> F[제작 과정]
+    D --> E[재료 <br>준비]
+    E --> F[제작 <br>과정]
     F --> G[시행착오]
     G --> H{성공?}
     H -->|실패| F
-    H -->|성공| I[완성 + 발표]
-    I --> J[가족 메이커 페어]
-    J --> K[포트폴리오 기록]
+    H -->|성공| I[완성 <br> 발표]
+    I --> J[가족 <br>메이커<br> 페어]
+    J --> K[포트폴리오 <br>기록]
     
-    style A fill:#FFD700,color:#fff
-    style D fill:#87CEEB,color:#fff
-    style F fill:#90EE90,color:#fff
+    style A fill:#FFD700,color:#f00
+    style D fill:#87CEEB,color:#111
+    style F fill:#90EE90,color:#111
     style I fill:#FF69B4,color:#fff
 ```
 
@@ -1331,30 +1334,7 @@ graph TD
 
 ---
 
-### 8.7 프뢰벨 → 명문대 합격 통계 (2020-2024)
 
-```mermaid
-pie title 프뢰벨 교육 이수자 대학 합격 현황 (300명 조사)
-    "SKY 대학" : 32
-    "서울 주요 대학" : 28
-    "지방 거점 국립대" : 25
-    "특성화대학" : 10
-    "해외 대학" : 5
-```
-
-**입시 유형별 성공률**
-
-| 대학 그룹 | 학생부종합 | 특기자전형 | 논술전형 | 총 합격률 |
-|----------|-----------|-----------|---------|----------|
-| **SKY** | 28% | 3% | 1% | 32% |
-| **서울 주요대** | 22% | 4% | 2% | 28% |
-| **거점 국립대** | 20% | 3% | 2% | 25% |
-| **특성화대** | 8% | 2% | - | 10% |
-| **해외 대학** | 4% | 1% | - | 5% |
-
-*프뢰벨 교육 이수자의 **85%가 학생부종합전형**으로 합격*
-
----
 
 ### 8.8 최종 정리: 프뢰벨 교육의 입시 경쟁력
 
@@ -1425,10 +1405,10 @@ graph LR
     I --> J[다음 프로젝트]
     J --> A
     
-    style A fill:#FFE4E1,color:#fff
-    style C fill:#FFD700,color:#fff
-    style E fill:#90EE90,color:#fff
-    style I fill:#FF69B4,color:#fff
+    style A fill:#FFE4E1,color:#111
+    style C fill:#FFD700,color:#111
+    style E fill:#90EE90,color:#111
+    style I fill:#FF69B4,color:#111
 ```
 
 #### 📚 **연령별 메이커 프로젝트 가이드**
@@ -1966,9 +1946,9 @@ mindmap
 
 ### 🚀 **프뢰벨과 함께 시작하세요**
 
+> 프뢰벨과 함께하는 창의성 발달 여정
 ```mermaid
-journey
-    title 프뢰벨과 함께하는 창의성 발달 여정
+timeline
     section 시작
       프뢰벨 교육 도입: 5: 부모
       아이가 흥미를 보임: 5: 아이
@@ -1976,6 +1956,9 @@ journey
       매일 함께 읽기: 5: 부모, 아이
       질문이 많아짐: 5: 아이
       스스로 만들기 시작: 5: 아이
+```
+```mermaid
+timeline
     section 도약
       프로젝트 완성: 5: 아이
       자신감 폭발: 5: 아이
