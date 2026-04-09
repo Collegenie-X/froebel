@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧒 유아 150패턴 마스터 테스트</title>
+<style>
+  :root{
+    --green:#38a169;--green-l:#c6f6d5;--green-ll:#f0fff4;
+    --red:#e53e3e;--red-l:#fed7d7;--red-ll:#fff5f5;
+    --yellow:#d69e2e;--yellow-l:#fefcbf;--yellow-ll:#fffff0;
+    --blue:#4A90D9;--blue-l:#bee3f8;--blue-ll:#ebf8ff;
+    --purple:#764ba2;--grad:linear-gradient(135deg,#667eea,#764ba2);
+    --bg:#f8f9fa;--card:#fff;--border:#e2e8f0;--radius:12px;
+    --shadow:0 2px 8px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:#2d3748;line-height:1.6;padding-bottom:60px}
+
+  header{background:var(--grad);color:#fff;padding:28px 20px 20px;text-align:center}
+  header h1{font-size:1.7rem;margin-bottom:6px}
+  header p{font-size:.9rem;opacity:.9}
+  .header-badges{display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:.8rem}
+
+  /* Score board */
+  .score-board{max-width:760px;margin:16px auto;padding:0 16px}
+  .score-card{background:#fff;border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:var(--shadow);border:1.5px solid var(--border)}
+  .score-item{text-align:center;flex:1;min-width:70px}
+  .score-num{font-size:1.6rem;font-weight:800}
+  .score-label{font-size:.75rem;color:#718096;font-weight:600}
+  .score-correct .score-num{color:var(--green)}
+  .score-wrong .score-num{color:var(--red)}
+  .score-total .score-num{color:#667eea}
+  .score-pct .score-num{color:#d69e2e}
+  .score-div{width:1px;height:40px;background:var(--border)}
+  .btn-reset{margin-left:auto;padding:7px 16px;border:none;border-radius:8px;background:#e2e8f0;color:#4a5568;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .15s}
+  .btn-reset:hover{background:#cbd5e0}
+
+  /* Ctrl bar */
+  .ctrl-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .ctrl-bar input{flex:1;min-width:160px;padding:7px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;outline:none}
+  .ctrl-bar input:focus{border-color:#667eea}
+  .cbtn{padding:7px 14px;border:none;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:700;transition:all .15s}
+  .cbtn.expand{background:#667eea;color:#fff}.cbtn.collapse{background:#e2e8f0;color:#4a5568}
+  .part-btn{padding:6px 12px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:.8rem;font-weight:700;background:#fff;color:#4a5568;transition:all .15s}
+  .part-btn.active{background:#667eea;color:#fff;border-color:#667eea}
+
+  /* Section header */
+  .section-hdr{max-width:760px;margin:20px auto 10px;padding:0 16px}
+  .section-hdr h2{font-size:1rem;font-weight:800;color:#667eea;padding:10px 14px;background:#fff;border-radius:var(--radius);border-left:4px solid #667eea;box-shadow:var(--shadow)}
+
+  /* Q card */
+  main{max-width:760px;margin:0 auto;padding:0 16px}
+  .q-wrap{margin-bottom:10px}
+  .q-details{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1.5px solid var(--border);overflow:hidden;transition:border-color .2s}
+  .q-details.answered-ok{border-color:#68d391}
+  .q-details.answered-ng{border-color:#fc8181}
+  .q-summary{cursor:pointer;display:flex;align-items:center;gap:10px;padding:12px 16px;list-style:none;user-select:none;background:linear-gradient(90deg,#f7f8fc,#fff);transition:background .2s}
+  .q-summary::-webkit-details-marker{display:none}
+  .q-details[open] .q-summary{background:linear-gradient(90deg,#eef2ff,#f7f8ff)}
+  .q-summary:hover{background:#eef2ff}
+  .q-num{background:var(--grad);color:#fff;border-radius:7px;padding:3px 9px;font-size:.75rem;font-weight:700;white-space:nowrap}
+  .q-part{font-size:.7rem;background:#e2e8f0;color:#718096;border-radius:8px;padding:2px 7px;font-weight:700}
+  .q-text{font-size:.95rem;font-weight:700;flex:1}
+  .q-hint-badge{font-size:.72rem;padding:2px 6px;border-radius:5px;font-weight:700;white-space:nowrap}
+  .hint-easy{background:var(--green-l);color:#276749}
+  .hint-mid{background:var(--yellow-l);color:#744210}
+  .hint-hard{background:var(--red-l);color:#9b2c2c}
+  .q-status{font-size:1rem;min-width:20px;text-align:center}
+
+  .q-body{padding:12px 16px 16px;border-top:1px solid var(--border)}
+
+  /* Hint box */
+  .hint-box{background:var(--yellow-ll);border:1.5px solid var(--yellow-l);border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:.88rem;font-family:monospace;color:#744210;letter-spacing:1px;display:none}
+  .hint-box.visible{display:block}
+
+  /* Answer box */
+  .ans-box{background:var(--green-ll);border:1.5px solid var(--green-l);border-radius:8px;padding:10px 14px;margin-bottom:10px;display:none;align-items:center;gap:10px}
+  .ans-box.visible{display:flex}
+  .ans-en{font-size:1rem;font-weight:800;color:#276749;flex:1}
+  .ans-ko{font-size:.82rem;color:#4a5568;margin-top:2px}
+  .btn-speak{padding:4px 12px;border:none;border-radius:6px;font-size:.76rem;cursor:pointer;font-weight:700;background:linear-gradient(135deg,#38a169,#2f855a);color:#fff;white-space:nowrap;transition:all .2s;box-shadow:0 2px 5px rgba(56,161,105,.3)}
+  .btn-speak:hover{transform:translateY(-1px)}
+  .btn-speak.speaking{background:linear-gradient(135deg,#e53e3e,#c53030);animation:pulse .9s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.72}}
+
+  /* Action row */
+  .action-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .btn-hint{padding:6px 12px;border:1.5px solid var(--yellow-l);border-radius:7px;background:#fff;color:#744210;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s}
+  .btn-hint:hover{background:var(--yellow-ll)}
+  .btn-show-ans{padding:6px 12px;border:1.5px solid var(--green-l);border-radius:7px;background:#fff;color:#276749;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s}
+  .btn-show-ans:hover{background:var(--green-ll)}
+  .check-row{display:flex;gap:8px;align-items:center;margin-left:auto}
+  .btn-ok{padding:6px 14px;border:none;border-radius:7px;background:var(--green);color:#fff;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 2px 5px rgba(56,161,105,.3)}
+  .btn-ok:hover{transform:translateY(-1px)}
+  .btn-ng{padding:6px 14px;border:none;border-radius:7px;background:var(--red);color:#fff;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 2px 5px rgba(229,62,62,.3)}
+  .btn-ng:hover{transform:translateY(-1px)}
+  .btn-ok.selected{box-shadow:0 0 0 3px rgba(56,161,105,.5);transform:scale(1.06)}
+  .btn-ng.selected{box-shadow:0 0 0 3px rgba(229,62,62,.5);transform:scale(1.06)}
+
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧒 유아 150패턴 마스터 테스트</h1>
+  <p>한글→영어 · 영어→한글 · 청크 채우기 · 상황 응용</p>
+  <div class="header-badges">
+    <span class="badge">📝 4개 파트 · 150문제</span>
+    <span class="badge">💡 힌트 시스템</span>
+    <span class="badge">✅ 정답 확인</span>
+    <span class="badge">🔊 정답 듣기</span>
+    <span class="badge">📊 점수 추적</span>
+  </div>
+</header>
+
+<div class="ctrl-bar">
+  <input type="text" id="searchBox" placeholder="🔍 문제 검색..." oninput="filterQ()">
+  <button class="cbtn expand" onclick="expandAll()">전체 펼치기</button>
+  <button class="cbtn collapse" onclick="collapseAll()">전체 접기</button>
+  <button class="part-btn active" onclick="filterPart(0,this)">전체</button>
+  <button class="part-btn" onclick="filterPart(1,this)">Part 1</button>
+  <button class="part-btn" onclick="filterPart(2,this)">Part 2</button>
+  <button class="part-btn" onclick="filterPart(3,this)">Part 3</button>
+  <button class="part-btn" onclick="filterPart(4,this)">Part 4</button>
+</div>
+
+<div class="score-board">
+  <div class="score-card">
+    <div class="score-item score-total"><div class="score-num" id="sTot">0</div><div class="score-label">풀었음</div></div>
+    <div class="score-div"></div>
+    <div class="score-item score-correct"><div class="score-num" id="sOk">0</div><div class="score-label">✅ 맞음</div></div>
+    <div class="score-div"></div>
+    <div class="score-item score-wrong"><div class="score-num" id="sNg">0</div><div class="score-label">❌ 틀림</div></div>
+    <div class="score-div"></div>
+    <div class="score-item score-pct"><div class="score-num" id="sPct">0%</div><div class="score-label">정답률</div></div>
+    <button class="btn-reset" onclick="resetAll()">🔄 초기화</button>
+  </div>
+</div>
+
+<main id="mainArea"></main>
+
+<script>
+const QUESTIONS = [
+  // Part 1: 한글 → 영어 (50문제)
+  {no:"001",part:1,cat:"인사하기",q:"안녕! 어떻게 지내?",ht:"🟢",hint:"H_ ! H_ _ are you?",en:"Hi! How are you?",ko:"안녕! 어떻게 지내?"},
+  {no:"002",part:1,cat:"인사하기",q:"안녕하세요, 여러분!",ht:"🟡",hint:"(2단어)",en:"Hello, everyone!",ko:"안녕하세요, 여러분!"},
+  {no:"003",part:1,cat:"인사하기",q:"좋은 아침이에요, 엄마!",ht:"🟢",hint:"G_ _ _ m_ _ _ _ _ _, Mommy!",en:"Good morning, Mommy!",ko:"좋은 아침이에요, 엄마!"},
+  {no:"004",part:1,cat:"인사하기",q:"잘 자요, 아빠!",ht:"🟡",hint:"(3단어)",en:"Good night, Daddy!",ko:"잘 자요, 아빠!"},
+  {no:"005",part:1,cat:"인사하기",q:"잘 가, 또 봐!",ht:"🟢",hint:"B_ _ - b_ _, see you!",en:"Bye-bye, see you!",ko:"잘 가, 또 봐!"},
+  {no:"006",part:1,cat:"인사하기",q:"만나서 반가워!",ht:"🟡",hint:"(4단어)",en:"Nice to meet you!",ko:"만나서 반가워!"},
+  {no:"007",part:1,cat:"인사하기",q:"고마워!",ht:"🟢",hint:"T_ _ _ _ you!",en:"Thank you!",ko:"고마워!"},
+  {no:"008",part:1,cat:"인사하기",q:"천만에!",ht:"🟡",hint:"(2단어, 줄임말)",en:"You're welcome!",ko:"천만에!"},
+  {no:"009",part:1,cat:"인사하기",q:"미안해!",ht:"🟢",hint:"S_ _ _ _!",en:"Sorry!",ko:"미안해!"},
+  {no:"010",part:1,cat:"인사하기",q:"실례합니다, 선생님!",ht:"🟡",hint:"(3단어)",en:"Excuse me, teacher!",ko:"실례합니다, 선생님!"},
+  {no:"011",part:1,cat:"자기소개",q:"나는 제니야.",ht:"🟢",hint:"I'm J_ _ _ _.",en:"I'm Jenny.",ko:"나는 제니야."},
+  {no:"012",part:1,cat:"자기소개",q:"내 이름은 톰이야.",ht:"🟡",hint:"(4단어)",en:"My name is Tom.",ko:"내 이름은 톰이야."},
+  {no:"013",part:1,cat:"자기소개",q:"나는 다섯 살이야.",ht:"🟢",hint:"I'm f_ _ _ years old.",en:"I'm five years old.",ko:"나는 다섯 살이야."},
+  {no:"014",part:1,cat:"자기소개",q:"나는 한국에 살아.",ht:"🟡",hint:"(3단어)",en:"I live in Korea.",ko:"나는 한국에 살아."},
+  {no:"015",part:1,cat:"자기소개",q:"나는 아이스크림을 좋아해.",ht:"🟢",hint:"I l_ _ _ ice cream.",en:"I like ice cream.",ko:"나는 아이스크림을 좋아해."},
+  {no:"016",part:1,cat:"자기소개",q:"이쪽은 나의 엄마야.",ht:"🟡",hint:"(4단어)",en:"This is my mom.",ko:"이쪽은 나의 엄마야."},
+  {no:"017",part:1,cat:"자기소개",q:"나는 여동생이 있어.",ht:"🟢",hint:"I h_ _ _ a baby sister.",en:"I have a baby sister.",ko:"나는 여동생이 있어."},
+  {no:"018",part:1,cat:"자기소개",q:"우리 아빠는 키가 커.",ht:"🟡",hint:"(4단어)",en:"My dad is tall.",ko:"우리 아빠는 키가 커."},
+  {no:"019",part:1,cat:"자기소개",q:"나는 우리 할머니를 사랑해.",ht:"🟢",hint:"I l_ _ _ my grandma.",en:"I love my grandma.",ko:"나는 우리 할머니를 사랑해."},
+  {no:"020",part:1,cat:"자기소개",q:"우리는 행복한 가족이야.",ht:"🟡",hint:"(5단어)",en:"We are a happy family.",ko:"우리는 행복한 가족이야."},
+  {no:"021",part:1,cat:"감정 표현",q:"나는 정말 행복해!",ht:"🟢",hint:"I'm s_ h_ _ _ _!",en:"I'm so happy!",ko:"나는 정말 행복해!"},
+  {no:"022",part:1,cat:"감정 표현",q:"나 슬퍼.",ht:"🟡",hint:"(2단어)",en:"I'm sad.",ko:"나 슬퍼."},
+  {no:"023",part:1,cat:"감정 표현",q:"나 화났어!",ht:"🟢",hint:"I'm a_ _ _ _!",en:"I'm angry!",ko:"나 화났어!"},
+  {no:"024",part:1,cat:"감정 표현",q:"나 무서워.",ht:"🟡",hint:"(2단어)",en:"I'm scared.",ko:"나 무서워."},
+  {no:"025",part:1,cat:"감정 표현",q:"나 피곤해.",ht:"🟢",hint:"I'm t_ _ _ _.",en:"I'm tired.",ko:"나 피곤해."},
+  {no:"026",part:1,cat:"감정 표현",q:"이거 좋아!",ht:"🟡",hint:"(3단어)",en:"I like it!",ko:"이거 좋아!"},
+  {no:"027",part:1,cat:"감정 표현",q:"이거 너무 좋아!",ht:"🟢",hint:"I l_ _ _ it!",en:"I love it!",ko:"이거 너무 좋아!"},
+  {no:"028",part:1,cat:"감정 표현",q:"이건 정말 재미있어!",ht:"🟡",hint:"(3단어)",en:"It's so fun!",ko:"이건 정말 재미있어!"},
+  {no:"029",part:1,cat:"감정 표현",q:"배고파!",ht:"🟢",hint:"I'm h_ _ _ _ _!",en:"I'm hungry!",ko:"배고파!"},
+  {no:"030",part:1,cat:"감정 표현",q:"목말라!",ht:"🟡",hint:"(2단어)",en:"I'm thirsty!",ko:"목말라!"},
+  {no:"031",part:1,cat:"요청하기",q:"저 물을 좀 가질 수 있나요?",ht:"🟢",hint:"C_ _ I have some water?",en:"Can I have some water?",ko:"저 물을 좀 가질 수 있나요?"},
+  {no:"032",part:1,cat:"요청하기",q:"나는 쿠키를 원해요.",ht:"🟡",hint:"(3단어)",en:"I want a cookie.",ko:"나는 쿠키를 원해요."},
+  {no:"033",part:1,cat:"요청하기",q:"나에게 공을 주세요.",ht:"🟢",hint:"G_ _ _ me the ball, please.",en:"Give me the ball, please.",ko:"나에게 공을 주세요."},
+  {no:"034",part:1,cat:"요청하기",q:"도와주세요, 제발!",ht:"🟡",hint:"(3단어)",en:"Help me, please!",ko:"도와주세요, 제발!"},
+  {no:"035",part:1,cat:"요청하기",q:"나를 기다려!",ht:"🟢",hint:"W_ _ _ for me!",en:"Wait for me!",ko:"나를 기다려!"},
+  {no:"036",part:1,cat:"요청하기",q:"제가 밖으로 가도 되나요?",ht:"🟡",hint:"(4단어)",en:"Can I go outside?",ko:"제가 밖으로 가도 되나요?"},
+  {no:"037",part:1,cat:"요청하기",q:"제가 놀아도 되나요?",ht:"🟢",hint:"M_ _ I play?",en:"May I play?",ko:"제가 놀아도 되나요?"},
+  {no:"038",part:1,cat:"요청하기",q:"제가 TV 봐도 되나요?",ht:"🟡",hint:"(4단어)",en:"Can I watch TV?",ko:"제가 TV 봐도 되나요?"},
+  {no:"039",part:1,cat:"요청하기",q:"나는 내 곰 인형이 필요해요.",ht:"🟢",hint:"I n_ _ _ my teddy bear.",en:"I need my teddy bear.",ko:"나는 내 곰 인형이 필요해요."},
+  {no:"040",part:1,cat:"요청하기",q:"하나 더 주세요!",ht:"🟡",hint:"(3단어)",en:"One more, please!",ko:"하나 더 주세요!"},
+  {no:"041",part:1,cat:"일상생활",q:"일어나! 아침이야!",ht:"🟢",hint:"W_ _ _ up! It's morning!",en:"Wake up! It's morning!",ko:"일어나! 아침이야!"},
+  {no:"042",part:1,cat:"일상생활",q:"아침 먹을 시간이야!",ht:"🟡",hint:"(4단어)",en:"Time to eat breakfast!",ko:"아침 먹을 시간이야!"},
+  {no:"043",part:1,cat:"일상생활",q:"나는 양치하고 있어.",ht:"🟢",hint:"I'm b_ _ _ _ _ _ _ my teeth.",en:"I'm brushing my teeth.",ko:"나는 양치하고 있어."},
+  {no:"044",part:1,cat:"일상생활",q:"학교에 가자!",ht:"🟡",hint:"(4단어)",en:"Let's go to school!",ko:"학교에 가자!"},
+  {no:"045",part:1,cat:"일상생활",q:"나는 사과 하나를 먹고 있어.",ht:"🟢",hint:"I'm e_ _ _ _ _ an apple.",en:"I'm eating an apple.",ko:"나는 사과 하나를 먹고 있어."},
+  {no:"046",part:1,cat:"일상생활",q:"맛있어!",ht:"🟡",hint:"(1단어)",en:"Yummy!",ko:"맛있어!"},
+  {no:"047",part:1,cat:"일상생활",q:"나 배불러.",ht:"🟢",hint:"I'm f_ _ _.",en:"I'm full.",ko:"나 배불러."},
+  {no:"048",part:1,cat:"일상생활",q:"나 다 먹었어!",ht:"🟡",hint:"(2단어)",en:"I'm done!",ko:"나 다 먹었어!"},
+  {no:"049",part:1,cat:"일상생활",q:"나 집에 왔어!",ht:"🟢",hint:"I'm h_ _ _!",en:"I'm home!",ko:"나 집에 왔어!"},
+  {no:"050",part:1,cat:"일상생활",q:"잘 자요! 좋은 꿈 꿔!",ht:"🟡",hint:"(3단어)",en:"Good night! Sweet dreams!",ko:"잘 자요! 좋은 꿈 꿔!"},
+
+  // Part 2: 영어 → 한글
+  {no:"051",part:2,cat:"여행 기초",q:"Where is the bathroom?",ht:"🟢",hint:"화_ _ _ 이 어디 있나요?",en:"Where is the bathroom?",ko:"화장실이 어디 있나요?"},
+  {no:"052",part:2,cat:"여행 기초",q:"I need help.",ht:"🟡",hint:"(3글자)",en:"I need help.",ko:"도움이 필요해요."},
+  {no:"053",part:2,cat:"여행 기초",q:"I'm lost.",ht:"🟢",hint:"나 길을 _ _ _ _ _.",en:"I'm lost.",ko:"나 길을 잃었어요."},
+  {no:"054",part:2,cat:"여행 기초",q:"This is my bag.",ht:"🟡",hint:"(5글자)",en:"This is my bag.",ko:"이것은 내 가방이에요."},
+  {no:"055",part:2,cat:"여행 기초",q:"Thank you for helping!",ht:"🟢",hint:"도와_ _ _ 고마워요!",en:"Thank you for helping!",ko:"도와줘서 고마워요!"},
+  {no:"056",part:2,cat:"여행 기초",q:"This is my room.",ht:"🟡",hint:"(4글자)",en:"This is my room.",ko:"이것은 내 방이에요."},
+  {no:"057",part:2,cat:"여행 기초",q:"I like this room!",ht:"🟢",hint:"나는 이 방을 _ _ _ _.",en:"I like this room!",ko:"나는 이 방을 좋아해요!"},
+  {no:"058",part:2,cat:"여행 기초",q:"Help! I need an adult!",ht:"🟡",hint:"(3글자+5글자)",en:"Help! I need an adult!",ko:"도와주세요! 어른이 필요해요!"},
+  {no:"059",part:2,cat:"여행 기초",q:"I can't find my mom.",ht:"🟢",hint:"나는 우리 _ _ 를 찾을 수 없어요.",en:"I can't find my mom.",ko:"나는 우리 엄마를 찾을 수 없어요."},
+  {no:"060",part:2,cat:"여행 기초",q:"I'm scared.",ht:"🟡",hint:"(3글자)",en:"I'm scared.",ko:"나 무서워요."},
+  {no:"061",part:2,cat:"교통과 이동",q:"I want to go to the park.",ht:"🟢",hint:"나는 _ _ 에 가고 싶어요.",en:"I want to go to the park.",ko:"나는 공원에 가고 싶어요."},
+  {no:"062",part:2,cat:"교통과 이동",q:"Are we there yet?",ht:"🟡",hint:"(5글자)",en:"Are we there yet?",ko:"우리 도착했나요?"},
+  {no:"063",part:2,cat:"교통과 이동",q:"I feel sick.",ht:"🟢",hint:"나 _ _ 요.",en:"I feel sick.",ko:"나 아파요."},
+  {no:"064",part:2,cat:"교통과 이동",q:"This bus is big!",ht:"🟡",hint:"(4글자)",en:"This bus is big!",ko:"이 버스는 커요!"},
+  {no:"065",part:2,cat:"교통과 이동",q:"I like the train!",ht:"🟢",hint:"나는 기_ _ 이 좋아요!",en:"I like the train!",ko:"나는 기차가 좋아요!"},
+  {no:"066",part:2,cat:"교통과 이동",q:"Let's take a taxi!",ht:"🟡",hint:"(4글자)",en:"Let's take a taxi!",ko:"택시 타자!"},
+  {no:"067",part:2,cat:"교통과 이동",q:"Where is the bus stop?",ht:"🟢",hint:"버스 _ _ _ 이 어디예요?",en:"Where is the bus stop?",ko:"버스 정류장이 어디예요?"},
+  {no:"068",part:2,cat:"교통과 이동",q:"How far is it?",ht:"🟡",hint:"(4글자)",en:"How far is it?",ko:"얼마나 멀어요?"},
+  {no:"069",part:2,cat:"교통과 이동",q:"Turn left here!",ht:"🟢",hint:"여기서 _ _ 으로 도세요!",en:"Turn left here!",ko:"여기서 왼쪽으로 도세요!"},
+  {no:"070",part:2,cat:"교통과 이동",q:"We're almost there!",ht:"🟡",hint:"(6글자)",en:"We're almost there!",ko:"거의 다 왔어요!"},
+
+  // Part 3: 청크 채우기
+  {no:"071",part:3,cat:"청크 채우기 - 인사",q:"Hi! ___ are you?",ht:"🟢",hint:"How (어떻게)",en:"Hi! How are you?",ko:"안녕! 어떻게 지내?"},
+  {no:"072",part:3,cat:"청크 채우기 - 인사",q:"Good ___, Mommy!",ht:"🟡",hint:"아침 인사 (morning)",en:"Good morning, Mommy!",ko:"좋은 아침이에요, 엄마!"},
+  {no:"073",part:3,cat:"청크 채우기 - 인사",q:"Nice to ___ you!",ht:"🟢",hint:"meet (처음 만날 때)",en:"Nice to meet you!",ko:"만나서 반가워!"},
+  {no:"074",part:3,cat:"청크 채우기 - 감정",q:"I'm so ___!",ht:"🟡",hint:"기쁜 감정",en:"I'm so happy!",ko:"나는 정말 행복해!"},
+  {no:"075",part:3,cat:"청크 채우기 - 감정",q:"I'm ___! (무서울 때)",ht:"🟢",hint:"scared",en:"I'm scared!",ko:"나 무서워!"},
+  {no:"076",part:3,cat:"청크 채우기 - 요청",q:"Can I ___ some water?",ht:"🟡",hint:"have (가질 수 있어요?)",en:"Can I have some water?",ko:"물 좀 마실 수 있나요?"},
+  {no:"077",part:3,cat:"청크 채우기 - 요청",q:"___ for me!",ht:"🟢",hint:"Wait (기다려)",en:"Wait for me!",ko:"나를 기다려!"},
+  {no:"078",part:3,cat:"청크 채우기 - 일상",q:"I'm ___ my teeth.",ht:"🟡",hint:"양치질",en:"I'm brushing my teeth.",ko:"나는 양치하고 있어."},
+  {no:"079",part:3,cat:"청크 채우기 - 일상",q:"Let's go to ___!",ht:"🟢",hint:"school (학교)",en:"Let's go to school!",ko:"학교에 가자!"},
+  {no:"080",part:3,cat:"청크 채우기 - 일상",q:"Good ___! Sweet dreams!",ht:"🟡",hint:"밤 인사",en:"Good night! Sweet dreams!",ko:"잘 자요! 좋은 꿈 꿔!"},
+  {no:"081",part:3,cat:"청크 채우기 - 감정",q:"I'm ___! (배고플 때)",ht:"🟢",hint:"hungry",en:"I'm hungry!",ko:"배고파!"},
+  {no:"082",part:3,cat:"청크 채우기 - 자기소개",q:"I ___ five years old.",ht:"🟡",hint:"am → 줄임말",en:"I'm five years old.",ko:"나는 다섯 살이야."},
+  {no:"083",part:3,cat:"청크 채우기 - 자기소개",q:"I live ___ Korea.",ht:"🟢",hint:"in (전치사)",en:"I live in Korea.",ko:"나는 한국에 살아."},
+  {no:"084",part:3,cat:"청크 채우기 - 자기소개",q:"I have a baby ___.",ht:"🟡",hint:"여동생 (sister)",en:"I have a baby sister.",ko:"나는 여동생이 있어."},
+  {no:"085",part:3,cat:"청크 채우기 - 인사",q:"You're ___! (고마워에 대한 답)",ht:"🟢",hint:"welcome",en:"You're welcome!",ko:"천만에요!"},
+  {no:"086",part:3,cat:"청크 채우기 - 요청",q:"Give ___ the ball, please.",ht:"🟡",hint:"me (나에게)",en:"Give me the ball, please.",ko:"나에게 공을 주세요."},
+  {no:"087",part:3,cat:"청크 채우기 - 일상",q:"___ up! It's morning!",ht:"🟢",hint:"Wake (일어나)",en:"Wake up! It's morning!",ko:"일어나! 아침이야!"},
+  {no:"088",part:3,cat:"청크 채우기 - 감정",q:"It's so ___! (재미있을 때)",ht:"🟡",hint:"fun",en:"It's so fun!",ko:"이건 정말 재미있어!"},
+  {no:"089",part:3,cat:"청크 채우기 - 자기소개",q:"My name ___ Tom.",ht:"🟢",hint:"is",en:"My name is Tom.",ko:"내 이름은 톰이야."},
+  {no:"090",part:3,cat:"청크 채우기 - 요청",q:"___ I play?",ht:"🟡",hint:"정중한 허가 요청",en:"May I play?",ko:"제가 놀아도 되나요?"},
+  {no:"091",part:3,cat:"청크 채우기 - 인사",q:"Excuse ___, teacher!",ht:"🟢",hint:"me (실례)",en:"Excuse me, teacher!",ko:"실례합니다, 선생님!"},
+  {no:"092",part:3,cat:"청크 채우기 - 감정",q:"I'm a little ___. (피곤할 때)",ht:"🟡",hint:"tired",en:"I'm a little tired.",ko:"나 조금 피곤해."},
+  {no:"093",part:3,cat:"청크 채우기 - 일상",q:"I'm ___ an apple.",ht:"🟢",hint:"eating (먹고 있어)",en:"I'm eating an apple.",ko:"나는 사과 하나를 먹고 있어."},
+  {no:"094",part:3,cat:"청크 채우기 - 자기소개",q:"I ___ ice cream.",ht:"🟡",hint:"like (좋아해)",en:"I like ice cream.",ko:"나는 아이스크림을 좋아해."},
+  {no:"095",part:3,cat:"청크 채우기 - 인사",q:"Have a good ___!",ht:"🟢",hint:"day",en:"Have a good day!",ko:"좋은 하루 보내!"},
+  {no:"096",part:3,cat:"청크 채우기 - 요청",q:"I ___ my teddy bear.",ht:"🟡",hint:"need (필요해)",en:"I need my teddy bear.",ko:"나는 내 곰 인형이 필요해요."},
+  {no:"097",part:3,cat:"청크 채우기 - 일상",q:"I'm ___! (집에 왔어!)",ht:"🟢",hint:"home",en:"I'm home!",ko:"나 집에 왔어!"},
+  {no:"098",part:3,cat:"청크 채우기 - 감정",q:"I ___ it! (너무 좋아할 때)",ht:"🟡",hint:"love",en:"I love it!",ko:"이거 너무 좋아!"},
+  {no:"099",part:3,cat:"청크 채우기 - 인사",q:"See you ___!",ht:"🟢",hint:"tomorrow (내일)",en:"See you tomorrow!",ko:"내일 봐!"},
+  {no:"100",part:3,cat:"청크 채우기 - 자기소개",q:"This ___ my mom.",ht:"🟡",hint:"is",en:"This is my mom.",ko:"이쪽은 나의 엄마야."},
+
+  // Part 4: 상황별 응용
+  {no:"101",part:4,cat:"상황 - 음식점",q:"음식점에서 음식을 주문하고 싶을 때",ht:"🔴",hint:"",en:"Can I have this, please?",ko:"이거 주세요!"},
+  {no:"102",part:4,cat:"상황 - 음식점",q:"음식이 맛있다고 말하고 싶을 때",ht:"🟡",hint:"Y_ _ _ _!",en:"Yummy! It's delicious!",ko:"맛있어요!"},
+  {no:"103",part:4,cat:"상황 - 화장실",q:"화장실이 어디 있는지 물어볼 때",ht:"🟢",hint:"Where is the b_ _ _ _ _ _ _?",en:"Where is the bathroom?",ko:"화장실이 어디 있나요?"},
+  {no:"104",part:4,cat:"상황 - 도움 요청",q:"길을 잃었을 때",ht:"🔴",hint:"",en:"I'm lost. Help me, please!",ko:"길을 잃었어요. 도와주세요!"},
+  {no:"105",part:4,cat:"상황 - 학교",q:"수업 시작할 때 선생님께 인사",ht:"🟡",hint:"G_ _ _ morning!",en:"Good morning, teacher!",ko:"좋은 아침이에요, 선생님!"},
+  {no:"106",part:4,cat:"상황 - 친구",q:"새 친구를 만났을 때",ht:"🟢",hint:"Nice to m_ _ _ you!",en:"Nice to meet you! I'm [name].",ko:"만나서 반가워요! 저는 [이름]이에요."},
+  {no:"107",part:4,cat:"상황 - 가족",q:"아침에 일어나서 가족에게",ht:"🟡",hint:"G_ _ _ morning!",en:"Good morning, Mommy!",ko:"좋은 아침이에요, 엄마!"},
+  {no:"108",part:4,cat:"상황 - 음식",q:"배가 고프다고 말할 때",ht:"🟢",hint:"I'm h_ _ _ _ _!",en:"I'm hungry! Can I eat?",ko:"배고파요! 먹어도 돼요?"},
+  {no:"109",part:4,cat:"상황 - 놀이",q:"친구에게 같이 놀자고 할 때",ht:"🔴",hint:"",en:"Let's play together!",ko:"같이 놀자!"},
+  {no:"110",part:4,cat:"상황 - 감사",q:"도움을 받았을 때",ht:"🟡",hint:"Thank you _ _ _ helping!",en:"Thank you for helping!",ko:"도와줘서 고마워요!"},
+  {no:"111",part:4,cat:"상황 - 여행",q:"공항에서 화장실 찾을 때",ht:"🟢",hint:"W_ _ _ _ is the bathroom?",en:"Where is the bathroom?",ko:"화장실이 어디 있나요?"},
+  {no:"112",part:4,cat:"상황 - 여행",q:"차 안에서 빨리 도착하고 싶을 때",ht:"🟡",hint:"A_ _ we there yet?",en:"Are we there yet?",ko:"우리 도착했나요?"},
+  {no:"113",part:4,cat:"상황 - 잠자리",q:"잠자리에서 부모님께",ht:"🟢",hint:"Good n_ _ _ _!",en:"Good night! Sweet dreams!",ko:"잘 자요! 좋은 꿈 꿔요!"},
+  {no:"114",part:4,cat:"상황 - 학교",q:"수업 중 질문할 때",ht:"🔴",hint:"",en:"Excuse me, teacher! I have a question.",ko:"실례합니다, 선생님! 질문이 있어요."},
+  {no:"115",part:4,cat:"상황 - 친구",q:"방학 후 친구를 다시 만났을 때",ht:"🟡",hint:"Nice to s_ _ you again!",en:"Nice to see you again!",ko:"다시 만나서 반가워!"},
+  {no:"116",part:4,cat:"상황 - 가족",q:"아빠가 퇴근하고 왔을 때",ht:"🟢",hint:"Good e_ _ _ _ _ _!",en:"Good evening, Daddy!",ko:"좋은 저녁이에요, 아빠!"},
+  {no:"117",part:4,cat:"상황 - 도움",q:"무거운 것 들고 있을 때",ht:"🔴",hint:"",en:"Help me, please! It's heavy!",ko:"도와주세요! 무거워요!"},
+  {no:"118",part:4,cat:"상황 - 음식",q:"다 먹었다고 말할 때",ht:"🟡",hint:"I'm d_ _ _!",en:"I'm done! It was yummy!",ko:"다 먹었어요! 맛있었어요!"},
+  {no:"119",part:4,cat:"상황 - 헤어짐",q:"유치원 끝나고 친구에게",ht:"🟢",hint:"Bye-bye! S_ _ you!",en:"Bye-bye! See you tomorrow!",ko:"잘 가! 내일 봐!"},
+  {no:"120",part:4,cat:"상황 - 자기소개",q:"외국인에게 나이 말할 때",ht:"🟡",hint:"I'm _ years old.",en:"I'm five years old.",ko:"나는 다섯 살이에요."},
+];
+
+let score = {ok:0, ng:0};
+let currentUtterance = null;
+let globalSpeed = 1;
+let currentPartFilter = 0;
+
+function hintClass(ht){ return ht==='🟢'?'hint-easy':ht==='🟡'?'hint-mid':'hint-hard'; }
+function partLabel(p){ return ['전체','Part 1: 한글→영어','Part 2: 영어→한글','Part 3: 청크 채우기','Part 4: 상황 응용'][p]; }
+
+function buildQuestions(){
+  const main = document.getElementById('mainArea');
+  let lastCat = '';
+  QUESTIONS.forEach(q=>{
+    if(q.cat !== lastCat){
+      const sd = document.createElement('div');
+      sd.className='section-hdr';
+      sd.setAttribute('data-part', q.part);
+      sd.innerHTML=`<h2>${partLabel(q.part)} — ${q.cat}</h2>`;
+      main.appendChild(sd);
+      lastCat = q.cat;
+    }
+    const wrap = document.createElement('div');
+    wrap.className='q-wrap';
+    wrap.id='q-'+q.no;
+    wrap.dataset.part = q.part;
+    wrap.dataset.text = (q.q+' '+q.en+' '+q.ko).toLowerCase();
+    wrap.innerHTML = makeQHTML(q);
+    main.appendChild(wrap);
+  });
+}
+
+function makeQHTML(q){
+  const hintHide = !q.hint || q.hint==='';
+  const hintBtn = hintHide ? '' : `<button class="btn-hint" onclick="toggleHint(this)">💡 힌트 보기</button>`;
+  const hintBox = hintHide ? '' : `<div class="hint-box">${q.hint}</div>`;
+
+  return `
+  <details class="q-details" id="qd-${q.no}">
+    <summary class="q-summary">
+      <span class="q-num">${q.no}</span>
+      <span class="q-part">Part ${q.part}</span>
+      <span class="q-text">${q.q}</span>
+      <span class="q-hint-badge ${hintClass(q.ht)}">${q.ht}</span>
+      <span class="q-status" id="st-${q.no}">⬜</span>
+    </summary>
+    <div class="q-body">
+      ${hintBox}
+      <div class="ans-box" id="ab-${q.no}">
+        <div style="flex:1">
+          <div class="ans-en">${q.en}</div>
+          <div class="ans-ko">${q.ko}</div>
+        </div>
+        <button class="btn-speak" onclick="speakAnswer(this,'${escQ(q.en)}')">🔊 듣기</button>
+      </div>
+      <div class="action-row">
+        ${hintBtn}
+        <button class="btn-show-ans" onclick="toggleAns(this,'${q.no}')">✅ 정답 확인</button>
+        <div class="check-row">
+          <button class="btn-ok" onclick="markQ('${q.no}','ok',this)">⭕ 맞음</button>
+          <button class="btn-ng" onclick="markQ('${q.no}','ng',this)">❌ 틀림</button>
+        </div>
+      </div>
+    </div>
+  </details>`;
+}
+
+function escQ(s){ return s.replace(/'/g,"\\'"); }
+
+function toggleHint(btn){
+  const box = btn.closest('.q-body').querySelector('.hint-box');
+  const vis = box.classList.toggle('visible');
+  btn.textContent = vis ? '💡 힌트 숨기기' : '💡 힌트 보기';
+}
+
+function toggleAns(btn, no){
+  const box = document.getElementById('ab-'+no);
+  const vis = box.classList.toggle('visible');
+  btn.textContent = vis ? '🙈 정답 숨기기' : '✅ 정답 확인';
+  if(vis){
+    const qd = document.getElementById('qd-'+no);
+    if(!qd.hasAttribute('open')) qd.setAttribute('open','');
+  }
+}
+
+function speakAnswer(btn, text){
+  if(currentUtterance){ speechSynthesis.cancel(); currentUtterance=null; }
+  btn.classList.add('speaking'); btn.textContent='⏸ 정지';
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=globalSpeed;
+  u.onend=()=>{btn.classList.remove('speaking');btn.textContent='🔊 듣기';currentUtterance=null};
+  u.onerror=()=>{btn.classList.remove('speaking');btn.textContent='🔊 듣기';currentUtterance=null};
+  currentUtterance=u; speechSynthesis.speak(u);
+}
+
+function markQ(no, type, btn){
+  const qd = document.getElementById('qd-'+no);
+  const stEl = document.getElementById('st-'+no);
+  const prevType = qd.dataset.marked;
+
+  // Undo previous
+  if(prevType==='ok') score.ok--;
+  if(prevType==='ng') score.ng--;
+
+  if(prevType===type){
+    // Deselect
+    qd.removeAttribute('data-marked');
+    qd.classList.remove('answered-ok','answered-ng');
+    stEl.textContent='⬜';
+    btn.classList.remove('selected');
+  } else {
+    qd.dataset.marked = type;
+    qd.classList.remove('answered-ok','answered-ng');
+    qd.classList.add('answered-'+type);
+    stEl.textContent = type==='ok'?'✅':'❌';
+    qd.querySelectorAll('.btn-ok,.btn-ng').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    if(type==='ok') score.ok++;
+    else score.ng++;
+  }
+  updateScore();
+}
+
+function updateScore(){
+  const tot = score.ok + score.ng;
+  document.getElementById('sTot').textContent = tot;
+  document.getElementById('sOk').textContent = score.ok;
+  document.getElementById('sNg').textContent = score.ng;
+  document.getElementById('sPct').textContent = tot ? Math.round(score.ok/tot*100)+'%' : '0%';
+}
+
+function resetAll(){
+  score={ok:0,ng:0};
+  document.querySelectorAll('.q-details').forEach(d=>{
+    d.removeAttribute('data-marked');
+    d.classList.remove('answered-ok','answered-ng');
+  });
+  document.querySelectorAll('.q-status').forEach(s=>s.textContent='⬜');
+  document.querySelectorAll('.btn-ok,.btn-ng').forEach(b=>b.classList.remove('selected'));
+  document.querySelectorAll('.ans-box').forEach(b=>b.classList.remove('visible'));
+  document.querySelectorAll('.hint-box').forEach(b=>b.classList.remove('visible'));
+  document.querySelectorAll('.btn-show-ans').forEach(b=>b.textContent='✅ 정답 확인');
+  document.querySelectorAll('.btn-hint').forEach(b=>b.textContent='💡 힌트 보기');
+  updateScore();
+}
+
+function expandAll(){ document.querySelectorAll('.q-details').forEach(d=>d.setAttribute('open','')); }
+function collapseAll(){ document.querySelectorAll('.q-details').forEach(d=>d.removeAttribute('open')); }
+
+function filterPart(p, btn){
+  currentPartFilter = p;
+  document.querySelectorAll('.ctrl-bar .part-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function filterQ(){
+  applyFilters();
+}
+
+function applyFilters(){
+  const q = document.getElementById('searchBox').value.toLowerCase();
+  document.querySelectorAll('.q-wrap').forEach(w=>{
+    const partMatch = !currentPartFilter || parseInt(w.dataset.part)===currentPartFilter;
+    const textMatch = !q || w.dataset.text.includes(q);
+    w.classList.toggle('hidden', !partMatch || !textMatch);
+  });
+  document.querySelectorAll('.section-hdr').forEach(h=>{
+    if(currentPartFilter && parseInt(h.dataset.part)!==currentPartFilter){h.classList.add('hidden');return;}
+    let nxt = h.nextElementSibling;
+    let has = false;
+    while(nxt && !nxt.classList.contains('section-hdr')){
+      if(!nxt.classList.contains('hidden'))has=true;
+      nxt=nxt.nextElementSibling;
+    }
+    h.classList.toggle('hidden', !has);
+  });
+}
+
+buildQuestions();
+</script>
+</body>
+</html>

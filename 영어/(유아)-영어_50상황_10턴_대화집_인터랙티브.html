@@ -185,6 +185,8 @@
   }
   .btn-row {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 8px;
     margin-bottom: 10px;
   }
@@ -354,6 +356,195 @@
     header h1 { font-size: 1.3rem; }
     .english-text { font-size: 0.82rem; }
     .toc-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ─── 재생 컨트롤 행 (버튼 아래 독립 행) ─── */
+  .play-control-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+    padding: 8px 12px;
+    background: linear-gradient(90deg, #f0fff4, #f7fff9);
+    border: 1px solid #c6f6d5;
+    border-radius: 10px;
+  }
+
+  /* ─── 인터벌 슬라이더 래퍼 ─── */
+  .interval-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: #276749;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .interval-wrap label { cursor: default; }
+  .interval-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 5px;
+    border-radius: 4px;
+    background: #c6f6d5;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .interval-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #38a169;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(56,161,105,0.45);
+    transition: background 0.2s, transform 0.15s;
+  }
+  .interval-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+  .interval-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #38a169;
+    cursor: pointer;
+    border: none;
+  }
+  .interval-val {
+    min-width: 30px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #276749;
+    background: #c6f6d5;
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+
+  /* ─── 재생 진행 표시 (턴 X/10) ─── */
+  .play-progress {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #718096;
+    background: #edf2f7;
+    border-radius: 10px;
+    padding: 2px 10px;
+    white-space: nowrap;
+    transition: all 0.3s;
+    margin-left: auto;
+  }
+  .play-progress.active { color: #276749; background: #c6f6d5; }
+
+  /* ─── 컨트롤 행 구분선 ─── */
+  .ctrl-divider {
+    width: 1px; height: 20px;
+    background: #c6f6d5;
+    border-radius: 1px;
+  }
+
+  /* ─── 속도 조절 ─── */
+  .speed-wrap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #4a5568;
+    white-space: nowrap;
+  }
+  .speed-wrap label { color: #276749; }
+  .speed-btn {
+    padding: 2px 10px;
+    border: 1.5px solid #c6f6d5;
+    border-radius: 5px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    font-weight: 700;
+    background: white;
+    color: #4a5568;
+    transition: all 0.15s;
+  }
+  .speed-btn:hover { border-color: #667eea; color: #667eea; background: #f0f4ff; }
+  .speed-btn.spd-active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 1px 4px rgba(102,126,234,0.35);
+  }
+
+  /* ─── 문장별 듣기 버튼 (각 턴 summary 내) ─── */
+  .btn-speak-one {
+    flex-shrink: 0;
+    background: white;
+    border: 1.5px solid #bee3f8;
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    color: #2b6cb0;
+    font-weight: 700;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .btn-speak-one:hover { background: #ebf8ff; border-color: #4A90D9; }
+  .btn-speak-one.spo-speaking {
+    background: #bee3f8;
+    border-color: #4A90D9;
+    animation: pulse-btn 0.9s infinite;
+  }
+  .turn-item.child .btn-speak-one {
+    border-color: #fbd38d;
+    color: #c05621;
+  }
+  .turn-item.child .btn-speak-one:hover { background: #fffbeb; border-color: #E8763A; }
+  .turn-item.child .btn-speak-one.spo-speaking {
+    background: #fbd38d;
+    border-color: #E8763A;
+  }
+
+  /* ─── 전체 듣기 버튼 ─── */
+  .btn-play-all {
+    padding: 5px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-weight: 700;
+    background: linear-gradient(135deg, #38a169, #2f855a);
+    color: white;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(56,161,105,0.3);
+  }
+  .btn-play-all:hover { background: linear-gradient(135deg, #2f855a, #276749); transform: translateY(-1px); }
+  .btn-play-all.playing-state {
+    background: linear-gradient(135deg, #e53e3e, #c53030);
+    box-shadow: 0 2px 6px rgba(229,62,62,0.4);
+    animation: pulse-btn 1.2s infinite;
+  }
+  @keyframes pulse-btn {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.75; }
+  }
+
+  /* ─── 재생 중 턴 하이라이트 ─── */
+  .turn-item.speaking {
+    transition: box-shadow 0.3s, transform 0.3s;
+    transform: scale(1.012);
+  }
+  .turn-item.parent.speaking {
+    box-shadow: 0 0 0 3px rgba(74,144,217,0.7), 0 4px 14px rgba(74,144,217,0.25);
+  }
+  .turn-item.child.speaking {
+    box-shadow: 0 0 0 3px rgba(232,118,58,0.7), 0 4px 14px rgba(232,118,58,0.25);
+  }
+  .turn-item.speaking .english-text {
+    color: #1a365d;
+    font-weight: 700;
+  }
+  .turn-item.child.speaking .english-text {
+    color: #7b341e;
   }
 </style>
 </head>
@@ -8092,6 +8283,283 @@ document.querySelectorAll('.toc-item').forEach(a => {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
+});
+
+// ══════════════════════════════════════════════════════════════
+// 공통 유틸
+// ══════════════════════════════════════════════════════════════
+
+// 속도 상수 : { 느림, 보통, 빠름 } → base rate
+const SPEED_MAP = { slow: 0.65, normal: 0.88, fast: 1.2 };
+
+/** 가장 가까운 play-control-row에서 현재 속도 읽기 */
+function _getBaseRate(el) {
+  const sitBody = el.closest('.sit-body');
+  const activeBtn = sitBody
+    ? sitBody.querySelector('.speed-btn.spd-active')
+    : document.querySelector('.speed-btn.spd-active');
+  return activeBtn ? parseFloat(activeBtn.dataset.rate) : SPEED_MAP.normal;
+}
+
+/** 영어 음성 선택 */
+function _pickVoice(isChild, voices) {
+  const en = (voices || []).filter(v => v.lang && v.lang.startsWith('en'));
+  if (!en.length) return null;
+  if (isChild)
+    return en.find(v => /female|zira|samantha|karen|moira/i.test(v.name))
+           || en[Math.min(1, en.length - 1)];
+  return en.find(v => /male|david|daniel|mark/i.test(v.name)) || en[0];
+}
+
+// ══════════════════════════════════════════════════════════════
+// 문장별 듣기 (speakSingle)
+// ══════════════════════════════════════════════════════════════
+let _singleBtn = null; // 현재 단일 재생 중인 버튼
+
+function speakSingle(btn) {
+  // 같은 버튼 재클릭 → 중지
+  if (btn === _singleBtn && btn.classList.contains('spo-speaking')) {
+    window.speechSynthesis.cancel();
+    _resetSingle(btn);
+    return;
+  }
+
+  // 이전 단일 재생 정리
+  if (_singleBtn) _resetSingle(_singleBtn);
+  // 전체 듣기 중이면 중지
+  _stopAllPlayback();
+
+  const turnItem = btn.closest('.turn-item');
+  const engSpan  = turnItem ? turnItem.querySelector('.english-text') : null;
+  if (!engSpan) return;
+
+  const isChild   = turnItem.classList.contains('child');
+  const baseRate  = _getBaseRate(btn);
+  const txt       = engSpan.textContent.trim();
+
+  const utt   = new SpeechSynthesisUtterance(txt);
+  utt.lang    = 'en-US';
+  utt.rate    = baseRate * (isChild ? 0.93 : 1.0);
+  utt.pitch   = isChild ? 1.2 : 1.0;
+  const voices = window.speechSynthesis.getVoices();
+  const v = _pickVoice(isChild, voices);
+  if (v) utt.voice = v;
+
+  btn.classList.add('spo-speaking');
+  btn.textContent = '⏹';
+  _singleBtn = btn;
+
+  const fin = () => { if (_singleBtn === btn) _resetSingle(btn); };
+  utt.onend = fin; utt.onerror = fin;
+  window.speechSynthesis.speak(utt);
+}
+
+function _resetSingle(btn) {
+  btn.classList.remove('spo-speaking');
+  btn.textContent = '🔊';
+  if (_singleBtn === btn) _singleBtn = null;
+}
+
+// ══════════════════════════════════════════════════════════════
+// 전체 듣기 (playAllTurns)
+// ══════════════════════════════════════════════════════════════
+let _activeSpeakBtn = null;
+
+function playAllTurns(btn) {
+  if (btn.dataset.playing === 'true') { _stopAllPlayback(); return; }
+  if (_activeSpeakBtn && _activeSpeakBtn !== btn) _stopAllPlayback();
+  if (_singleBtn) _resetSingle(_singleBtn);
+
+  window.speechSynthesis.cancel();
+
+  const sitBody    = btn.closest('.sit-body');
+  const sitDetails = sitBody.closest('details.sit-details');
+  if (sitDetails) sitDetails.open = true;
+
+  const turnItems = Array.from(sitBody.querySelectorAll('.turn-item'));
+  const total     = turnItems.length;
+  if (total === 0) return;
+
+  const ctrlRow = sitBody.querySelector('.play-control-row');
+  const progEl  = ctrlRow ? ctrlRow.querySelector('.play-progress') : null;
+
+  btn.dataset.playing = 'true';
+  btn.textContent = '⏹ 중지';
+  btn.classList.add('playing-state');
+  _activeSpeakBtn = btn;
+
+  let voices = window.speechSynthesis.getVoices();
+  let index  = 0;
+  let _tid   = null;
+
+  function clearHL() { turnItems.forEach(t => t.classList.remove('speaking')); }
+
+  function updateProg(cur, tot) {
+    if (!progEl) return;
+    if (cur > tot) { progEl.textContent = '✅ 완료'; progEl.classList.remove('active'); }
+    else           { progEl.textContent = `▶ 턴 ${cur} / ${tot}`; progEl.classList.add('active'); }
+  }
+
+  function speakNext() {
+    if (btn.dataset.playing !== 'true' || index >= total) {
+      clearHL(); _resetBtn(btn); updateProg(total + 1, total); return;
+    }
+    clearHL();
+    const item    = turnItems[index];
+    const isChild = item.classList.contains('child');
+    item.classList.add('speaking');
+    item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    updateProg(index + 1, total);
+
+    // 속도 실시간 읽기
+    const baseRate = _getBaseRate(btn);
+    const txt = (item.querySelector('.english-text') || {}).textContent || '';
+    const utt = new SpeechSynthesisUtterance(txt.trim());
+    utt.lang  = 'en-US';
+    utt.rate  = baseRate * (isChild ? 0.93 : 1.0);
+    utt.pitch = isChild ? 1.2 : 1.0;
+    voices    = window.speechSynthesis.getVoices();
+    const v   = _pickVoice(isChild, voices);
+    if (v) utt.voice = v;
+
+    const done = () => {
+      item.classList.remove('speaking');
+      index++;
+      if (btn.dataset.playing !== 'true' || index >= total) {
+        clearHL(); _resetBtn(btn); updateProg(total + 1, total); return;
+      }
+      // 간격 실시간 읽기
+      const slider = ctrlRow ? ctrlRow.querySelector('.interval-slider') : null;
+      const gapMs  = slider ? parseFloat(slider.value) * 1000 : 2000;
+      _tid = setTimeout(speakNext, gapMs);
+    };
+    utt.onend = done; utt.onerror = done;
+    window.speechSynthesis.speak(utt);
+  }
+
+  if (!voices.length) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = null;
+      speakNext();
+    };
+    setTimeout(() => {
+      if (btn.dataset.playing === 'true' && index === 0) {
+        voices = window.speechSynthesis.getVoices();
+        speakNext();
+      }
+    }, 300);
+  } else {
+    speakNext();
+  }
+}
+
+function _resetBtn(btn) {
+  btn.dataset.playing = 'false';
+  btn.textContent = '🔊 전체 듣기';
+  btn.classList.remove('playing-state');
+  if (_activeSpeakBtn === btn) _activeSpeakBtn = null;
+}
+function _stopAllPlayback() {
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.turn-item.speaking').forEach(el => el.classList.remove('speaking'));
+  document.querySelectorAll('.play-progress').forEach(el => { el.textContent = ''; el.classList.remove('active'); });
+  if (_activeSpeakBtn) { _resetBtn(_activeSpeakBtn); _activeSpeakBtn = null; }
+}
+
+// ══════════════════════════════════════════════════════════════
+// DOMContentLoaded: 50개 상황에 UI 삽입
+// ══════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function () {
+  window.speechSynthesis.getVoices();
+
+  document.querySelectorAll('.sit-body').forEach(function (sitBody) {
+    const btnRow = sitBody.querySelector('.btn-row');
+    if (!btnRow) return;
+
+    // ── A. 전체 듣기 버튼 (btn-row에 추가) ──────────────────
+    const playBtn = document.createElement('button');
+    playBtn.className = 'btn-play-all';
+    playBtn.textContent = '🔊 전체 듣기';
+    playBtn.dataset.playing = 'false';
+    playBtn.addEventListener('click', function () { playAllTurns(this); });
+    btnRow.appendChild(playBtn);
+
+    // ── B. 재생 컨트롤 행 (btn-row 아래) ────────────────────
+    const ctrlRow = document.createElement('div');
+    ctrlRow.className = 'play-control-row';
+
+    // B-1. 간격 슬라이더
+    const intervalWrap = document.createElement('div');
+    intervalWrap.className = 'interval-wrap';
+    const iLbl = document.createElement('label');
+    iLbl.textContent = '⏱ 간격';
+    const slider = document.createElement('input');
+    slider.type = 'range'; slider.className = 'interval-slider';
+    slider.min = '0'; slider.max = '10'; slider.step = '0.5'; slider.value = '2';
+    const valSpan = document.createElement('span');
+    valSpan.className = 'interval-val'; valSpan.textContent = '2s';
+    slider.addEventListener('input', function () {
+      const v = parseFloat(this.value);
+      valSpan.textContent = v === 0 ? '0s' : v + 's';
+    });
+    intervalWrap.append(iLbl, slider, valSpan);
+
+    // B-2. 구분선
+    const div1 = document.createElement('div');
+    div1.className = 'ctrl-divider';
+
+    // B-3. 속도 버튼
+    const speedWrap = document.createElement('div');
+    speedWrap.className = 'speed-wrap';
+    const sLbl = document.createElement('label');
+    sLbl.textContent = '🎚 속도';
+    speedWrap.appendChild(sLbl);
+    [
+      { label: '🐢 느림', key: 'slow',   rate: SPEED_MAP.slow   },
+      { label: '🚶 보통', key: 'normal', rate: SPEED_MAP.normal  },
+      { label: '🐇 빠름', key: 'fast',   rate: SPEED_MAP.fast   }
+    ].forEach(function (s) {
+      const sb = document.createElement('button');
+      sb.className = 'speed-btn' + (s.key === 'normal' ? ' spd-active' : '');
+      sb.textContent = s.label;
+      sb.dataset.rate = s.rate;
+      sb.addEventListener('click', function () {
+        speedWrap.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('spd-active'));
+        sb.classList.add('spd-active');
+      });
+      speedWrap.appendChild(sb);
+    });
+
+    // B-4. 구분선
+    const div2 = document.createElement('div');
+    div2.className = 'ctrl-divider';
+
+    // B-5. 진행 표시
+    const prog = document.createElement('span');
+    prog.className = 'play-progress';
+
+    ctrlRow.append(intervalWrap, div1, speedWrap, div2, prog);
+    btnRow.insertAdjacentElement('afterend', ctrlRow);
+
+    // ── C. 각 턴 summary에 문장별 🔊 버튼 삽입 ──────────────
+    sitBody.querySelectorAll('.turn-item').forEach(function (item) {
+      const summary = item.querySelector('details summary');
+      if (!summary) return;
+      const speakBtn = document.createElement('button');
+      speakBtn.className = 'btn-speak-one';
+      speakBtn.textContent = '🔊';
+      speakBtn.title = '이 문장 듣기';
+      speakBtn.addEventListener('click', function (e) {
+        e.stopPropagation(); // details 토글 방지
+        speakSingle(this);
+      });
+      summary.appendChild(speakBtn);
+    });
+  });
+
+  // Esc → 전체 중지
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') _stopAllPlayback(); });
 });
 </script>
 </body>
