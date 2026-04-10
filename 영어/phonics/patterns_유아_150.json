@@ -1,0 +1,675 @@
+{
+  "title": "유아 영어 회화 150패턴",
+  "description": "유아 (3-7세) 영어 회화 패턴 학습",
+  "version": "1.0",
+  "level": "유아 (3-7세)",
+  "total_sentences": 35,
+  "situations": [
+    {
+      "id": 1,
+      "emoji": "👋",
+      "name": "인사",
+      "nameEn": "인사 · Greetings",
+      "color": "linear-gradient(135deg,#ff9a44 0%,#fc6076 100%)",
+      "sentences": [
+        {
+          "id": 1,
+          "english": "Hi! How are you?",
+          "question": "안녕! 어떻게 지내?",
+          "answer": "Hi! (인사) → How are you? (안부 묻기)",
+          "chunks": [
+            "Hi!",
+            "How",
+            "are you?"
+          ],
+          "phonics": "Hi! (인사) → How are you? (안부 묻기)",
+          "dialogue": [
+            "A: Hi! How are you? / 안녕! 어떻게 지내?",
+            "B: Hi! I'm fine, thank you! / 안녕! 나는 잘 지내, 고마워!",
+            "A: Good! Let's play! / 좋아! 같이 놀자!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 2,
+          "english": "Hello, everyone!",
+          "question": "안녕하세요, 여러분!",
+          "answer": "Hello, (인사) → everyone! (대상)",
+          "chunks": [
+            "Hello,",
+            "everyone!"
+          ],
+          "phonics": "Hello, (인사) → everyone! (대상)",
+          "dialogue": [
+            "A: Hello, everyone! How are you today? / 안녕하세요, 여러분! 오늘 어떻게 지내요?",
+            "B: Hello, teacher! We're fine! / 안녕하세요, 선생님! 우리는 잘 지내요!",
+            "A: That's good! Let's start our class! / 좋아요! 수업을 시작하자!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 3,
+          "english": "Good morning, Mommy!",
+          "question": "좋은 아침이에요, 엄마!",
+          "answer": "Good morning, (아침 인사) → Mommy! (호칭)",
+          "chunks": [
+            "Good morning,",
+            "Mommy!"
+          ],
+          "phonics": "Good morning, (아침 인사) → Mommy! (호칭)",
+          "dialogue": [
+            "A: Good morning, Mommy! / 좋은 아침이에요, 엄마!",
+            "B: Good morning, sweetie! Did you sleep well? / 좋은 아침, 얘야! 잘 잤니?",
+            "A: Yes! I had a good dream! / 네! 좋은 꿈 꿨어요!",
+            "B: That's wonderful! Let's have breakfast! / 잘됐구나! 아침 먹자!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 4,
+          "english": "Good afternoon, teacher!",
+          "question": "좋은 오후에요, 선생님!",
+          "answer": "Good afternoon, (오후 인사) → teacher! (호칭)",
+          "chunks": [
+            "Good afternoon,",
+            "teacher!"
+          ],
+          "phonics": "Good afternoon, (오후 인사) → teacher! (호칭)",
+          "dialogue": [
+            "A: Good afternoon, teacher! / 좋은 오후에요, 선생님!",
+            "B: Good afternoon! Are you ready to learn? / 좋은 오후! 배울 준비 됐니?",
+            "A: Yes! I'm ready! / 네! 준비됐어요!",
+            "B: Great! Let's begin! / 좋아! 시작하자!"
+          ],
+          "star": 4
+        },
+        {
+          "id": 5,
+          "english": "Good evening, Daddy!",
+          "question": "좋은 저녁이에요, 아빠!",
+          "answer": "Good evening, (저녁 인사) → Daddy! (호칭)",
+          "chunks": [
+            "Good evening,",
+            "Daddy!"
+          ],
+          "phonics": "Good evening, (저녁 인사) → Daddy! (호칭)",
+          "dialogue": [
+            "A: Good evening, Daddy! / 좋은 저녁이에요, 아빠!",
+            "B: Good evening! Did you have a good day? / 좋은 저녁! 좋은 하루 보냈어?",
+            "A: Yes! I played with my friends! / 네! 친구들이랑 놀았어요!",
+            "B: That's nice! Let's eat dinner together! / 좋았겠다! 같이 저녁 먹자!"
+          ],
+          "star": 4
+        },
+        {
+          "id": 6,
+          "english": "Good night! Sleep well!",
+          "question": "잘 자요! 푹 자요!",
+          "answer": "Good night, (밤 인사) → sleep well! (잘 자라는 말)",
+          "chunks": [
+            "Good night,",
+            "sleep well!"
+          ],
+          "phonics": "Good night, (밤 인사) → sleep well! (잘 자라는 말)",
+          "dialogue": [
+            "A: It's bedtime. Good night, sweetie! / 잘 시간이야. 잘 자, 얘야!",
+            "B: Good night, Mommy! Sleep well! / 잘 자요, 엄마! 푹 자요!",
+            "A: Sweet dreams! I love you! / 좋은 꿈 꿔! 사랑해!",
+            "B: I love you too! Good night! / 저도 사랑해요! 잘 자요!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 7,
+          "english": "How are you today?",
+          "question": "오늘 어떻게 지내?",
+          "answer": "How are you (안부) → today? (시간)",
+          "chunks": [
+            "How are you",
+            "today?"
+          ],
+          "phonics": "How are you (안부) → today? (시간)",
+          "dialogue": [
+            "A: Good morning! How are you today? / 좋은 아침! 오늘 어떻게 지내?",
+            "B: I'm great! How are you? / 아주 좋아요! 선생님은요?",
+            "A: I'm fine, thank you! Are you happy? / 나도 좋아, 고마워! 너 기분 좋니?",
+            "B: Yes! I'm very happy today! / 네! 오늘 아주 기분 좋아요!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 8,
+          "english": "I'm fine, thank you!",
+          "question": "나는 잘 지내요, 고마워요!",
+          "answer": "I'm fine, (상태) → thank you! (감사)",
+          "chunks": [
+            "I'm fine,",
+            "thank you!"
+          ],
+          "phonics": "I'm fine, (상태) → thank you! (감사)",
+          "dialogue": [
+            "A: Hi! How are you? / 안녕! 어떻게 지내?",
+            "B: I'm fine, thank you! And you? / 잘 지내, 고마워! 너는?",
+            "A: I'm good too! Want to play? / 나도 좋아! 놀래?",
+            "B: Yes! Let's play together! / 응! 같이 놀자!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 9,
+          "english": "Bye-bye! See you!",
+          "question": "잘 가! 또 봐!",
+          "answer": "Bye-bye, (작별) → see you! (다음 만남)",
+          "chunks": [
+            "Bye-bye,",
+            "see you!"
+          ],
+          "phonics": "Bye-bye, (작별) → see you! (다음 만남)",
+          "dialogue": [
+            "A: I have to go home now. / 나 이제 집에 가야 해.",
+            "B: Okay! Bye-bye! See you! / 알겠어! 잘 가! 또 봐!",
+            "A: Bye-bye! See you tomorrow! / 잘 가! 내일 봐!",
+            "B: Yes! See you tomorrow! / 응! 내일 봐!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 10,
+          "english": "See you tomorrow!",
+          "question": "내일 봐!",
+          "answer": "See you (만남 약속) → tomorrow! (시간)",
+          "chunks": [
+            "See you",
+            "tomorrow!"
+          ],
+          "phonics": "See you (만남 약속) → tomorrow! (시간)",
+          "dialogue": [
+            "A: Today was fun! See you tomorrow! / 오늘 재미있었어! 내일 보자!",
+            "B: See you! What will we play tomorrow? / 또 봐! 내일 뭐 하고 놀까?",
+            "A: Let's play tag! See you at the playground! / 술래잡기 하자! 놀이터에서 보자!",
+            "B: Okay! See you! Bye! / 좋아! 또 봐! 안녕!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 11,
+          "english": "See you later, friend!",
+          "question": "나중에 봐, 친구야!",
+          "answer": "See you later, (나중에) → friend! (호칭)",
+          "chunks": [
+            "See you later,",
+            "friend!"
+          ],
+          "phonics": "See you later, (나중에) → friend! (호칭)",
+          "dialogue": [
+            "A: I need to eat lunch now. / 나 이제 점심 먹어야 해.",
+            "B: Okay! See you later, friend! / 알겠어! 나중에 봐, 친구야!",
+            "A: See you later! Let's play after lunch! / 나중에 봐! 점심 먹고 놀자!",
+            "B: Yes! See you later! / 응! 나중에 봐!"
+          ],
+          "star": 4
+        },
+        {
+          "id": 12,
+          "english": "Nice to meet you!",
+          "question": "만나서 반가워!",
+          "answer": "Nice to meet you! (첫 만남) → I'm [이름]. (소개)",
+          "chunks": [
+            "Nice to meet you!",
+            "I'm Tom."
+          ],
+          "phonics": "Nice to meet you! (첫 만남) → I'm [이름]. (소개)",
+          "dialogue": [
+            "A: Hi! I'm Tom. What's your name? / 안녕! 나는 톰이야. 너의 이름은 뭐야?",
+            "B: I'm Jenny. Nice to meet you! / 나는 제니야. 만나서 반가워!",
+            "A: Nice to meet you too! Do you like toys? / 나도 만나서 반가워! 너 장난감 좋아해?",
+            "B: Yes! Let's play together! / 응! 같이 놀자!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 13,
+          "english": "Nice to see you again!",
+          "question": "다시 만나서 반가워!",
+          "answer": "Nice to see you (만남) → again! (재회)",
+          "chunks": [
+            "Nice to see you",
+            "again!"
+          ],
+          "phonics": "Nice to see you (만남) → again! (재회)",
+          "dialogue": [
+            "A: Hi, Jenny! Nice to see you again! / 안녕, 제니! 다시 만나서 반가워!",
+            "B: Nice to see you too! I missed you! / 나도 반가워! 보고 싶었어!",
+            "A: I missed you too! How was your vacation? / 나도 보고 싶었어! 방학 어땠어?",
+            "B: It was fun! Let's play together! / 재미있었어! 같이 놀자!"
+          ],
+          "star": 4
+        },
+        {
+          "id": 14,
+          "english": "Have a good day!",
+          "question": "좋은 하루 보내!",
+          "answer": "Have (가지다) → a good day! (좋은 하루)",
+          "chunks": [
+            "Have",
+            "a good day!"
+          ],
+          "phonics": "Have (가지다) → a good day! (좋은 하루)",
+          "dialogue": [
+            "A: Okay, Mommy! Have a good day! / 네, 엄마! 좋은 하루 보내세요!",
+            "B: Thank you! You have a good day too! / 고마워! 너도 좋은 하루 보내!",
+            "A: I will! See you later! Love you! / 그럴게요! 나중에 봐요! 사랑해요!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 15,
+          "english": "Thank you so much!",
+          "question": "정말 고마워요!",
+          "answer": "Thank you (감사) → so much! (강조)",
+          "chunks": [
+            "Thank you",
+            "so much!"
+          ],
+          "phonics": "Thank you (감사) → so much! (강조)",
+          "dialogue": [
+            "A: Here's a present for you! / 너에게 줄 선물이 있어!",
+            "B: Wow! Thank you so much, Mommy! / 와! 정말 고마워요, 엄마!",
+            "A: Do you like it? / 마음에 들어?",
+            "B: Yes! I love it! Thank you! / 네! 너무 좋아요! 고마워요!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 16,
+          "english": "You're welcome! Anytime.",
+          "question": "천만에요! 언제든지.",
+          "answer": "You're welcome! (응답) → Anytime. (항상 OK)",
+          "chunks": [
+            "You're welcome!",
+            "Anytime."
+          ],
+          "phonics": "You're welcome! (응답) → Anytime. (항상 OK)",
+          "dialogue": [
+            "A: Thank you for helping me! / 도와줘서 고마워!",
+            "B: You're welcome! Anytime! / 천만에요! 언제든지!",
+            "A: You're so kind! / 너 정말 친절하다!",
+            "B: No problem! We're friends! / 문제없어! 우리는 친구잖아!"
+          ],
+          "star": 4
+        },
+        {
+          "id": 17,
+          "english": "Help me, please!",
+          "question": "도와주세요, 제발!",
+          "answer": "Help me, (요청) → please! (예의)",
+          "chunks": [
+            "Help me,",
+            "please!"
+          ],
+          "phonics": "Help me, (요청) → please! (예의)",
+          "dialogue": [
+            "A: Help me, please! I can't reach it. / 도와주세요, 제발! 닿지 않아요.",
+            "B: Of course! Here you go! / 물론이죠! 여기요!",
+            "A: Thank you so much! / 정말 고마워요!",
+            "B: You're welcome! No problem! / 천만에요! 문제없어요!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 18,
+          "english": "Sorry, I'm late!",
+          "question": "미안해요, 늦었어요!",
+          "answer": "Sorry, (사과) → I'm late! (이유)",
+          "chunks": [
+            "Sorry,",
+            "I'm late!"
+          ],
+          "phonics": "Sorry, (사과) → I'm late! (이유)",
+          "dialogue": [
+            "A: Sorry, I'm late! I missed the bus. / 미안해요, 늦었어요! 버스를 놓쳤어요.",
+            "B: It's okay! Come in! / 괜찮아요! 들어와요!",
+            "A: Thank you for waiting! / 기다려줘서 고마워요!",
+            "B: No problem! Let's start! / 문제없어요! 시작해요!"
+          ],
+          "star": 4
+        },
+        {
+          "id": 19,
+          "english": "Excuse me, teacher!",
+          "question": "실례합니다, 선생님!",
+          "answer": "Excuse me, (실례) → teacher! (대상)",
+          "chunks": [
+            "Excuse me,",
+            "teacher!"
+          ],
+          "phonics": "Excuse me, (실례) → teacher! (대상)",
+          "dialogue": [
+            "A: Excuse me, teacher! I have a question. / 실례합니다, 선생님! 질문이 있어요.",
+            "B: Sure! What's your question? / 물론이죠! 질문이 뭐야?",
+            "A: How do you spell 'cat'? / 'cat'은 어떻게 써요?",
+            "B: C-A-T! Good question! / C-A-T! 좋은 질문이야!"
+          ],
+          "star": 4
+        },
+        {
+          "id": 20,
+          "english": "No problem! It's okay.",
+          "question": "문제없어요! 괜찮아요.",
+          "answer": "No problem! (괜찮다) → It's okay. (확인)",
+          "chunks": [
+            "No problem!",
+            "It's okay."
+          ],
+          "phonics": "No problem! (괜찮다) → It's okay. (확인)",
+          "dialogue": [
+            "A: Oh no! I broke your toy! / 이런! 네 장난감 부쉈어!",
+            "B: No problem! It's okay! / 문제없어! 괜찮아!",
+            "A: Really? I'm so sorry! / 정말? 너무 미안해!",
+            "B: Really! Don't worry! It's okay! / 정말! 걱정 마! 괜찮아!"
+          ],
+          "star": 4
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "emoji": "🙋",
+      "name": "자기소개",
+      "nameEn": "자기소개 · Introduction",
+      "color": "linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)",
+      "sentences": [
+        {
+          "id": 21,
+          "english": "I'm Jenny.",
+          "question": "나는 제니야.",
+          "answer": "I'm (나는) → [이름]. (소개)",
+          "chunks": [
+            "I'm",
+            "Jenny."
+          ],
+          "phonics": "I'm (나는) → [이름]. (소개)",
+          "dialogue": [
+            "A: Hi! I'm Jenny. What's your name? / 안녕! 나는 제니야. 너의 이름은 뭐야?",
+            "B: I'm Tom! Nice to meet you, Jenny! / 나는 톰이야! 만나서 반가워, 제니!",
+            "A: Nice to meet you too! How old are you? / 나도 만나서 반가워! 너는 몇 살이야?",
+            "B: I'm five! How about you? / 다섯 살이야! 너는?"
+          ],
+          "star": 5
+        },
+        {
+          "id": 22,
+          "english": "My name is Tom.",
+          "question": "내 이름은 톰이야.",
+          "answer": "My name (내 이름) → is [이름]. (확인)",
+          "chunks": [
+            "My name",
+            "is Tom."
+          ],
+          "phonics": "My name (내 이름) → is [이름]. (확인)",
+          "dialogue": [
+            "A: Hello! My name is Tom. / 안녕하세요! 내 이름은 톰이에요.",
+            "B: Hi Tom! I'm Jenny! / 안녕 톰! 나는 제니야!",
+            "A: Hi Jenny! Nice to meet you! / 안녕 제니! 만나서 반가워!",
+            "B: Nice to meet you too! / 나도 만나서 반가워!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 23,
+          "english": "I'm five years old.",
+          "question": "나는 다섯 살이야.",
+          "answer": "I'm (나는) → [숫자] (나이) → years old. (살)",
+          "chunks": [
+            "I'm",
+            "five",
+            "years old."
+          ],
+          "phonics": "I'm (나는) → [숫자] (나이) → years old. (살)",
+          "dialogue": [
+            "A: How old are you? / 너는 몇 살이야?",
+            "B: I'm five years old! How about you? / 다섯 살이야! 너는?",
+            "A: I'm six! I'm older! / 나는 여섯 살! 내가 더 많아!",
+            "B: Wow! You're big! / 와! 너 크다!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 24,
+          "english": "I live in Korea.",
+          "question": "나는 한국에 살아.",
+          "answer": "I live (나는 살아) → in [장소]. (위치)",
+          "chunks": [
+            "I live",
+            "in Korea."
+          ],
+          "phonics": "I live (나는 살아) → in [장소]. (위치)",
+          "dialogue": [
+            "A: Where do you live? / 어디에 살아?",
+            "B: I live in Korea! It's great! / 한국에 살아! 너무 좋아!",
+            "A: Cool! I live in America! / 멋지다! 나는 미국에 살아!",
+            "B: Wow! I want to visit! / 와! 나 방문하고 싶어!"
+          ],
+          "star": 4
+        },
+        {
+          "id": 25,
+          "english": "I like ice cream!",
+          "question": "나는 아이스크림을 좋아해!",
+          "answer": "I like (좋아해) → [명사]. (대상)",
+          "chunks": [
+            "I like",
+            "ice cream!"
+          ],
+          "phonics": "I like (좋아해) → [명사]. (대상)",
+          "dialogue": [
+            "A: What do you like? / 너는 뭘 좋아해?",
+            "B: I like ice cream! It's yummy! / 아이스크림 좋아해! 맛있어!",
+            "A: Me too! Chocolate is the best! / 나도! 초콜릿이 최고야!",
+            "B: I like strawberry! It's my favorite! / 나는 딸기 좋아! 내가 제일 좋아하는 거야!"
+          ],
+          "star": 5
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "emoji": "😊",
+      "name": "감정",
+      "nameEn": "감정 · Feelings",
+      "color": "linear-gradient(135deg,#43e97b 0%,#38f9d7 100%)",
+      "sentences": [
+        {
+          "id": 26,
+          "english": "I'm so happy!",
+          "question": "나는 정말 행복해!",
+          "answer": "I'm (나는) → so happy! (매우 행복한)",
+          "chunks": [
+            "I'm",
+            "so happy!"
+          ],
+          "phonics": "I'm (나는) → so happy! (매우 행복한)",
+          "dialogue": [
+            "A: Why are you so happy? / 왜 그렇게 행복해?",
+            "B: I'm so happy! I got a new toy! / 너무 행복해! 새 장난감 생겼어!",
+            "A: That's great! Can I see it? / 좋겠다! 봐도 돼?",
+            "B: Sure! Come and see! / 물론! 와서 봐!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 27,
+          "english": "I'm sad.",
+          "question": "나 슬퍼.",
+          "answer": "I'm (나는) → sad. (슬픈 상태)",
+          "chunks": [
+            "I'm",
+            "sad."
+          ],
+          "phonics": "I'm (나는) → sad. (슬픈 상태)",
+          "dialogue": [
+            "A: What's wrong? Are you okay? / 왜 그래? 괜찮아?",
+            "B: I'm sad. I lost my toy. / 나 슬퍼. 장난감 잃어버렸어.",
+            "A: Oh no! Let's find it together! / 이런! 같이 찾아보자!",
+            "B: Thank you! You're a good friend! / 고마워! 너는 좋은 친구야!"
+          ],
+          "star": 4
+        },
+        {
+          "id": 28,
+          "english": "I'm angry!",
+          "question": "나 화났어!",
+          "answer": "I'm (나는) → angry! (화난 상태)",
+          "chunks": [
+            "I'm",
+            "angry!"
+          ],
+          "phonics": "I'm (나는) → angry! (화난 상태)",
+          "dialogue": [
+            "A: Why are you angry? / 왜 화났어?",
+            "B: I'm angry! He took my toy! / 나 화났어! 걔가 내 장난감 가져갔어!",
+            "A: Let's talk to the teacher. / 선생님께 말하자.",
+            "B: Okay. I'm still a little angry. / 알겠어. 아직도 조금 화나."
+          ],
+          "star": 4
+        },
+        {
+          "id": 29,
+          "english": "I'm scared.",
+          "question": "나 무서워.",
+          "answer": "I'm (나는) → scared. (무서운 상태)",
+          "chunks": [
+            "I'm",
+            "scared."
+          ],
+          "phonics": "I'm (나는) → scared. (무서운 상태)",
+          "dialogue": [
+            "A: Don't be scared! I'm here. / 무서워하지 마! 내가 있잖아.",
+            "B: I'm scared! It's dark! / 나 무서워! 어두워!",
+            "A: Let's turn on the light! / 불 켜자!",
+            "B: Okay! Thank you! I'm not scared now. / 알겠어! 고마워! 이제 안 무서워."
+          ],
+          "star": 4
+        },
+        {
+          "id": 30,
+          "english": "I'm tired.",
+          "question": "나 피곤해.",
+          "answer": "I'm (나는) → tired. (피곤한 상태)",
+          "chunks": [
+            "I'm",
+            "tired."
+          ],
+          "phonics": "I'm (나는) → tired. (피곤한 상태)",
+          "dialogue": [
+            "A: Do you want to play? / 놀고 싶어?",
+            "B: I'm tired. Can we rest first? / 나 피곤해. 먼저 쉬면 안 돼?",
+            "A: Sure! Let's rest for a little. / 물론! 잠깐 쉬자.",
+            "B: Thank you! I feel better now! / 고마워! 이제 좀 나아졌어!"
+          ],
+          "star": 4
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "emoji": "🙏",
+      "name": "요청",
+      "nameEn": "요청 · Requests",
+      "color": "linear-gradient(135deg,#667eea 0%,#764ba2 100%)",
+      "sentences": [
+        {
+          "id": 31,
+          "english": "Can I have some water?",
+          "question": "물을 좀 마실 수 있나요?",
+          "answer": "Can I have (줄 수 있어요?) → some water? (무엇을)",
+          "chunks": [
+            "Can I have",
+            "some water?"
+          ],
+          "phonics": "Can I have (줄 수 있어요?) → some water? (무엇을)",
+          "dialogue": [
+            "A: Can I have some water, please? / 물 좀 주세요.",
+            "B: Of course! Here you go! / 물론이죠! 여기요!",
+            "A: Thank you! I was so thirsty! / 감사해요! 너무 목말랐어요!",
+            "B: You're welcome! Drink up! / 천만에요! 많이 마셔요!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 32,
+          "english": "I want a cookie.",
+          "question": "나는 쿠키를 원해요.",
+          "answer": "I want (원해요) → [명사]. (무엇을)",
+          "chunks": [
+            "I want",
+            "a cookie."
+          ],
+          "phonics": "I want (원해요) → [명사]. (무엇을)",
+          "dialogue": [
+            "A: I want a cookie, please! / 쿠키 주세요, 부탁해요!",
+            "B: Okay! Here's your cookie! / 알겠어! 여기 네 쿠키야!",
+            "A: Yummy! Thank you, Mommy! / 맛있어! 고마워요, 엄마!",
+            "B: You're welcome! Just one, okay? / 천만에요! 하나만이야, 알겠지?"
+          ],
+          "star": 5
+        },
+        {
+          "id": 33,
+          "english": "Give me the ball, please.",
+          "question": "나에게 공을 주세요.",
+          "answer": "Give me (주세요) → the [명사], (무엇을) → please. (예의)",
+          "chunks": [
+            "Give me",
+            "the ball,",
+            "please."
+          ],
+          "phonics": "Give me (주세요) → the [명사], (무엇을) → please. (예의)",
+          "dialogue": [
+            "A: Give me the ball, please! / 공 주세요, 제발!",
+            "B: Here! Catch! / 받아라! 잡아!",
+            "A: Thanks! I caught it! / 고마워! 잡았어!",
+            "B: Great catch! Let's play! / 잘 잡았어! 놀자!"
+          ],
+          "star": 4
+        },
+        {
+          "id": 34,
+          "english": "Wait for me!",
+          "question": "나를 기다려!",
+          "answer": "Wait (기다려) → for me! (나를)",
+          "chunks": [
+            "Wait",
+            "for me!"
+          ],
+          "phonics": "Wait (기다려) → for me! (나를)",
+          "dialogue": [
+            "A: I'm going ahead! / 나 먼저 간다!",
+            "B: Wait for me! I'm coming! / 나 기다려! 나 가고 있어!",
+            "A: Hurry up! We'll be late! / 서둘러! 늦겠어!",
+            "B: Okay! I'm ready! Let's go! / 알겠어! 준비됐어! 가자!"
+          ],
+          "star": 5
+        },
+        {
+          "id": 35,
+          "english": "Can I go outside?",
+          "question": "제가 밖으로 가도 되나요?",
+          "answer": "Can I (해도 돼요?) → go outside? (어디로)",
+          "chunks": [
+            "Can I",
+            "go outside?"
+          ],
+          "phonics": "Can I (해도 돼요?) → go outside? (어디로)",
+          "dialogue": [
+            "A: Can I go outside and play? / 밖에 나가서 놀아도 돼요?",
+            "B: Did you finish your homework? / 숙제는 다 했니?",
+            "A: Yes! All done! / 네! 다 했어요!",
+            "B: Okay! You can go outside! / 알겠어! 나가도 돼!"
+          ],
+          "star": 5
+        }
+      ]
+    }
+  ]
+}
