@@ -16,12 +16,18 @@
     --shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    background: var(--bg);
+  }
   body {
     font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
     background: var(--bg);
     color: #2D3748;
     line-height: 1.6;
     padding: 0 0 60px 0;
+    max-width: 980px;
+    margin: 0 auto;
+    box-shadow: 0 0 40px rgba(0,0,0,0.08);
   }
 
   /* Header */
@@ -430,6 +436,83 @@
 
   .hidden { display: none !important; }
 
+  /* ═══ 전체 상황 듣기 (Global Play) ═══ */
+  .global-play-bar {
+    background: linear-gradient(90deg, #1a202c 0%, #2d3748 100%);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #667eea;
+  }
+  .global-play-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(102,126,234,0.4);
+  }
+  .global-play-btn:hover { opacity: 0.9; transform: scale(1.03); }
+  .global-play-btn.playing-state {
+    background: linear-gradient(135deg, #dd6b20 0%, #c05621 100%);
+    box-shadow: 0 2px 8px rgba(221,107,32,0.4);
+  }
+  .global-play-btn.paused-state {
+    background: linear-gradient(135deg, #38a169 0%, #276749 100%);
+    box-shadow: 0 2px 8px rgba(56,161,105,0.4);
+  }
+  .global-stop-btn {
+    padding: 8px 16px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 10px;
+    background: transparent;
+    color: #e2e8f0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: none;
+  }
+  .global-stop-btn:hover {
+    background: rgba(229,62,62,0.25);
+    border-color: #fc8181;
+    color: #fc8181;
+  }
+  .global-prog-text {
+    font-size: 0.8rem;
+    color: #e2e8f0;
+    font-weight: 600;
+    flex: 1;
+    min-width: 180px;
+  }
+  .global-prog-text.active { color: #90cdf4; }
+  .global-interval-label { font-size: 0.78rem; color: #a0aec0; }
+  .global-interval-slider { width: 80px; accent-color: #667eea; }
+  .global-interval-value {
+    font-size: 0.78rem;
+    color: #90cdf4;
+    font-weight: 700;
+    min-width: 30px;
+  }
+  /* 현재 재생 중인 항목 — 노란 테두리 + 글로우 */
+  .turn-item.speaking-global {
+    border: 2.5px solid #f6e05e !important;
+    box-shadow: 0 0 0 3px rgba(246,224,94,0.45), 0 0 14px rgba(246,224,94,0.25) !important;
+    background: #fffff0 !important;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .turn-item.speaking-global details summary {
+    background: #fffff0 !important;
+  }
+
   /* Legend */
   .legend {
     display: flex;
@@ -562,6 +645,15 @@
     <option value="">기본 영어 음성</option>
   </select>
   <button class="tts-speed-btn" onclick="stopTTS()" style="margin-left:auto;">⏹ 중지</button>
+</div>
+
+<div class="global-play-bar" id="globalPlayBar">
+  <button class="global-play-btn" id="globalPlayBtn" onclick="globalPlayPause()">▶ 전체 상황 듣기</button>
+  <button class="global-stop-btn" id="globalStopBtn" onclick="globalStop()">⏹ 정지</button>
+  <span class="global-prog-text" id="globalProgText">← 전체 46상황 순서 재생 | ▶ 재생  ⏸ 일시정지  ⏹ 정지</span>
+  <span class="global-interval-label">문장 간격:</span>
+  <input type="range" class="global-interval-slider" id="globalIntervalSlider" min="0.5" max="5" step="0.5" value="1.5" oninput="document.getElementById('globalIntervalVal').textContent=this.value+'s'">
+  <span class="global-interval-value" id="globalIntervalVal">1.5s</span>
 </div>
 
 <div class="voice-panel" id="voicePanel">
@@ -19217,6 +19309,251 @@ speakText = function(text, btn) {
   };
   speechSynthesis.speak(utter);
 };
+
+// ═══════════════════════════════════════════════════
+// 🌐 전체 상황 듣기 v2
+// 상태: stopped → playing → paused → playing → stopped
+// ▶ 재생  ⏸ 일시정지  ▶ 계속  ⏹ 정지(처음으로)
+// ═══════════════════════════════════════════════════
+var _gp = {
+  playing:      false,
+  paused:       false,
+  pauseFlag:    false,   // onend 콜백에서 진행 차단
+  index:        0,
+  items:        [],
+  total:        0,
+  currentSitEl: null,   // 현재 열려 있는 sitDetails 엘리먼트
+  prevItem:     null    // 이전 재생 항목 (아코디언 닫기용)
+};
+
+// 강조 해제 + 이전 항목 아코디언 닫기
+function _gpClearHL() {
+  document.querySelectorAll('.turn-item.speaking-global').forEach(function(t) {
+    t.classList.remove('speaking-global');
+    var d = t.querySelector('details');
+    if (d) d.open = false;          // 아코디언 닫기
+  });
+  // prevItem 이 있으면 확실하게 닫기
+  if (_gp.prevItem) {
+    var pd = _gp.prevItem.querySelector('details');
+    if (pd) pd.open = false;
+    _gp.prevItem = null;
+  }
+}
+
+function _gpUpdateProg(cur, tot) {
+  var progEl = document.getElementById('globalProgText');
+  if (!progEl) return;
+  if (cur > tot) {
+    progEl.textContent = '✅ 전체 완료! (' + tot + '문장 재생)';
+    progEl.classList.remove('active');
+    return;
+  }
+  var item = _gp.items[cur - 1];
+  var sitEl = item ? item.closest('.situation') : null;
+  var sitTitle = sitEl ? sitEl.querySelector('.sit-title') : null;
+  var sitName = sitTitle ? sitTitle.textContent.trim() : '';
+  if (sitName.length > 20) sitName = sitName.substring(0, 20) + '…';
+  progEl.textContent = '▶ ' + cur + ' / ' + tot + (sitName ? '  ·  ' + sitName : '');
+  progEl.classList.add('active');
+}
+
+function _gpSetUI(state) {
+  var playBtn = document.getElementById('globalPlayBtn');
+  var stopBtn = document.getElementById('globalStopBtn');
+  if (!playBtn) return;
+  playBtn.classList.remove('playing-state', 'paused-state');
+  if (state === 'stopped') {
+    playBtn.textContent = '▶ 전체 상황 듣기';
+    if (stopBtn) stopBtn.style.display = 'none';
+  } else if (state === 'playing') {
+    playBtn.textContent = '⏸ 일시정지';
+    playBtn.classList.add('playing-state');
+    if (stopBtn) stopBtn.style.display = '';
+  } else if (state === 'paused') {
+    playBtn.textContent = '▶ 계속 재생';
+    playBtn.classList.add('paused-state');
+    if (stopBtn) stopBtn.style.display = '';
+  }
+}
+
+function _gpSpeakNext() {
+  // ── 중단 조건 ─────────────────────────────────────
+  if (_gp.pauseFlag || _gp.index >= _gp.total) {
+    if (!_gp.pauseFlag) {
+      _gpClearHL();
+      _gpUpdateProg(_gp.total + 1, _gp.total);
+      _gp.playing = false;
+      _gpSetUI('stopped');
+    }
+    return;
+  }
+
+  // ── 이전 항목 정리 (강조 해제 + 아코디언 닫기) ───
+  _gpClearHL();
+
+  var item = _gp.items[_gp.index];
+
+  // ── 1단계: 상황(sit-details) 펼치기 ─────────────
+  var sitDetails = item.closest('details.sit-details');
+  var sitJustOpened = false;
+  if (sitDetails && !sitDetails.open) {
+    sitDetails.open = true;
+    sitJustOpened = true;
+    _gp.currentSitEl = sitDetails;
+  }
+
+  // ── 2단계: 항목 아코디언(turn details) 열기 ──────
+  // sit-details 가 방금 열렸으면 DOM 렌더링 대기 후 열기
+  var turnDetails = item.querySelector('details');
+  var delay = sitJustOpened ? 200 : 30;   // 30ms: 닫힘→열림 전환 애니메이션 여유
+
+  setTimeout(function() {
+    if (_gp.pauseFlag) return;
+
+    // 항목 아코디언 열기
+    if (turnDetails) turnDetails.open = true;
+
+    // 노란 테두리 강조
+    item.classList.add('speaking-global');
+    _gp.prevItem = item;   // 다음 턴에서 닫을 용도로 기억
+
+    // ── 스크롤 (sticky 바 높이 140px 보정) ──────────
+    // 아코디언이 막 열렸으므로 rAF로 레이아웃 확정 후 스크롤
+    requestAnimationFrame(function() {
+      if (_gp.pauseFlag) return;
+      var rect = item.getBoundingClientRect();
+      var topOffset = 150;
+      var bottomOffset = 80;
+      if (rect.top < topOffset || rect.bottom > window.innerHeight - bottomOffset) {
+        window.scrollTo({
+          top: window.scrollY + rect.top - topOffset - 10,
+          behavior: 'smooth'
+        });
+      }
+    });
+
+    _gpUpdateProg(_gp.index + 1, _gp.total);
+
+    // ── TTS 재생 ─────────────────────────────────────
+    var engText = (item.dataset.eng || '').trim();
+    if (!engText) {
+      // 영어 텍스트가 없으면 바로 다음으로
+      item.classList.remove('speaking-global');
+      if (turnDetails) turnDetails.open = false;
+      _gp.prevItem = null;
+      _gp.index++;
+      setTimeout(_gpSpeakNext, 0);
+      return;
+    }
+
+    var roleClass = _getRoleClass(item);
+    var utt = new SpeechSynthesisUtterance(engText);
+    utt.lang  = 'en-US';
+    utt.rate  = ttsState.rate;
+    utt.pitch = (roleClass === 'role-b') ? 0.95 : 1.1;
+    var v = _pickVoice2(roleClass);
+    if (v) utt.voice = v;
+
+    utt.onend = utt.onerror = function() {
+      item.classList.remove('speaking-global');
+      if (_gp.pauseFlag) {
+        // 일시정지/정지: 아코디언은 열린 채로 유지 (사용자가 볼 수 있도록)
+        return;
+      }
+      // 재생 완료 → 아코디언 닫기는 다음 _gpClearHL 에서 처리
+      _gp.index++;
+      if (_gp.index >= _gp.total) {
+        _gpClearHL();
+        _gpUpdateProg(_gp.total + 1, _gp.total);
+        _gp.playing = false;
+        _gpSetUI('stopped');
+        return;
+      }
+      var slider = document.getElementById('globalIntervalSlider');
+      var gapMs  = slider ? parseFloat(slider.value) * 1000 : 1500;
+      setTimeout(_gpSpeakNext, gapMs);
+    };
+    speechSynthesis.speak(utt);
+  }, delay);
+}
+
+// ── 공개 함수 ──────────────────────────────────────
+
+function globalPlayPause() {
+  if (typeof speechSynthesis === 'undefined') {
+    alert('이 브라우저는 음성 기능을 지원하지 않습니다.\nChrome 또는 Edge를 이용해 주세요.');
+    return;
+  }
+
+  if (!_gp.playing && !_gp.paused) {
+    // ▶ 시작
+    _stopAllPlayback();
+    stopTTS();
+    speechSynthesis.cancel();
+
+    _gp.items = Array.from(document.querySelectorAll('.turn-item')).filter(function(el) {
+      return !el.closest('.hidden') && (el.dataset.eng || '').trim() !== '';
+    });
+    _gp.total = _gp.items.length;
+    if (_gp.total === 0) return;
+
+    _gp.playing   = true;
+    _gp.paused    = false;
+    _gp.pauseFlag = false;
+    _gp.index     = 0;
+    _gp.currentSitEl = null;
+
+    _gpSetUI('playing');
+    var progEl = document.getElementById('globalProgText');
+    if (progEl) { progEl.textContent = '음성 준비 중...'; progEl.classList.add('active'); }
+
+    var voices = speechSynthesis.getVoices();
+    if (!voices.length) {
+      setTimeout(function() { if (_gp.playing) _gpSpeakNext(); }, 400);
+    } else {
+      _gpSpeakNext();
+    }
+
+  } else if (_gp.playing && !_gp.paused) {
+    // ⏸ 일시정지
+    _gp.playing   = false;
+    _gp.paused    = true;
+    _gp.pauseFlag = true;
+    speechSynthesis.cancel();
+    _gpClearHL();
+    _gpSetUI('paused');
+    var progEl = document.getElementById('globalProgText');
+    if (progEl) {
+      progEl.textContent = '⏸ 일시정지 — ' + (_gp.index + 1) + '번째 문장부터 재개 가능';
+      progEl.classList.remove('active');
+    }
+
+  } else if (_gp.paused) {
+    // ▶ 계속 재생
+    _gp.playing   = true;
+    _gp.paused    = false;
+    _gp.pauseFlag = false;
+    _gpSetUI('playing');
+    _gpSpeakNext();
+  }
+}
+
+function globalStop() {
+  _gp.pauseFlag = true;
+  _gp.playing   = false;
+  _gp.paused    = false;
+  if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
+  _gpClearHL();
+  _gp.index        = 0;
+  _gp.currentSitEl = null;
+  _gpSetUI('stopped');
+  var progEl = document.getElementById('globalProgText');
+  if (progEl) { progEl.textContent = '⏹ 정지 — ▶ 버튼으로 처음부터 다시 재생'; progEl.classList.remove('active'); }
+}
+
+// 하위 호환 (기존 호출 유지)
+function playAllGlobal() { globalPlayPause(); }
 
 // ── 초기화 ──
 if (typeof speechSynthesis !== 'undefined') {
