@@ -297,15 +297,171 @@
     /* ====== FLOATING MINI PLAYER ====== */
     #miniPlayer {
       position: fixed; bottom: 20px; right: 20px;
-      background: white; border-radius: 14px;
-      padding: 12px 18px; box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+      border-radius: 16px;
+      padding: 13px 16px 11px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
       display: none; z-index: 999;
-      min-width: 220px; max-width: 300px;
+      min-width: 230px; max-width: 300px;
+      /* 전체 border + left 강조 동시 적용 */
+      border: 2.5px solid #4CAF50;
+      border-left-width: 6px;
+      background: #fff;
+      transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
     }
     #miniPlayer.visible { display: block; }
-    .mini-now { font-size: 0.78em; color: #95a5a6; margin-bottom: 4px; }
-    .mini-text { font-size: 1em; font-weight: 700; color: #2c3e50; line-height: 1.4; }
-    .mini-controls { display: flex; gap: 8px; margin-top: 10px; justify-content: flex-end; }
+
+    /* ── 재생 중 ── */
+    #miniPlayer.state-playing {
+      border-color: #4CAF50;
+      background: #fff;
+      box-shadow: 0 8px 32px rgba(76,175,80,0.18);
+    }
+    /* ── 일시정지 ── 전체 주황 점선 테두리로 강조 */
+    #miniPlayer.state-paused {
+      border-color: #FFA726;
+      border-style: dashed;
+      border-left-style: solid;
+      background: #FFF8E1;
+      box-shadow: 0 8px 32px rgba(255,167,38,0.22);
+    }
+
+    /* 상태 배지 행 */
+    .mini-status-row {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 7px;
+    }
+    /* 상태 배지 */
+    .mini-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 2px 9px; border-radius: 20px;
+      font-size: 0.76em; font-weight: 800;
+      letter-spacing: 0.4px;
+      transition: background 0.25s, color 0.25s;
+    }
+    #miniPlayer.state-playing  .mini-badge {
+      background: #E8F5E9; color: #2E7D32;
+    }
+    #miniPlayer.state-paused   .mini-badge {
+      background: #FFF3E0; color: #E65100;
+    }
+    /* 파동 점 */
+    .mini-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0; display: inline-block;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; transform: scale(1.1); }
+      50%      { opacity: 0.3; transform: scale(0.6); }
+    }
+    #miniPlayer.state-playing .mini-dot {
+      background: #4CAF50;
+      animation: pulse-dot 1s ease-in-out infinite;
+    }
+    #miniPlayer.state-paused  .mini-dot {
+      background: #FFA726; animation: none;
+    }
+
+    /* 재생 문장 */
+    .mini-text {
+      font-size: 1em; font-weight: 700;
+      color: #2c3e50; line-height: 1.4;
+      min-height: 1.4em;
+      transition: color 0.2s;
+    }
+    #miniPlayer.state-paused .mini-text { color: #999; }
+
+    /* Space 힌트 */
+    .mini-hint {
+      font-size: 0.70em; color: #ccc;
+      margin-top: 4px; text-align: right;
+    }
+    .mini-controls {
+      display: flex; gap: 8px;
+      margin-top: 10px; justify-content: flex-end;
+    }
+
+    /* ====== SITUATION FILTER BAR ====== */
+    #filterSection {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .filter-header {
+      padding: 12px 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(135deg, #5c6bc0 0%, #7e57c2 100%);
+      color: white;
+      user-select: none;
+    }
+    .filter-header-left { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.95em; }
+    .filter-header-right { display: flex; align-items: center; gap: 10px; font-size: 0.82em; }
+    .filter-count-badge {
+      background: rgba(255,255,255,0.28);
+      padding: 2px 10px; border-radius: 12px; font-weight: 700;
+    }
+    .filter-body {
+      padding: 14px 16px 12px;
+      display: none;
+    }
+    #filterSection.open .filter-body { display: block; }
+
+    /* 전체/초기화 버튼 행 */
+    .filter-top-row {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 10px; flex-wrap: wrap;
+    }
+    .btn-filter-all {
+      padding: 5px 14px; border-radius: 20px;
+      font-size: 0.82em; font-weight: 700;
+      border: 2px solid #5c6bc0; background: #5c6bc0; color: white;
+      cursor: pointer; transition: all 0.18s;
+    }
+    .btn-filter-all:hover { opacity: 0.85; }
+    .btn-filter-reset {
+      padding: 5px 12px; border-radius: 20px;
+      font-size: 0.82em; font-weight: 600;
+      border: 2px solid #e0e0e0; background: white; color: #888;
+      cursor: pointer; transition: all 0.18s;
+    }
+    .btn-filter-reset:hover { border-color: #bbb; color: #555; }
+    .filter-selected-info {
+      font-size: 0.80em; color: #7e57c2; font-weight: 600;
+      margin-left: auto;
+    }
+
+    /* 상황 칩 그리드 */
+    .filter-chips {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      max-height: 180px; overflow-y: auto;
+      padding-right: 4px;
+    }
+    .filter-chips::-webkit-scrollbar { width: 4px; }
+    .filter-chips::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+
+    .sit-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px; border-radius: 16px;
+      font-size: 0.78em; font-weight: 600;
+      border: 2px solid #e0e0e0;
+      background: #f9f9f9; color: #555;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .sit-chip:hover { border-color: #7e57c2; color: #5c6bc0; background: #ede7f6; }
+    .sit-chip.selected {
+      border-color: #7e57c2;
+      background: linear-gradient(135deg, #ede7f6, #d1c4e9);
+      color: #4527a0;
+      font-weight: 700;
+    }
+
+    /* 필터 적용 중 상황 섹션 숨김 */
+    .situation-section.filter-hidden { display: none !important; }
 
     /* ====== RESPONSIVE ====== */
     @media (max-width: 600px) {
@@ -313,6 +469,7 @@
       .cards-grid { grid-template-columns: 1fr; }
       .global-controls { flex-direction: column; align-items: flex-start; }
       .settings-body { grid-template-columns: 1fr; }
+      .filter-chips { max-height: 140px; }
     }
 
     /* Chunk color palette */
@@ -571,8 +728,8 @@
     <div class="setting-item">
       <label>⏱ 문장 간 간격 (Interval)</label>
       <div class="slider-row">
-        <input type="range" id="intervalSlider" min="0" max="10000" step="200" value="400">
-        <span class="slider-val" id="intervalVal">0.4초</span>
+        <input type="range" id="intervalSlider" min="0" max="10000" step="200" value="1500">
+        <span class="slider-val" id="intervalVal">1.5초</span>
       </div>
     </div>
     <div class="setting-item" style="align-self: flex-end;">
@@ -583,9 +740,28 @@
 </div>
 
 <!-- ====== GLOBAL CONTROLS ====== -->
+<!-- ====== SITUATION FILTER ====== -->
+<div id="filterSection">
+  <div class="filter-header" onclick="toggleFilterPanel()">
+    <div class="filter-header-left">🔎 상황 필터</div>
+    <div class="filter-header-right">
+      <span class="filter-count-badge" id="filterCountBadge">전체 154개</span>
+      <span id="filterChevron">▼</span>
+    </div>
+  </div>
+  <div class="filter-body">
+    <div class="filter-top-row">
+      <button class="btn-filter-all" onclick="selectAllSituations()">✅ 전체 선택</button>
+      <button class="btn-filter-reset" onclick="resetFilter()">🔄 초기화</button>
+      <span class="filter-selected-info" id="filterInfo">전체 재생 중</span>
+    </div>
+    <div class="filter-chips" id="filterChips"></div>
+  </div>
+</div>
+
 <div class="global-controls">
   <div class="ctrl-group">
-    <button class="btn btn-green"  id="btnPlayAll"   onclick="playAll()">▶ 전체 듣기</button>
+    <button class="btn btn-green"  id="btnPlayAll"   onclick="playAll()">▶ 선택 듣기</button>
     <button class="btn btn-orange" id="btnPause"     onclick="togglePause()" disabled>⏸ 일시정지</button>
     <button class="btn btn-red"    id="btnStop"      onclick="stopAll()"   disabled>⏹ 정지</button>
   </div>
@@ -635,11 +811,17 @@
 <div id="situationsContainer"></div>
 
 <!-- ====== MINI PLAYER ====== -->
-<div id="miniPlayer">
-  <div class="mini-now">🔊 지금 재생 중</div>
+<div id="miniPlayer" class="state-playing">
+  <div class="mini-status-row">
+    <span class="mini-badge">
+      <span class="mini-dot"></span>
+      <span id="miniStateLabel">재생중</span>
+    </span>
+  </div>
   <div class="mini-text" id="miniText">—</div>
+  <div class="mini-hint">Space = 일시정지 / 재개</div>
   <div class="mini-controls">
-    <button class="btn btn-orange btn-sm" onclick="togglePause()">⏸</button>
+    <button class="btn btn-orange btn-sm" id="miniPauseBtn" onclick="togglePause()">⏸</button>
     <button class="btn btn-red    btn-sm" onclick="stopAll()">⏹</button>
   </div>
 </div>
@@ -3743,6 +3925,8 @@ let isPlayingAll = false;
 let isPaused = false;
 let globalPlayIndex = 0;
 let flatSentences = [];
+let filteredFlat = [];        /* 필터 적용된 재생 목록 */
+let selectedSitIds = new Set(); /* 선택된 상황 ID. 빈 Set = 전체 */
 let showChunks = false;
 let settingsOpen = true;
 let situationPlayIndex = 0;
@@ -3755,6 +3939,105 @@ SITUATIONS.forEach(sit => {
     flatSentences.push({ ...s, sitId: sit.id });
   });
 });
+filteredFlat = [...flatSentences]; /* 초기값: 전체 */
+
+/* ================================================================
+   SITUATION FILTER
+   ================================================================ */
+function initFilterChips() {
+  const container = document.getElementById('filterChips');
+  if (!container) return;
+  container.innerHTML = '';
+  SITUATIONS.forEach(sit => {
+    const chip = document.createElement('button');
+    chip.className = 'sit-chip';
+    chip.dataset.sitId = sit.id;
+    chip.innerHTML = `${sit.emoji} ${sit.name}`;
+    chip.addEventListener('click', () => toggleSitChip(sit.id, chip));
+    container.appendChild(chip);
+  });
+  updateFilterBadge();
+}
+
+function toggleSitChip(sitId, chipEl) {
+  if (selectedSitIds.has(sitId)) {
+    selectedSitIds.delete(sitId);
+    chipEl.classList.remove('selected');
+  } else {
+    selectedSitIds.add(sitId);
+    chipEl.classList.add('selected');
+  }
+  applyFilter();
+}
+
+function selectAllSituations() {
+  /* 전체 선택: 모든 칩 선택 */
+  selectedSitIds.clear();
+  SITUATIONS.forEach(s => selectedSitIds.add(s.id));
+  document.querySelectorAll('.sit-chip').forEach(c => c.classList.add('selected'));
+  applyFilter();
+}
+
+function resetFilter() {
+  /* 전체 해제 → 전체 보기 */
+  selectedSitIds.clear();
+  document.querySelectorAll('.sit-chip').forEach(c => c.classList.remove('selected'));
+  applyFilter();
+}
+
+function applyFilter() {
+  const isAll = selectedSitIds.size === 0 || selectedSitIds.size === SITUATIONS.length;
+
+  /* 1. 상황 섹션 표시/숨김 */
+  document.querySelectorAll('.situation-section').forEach(sec => {
+    const id = parseInt(sec.id.replace('sit-', ''));
+    if (isAll || selectedSitIds.has(id)) {
+      sec.classList.remove('filter-hidden');
+    } else {
+      sec.classList.add('filter-hidden');
+    }
+  });
+
+  /* 2. filteredFlat 재구성 (전체 듣기 대상) */
+  if (isAll) {
+    filteredFlat = [...flatSentences];
+  } else {
+    filteredFlat = flatSentences.filter(s => selectedSitIds.has(s.sitId));
+  }
+
+  updateFilterBadge();
+}
+
+function updateFilterBadge() {
+  const badge = document.getElementById('filterCountBadge');
+  const info  = document.getElementById('filterInfo');
+  const isAll = selectedSitIds.size === 0 || selectedSitIds.size === SITUATIONS.length;
+
+  if (badge) {
+    badge.textContent = isAll
+      ? `전체 ${SITUATIONS.length}개`
+      : `${selectedSitIds.size}개 선택`;
+  }
+  if (info) {
+    info.textContent = isAll
+      ? `전체 ${flatSentences.length}문장 재생`
+      : `${filteredFlat.length}문장 재생 예정`;
+    info.style.color = isAll ? '#7e57c2' : '#e65100';
+  }
+
+  /* 버튼 텍스트도 업데이트 */
+  const btnPlay = document.getElementById('btnPlayAll');
+  if (btnPlay) {
+    btnPlay.textContent = isAll ? '▶ 전체 듣기' : `▶ 선택 듣기 (${filteredFlat.length})`;
+  }
+}
+
+function toggleFilterPanel() {
+  const sec = document.getElementById('filterSection');
+  const chv = document.getElementById('filterChevron');
+  sec.classList.toggle('open');
+  if (chv) chv.textContent = sec.classList.contains('open') ? '▲' : '▼';
+}
 
 /* Voice loading */
 function loadVoices() {
@@ -3825,6 +4108,7 @@ function testVoice() { speak("Hello! Good morning! Let's learn English together!
    ================================================================ */
 function playAll() {
   if (isPlayingAll) return;
+  if (filteredFlat.length === 0) { alert('선택된 상황이 없어요. 상황 필터에서 상황을 선택해 주세요!'); return; }
   stopSitPlay();
   globalPlayIndex = 0;
   isPlayingAll = true;
@@ -3833,16 +4117,17 @@ function playAll() {
   document.getElementById('btnPause').disabled = false;
   document.getElementById('btnStop').disabled = false;
   document.getElementById('miniPlayer').classList.add('visible');
+  setMiniState(true);
   playAllNext();
 }
 
 function playAllNext() {
-  if (!isPlayingAll || globalPlayIndex >= flatSentences.length) {
+  if (!isPlayingAll || globalPlayIndex >= filteredFlat.length) {
     finishPlayAll(); return;
   }
-  const s = flatSentences[globalPlayIndex];
+  const s = filteredFlat[globalPlayIndex];
   setHighlight(s.id, true);
-  updateProgress(globalPlayIndex + 1, flatSentences.length);
+  updateProgress(globalPlayIndex + 1, filteredFlat.length);
   document.getElementById('miniText').textContent = s.english;
 
   // Auto-open section
@@ -3861,32 +4146,54 @@ function playAllNext() {
   });
 }
 
+function setMiniState(playing) {
+  const mp  = document.getElementById('miniPlayer');
+  const lbl = document.getElementById('miniStateLabel');
+  const mpb = document.getElementById('miniPauseBtn');
+  if (playing) {
+    mp.classList.remove('state-paused');
+    mp.classList.add('state-playing');
+    if (lbl) lbl.textContent = '재생중';
+    if (mpb) mpb.textContent = '⏸';
+  } else {
+    mp.classList.remove('state-playing');
+    mp.classList.add('state-paused');
+    if (lbl) lbl.textContent = '일시정지';
+    if (mpb) mpb.textContent = '▶';
+  }
+}
+
 function togglePause() {
   const btn = document.getElementById('btnPause');
+
   if (isPaused) {
-    /* ── 재개: 현재 인덱스 문장부터 다시 시작 ── */
+    /* ── 재개 ── */
     isPaused = false;
     btn.textContent = '⏸ 일시정지';
+    setMiniState(true);
     if (isPlayingAll) {
       playAllNext();
     } else if (sitPlayActive) {
       playFromSitQueue();
     }
   } else {
-    /* ── 일시정지: 음성 취소 후 인덱스 유지 ── */
-    window.speechSynthesis.cancel();
+    /* ── 일시정지: isPaused를 먼저 true로 설정해야
+          cancel()의 onend 콜백에서 진행이 멈춤 ── */
     isPaused = true;
+    window.speechSynthesis.cancel();
     btn.textContent = '▶ 계속';
-    /* 현재 하이라이트 카드 유지 (시각적 표시) */
+    setMiniState(false);
   }
 }
 
 function stopAll() {
+  isPaused = false; /* 먼저 플래그 초기화 → cancel() onend 무시 */
   window.speechSynthesis.cancel();
-  isPlayingAll = false; isPaused = false; sitPlayActive = false;
+  isPlayingAll = false; sitPlayActive = false;
   document.querySelectorAll('.sentence-card.playing').forEach(c => c.classList.remove('playing'));
   finishPlayAll();
   document.getElementById('miniPlayer').classList.remove('visible');
+  setMiniState(true); /* 다음 재생을 위해 재생 상태로 초기화 */
 }
 
 function finishPlayAll() {
@@ -3896,6 +4203,7 @@ function finishPlayAll() {
   document.getElementById('btnStop').disabled = true;
   document.getElementById('btnPause').textContent = '⏸ 일시정지';
   document.getElementById('miniPlayer').classList.remove('visible');
+  setMiniState(true);
 }
 
 /* Play one sentence */
@@ -4404,6 +4712,7 @@ setQuizMode = function(mode) {
 };
 
 render();
+initFilterChips();   /* 상황 필터 칩 초기화 */
 requestAnimationFrame(() => applyTwemoji());
 </script>
 </body>
