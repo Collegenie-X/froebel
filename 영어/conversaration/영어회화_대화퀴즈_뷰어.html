@@ -611,6 +611,51 @@ function handleJsonDrop(event) {
 function applyJsonData(data, fileName) {
   var sits = Array.isArray(data) ? data : (data.situations || []);
   if (!sits.length) { alert('situations 데이터를 찾을 수 없습니다.'); return; }
+
+  // ★ sentences[] → turns[] 자동 변환 (phonics_viewer 포맷 호환)
+  sits.forEach(function(sit) {
+    if (!sit.turns && sit.sentences && sit.sentences.length) {
+      var turnCounter = 1; // 연속 턴 번호
+      var allTurns = [];
+      sit.sentences.forEach(function(s) {
+        // dialogue 배열에서 A/B 파싱 시도
+        var dialogueParsed = [];
+        if (Array.isArray(s.dialogue) && s.dialogue.length) {
+          s.dialogue.forEach(function(line, di) {
+            var roleMatch = line.match(/^([A-Z]):\s*(.+?)\s*\/\s*(.+)$/);
+            if (roleMatch) {
+              var isA = roleMatch[1] === 'A';
+              dialogueParsed.push({
+                turn: turnCounter++,
+                speaker: isA ? '학생' : '친구',   // A=학생(파랑), B=친구(주황)
+                role:    isA ? 'c'    : 'b',      // c=파랑, b=주황
+                english: roleMatch[2].trim(),
+                korean:  roleMatch[3].trim(),
+                chunks:  di === 0 ? (s.chunks || []) : [],
+                tip:    (di === 0 && s.phonics) ? { tag: '📚 팁', text: s.phonics } : null
+              });
+            }
+          });
+        }
+        if (dialogueParsed.length) {
+          allTurns = allTurns.concat(dialogueParsed);
+        } else {
+          // dialogue 없으면 단일 문장으로
+          allTurns.push({
+            turn:    turnCounter++,
+            speaker: '학생',
+            role:    'c',
+            english: s.english || '',
+            korean:  s.question || s.answer || '',
+            chunks:  s.chunks || [],
+            tip:     s.phonics ? { tag: '📚 팁', text: s.phonics } : null
+          });
+        }
+      });
+      sit.turns = allTurns;
+    }
+  });
+
   SITUATIONS = sits;
   _selectedSits.clear();
 
@@ -782,18 +827,21 @@ function buildTurnItem(t) {
   var chunksBox = document.createElement('div');
   chunksBox.className = 'chunks-box' + (_showChunks ? ' visible' : '');
   if (t.english) {
-    var words = t.english.split(/\s+/);
-    // 의미 단위로 묶기 (3~4단어씩)
-    var chunks = [];
-    var curr = [];
-    words.forEach(function(w) {
-      curr.push(w);
-      if (curr.length >= 3 || w.endsWith(',') || w.endsWith(';')) {
-        chunks.push(curr.join(' '));
-        curr = [];
-      }
-    });
-    if (curr.length) chunks.push(curr.join(' '));
+    // ★ JSON에 chunks 배열이 있으면 그것을 사용, 없으면 자동 분할
+    var chunks = (Array.isArray(t.chunks) && t.chunks.length)
+      ? t.chunks
+      : (function() {
+          var words = t.english.split(/\s+/);
+          var arr = [], curr = [];
+          words.forEach(function(w) {
+            curr.push(w);
+            if (curr.length >= 3 || w.endsWith(',') || w.endsWith(';')) {
+              arr.push(curr.join(' ')); curr = [];
+            }
+          });
+          if (curr.length) arr.push(curr.join(' '));
+          return arr;
+        })();
     chunks.forEach(function(c, i) {
       var pill = document.createElement('span');
       pill.className = 'chunk-pill cc-' + (i % 7);
@@ -887,6 +935,19 @@ function _speakSingle(btn) {
 ================================================================ */
 var _activeSitBtn = null;
 
+// 재생 중인 턴이 화면에 보이도록: 상황 섹션 열기 + details 열기 + 스크롤
+function _ensureTurnVisible(item) {
+  // 1) 부모 situation-section이 닫혀 있으면 자동으로 열기
+  var sec = item.closest ? item.closest('.situation-section')
+            : (function(el){ while(el){ if(el.classList&&el.classList.contains('situation-section')) return el; el=el.parentElement; } return null; })(item);
+  if (sec && !sec.classList.contains('open')) sec.classList.add('open');
+  // 2) 해당 turn의 details 열기
+  var det = item.querySelector('details');
+  if (det) det.open = true;
+  // 3) 스크롤 포커스 (약간 딜레이로 DOM 렌더 후 적용)
+  setTimeout(function(){ item.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 60);
+}
+
 function _sectionPlayToggle(playBtn, progEl, itvSlider, body) {
   if (_activeSitBtn === playBtn && _secPlaying) {
     _stopSectionPlay(); return;
@@ -909,9 +970,8 @@ function _secNext(itvSlider) {
   }
   var item = _secQueue[_secIndex];
   var eng  = item.dataset.eng || '';
-  var details = item.querySelector('details');
-  if (details) details.open = true;
   item.classList.add('speaking-global');
+  _ensureTurnVisible(item);
   _miniUpdateText(eng);
   if (_secProgEl) _secProgEl.textContent = (_secIndex+1) + ' / ' + _secQueue.length;
   _speak(eng, function() {
@@ -988,9 +1048,7 @@ function _gpNext() {
   for (var i = 0; i < allItems.length; i++) {
     if ((allItems[i].dataset.eng||'') === item.eng) {
       allItems[i].classList.add('speaking-global');
-      var d = allItems[i].querySelector('details');
-      if (d) d.open = true;
-      allItems[i].scrollIntoView({ behavior:'smooth', block:'nearest' });
+      _ensureTurnVisible(allItems[i]);
       break;
     }
   }
