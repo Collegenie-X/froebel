@@ -2,8 +2,6 @@
   "title": "초등 영어 회화 150패턴",
   "description": "초등 (8-13세) 영어 회화 패턴 학습",
   "version": "1.0",
-  "level": "초등 (8-13세)",
-  "total_sentences": 40,
   "situations": [
     {
       "id": 1,
@@ -15,379 +13,259 @@
         {
           "id": 1,
           "english": "Hi there! How's it going?",
-          "question": "안녕! 어떻게 지내?",
-          "answer": "Hi there! (친근한 인사) → How's it (어떻게) → going? (진행되고 있니)",
+          "question": "How do you casually greet someone?",
+          "answer": "안녕! 어떻게 지내?",
           "chunks": [
             "Hi there!",
             "How's it",
             "going?"
           ],
           "phonics": "Hi there! (친근한 인사) → How's it (어떻게) → going? (진행되고 있니)",
-          "dialogue": [
-            "A: Hi there! How's it going? / 안녕! 어떻게 지내?",
-            "B: Hey! Pretty good! How about you? / 야! 꽤 좋아! 너는?",
-            "A: I'm doing great! Want to play basketball after school? / 나 아주 잘 지내! 방과 후에 농구 할래?",
-            "B: Sure! That sounds fun! / 물론이지! 재미있을 것 같아!"
-          ],
-          "star": 5
+          "tips": "Hi / Hello / Hey | 상황별 인사 강도 차이"
         },
         {
           "id": 2,
           "english": "Hey! What's up, dude?",
-          "question": "야! 뭐해, 친구?",
-          "answer": "Hey! (호출) → What's up, (무슨 일) → dude? (친구)",
+          "question": "How do you casually greet someone?",
+          "answer": "야! 뭐해, 친구?",
           "chunks": [
             "Hey!",
             "What's up,",
             "dude?"
           ],
           "phonics": "Hey! (호출) → What's up, (무슨 일) → dude? (친구)",
-          "dialogue": [
-            "A: Hey! What's up, dude? / 야! 뭐해, 친구?",
-            "B: Not much! Just finished math class. You? / 별일 없어! 방금 수학 수업 끝났어. 너는?",
-            "A: Same! The test was so hard. What's up after school? / 나도! 시험 너무 어려웠어. 방과 후에 뭐 해?",
-            "B: Nothing planned! Want to play basketball? / 계획 없어! 농구 할래?"
-          ],
-          "star": 5
+          "tips": "Hi / Hello / Hey | 상황별 인사 강도 차이"
         },
         {
           "id": 3,
           "english": "Good to see you again!",
-          "question": "다시 만나서 좋아!",
-          "answer": "Good to see you (만나서 좋아) → again! (다시)",
+          "question": "What do you say when you meet someone again?",
+          "answer": "다시 만나서 좋아!",
           "chunks": [
             "Good to see you",
             "again!"
           ],
           "phonics": "Good to see you (만나서 좋아) → again! (다시)",
-          "dialogue": [
-            "A: Good to see you again! It's been a while! / 다시 만나서 좋아! 오래됐다!",
-            "B: I know! How was your summer? / 맞아! 여름 어땠어?",
-            "A: Amazing! I went to Busan! How about you? / 완전 좋았어! 부산 다녀왔어! 너는?",
-            "B: Cool! I stayed home but played lots of games! / 멋지다! 나는 집에 있었는데 게임 많이 했어!"
-          ],
-          "star": 4
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         },
         {
           "id": 4,
           "english": "Long time no see!",
-          "question": "오랜만이야!",
-          "answer": "Long time (오랜 시간) → no see! (못 봤네)",
+          "question": "What do you say when meeting someone you haven't seen in a while?",
+          "answer": "오랜만이야!",
           "chunks": [
             "Long time",
             "no see!",
             "Where have you been?"
           ],
           "phonics": "Long time (오랜 시간) → no see! (못 봤네)",
-          "dialogue": [
-            "A: Long time no see! Where have you been? / 오랜만이야! 어디 있었어?",
-            "B: I moved to a different school last year! / 작년에 다른 학교로 이사 갔어!",
-            "A: Oh wow! I missed you so much! / 오 와! 너무 보고 싶었어!",
-            "B: Me too! Let's catch up! / 나도! 이야기 많이 하자!"
-          ],
-          "star": 3
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         },
         {
           "id": 5,
           "english": "How's it going?",
-          "question": "어떻게 지내?",
-          "answer": "How's it (어떻게) → going? (되어가고 있니)",
+          "question": "How do you ask about a way or condition?",
+          "answer": "어떻게 지내?",
           "chunks": [
             "Hey,",
             "how's it",
             "going?"
           ],
           "phonics": "How's it (어떻게) → going? (되어가고 있니)",
-          "dialogue": [
-            "A: Hey! How's it going? / 야! 어떻게 지내?",
-            "B: Pretty good! Just finished homework. You? / 꽤 좋아! 방금 숙제 끝냈어. 너는?",
-            "A: Same! Want to go to the park? / 나도! 공원 갈래?",
-            "B: Yes! Let's go! / 응! 가자!"
-          ],
-          "star": 5
+          "tips": "의문문 패턴 | 질문으로 상대방 의도/정보 확인"
         },
         {
           "id": 6,
           "english": "What's new with you?",
-          "question": "너에게 무슨 새로운 일 있어?",
-          "answer": "What's new (새로운 게 뭐야) → with you? (너에게)",
+          "question": "How do you ask about something specific?",
+          "answer": "너에게 무슨 새로운 일 있어?",
           "chunks": [
             "What's new",
             "with you?"
           ],
           "phonics": "What's new (새로운 게 뭐야) → with you? (너에게)",
-          "dialogue": [
-            "A: Hey! What's new with you? / 야! 뭐 새로운 거 있어?",
-            "B: I joined the soccer team! It's awesome! / 축구팀에 들어갔어! 완전 좋아!",
-            "A: No way! That's so cool! / 말도 안 돼! 너무 멋지다!",
-            "B: Yeah! We have a game this Saturday! / 응! 이번 토요일에 게임 있어!"
-          ],
-          "star": 4
+          "tips": "의문문 패턴 | 질문으로 상대방 의도/정보 확인"
         },
         {
           "id": 7,
           "english": "How was your day at school?",
-          "question": "학교에서 하루 어땠어?",
-          "answer": "How was (어땠어) → your day (너의 하루) → at school? (학교에서)",
+          "question": "How do you ask how something went?",
+          "answer": "학교에서 하루 어땠어?",
           "chunks": [
             "How was",
             "your day",
             "at school?"
           ],
           "phonics": "How was (어땠어) → your day (너의 하루) → at school? (학교에서)",
-          "dialogue": [
-            "A: Welcome home! How was your day at school? / 어서 와! 학교에서 하루 어땠어?",
-            "B: It was great! We had PE class! / 좋았어! 체육 수업 있었어!",
-            "A: Fun! What did you do? / 재밌겠다! 뭐 했어?",
-            "B: We played soccer! I scored a goal! / 축구 했어! 나 골 넣었어!"
-          ],
-          "star": 5
+          "tips": "의문문 패턴 | 질문으로 상대방 의도/정보 확인"
         },
         {
           "id": 8,
           "english": "See you tomorrow at school!",
-          "question": "내일 학교에서 보자!",
-          "answer": "See you (보자) → tomorrow (내일) → at school! (학교에서)",
+          "question": "What do you say when saying goodbye?",
+          "answer": "내일 학교에서 보자!",
           "chunks": [
             "See you",
             "tomorrow",
             "at school!"
           ],
           "phonics": "See you (보자) → tomorrow (내일) → at school! (학교에서)",
-          "dialogue": [
-            "A: I have to go! See you tomorrow at school! / 가야 해! 내일 학교에서 보자!",
-            "B: See you! Don't forget the homework! / 또 봐! 숙제 잊지 마!",
-            "A: I won't! Bye! / 안 잊을게! 안녕!",
-            "B: Bye! See you tomorrow! / 안녕! 내일 봐!"
-          ],
-          "star": 5
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         },
         {
           "id": 9,
           "english": "Take care! See you later!",
-          "question": "조심해서 가! 나중에 봐!",
-          "answer": "Take care! (조심해) → See you (보자) → later! (나중에)",
+          "question": "What do you say when saying goodbye?",
+          "answer": "조심해서 가! 나중에 봐!",
           "chunks": [
             "Take care!",
             "See you",
             "later!"
           ],
           "phonics": "Take care! (조심해) → See you (보자) → later! (나중에)",
-          "dialogue": [
-            "A: I'm going home now. Take care! / 나 이제 집에 가. 조심해서 가!",
-            "B: Take care! See you at practice tomorrow! / 잘 가! 내일 연습에서 보자!",
-            "A: Right! Don't be late! / 맞아! 늦지 마!",
-            "B: I won't! See you later! / 안 늦을게! 나중에 봐!"
-          ],
-          "star": 4
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         },
         {
           "id": 10,
           "english": "Have a good one! Bye!",
-          "question": "좋은 하루 가져! 안녕!",
-          "answer": "Have (가지다) → a good one! (좋은 것) → Bye! (작별)",
+          "question": "What do you say when saying goodbye?",
+          "answer": "좋은 하루 가져! 안녕!",
           "chunks": [
             "Have",
             "a good one!",
             "Bye!"
           ],
           "phonics": "Have (가지다) → a good one! (좋은 것) → Bye! (작별)",
-          "dialogue": [
-            "A: Alright, I gotta go! Have a good one! / 좋아, 나 가야 해! 좋은 하루 보내!",
-            "B: You too! Have a great day! / 너도! 멋진 하루 보내!",
-            "A: Thanks! See you around! / 고마워! 또 봐!",
-            "B: Yep! Bye! / 응! 안녕!"
-          ],
-          "star": 3
+          "tips": "Have + 과거분사? | 경험 질문 / Have a ~ | 표현"
         },
         {
           "id": 11,
           "english": "I'm from Seoul, Korea.",
-          "question": "나는 서울, 한국에서 왔어.",
-          "answer": "I'm from (나는 출신) → [도시], (도시) → [나라]. (나라)",
+          "question": "How do you introduce yourself?",
+          "answer": "나는 서울, 한국에서 왔어.",
           "chunks": [
             "I'm from",
             "Seoul,",
             "Korea."
           ],
           "phonics": "I'm from (나는 출신) → [도시], (도시) → [나라]. (나라)",
-          "dialogue": [
-            "A: Where are you from? / 어디 출신이야?",
-            "B: I'm from Seoul, Korea! How about you? / 서울, 한국 출신이야! 너는?",
-            "A: Cool! I'm from New York! / 멋지다! 나는 뉴욕 출신이야!",
-            "B: Wow! America! That's awesome! / 와! 미국! 멋지다!"
-          ],
-          "star": 5
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 12,
           "english": "I'm in the 5th grade.",
-          "question": "나는 5학년이야.",
-          "answer": "I'm in (나는 있어) → the [숫자]th (몇 번째) → grade. (학년)",
+          "question": "How do you introduce yourself?",
+          "answer": "나는 5학년이야.",
           "chunks": [
             "I'm in",
             "the 5th",
             "grade."
           ],
           "phonics": "I'm in (나는 있어) → the [숫자]th (몇 번째) → grade. (학년)",
-          "dialogue": [
-            "A: What grade are you in? / 몇 학년이야?",
-            "B: I'm in the 5th grade! You? / 5학년이야! 너는?",
-            "A: Same! We might be in the same class! / 나도! 같은 반일 수도 있겠다!",
-            "B: Really? What class are you in? / 정말? 몇 반이야?"
-          ],
-          "star": 5
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 13,
           "english": "My favorite subject is science.",
-          "question": "내가 가장 좋아하는 과목은 과학이야.",
-          "answer": "My favorite (내가 제일 좋아하는) → subject (과목) → is [과목]. (이다)",
+          "question": "How do you talk about yourself or your interests?",
+          "answer": "내가 가장 좋아하는 과목은 과학이야.",
           "chunks": [
             "My favorite subject",
             "is",
             "science."
           ],
           "phonics": "My favorite (내가 제일 좋아하는) → subject (과목) → is [과목]. (이다)",
-          "dialogue": [
-            "A: What's your favorite subject? / 제일 좋아하는 과목이 뭐야?",
-            "B: My favorite subject is science! It's so cool! / 과학이야! 너무 신기해!",
-            "A: Really? I like math better! / 정말? 나는 수학이 더 좋아!",
-            "B: Math? That's hard for me! / 수학? 나한테는 어려워!"
-          ],
-          "star": 4
+          "tips": "소유격 + 명사 | 소유 관계 표현"
         },
         {
           "id": 14,
           "english": "I have a dog named Max.",
-          "question": "나는 맥스라는 개가 있어.",
-          "answer": "I have (나는 있어) → a [동물] (동물) → named [이름]. (이름이 ~인)",
+          "question": "How do you say what you have?",
+          "answer": "나는 맥스라는 개가 있어.",
           "chunks": [
             "I have",
             "a dog",
             "named Max."
           ],
           "phonics": "I have (나는 있어) → a [동물] (동물) → named [이름]. (이름이 ~인)",
-          "dialogue": [
-            "A: Do you have any pets? / 반려동물 있어?",
-            "B: Yes! I have a dog named Max! / 응! 맥스라는 개가 있어!",
-            "A: So cute! What does he look like? / 귀엽다! 어떻게 생겼어?",
-            "B: He's big and fluffy! You should meet him! / 크고 털이 복실복실해! 한번 만나봐!"
-          ],
-          "star": 4
+          "tips": "I + want/need/have + 명사 | 기본 욕구/소유 표현"
         },
         {
           "id": 15,
           "english": "I'm really into K-pop.",
-          "question": "나는 K팝에 빠져 있어.",
-          "answer": "I'm really (나는 정말) → into (빠져) → [취미]. (무엇에)",
+          "question": "How do you talk about something you are into?",
+          "answer": "나는 K팝에 빠져 있어.",
           "chunks": [
             "I'm really",
             "into",
             "K-pop."
           ],
           "phonics": "I'm really (나는 정말) → into (빠져) → [취미]. (무엇에)",
-          "dialogue": [
-            "A: What are you into these days? / 요즘 뭐에 빠져 있어?",
-            "B: I'm really into K-pop! Do you like it? / K팝에 완전 빠져 있어! 너도 좋아해?",
-            "A: Yes! My favorite group is BTS! / 응! 내가 좋아하는 그룹은 BTS야!",
-            "B: Me too! They're the best! / 나도! 최고야!"
-          ],
-          "star": 5
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 16,
           "english": "I'm good at drawing.",
-          "question": "나는 그림 잘 그려.",
-          "answer": "I'm good (나는 잘해) → at (에서) → [동명사]. (무엇을)",
+          "question": "How do you talk about your skills or interests?",
+          "answer": "나는 그림 잘 그려.",
           "chunks": [
             "I'm good",
             "at",
             "drawing."
           ],
           "phonics": "I'm good (나는 잘해) → at (에서) → [동명사]. (무엇을)",
-          "dialogue": [
-            "A: What are you good at? / 잘하는 게 뭐야?",
-            "B: I'm good at drawing! Want to see? / 그림 잘 그려! 보고 싶어?",
-            "A: Sure! Wow, this is amazing! / 응! 와, 이거 진짜 대단하다!",
-            "B: Thanks! I practice every day! / 고마워! 매일 연습해!"
-          ],
-          "star": 4
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 17,
           "english": "My dream is to be a doctor.",
-          "question": "내 꿈은 의사가 되는 거야.",
-          "answer": "My dream (내 꿈) → is to be (되는 것) → [직업]. (직업)",
+          "question": "How do you talk about yourself or your interests?",
+          "answer": "내 꿈은 의사가 되는 거야.",
           "chunks": [
             "My dream",
             "is to be",
             "a doctor."
           ],
           "phonics": "My dream (내 꿈) → is to be (되는 것) → [직업]. (직업)",
-          "dialogue": [
-            "A: What do you want to be when you grow up? / 커서 뭐가 되고 싶어?",
-            "B: My dream is to be a doctor! / 내 꿈은 의사가 되는 거야!",
-            "A: That's cool! Why a doctor? / 멋지다! 왜 의사?",
-            "B: I want to help sick people! / 아픈 사람들을 돕고 싶어!"
-          ],
-          "star": 4
+          "tips": "소유격 + 명사 | 소유 관계 표현"
         },
         {
           "id": 18,
           "english": "I have two brothers.",
-          "question": "나는 남동생이 둘 있어.",
-          "answer": "I have (있어) → [숫자] (개수) → [가족]. (누가)",
+          "question": "How do you say what you have?",
+          "answer": "나는 남동생이 둘 있어.",
           "chunks": [
             "I have",
             "two",
             "brothers."
           ],
           "phonics": "I have (있어) → [숫자] (개수) → [가족]. (누가)",
-          "dialogue": [
-            "A: Do you have any siblings? / 형제자매 있어?",
-            "B: Yes! I have two brothers! / 응! 남동생 둘 있어!",
-            "A: Wow! Are they older or younger? / 와! 형들이야, 동생들이야?",
-            "B: One older and one younger! / 한 명은 형, 한 명은 동생이야!"
-          ],
-          "star": 4
+          "tips": "I + want/need/have + 명사 | 기본 욕구/소유 표현"
         },
         {
           "id": 19,
           "english": "I live in an apartment.",
-          "question": "나는 아파트에 살아.",
-          "answer": "I live (나는 살아) → in [장소]. (어디에)",
+          "question": "How do you say where you live?",
+          "answer": "나는 아파트에 살아.",
           "chunks": [
             "I live",
             "in an apartment."
           ],
           "phonics": "I live (나는 살아) → in [장소]. (어디에)",
-          "dialogue": [
-            "A: Do you live near here? / 여기 근처에 살아?",
-            "B: Yes! I live in an apartment nearby! / 응! 근처 아파트에 살아!",
-            "A: Cool! We can hang out more often! / 멋지다! 더 자주 놀 수 있겠다!",
-            "B: Totally! Come over sometime! / 맞아! 언제 놀러 와!"
-          ],
-          "star": 3
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 20,
           "english": "Nice talking to you!",
-          "question": "이야기 나눠서 좋았어!",
-          "answer": "Nice (좋았어) → talking (이야기하는 게) → to you! (너와)",
+          "question": "What do you say when ending a conversation?",
+          "answer": "이야기 나눠서 좋았어!",
           "chunks": [
             "Nice",
             "talking",
             "to you!"
           ],
           "phonics": "Nice (좋았어) → talking (이야기하는 게) → to you! (너와)",
-          "dialogue": [
-            "A: I gotta go! Nice talking to you! / 가야 해! 이야기 나눠서 좋았어!",
-            "B: Same here! It was great meeting you! / 나도! 만나서 정말 좋았어!",
-            "A: Let's hang out again sometime! / 언제 또 놀자!",
-            "B: Definitely! See you around! / 꼭! 또 봐!"
-          ],
-          "star": 4
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         }
       ]
     },
@@ -401,96 +279,66 @@
         {
           "id": 21,
           "english": "I'm so excited about the trip!",
-          "question": "여행이 너무 기대돼!",
-          "answer": "I'm so excited (너무 기대돼) → about (에 대해) → [명사]. (무엇이)",
+          "question": "How do you express your feelings in English?",
+          "answer": "여행이 너무 기대돼!",
           "chunks": [
             "I'm so excited",
             "about",
             "the trip!"
           ],
           "phonics": "I'm so excited (너무 기대돼) → about (에 대해) → [명사]. (무엇이)",
-          "dialogue": [
-            "A: I'm so excited about the trip! Are you? / 여행이 너무 기대돼! 너는?",
-            "B: Me too! I can't wait! / 나도! 빨리 가고 싶어!",
-            "A: What are you most looking forward to? / 뭐가 제일 기대돼?",
-            "B: The beach! I love swimming! / 바다! 수영 엄청 좋아해!"
-          ],
-          "star": 5
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         },
         {
           "id": 22,
           "english": "I'm really nervous.",
-          "question": "나 정말 긴장돼.",
-          "answer": "I'm really (나는 정말) → nervous. (긴장된)",
+          "question": "How do you express your feelings in English?",
+          "answer": "나 정말 긴장돼.",
           "chunks": [
             "I'm really",
             "nervous."
           ],
           "phonics": "I'm really (나는 정말) → nervous. (긴장된)",
-          "dialogue": [
-            "A: Are you okay? You look pale. / 괜찮아? 얼굴이 창백해.",
-            "B: I'm really nervous about the presentation! / 발표 때문에 정말 긴장돼!",
-            "A: It's okay! You practiced so much! / 괜찮아! 연습 많이 했잖아!",
-            "B: I know, but still! Wish me luck! / 알아, 그래도! 행운 빌어줘!"
-          ],
-          "star": 4
+          "tips": "짧은 핵심 표현 | 자주 쓰는 일상 문구"
         },
         {
           "id": 23,
           "english": "That really made my day!",
-          "question": "그게 오늘 완전 기분 좋게 해줬어!",
-          "answer": "That really (그게 정말) → made (만들어줬어) → my day! (내 하루를)",
+          "question": "How do you express that something made you very happy?",
+          "answer": "그게 오늘 완전 기분 좋게 해줬어!",
           "chunks": [
             "That really",
             "made",
             "my day!"
           ],
           "phonics": "That really (그게 정말) → made (만들어줬어) → my day! (내 하루를)",
-          "dialogue": [
-            "A: Did you see? We won the game! / 봤어? 우리 이겼어!",
-            "B: I know! That really made my day! / 알아! 그거 때문에 완전 기분 좋아!",
-            "A: Same! Best day ever! / 나도! 최고의 날이야!",
-            "B: Let's celebrate after school! / 방과 후에 축하하자!"
-          ],
-          "star": 4
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         },
         {
           "id": 24,
           "english": "I'm in a really good mood today!",
-          "question": "오늘 기분이 정말 좋아!",
-          "answer": "I'm in (나는 있어) → a good mood (좋은 기분에) → today! (오늘)",
+          "question": "How do you describe your current situation?",
+          "answer": "오늘 기분이 정말 좋아!",
           "chunks": [
             "I'm in",
             "a really good mood",
             "today!"
           ],
           "phonics": "I'm in (나는 있어) → a good mood (좋은 기분에) → today! (오늘)",
-          "dialogue": [
-            "A: You seem happy today! / 오늘 행복해 보여!",
-            "B: I am! I'm in a really good mood today! / 맞아! 오늘 기분이 정말 좋아!",
-            "A: What happened? / 무슨 일이야?",
-            "B: I got an A on my test! / 시험에서 A 받았어!"
-          ],
-          "star": 4
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         },
         {
           "id": 25,
           "english": "I'm feeling a bit under the weather.",
-          "question": "나 좀 몸이 안 좋아.",
-          "answer": "I'm feeling (나는 느껴) → a bit (조금) → under the weather. (몸 안 좋은)",
+          "question": "How do you say how you're feeling?",
+          "answer": "나 좀 몸이 안 좋아.",
           "chunks": [
             "I'm feeling",
             "a bit",
             "under the weather."
           ],
-          "phonics": "I'm feeling (나는 느껴) → a bit (조금) → under the weather. (몸 안 좋…",
-          "dialogue": [
-            "A: Are you coming to practice? / 연습에 와?",
-            "B: I'm feeling a bit under the weather. Maybe not. / 나 몸이 좀 안 좋아. 못 갈 것 같아.",
-            "A: Oh no! You should rest. / 이런! 쉬어야 해.",
-            "B: Yeah. I hope I'm better tomorrow. / 응. 내일은 낫길 바라."
-          ],
-          "star": 3
+          "phonics": "I'm feeling (나는 느껴) → a bit (조금) → under the weather. (몸 안 좋은)",
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         }
       ]
     },
@@ -504,96 +352,66 @@
         {
           "id": 26,
           "english": "I wake up at 7 every morning.",
-          "question": "나는 매일 아침 7시에 일어나.",
-          "answer": "I wake up (일어나) → at [시간] (몇 시에) → every morning. (매일 아침)",
+          "question": "How do you talk about your daily sleep schedule?",
+          "answer": "나는 매일 아침 7시에 일어나.",
           "chunks": [
             "I wake up",
             "at 7",
             "every morning."
           ],
           "phonics": "I wake up (일어나) → at [시간] (몇 시에) → every morning. (매일 아침)",
-          "dialogue": [
-            "A: What time do you wake up? / 몇 시에 일어나?",
-            "B: I wake up at 7 every morning! You? / 나는 매일 아침 7시에 일어나! 너는?",
-            "A: I wake up at 6:30! School starts early. / 나는 6시 30분에 일어나! 학교가 일찍 시작해.",
-            "B: Wow, that's early! I'd be so tired! / 와, 일찍 일어나네! 나라면 너무 피곤할 것 같아!"
-          ],
-          "star": 5
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 27,
           "english": "I always have breakfast before school.",
-          "question": "나는 항상 학교 가기 전에 아침을 먹어.",
-          "answer": "I always have (항상 먹어) → breakfast (아침) → before school. (학교 가기 전에)",
+          "question": "How do you talk about your daily habits or routine?",
+          "answer": "나는 항상 학교 가기 전에 아침을 먹어.",
           "chunks": [
             "I always have",
             "breakfast",
             "before school."
           ],
-          "phonics": "I always have (항상 먹어) → breakfast (아침) → before school. (학교 …",
-          "dialogue": [
-            "A: Do you eat breakfast every day? / 매일 아침 먹어?",
-            "B: Yes! I always have breakfast before school! / 응! 항상 학교 가기 전에 아침 먹어!",
-            "A: What do you usually eat? / 보통 뭐 먹어?",
-            "B: Rice and soup! It's the best! / 밥이랑 국! 최고야!"
-          ],
-          "star": 5
+          "phonics": "I always have (항상 먹어) → breakfast (아침) → before school. (학교 가기 전에)",
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 28,
           "english": "I study for two hours after school.",
-          "question": "나는 방과 후에 두 시간 공부해.",
-          "answer": "I study (공부해) → for [시간] (얼마나) → after school. (방과 후에)",
+          "question": "How do you talk about your daily activities?",
+          "answer": "나는 방과 후에 두 시간 공부해.",
           "chunks": [
             "I study",
             "for two hours",
             "after school."
           ],
           "phonics": "I study (공부해) → for [시간] (얼마나) → after school. (방과 후에)",
-          "dialogue": [
-            "A: When do you do your homework? / 숙제 언제 해?",
-            "B: I study for two hours after school! / 방과 후에 두 시간 공부해!",
-            "A: Wow, two hours is a lot! / 와, 두 시간은 많다!",
-            "B: I know, but I want to get good grades! / 알아, 그런데 좋은 성적 받고 싶어!"
-          ],
-          "star": 4
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 29,
           "english": "I go to bed at 9:30.",
-          "question": "나는 9시 30분에 자.",
-          "answer": "I go to bed (나는 자) → at [시간]. (몇 시에)",
+          "question": "How do you talk about activities or classes you do regularly?",
+          "answer": "나는 9시 30분에 자.",
           "chunks": [
             "I go to bed",
             "at 9:30."
           ],
           "phonics": "I go to bed (나는 자) → at [시간]. (몇 시에)",
-          "dialogue": [
-            "A: What time do you go to bed? / 몇 시에 자?",
-            "B: I go to bed at 9:30. My mom says so! / 9시 30분에 자. 엄마가 그렇게 해!",
-            "A: Same! My bedtime is 10. / 나도! 나는 10시야.",
-            "B: We need sleep to grow tall! / 키 크려면 자야 해!"
-          ],
-          "star": 4
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 30,
           "english": "I practice piano every day.",
-          "question": "나는 매일 피아노를 연습해.",
-          "answer": "I practice (연습해) → [악기/기술] (무엇을) → every day. (매일)",
+          "question": "How do you talk about your daily activities?",
+          "answer": "나는 매일 피아노를 연습해.",
           "chunks": [
             "I practice",
             "piano",
             "every day."
           ],
           "phonics": "I practice (연습해) → [악기/기술] (무엇을) → every day. (매일)",
-          "dialogue": [
-            "A: You're so good at piano! How? / 피아노 진짜 잘 치네! 어떻게?",
-            "B: I practice piano every day for an hour! / 매일 한 시간씩 피아노 연습해!",
-            "A: Every day? That's impressive! / 매일? 대단하다!",
-            "B: It's hard but worth it! / 힘들지만 할 만해!"
-          ],
-          "star": 4
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         }
       ]
     },
@@ -607,95 +425,65 @@
         {
           "id": 31,
           "english": "Can I borrow your eraser?",
-          "question": "지우개 빌릴 수 있어?",
-          "answer": "Can I borrow (빌릴 수 있어?) → your [물건]? (네 것을)",
+          "question": "How do you make a polite request?",
+          "answer": "지우개 빌릴 수 있어?",
           "chunks": [
             "Can I borrow",
             "your eraser?"
           ],
           "phonics": "Can I borrow (빌릴 수 있어?) → your [물건]? (네 것을)",
-          "dialogue": [
-            "A: Can I borrow your eraser? I forgot mine. / 지우개 빌릴 수 있어? 내 것 깜빡했어.",
-            "B: Sure! Here you go! / 물론! 여기!",
-            "A: Thanks a lot! I'll give it back soon. / 고마워! 곧 돌려줄게.",
-            "B: No problem! Take your time! / 괜찮아! 천천히 써!"
-          ],
-          "star": 5
+          "tips": "의문문 패턴 | 질문으로 상대방 의도/정보 확인"
         },
         {
           "id": 32,
           "english": "I don't understand this problem.",
-          "question": "이 문제 이해가 안 돼.",
-          "answer": "I don't understand (이해 못 해) → this problem. (이 문제를)",
+          "question": "How do you say you don't have or can't do something?",
+          "answer": "이 문제 이해가 안 돼.",
           "chunks": [
             "I don't understand",
             "this problem."
           ],
           "phonics": "I don't understand (이해 못 해) → this problem. (이 문제를)",
-          "dialogue": [
-            "A: I don't understand this problem. Can you help? / 이 문제 이해가 안 돼. 도와줄 수 있어?",
-            "B: Sure! Which part is confusing? / 물론! 어느 부분이 헷갈려?",
-            "A: This part with fractions. / 분수 이 부분.",
-            "B: Ah! I'll explain! It's easy once you get it! / 아! 설명해줄게! 알고 나면 쉬워!"
-          ],
-          "star": 5
+          "tips": "부정문 표현 | don't/can't + 동사"
         },
         {
           "id": 33,
           "english": "The test was really tough.",
-          "question": "시험이 정말 어려웠어.",
-          "answer": "The test (시험이) → was really (정말 ~했어) → tough. (어려운)",
+          "question": "How do you describe something?",
+          "answer": "시험이 정말 어려웠어.",
           "chunks": [
             "The test",
             "was really",
             "tough."
           ],
           "phonics": "The test (시험이) → was really (정말 ~했어) → tough. (어려운)",
-          "dialogue": [
-            "A: How did the test go? / 시험 어땠어?",
-            "B: The test was really tough! I hope I passed. / 시험이 정말 어려웠어! 합격했으면 좋겠어.",
-            "A: Same! I think I got some wrong. / 나도! 몇 개 틀린 것 같아.",
-            "B: Let's study together next time! / 다음에는 같이 공부하자!"
-          ],
-          "star": 4
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 34,
           "english": "I forgot to do my homework!",
-          "question": "숙제하는 거 깜빡했어!",
-          "answer": "I forgot (깜빡했어) → to do (하는 것을) → my homework! (숙제를)",
+          "question": "What do you say at school?",
+          "answer": "숙제하는 거 깜빡했어!",
           "chunks": [
             "I forgot",
             "to do",
             "my homework!"
           ],
           "phonics": "I forgot (깜빡했어) → to do (하는 것을) → my homework! (숙제를)",
-          "dialogue": [
-            "A: Oh no! I forgot to do my homework! / 이런! 숙제하는 거 깜빡했어!",
-            "B: Really? The teacher will be upset! / 정말? 선생님이 화낼 거야!",
-            "A: I know! Maybe I can do it at lunch. / 알아! 점심때 해야겠어.",
-            "B: Quick! The class starts in 10 minutes! / 빨리! 10분 후에 수업 시작해!"
-          ],
-          "star": 4
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         },
         {
           "id": 35,
           "english": "Let's work on this together.",
-          "question": "같이 이거 해 보자.",
-          "answer": "Let's work on (같이 해 보자) → this (이것을) → together. (함께)",
+          "question": "How do you suggest doing something together?",
+          "answer": "같이 이거 해 보자.",
           "chunks": [
             "Let's work on",
             "this",
             "together."
           ],
           "phonics": "Let's work on (같이 해 보자) → this (이것을) → together. (함께)",
-          "dialogue": [
-            "A: This project is so hard! / 이 프로젝트 너무 어려워!",
-            "B: Let's work on it together! Two brains are better! / 같이 해 보자! 두 머리가 하나보다 낫지!",
-            "A: Good idea! When can we meet? / 좋은 생각이야! 언제 만날 수 있어?",
-            "B: How about this Saturday? / 이번 토요일 어때?"
-          ],
-          "star": 5
+          "tips": "Let's + 동사원형 | 함께 하자 제안"
         }
       ]
     },
@@ -709,97 +497,67 @@
         {
           "id": 36,
           "english": "What do you do for fun?",
-          "question": "재미로 뭐 해?",
-          "answer": "What do you (뭐 해) → do (하니) → for fun? (재미로)",
+          "question": "How do you ask someone about their opinion or action?",
+          "answer": "재미로 뭐 해?",
           "chunks": [
             "What do you",
             "do",
             "for fun?"
           ],
           "phonics": "What do you (뭐 해) → do (하니) → for fun? (재미로)",
-          "dialogue": [
-            "A: Hey! What do you do for fun? / 야! 재미로 뭐 해?",
-            "B: I play video games and draw comics! / 비디오 게임하고 만화 그려!",
-            "A: Cool! What games do you play? / 멋지다! 어떤 게임 해?",
-            "B: Mostly RPG games! What about you? / 주로 RPG 게임! 너는?"
-          ],
-          "star": 5
+          "tips": "What + 동사? | 정보 요청 의문문"
         },
         {
           "id": 37,
           "english": "I'm on the school soccer team.",
-          "question": "나는 학교 축구팀에 있어.",
-          "answer": "I'm on (나는 있어) → the school (학교의) → [스포츠] team. (팀에)",
+          "question": "How do you say you're on a team or in a group?",
+          "answer": "나는 학교 축구팀에 있어.",
           "chunks": [
             "I'm on",
             "the school",
             "soccer team."
           ],
           "phonics": "I'm on (나는 있어) → the school (학교의) → [스포츠] team. (팀에)",
-          "dialogue": [
-            "A: Are you into sports? / 운동 좋아해?",
-            "B: Yes! I'm on the school soccer team! / 응! 학교 축구팀에 있어!",
-            "A: That's awesome! When's your next game? / 멋지다! 다음 경기 언제야?",
-            "B: Next Friday! You should come and watch! / 다음 주 금요일! 와서 봐!"
-          ],
-          "star": 4
+          "tips": "기본 문장 패턴 | 핵심 실용 표현"
         },
         {
           "id": 38,
           "english": "Want to hang out this weekend?",
-          "question": "이번 주말에 놀래?",
-          "answer": "Want to (하고 싶어?) → hang out (어울려 놀다) → this weekend? (이번 주말에)",
+          "question": "How do you casually invite someone to do something?",
+          "answer": "이번 주말에 놀래?",
           "chunks": [
             "Want to",
             "hang out",
             "this weekend?"
           ],
-          "phonics": "Want to (하고 싶어?) → hang out (어울려 놀다) → this weekend? (이번 주말에…",
-          "dialogue": [
-            "A: Want to hang out this weekend? / 이번 주말에 놀래?",
-            "B: Sure! What do you want to do? / 좋아! 뭐 하고 싶어?",
-            "A: Maybe go to the mall or play at the park? / 쇼핑몰 가거나 공원에서 놀거나?",
-            "B: The park sounds fun! Let's do it! / 공원이 재밌을 것 같아! 그러자!"
-          ],
-          "star": 5
+          "phonics": "Want to (하고 싶어?) → hang out (어울려 놀다) → this weekend? (이번 주말에)",
+          "tips": "의문문 패턴 | 질문으로 상대방 의도/정보 확인"
         },
         {
           "id": 39,
           "english": "That was so much fun!",
-          "question": "그거 정말 재미있었어!",
-          "answer": "That was (그게 ~했어) → so much (너무 많이) → fun! (재미있었어)",
+          "question": "How do you say something was really fun or enjoyable?",
+          "answer": "그거 정말 재미있었어!",
           "chunks": [
             "That was",
             "so much",
             "fun!"
           ],
           "phonics": "That was (그게 ~했어) → so much (너무 많이) → fun! (재미있었어)",
-          "dialogue": [
-            "A: That was so much fun! Let's do it again! / 정말 재미있었어! 다시 하자!",
-            "B: Totally! Best day ever! / 완전! 역대 최고의 날이야!",
-            "A: We should do this every weekend! / 매주 주말마다 이러자!",
-            "B: Yes! I'll ask my mom! / 응! 엄마한테 물어볼게!"
-          ],
-          "star": 5
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         },
         {
           "id": 40,
           "english": "You're my best friend!",
-          "question": "너는 내 가장 친한 친구야!",
-          "answer": "You're (너는) → my best (내 가장 친한) → friend! (친구야)",
+          "question": "How do you say something about someone?",
+          "answer": "너는 내 가장 친한 친구야!",
           "chunks": [
             "You're",
             "my best",
             "friend!"
           ],
           "phonics": "You're (너는) → my best (내 가장 친한) → friend! (친구야)",
-          "dialogue": [
-            "A: Thanks for always being there for me! / 항상 내 곁에 있어줘서 고마워!",
-            "B: Of course! You're my best friend! / 물론이지! 너는 내 가장 친한 친구야!",
-            "A: You're mine too! BFFs! / 나도! BFF야!",
-            "B: Forever! Best friends forever! / 영원히! 영원한 베프!"
-          ],
-          "star": 5
+          "tips": "감탄문/명령문 패턴 | 감정 표현 또는 강한 지시"
         }
       ]
     }

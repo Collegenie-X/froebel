@@ -282,18 +282,35 @@
     .card-qa { border-top: 1px solid #f0f0f0; padding-top: 10px; }
     .card-q {
       font-size: 0.82em; color: #1565c0; font-weight: 700;
-      margin-bottom: 5px; display: flex; gap: 6px; align-items: flex-start;
+      margin-bottom: 8px; display: flex; gap: 6px; align-items: flex-start;
     }
     .card-q-icon { flex-shrink: 0; }
     .card-a {
-      font-size: 0.85em; color: #34495e; line-height: 1.55;
+      font-size: 1.1em; color: #1a1a2e; line-height: 1.6;
       display: flex; gap: 6px; align-items: flex-start;
+      font-weight: 800;
+    }
+    .card-a-icon { flex-shrink: 0; font-size: 1em; }
+    .card-answer-text {
+      color: #ee8585;
+      font-size: 0.82em;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      padding: 4px 10px;
+      background: #fff8e1;
+      border-radius: 8px;
+      border-left: 4px solid #f1c5c5;
+      display: inline-block;
     }
     .card-a-icon { flex-shrink: 0; }
     .phonics-tip {
-      margin-top: 7px;
-      font-size: 0.75em; color: #9b59b6; font-style: italic;
+      margin-top: 8px;
+      font-size: 0.74em; color: #7e57c2;
+      font-style: italic; font-weight: 600;
       display: flex; gap: 5px; align-items: flex-start;
+      background: #f3e5f5;
+      border-radius: 8px;
+      padding: 5px 10px;
     }
 
     /* ====== FLOATING MINI PLAYER ====== */
@@ -371,6 +388,44 @@
       transition: color 0.2s;
     }
     #miniPlayer.state-paused .mini-text { color: #999; }
+
+    /* 진행 카운터 배지 (N / 전체) */
+    .mini-progress-badge {
+      margin-left: auto;
+      font-size: 0.75em; font-weight: 800;
+      color: #667eea; background: #eef0fb;
+      padding: 2px 9px; border-radius: 20px;
+      white-space: nowrap;
+    }
+    #miniPlayer.state-paused .mini-progress-badge {
+      color: #E65100; background: #FFF3E0;
+    }
+
+    /* 현재 섹션 라벨 */
+    .mini-section-label {
+      font-size: 0.75em; font-weight: 700;
+      color: #95a5a6; margin-bottom: 4px;
+      white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .mini-section-label:empty { display: none; }
+
+    /* 미니 진행 바 */
+    .mini-progress-bar-wrap {
+      height: 4px; background: #eee;
+      border-radius: 2px; margin: 7px 0 4px;
+      overflow: hidden;
+    }
+    .mini-progress-bar-inner {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #4CAF50, #81C784);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+    #miniPlayer.state-paused .mini-progress-bar-inner {
+      background: linear-gradient(90deg, #FFA726, #FFD54F);
+    }
 
     /* Space 힌트 */
     .mini-hint {
@@ -718,6 +773,153 @@
       z-index: 1;
     }
 
+    /* ====== GAME-STYLE QUIZ CARD ====== */
+    .quiz-card-game {
+      padding: 0 !important;
+      border-left: none !important;
+      overflow: hidden;
+    }
+    .quiz-game-top {
+      display: flex; align-items: center; gap: 8px;
+      padding: 11px 14px; color: white;
+    }
+    .quiz-mode-tag {
+      font-size: 0.76em; font-weight: 800;
+      color:#888;
+      padding: 4px 11px; border-radius: 20px;
+      letter-spacing: 0.4px; white-space: nowrap;
+    }
+    .quiz-num-tag {
+      background: rgba(255,255,255,0.22); color: #888;
+      font-size: 0.73em; font-weight: 800;
+      padding: 2px 9px; border-radius: 20px; margin-left: auto;
+    }
+    .quiz-play-mini {
+      width: 40px; height: 40px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,0.28); color: white;
+      cursor: pointer; font-size: 0.9em;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+    .quiz-play-mini:hover { background: rgba(255,255,255,0.48); transform: scale(1.1); }
+    .quiz-result-game { font-size: 1.5em; flex-shrink: 0; min-width: 26px; text-align: center; }
+    .quiz-emoji-row {
+      text-align: center; padding: 14px 0 8px;
+    }
+    .quiz-emoji-row .card-img-emoji {
+      display: flex; justify-content: center; align-items: center; gap: 10px;
+    }
+    .quiz-q-block, .quiz-a-block { margin: 0 13px 9px; }
+    .quiz-block-label {
+      font-size: 0.68em; font-weight: 800; color: #aaa;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      margin-bottom: 5px; display: flex; align-items: center; gap: 4px;
+    }
+    .quiz-q-inner {
+      background: #f4f6ff; border-radius: 12px;
+      padding: 12px 14px; border: 2px solid #dde1ff;
+    }
+    .quiz-q-text {
+      font-size: 1.22em; font-weight: 800;
+      color: #2c3e50; line-height: 1.45;
+    }
+    /* 정답 박스 */
+    .quiz-a-inner {
+      border-radius: 14px; padding: 16px 14px;
+      border: 2.5px dashed #b39ddb;
+      background: linear-gradient(135deg, #f3e5f5 0%, #ede7f6 100%);
+      min-height: 72px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+    .quiz-a-clickable:hover:not(.revealed) {
+      border-color: #9575cd;
+      background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%);
+      transform: scale(1.025);
+      box-shadow: 0 5px 18px rgba(149,117,205,0.32);
+    }
+    .quiz-a-clickable:active:not(.revealed) { transform: scale(0.97); }
+    .quiz-a-inner.revealed {
+      cursor: default;
+      border: 2.5px solid #66bb6a;
+      background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    }
+    .quiz-mystery-wrap {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 6px; text-align: center;
+    }
+    .quiz-mystery-icon {
+      font-size: 2.2em; display: block;
+      animation: mysteryPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes mysteryPulse {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.75; }
+      50%       { transform: scale(1.22) rotate(-6deg); opacity: 1; }
+    }
+    .quiz-mystery-text {
+      font-size: 0.78em; color: #9575cd; font-weight: 700;
+    }
+    .quiz-a-inner.revealed .quiz-mystery-wrap { display: none; }
+    .quiz-revealed-answer {
+      display: none;
+      font-size: 1.28em; font-weight: 800;
+      color: #2e7d32; line-height: 1.45; text-align: center;
+      animation: revealPop 0.48s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .quiz-a-inner.revealed .quiz-revealed-answer { display: block; }
+    @keyframes revealPop {
+      0%   { transform: scale(0.35) rotate(-10deg); opacity: 0; }
+      65%  { transform: scale(1.12) rotate(3deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    /* 청크 행 */
+    .quiz-chunks-row { margin: 0 13px 9px; }
+    .quiz-chunks-row .chunks-box { margin: 0; border-radius: 10px; }
+    /* 확인하기 버튼 */
+    .quiz-confirm-wrap { padding: 4px 13px 15px; }
+    .quiz-confirm-game-btn {
+      width: 100%; padding: 14px 0; border: none; border-radius: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white; font-size: 1.05em; font-weight: 800;
+      cursor: pointer; letter-spacing: 0.7px;
+      transition: all 0.22s;
+      box-shadow: 0 5px 18px rgba(102,126,234,0.42);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      position: relative; overflow: hidden;
+    }
+    .quiz-confirm-game-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .quiz-confirm-game-btn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 26px rgba(102,126,234,0.52);
+    }
+    .quiz-confirm-game-btn:active:not(:disabled) { transform: scale(0.97); }
+    .quiz-confirm-game-btn:disabled {
+      background: linear-gradient(135deg, #a5d6a7, #66bb6a);
+      box-shadow: 0 3px 10px rgba(102,187,106,0.35); cursor: default;
+    }
+    /* 카드 결과 강조 */
+    .quiz-card-game.quiz-correct { box-shadow: 0 0 0 3px #66bb6a, 0 6px 20px rgba(102,187,106,0.25); }
+    .quiz-card-game.quiz-wrong   { box-shadow: 0 0 0 3px #ef5350, 0 6px 20px rgba(239,83,80,0.20); }
+    @keyframes cardRevealShine {
+      0%   { opacity: 0; left: -100%; }
+      50%  { opacity: 0.55; }
+      100% { opacity: 0; left: 200%; }
+    }
+    .quiz-a-inner.revealed::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+      animation: cardRevealShine 0.7s ease forwards;
+    }
+
     /* ====== JSON LOADER ====== */
     #jsonLoaderWrap {
       background: white;
@@ -905,8 +1107,13 @@
       <span class="mini-dot"></span>
       <span id="miniStateLabel">재생중</span>
     </span>
+    <span class="mini-progress-badge" id="miniProgress">—</span>
   </div>
+  <div class="mini-section-label" id="miniSectionLabel"></div>
   <div class="mini-text" id="miniText">—</div>
+  <div class="mini-progress-bar-wrap">
+    <div class="mini-progress-bar-inner" id="miniProgressBar"></div>
+  </div>
   <div class="mini-hint">Space = 일시정지 / 재개</div>
   <div class="mini-controls">
     <button class="btn btn-orange btn-sm" id="miniPauseBtn" onclick="togglePause()">⏸</button>
@@ -971,7 +1178,7 @@ function applyJsonData(data, fileName) {
   selectedSitIds.clear();
   SITUATIONS.forEach(sit => {
     (sit.sentences || []).forEach(s => {
-      flatSentences.push({ ...s, sitId: sit.id });
+      flatSentences.push({ ...s, sitId: sit.id, sitName: sit.name, sitEmoji: sit.emoji || '' });
     });
   });
   filteredFlat = [...flatSentences];
@@ -1212,6 +1419,9 @@ function playAllNext() {
   setHighlight(s.id, true);
   updateProgress(globalPlayIndex + 1, filteredFlat.length);
   document.getElementById('miniText').textContent = s.english;
+  /* 미니 플레이어 진행 상태 업데이트 */
+  const sectionLabel = (s.sitEmoji || '') + ' ' + (s.sitName || '');
+  updateMiniProgress(globalPlayIndex + 1, filteredFlat.length, sectionLabel.trim());
 
   // Auto-open section
   openSection(s.sitId);
@@ -1244,6 +1454,16 @@ function setMiniState(playing) {
     if (lbl) lbl.textContent = '일시정지';
     if (mpb) mpb.textContent = '▶';
   }
+}
+
+/* 미니 플레이어 진행 상태 업데이트 */
+function updateMiniProgress(current, total, sectionName) {
+  const progBadge = document.getElementById('miniProgress');
+  const progBar   = document.getElementById('miniProgressBar');
+  const secLabel  = document.getElementById('miniSectionLabel');
+  if (progBadge) progBadge.textContent = current + ' / ' + total;
+  if (progBar)   progBar.style.width = (total > 0 ? (current / total * 100) : 0) + '%';
+  if (secLabel && sectionName) secLabel.textContent = sectionName;
 }
 
 function togglePause() {
@@ -1286,6 +1506,13 @@ function finishPlayAll() {
   document.getElementById('btnStop').disabled = true;
   document.getElementById('btnPause').textContent = '⏸ 일시정지';
   document.getElementById('miniPlayer').classList.remove('visible');
+  /* 미니 플레이어 초기화 */
+  const pb = document.getElementById('miniProgressBar');
+  if (pb) pb.style.width = '0%';
+  const pg = document.getElementById('miniProgress');
+  if (pg) pg.textContent = '—';
+  const sl = document.getElementById('miniSectionLabel');
+  if (sl) sl.textContent = '';
   setMiniState(true);
 }
 
@@ -1311,6 +1538,9 @@ function playSituation(sitId) {
   document.getElementById('btnPause').disabled = false;
   document.getElementById('btnStop').disabled = false;
   document.getElementById('miniPlayer').classList.add('visible');
+  setMiniState(true);
+  /* 섹션 전체 듣기 - 미니 플레이어 섹션명 설정 */
+  document.getElementById('miniSectionLabel').textContent = (sit.emoji || '') + ' ' + (sit.name || '');
   playFromSitQueue();
 }
 
@@ -1326,6 +1556,8 @@ function playFromSitQueue() {
   const s = sitPlayQueue[sitPlayIndex];
   setHighlight(s.id, true);
   document.getElementById('miniText').textContent = s.english;
+  /* 미니 플레이어 진행 상태 업데이트 (섹션별 재생) */
+  updateMiniProgress(sitPlayIndex + 1, sitPlayQueue.length, '');
   const card = document.getElementById('card-' + s.id);
   if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   speak(s.english, () => {
@@ -1402,7 +1634,6 @@ function renderCard(s, sit) {
   const isKr2En = quizMode === 'kr2en';
   const isEn2Kr = quizMode === 'en2kr';
   const isQuiz = isKr2En || isEn2Kr;
-  const quizClass = isQuiz ? 'quiz-active' : '';
 
   // 이미지 이모지 생성
   const emojis = getCardEmojis(s.english, sit.emoji);
@@ -1412,12 +1643,56 @@ function renderCard(s, sit) {
   const engHidden = isKr2En ? 'quiz-hidden' : '';
   const korHidden = isEn2Kr ? 'quiz-hidden' : '';
 
+  // ── 퀴즈 모드: 게임 스타일 카드 ──
+  if (isQuiz) {
+    const modeLabel = isKr2En ? '🇰🇷 → 🇺🇸 한글→영어' : '🇺🇸 → 🇰🇷 영어→한글';
+    const questionText = isKr2En ? s.answer : s.english;   // 보이는 쪽
+    const answerText   = isKr2En ? s.english : s.answer;   // 숨겨진 쪽
+    return `
+  <div class="sentence-card quiz-active quiz-card-game" id="card-${s.id}"
+       style="border-top:5px solid ${sit.border};">
+    <!-- 상단 헤더 -->
+    <div class="quiz-game-top" style="background:${sit.border};">
+      <span class="quiz-mode-tag">🎯 ${modeLabel}</span>
+      <span class="quiz-num-tag">#${s.id}</span>
+      <button class="quiz-play-mini" onclick="playSentence(${s.id})" title="이 문장 듣기">🔊</button>
+      <span class="quiz-result-game" id="result-${s.id}"></span>
+    </div>
+    <!-- 이모지 -->
+    <div class="quiz-emoji-row">
+      <div class="card-img-emoji">${emojiSpans}</div>
+    </div>
+    <!-- 문제 (보이는 쪽) -->
+    <div class="quiz-q-block">
+      <div class="quiz-block-label">📋 문제</div>
+      <div class="quiz-q-inner">
+        <div class="quiz-q-text">${questionText}</div>
+      </div>
+    </div>
+    <!-- 청크 -->
+    <div class="quiz-chunks-row">
+      <div class="chunks-box${showChunks ? ' visible' : ''}">${chunkPills}</div>
+    </div>
+    <!-- 정답 (클릭하면 공개) -->
+    <div class="quiz-a-block" style="padding-bottom:14px;">
+      <div class="quiz-block-label">💡 정답 <span style="font-size:0.85em;color:#b39ddb;font-weight:600;text-transform:none;letter-spacing:0;">— 탭하여 확인 👇</span></div>
+      <div class="quiz-a-inner quiz-a-clickable" id="answerBox-${s.id}"
+           onclick="confirmQuizCard(${s.id})">
+        <div class="quiz-mystery-wrap">
+          <span class="quiz-mystery-icon">❓</span>
+        </div>
+        <div class="quiz-revealed-answer" id="quizReveal-${s.id}">${answerText}</div>
+      </div>
+    </div>
+  </div>`;
+  }
+
+  // ── 일반 모드: 전체 정보 카드 ──
   return `
-  <div class="sentence-card ${quizClass}" id="card-${s.id}" style="border-left-color:${sit.border}">
+  <div class="sentence-card" id="card-${s.id}" style="border-left-color:${sit.border}">
     <div class="card-image" style="background:${sit.color}">
       <span class="card-img-num">#${s.id}</span>
       <div class="card-img-emoji">${emojiSpans}</div>
-      <span class="quiz-result-icon" id="result-${s.id}" style="top:8px;right:10px;position:absolute;z-index:3"></span>
     </div>
     <div class="card-top">
       <span></span>
@@ -1426,36 +1701,25 @@ function renderCard(s, sit) {
         onclick="playSentence(${s.id})"
         title="이 문장 듣기">🔊</button>
     </div>
-    <div class="card-english ${engHidden}" id="eng-${s.id}" onclick="revealQuizItem('eng-${s.id}')">${s.english}</div>
+    <div class="card-english" id="eng-${s.id}">${s.english}</div>
     <span class="phonics-badge">📚 ${s.phonics}</span>
     <div class="chunks-box${showChunks ? ' visible' : ''}">${chunkPills}</div>
-    ${isKr2En ? `
-    <div class="quiz-input-area">
-      <input class="quiz-input" id="input-${s.id}" type="text" placeholder="영어로 입력하세요..."
->
-      <div style="margin-top:6px; display:flex; gap:6px; align-items:center;">
-        <button class="btn btn-green btn-sm" onclick="checkQuizAnswerById(${s.id})">✔ 확인</button>
-        <button class="btn btn-orange btn-sm" onclick="revealQuizItem('eng-${s.id}'); markQuizResult(${s.id}, false)">👁 정답 보기</button>
-      </div>
-    </div>` : ''}
-    ${isEn2Kr ? `
-    <div class="quiz-input-area">
-      <button class="btn btn-orange btn-sm" onclick="revealQuizItem('ans-${s.id}')">👁 한글 뜻 보기</button>
-      <div style="margin-top:6px; display:flex; gap:6px;">
-        <button class="quiz-check-btn correct-btn" onclick="markQuizResult(${s.id}, true)">✅ 알았어요</button>
-        <button class="quiz-check-btn wrong-btn" onclick="markQuizResult(${s.id}, false)">❌ 몰랐어요</button>
-      </div>
-    </div>` : ''}
     <div class="card-qa">
-      <div class="card-q"><span class="card-q-icon">❓</span><span>${s.question}</span></div>
-      <div class="card-a"><span class="card-a-icon">💬</span><span class="card-answer-text ${korHidden}" id="ans-${s.id}" onclick="revealQuizItem('ans-${s.id}')">${s.answer}</span></div>
+      <div class="card-q"><span class="card-q-icon">❓</span><span>${s.question || ''}</span></div>
+      <div class="card-a"><span class="card-a-icon">💬</span><span class="card-answer-text" id="ans-${s.id}">${s.answer}</span></div>
     </div>
-    ${!isQuiz ? '' : `<button class="quiz-reveal-btn" onclick="revealAllInCard(${s.id})">🔓 전체 보기</button>`}
+    ${s.tips ? `<div class="phonics-tip"><span>💡</span><span>${s.tips}</span></div>` : ''}
   </div>`;
 }
 
 function render() {
   const container = document.getElementById('situationsContainer');
+
+  /* ── 열린 섹션 ID 저장 (재렌더링 후 복원) ── */
+  const openIds = new Set(
+    [...document.querySelectorAll('.situation-section.open')].map(el => el.id)
+  );
+
   container.innerHTML = '';
 
   SITUATIONS.forEach(sit => {
@@ -1487,6 +1751,9 @@ function render() {
         </div>
         <div class="cards-grid">${cardsHTML}</div>
       </div>`;
+
+    /* ── 이전에 열려 있던 섹션이면 open 클래스 복원 ── */
+    if (openIds.has('sit-' + sit.id)) sec.classList.add('open');
 
     container.appendChild(sec);
   });
@@ -1629,14 +1896,8 @@ function setQuizMode(mode) {
   document.getElementById('btnEnToKr').classList.toggle('active', mode === 'en2kr');
   document.getElementById('btnQuizOff').classList.toggle('active', mode === 'off');
 
-  // Show/hide score bar
-  const scoreBar = document.getElementById('quizScoreBar');
-  if (mode === 'off') {
-    scoreBar.classList.remove('visible');
-  } else {
-    scoreBar.classList.add('visible');
-    updateQuizScore();
-  }
+  // 퀴즈 모드: 점수 바 숨김 (확인하기 단일 버튼 방식 — 점수 미사용)
+  document.getElementById('quizScoreBar').classList.remove('visible');
 
   render();
 }
@@ -1652,6 +1913,26 @@ function revealQuizItem(elId) {
 function revealAllInCard(sentenceId) {
   revealQuizItem('eng-' + sentenceId);
   revealQuizItem('ans-' + sentenceId);
+}
+
+// ── 정답 박스 클릭: 직접 공개 + 청크 표시 + 자동 음성 재생 ──
+function confirmQuizCard(id) {
+  const box = document.getElementById('answerBox-' + id);
+  if (!box || box.classList.contains('revealed')) return; // 이미 공개됨이면 무시
+  box.classList.add('revealed');
+
+  // 카드 테두리 초록 강조
+  const card = document.getElementById('card-' + id);
+  if (card) card.classList.add('quiz-correct');
+
+  // 청크 박스 공개 (토글 설정과 무관하게 이 카드만 표시)
+  if (card) {
+    const chunksBox = card.querySelector('.chunks-box');
+    if (chunksBox) chunksBox.classList.add('visible');
+  }
+
+  // 정답 공개 즉시 영어 음성 재생
+  playSentence(id);
 }
 
 function checkQuizAnswerById(sentenceId) {

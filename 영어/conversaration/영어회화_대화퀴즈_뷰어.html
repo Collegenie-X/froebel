@@ -447,13 +447,23 @@
       <button class="speed-btn active" id="rateNormal" onclick="setRate(1.0,this)">▶ 보통</button>
       <button class="speed-btn" onclick="setRate(1.3,this)">🐇 빠르게</button>
     </div>
-    <!-- 음성 선택 -->
+    <!-- 음성 선택 A (학생 / 파랑) -->
     <div class="ctrl-group">
-      <span class="ctrl-label">🎤 음성</span>
+      <span class="ctrl-label" style="color:#4A90D9">🎤 화자A</span>
       <div class="ctrl-divider"></div>
-      <select class="voice-select" id="voiceSelect" onchange="setVoice(this.value)">
+      <select class="voice-select" id="voiceSelectA" onchange="setVoiceA(this.value)">
         <option value="">기본 영어 음성</option>
       </select>
+      <button class="speed-btn" onclick="testVoiceA()" title="화자A 음성 테스트">▶ 테스트</button>
+    </div>
+    <!-- 음성 선택 B (친구 / 주황) -->
+    <div class="ctrl-group">
+      <span class="ctrl-label" style="color:#E8763A">🎤 화자B</span>
+      <div class="ctrl-divider"></div>
+      <select class="voice-select" id="voiceSelectB" onchange="setVoiceB(this.value)">
+        <option value="">기본 영어 음성</option>
+      </select>
+      <button class="speed-btn" onclick="testVoiceB()" title="화자B 음성 테스트">▶ 테스트</button>
     </div>
     <!-- 청크 -->
     <div class="ctrl-group">
@@ -557,7 +567,8 @@
 ================================================================ */
 var SITUATIONS = [];
 var _ttsRate = 1.0;
-var _ttsVoice = null;
+var _ttsVoiceA = null;   // 화자A (role-c, 학생, 파랑)
+var _ttsVoiceB = null;   // 화자B (role-b, 친구, 주황)
 var _allVoices = [];
 var _showChunks = false;
 var _currentMode = 'off';   // off | ko-en | en-ko
@@ -886,13 +897,32 @@ function buildTurnItem(t) {
 function _loadVoices() {
   _allVoices = speechSynthesis.getVoices();
   var enVoices = _allVoices.filter(function(v){ return v.lang.startsWith('en'); });
-  var sel = document.getElementById('voiceSelect');
-  sel.innerHTML = '<option value="">기본 영어 음성</option>';
-  enVoices.forEach(function(v, i) {
-    var opt = document.createElement('option');
-    opt.value = v.name; opt.textContent = v.name + ' (' + v.lang + ')';
-    sel.appendChild(opt);
-  });
+
+  // 화자A 셀렉트
+  var selA = document.getElementById('voiceSelectA');
+  if (selA) {
+    var prevA = selA.value;
+    selA.innerHTML = '<option value="">기본 영어 음성</option>';
+    enVoices.forEach(function(v) {
+      var opt = document.createElement('option');
+      opt.value = v.name; opt.textContent = v.name + ' (' + v.lang + ')';
+      selA.appendChild(opt);
+    });
+    if (prevA) selA.value = prevA;
+  }
+
+  // 화자B 셀렉트
+  var selB = document.getElementById('voiceSelectB');
+  if (selB) {
+    var prevB = selB.value;
+    selB.innerHTML = '<option value="">기본 영어 음성</option>';
+    enVoices.forEach(function(v) {
+      var opt = document.createElement('option');
+      opt.value = v.name; opt.textContent = v.name + ' (' + v.lang + ')';
+      selB.appendChild(opt);
+    });
+    if (prevB) selB.value = prevB;
+  }
 }
 if (typeof speechSynthesis !== 'undefined') {
   speechSynthesis.addEventListener('voiceschanged', _loadVoices);
@@ -904,30 +934,50 @@ function setRate(r, btn) {
   document.querySelectorAll('.speed-btn').forEach(function(b){ b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
 }
-function setVoice(name) {
-  _ttsVoice = _allVoices.find(function(v){ return v.name === name; }) || null;
+function setVoiceA(name) {
+  _ttsVoiceA = _allVoices.find(function(v){ return v.name === name; }) || null;
+}
+function setVoiceB(name) {
+  _ttsVoiceB = _allVoices.find(function(v){ return v.name === name; }) || null;
+}
+function testVoiceA() {
+  speechSynthesis.cancel();
+  var utt = new SpeechSynthesisUtterance('Hello! I am speaker A. How are you?');
+  utt.lang = 'en-US'; utt.rate = _ttsRate;
+  if (_ttsVoiceA) utt.voice = _ttsVoiceA;
+  speechSynthesis.speak(utt);
+}
+function testVoiceB() {
+  speechSynthesis.cancel();
+  var utt = new SpeechSynthesisUtterance('Hi there! I am speaker B. Nice to meet you!');
+  utt.lang = 'en-US'; utt.rate = _ttsRate;
+  if (_ttsVoiceB) utt.voice = _ttsVoiceB;
+  speechSynthesis.speak(utt);
 }
 function stopTTS() {
   if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
 }
-function _speak(text, onEnd) {
+/* role: 'c' = 화자A(학생/파랑), 'b' = 화자B(친구/주황) */
+function _speak(text, onEnd, role) {
   if (!text || typeof speechSynthesis === 'undefined') { if(onEnd) onEnd(); return; }
   speechSynthesis.cancel();
   var utt = new SpeechSynthesisUtterance(text);
   utt.lang = 'en-US'; utt.rate = _ttsRate;
-  if (_ttsVoice) utt.voice = _ttsVoice;
+  var voice = (role === 'b') ? _ttsVoiceB : _ttsVoiceA;
+  if (voice) utt.voice = voice;
   utt.onend = utt.onerror = function() { if(onEnd) onEnd(); };
   speechSynthesis.speak(utt);
 }
 function _speakSingle(btn) {
   var item = btn.closest('.turn-item');
   if (!item) return;
-  var eng = item.dataset.eng || '';
+  var eng  = item.dataset.eng  || '';
+  var role = item.dataset.role || 'c';
   if (!eng) return;
   stopTTS();
   document.querySelectorAll('.summary-tts-btn.playing').forEach(function(b){ b.classList.remove('playing'); b.textContent='🔊'; });
   btn.classList.add('playing'); btn.textContent = '⏸';
-  _speak(eng, function() { btn.classList.remove('playing'); btn.textContent = '🔊'; });
+  _speak(eng, function() { btn.classList.remove('playing'); btn.textContent = '🔊'; }, role);
 }
 
 /* ================================================================
@@ -969,7 +1019,8 @@ function _secNext(itvSlider) {
     _stopSectionPlay(); return;
   }
   var item = _secQueue[_secIndex];
-  var eng  = item.dataset.eng || '';
+  var eng  = item.dataset.eng  || '';
+  var role = item.dataset.role || 'c';
   item.classList.add('speaking-global');
   _ensureTurnVisible(item);
   _miniUpdateText(eng);
@@ -980,7 +1031,7 @@ function _secNext(itvSlider) {
     _secIndex++;
     var gap = itvSlider ? parseFloat(itvSlider.value)*1000 : 2000;
     setTimeout(function(){ _secNext(itvSlider); }, gap);
-  });
+  }, role);
 }
 
 function _stopSectionPlay() {
@@ -1006,7 +1057,7 @@ function gpToggle() {
     SITUATIONS.forEach(function(sit) {
       if (selIds.length > 0 && selIds.indexOf(sit.id) === -1) return;
       (sit.turns||[]).forEach(function(t) {
-        if ((t.english||'').trim()) _gp.items.push({ eng: t.english, sitId: sit.id });
+        if ((t.english||'').trim()) _gp.items.push({ eng: t.english, sitId: sit.id, role: t.role || 'c' });
       });
     });
     _gp.total = _gp.items.length;
@@ -1059,7 +1110,7 @@ function _gpNext() {
     if (_gp.index >= _gp.total) { _gp.playing = false; _gpSetUI('stopped'); _miniHide(); return; }
     var gap = parseFloat(document.getElementById('gpInterval').value) * 1000;
     setTimeout(_gpNext, gap);
-  });
+  }, item.role || 'c');
 }
 
 function _gpSetUI(state) {
