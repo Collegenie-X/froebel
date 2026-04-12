@@ -1,0 +1,109 @@
+{
+  "title": "유아 한글 단어 학습",
+  "description": "유아 (3-7세) 한글 단어 학습 - 48단어 · 6개 주제",
+  "version": "1.0",
+  "categories": [
+    {
+      "id": "animals",
+      "name": "동물",
+      "icon": "🐾",
+      "color": "#FF6B6B",
+      "gradient": "linear-gradient(135deg,#FF6B6B,#FF8E53)",
+      "words": [
+        { "id": 1,  "word": "강아지", "emoji": "🐶", "hint": "멍멍!",    "syllables": ["강","아","지"], "imgQuery": "cute+puppy+dog" },
+        { "id": 2,  "word": "고양이", "emoji": "🐱", "hint": "야옹!",    "syllables": ["고","양","이"], "imgQuery": "cute+kitten+cat" },
+        { "id": 3,  "word": "토끼",   "emoji": "🐰", "hint": "폴짝!",    "syllables": ["토","끼"],     "imgQuery": "cute+bunny+rabbit" },
+        { "id": 4,  "word": "사자",   "emoji": "🦁", "hint": "어흥!",    "syllables": ["사","자"],     "imgQuery": "lion+animal" },
+        { "id": 5,  "word": "코끼리", "emoji": "🐘", "hint": "뿌우~",    "syllables": ["코","끼","리"], "imgQuery": "elephant+animal" },
+        { "id": 6,  "word": "기린",   "emoji": "🦒", "hint": "목이 길어요!", "syllables": ["기","린"],   "imgQuery": "giraffe" },
+        { "id": 7,  "word": "돼지",   "emoji": "🐷", "hint": "꿀꿀!",    "syllables": ["돼","지"],     "imgQuery": "cute+pig+farm" },
+        { "id": 8,  "word": "소",     "emoji": "🐮", "hint": "음메~",    "syllables": ["소"],          "imgQuery": "cow+farm" },
+        { "id": 9,  "word": "곰",     "emoji": "🐻", "hint": "으르르~",  "syllables": ["곰"],          "imgQuery": "bear+brown" },
+        { "id": 10, "word": "닭",     "emoji": "🐔", "hint": "꼬끼오!",  "syllables": ["닭"],          "imgQuery": "chicken+rooster+farm" }
+      ]
+    },
+    {
+      "id": "fruits",
+      "name": "과일",
+      "icon": "🍎",
+      "color": "#FF5722",
+      "gradient": "linear-gradient(135deg,#FF5722,#FF9800)",
+      "words": [
+        { "id": 11, "word": "사과",   "emoji": "🍎", "hint": "빨간 과일",     "syllables": ["사","과"],     "imgQuery": "red+apple+fruit" },
+        { "id": 12, "word": "바나나", "emoji": "🍌", "hint": "노란 과일",     "syllables": ["바","나","나"], "imgQuery": "banana+yellow" },
+        { "id": 13, "word": "포도",   "emoji": "🍇", "hint": "보라색 과일",   "syllables": ["포","도"],     "imgQuery": "grapes+purple" },
+        { "id": 14, "word": "딸기",   "emoji": "🍓", "hint": "빨간 열매",     "syllables": ["딸","기"],     "imgQuery": "strawberry+red" },
+        { "id": 15, "word": "수박",   "emoji": "🍉", "hint": "크고 달아요",   "syllables": ["수","박"],     "imgQuery": "watermelon+slice" },
+        { "id": 16, "word": "오렌지", "emoji": "🍊", "hint": "주황색 과일",   "syllables": ["오","렌","지"], "imgQuery": "orange+fruit+fresh" },
+        { "id": 17, "word": "복숭아", "emoji": "🍑", "hint": "분홍색 과일",   "syllables": ["복","숭","아"], "imgQuery": "peach+fruit" },
+        { "id": 18, "word": "귤",     "emoji": "🍊", "hint": "작은 오렌지",   "syllables": ["귤"],          "imgQuery": "tangerine+mandarin" }
+      ]
+    },
+    {
+      "id": "veggies",
+      "name": "채소",
+      "icon": "🥕",
+      "color": "#4CAF50",
+      "gradient": "linear-gradient(135deg,#4CAF50,#8BC34A)",
+      "words": [
+        { "id": 21, "word": "당근",   "emoji": "🥕", "hint": "주황색 채소",   "syllables": ["당","근"],     "imgQuery": "carrot+vegetable" },
+        { "id": 22, "word": "오이",   "emoji": "🥒", "hint": "초록색 채소",   "syllables": ["오","이"],     "imgQuery": "cucumber+green" },
+        { "id": 23, "word": "토마토", "emoji": "🍅", "hint": "빨간 채소",     "syllables": ["토","마","토"], "imgQuery": "tomato+red" },
+        { "id": 24, "word": "양파",   "emoji": "🧅", "hint": "눈물 나요",     "syllables": ["양","파"],     "imgQuery": "onion+vegetable" },
+        { "id": 25, "word": "감자",   "emoji": "🥔", "hint": "갈색 채소",     "syllables": ["감","자"],     "imgQuery": "potato+vegetable" },
+        { "id": 26, "word": "옥수수", "emoji": "🌽", "hint": "노란 채소",     "syllables": ["옥","수","수"], "imgQuery": "corn+yellow" },
+        { "id": 27, "word": "버섯",   "emoji": "🍄", "hint": "우산 모양",     "syllables": ["버","섯"],     "imgQuery": "mushroom" },
+        { "id": 28, "word": "고추",   "emoji": "🌶️", "hint": "매워요!",       "syllables": ["고","추"],     "imgQuery": "red+chili+pepper" }
+      ]
+    },
+    {
+      "id": "vehicles",
+      "name": "탈것",
+      "icon": "🚗",
+      "color": "#2196F3",
+      "gradient": "linear-gradient(135deg,#2196F3,#03A9F4)",
+      "words": [
+        { "id": 31, "word": "자동차", "emoji": "🚗", "hint": "부릉부릉~",     "syllables": ["자","동","차"],   "imgQuery": "red+car+vehicle" },
+        { "id": 32, "word": "버스",   "emoji": "🚌", "hint": "정류장에 서요", "syllables": ["버","스"],       "imgQuery": "yellow+school+bus" },
+        { "id": 33, "word": "기차",   "emoji": "🚂", "hint": "칙칙폭폭!",     "syllables": ["기","차"],       "imgQuery": "train+locomotive" },
+        { "id": 34, "word": "비행기", "emoji": "✈️", "hint": "하늘을 날아요", "syllables": ["비","행","기"],   "imgQuery": "airplane+sky" },
+        { "id": 35, "word": "자전거", "emoji": "🚲", "hint": "페달을 밟아요", "syllables": ["자","전","거"],   "imgQuery": "bicycle+bike" },
+        { "id": 36, "word": "오토바이","emoji": "🏍️","hint": "씽씽~",         "syllables": ["오","토","바","이"],"imgQuery": "motorcycle+bike" },
+        { "id": 37, "word": "소방차", "emoji": "🚒", "hint": "불을 꺼요!",    "syllables": ["소","방","차"],   "imgQuery": "fire+truck+red" },
+        { "id": 38, "word": "로켓",   "emoji": "🚀", "hint": "우주로 가요!",  "syllables": ["로","켓"],       "imgQuery": "rocket+launch+space" }
+      ]
+    },
+    {
+      "id": "food",
+      "name": "음식",
+      "icon": "🍚",
+      "color": "#FF9800",
+      "gradient": "linear-gradient(135deg,#FF9800,#FFC107)",
+      "words": [
+        { "id": 41, "word": "밥",       "emoji": "🍚", "hint": "쌀로 만들어요", "syllables": ["밥"],          "imgQuery": "rice+bowl+korean" },
+        { "id": 42, "word": "빵",       "emoji": "🍞", "hint": "밀로 만들어요", "syllables": ["빵"],          "imgQuery": "bread+loaf" },
+        { "id": 43, "word": "케이크",   "emoji": "🎂", "hint": "생일에 먹어요", "syllables": ["케","이","크"], "imgQuery": "birthday+cake" },
+        { "id": 44, "word": "아이스크림","emoji":"🍦", "hint": "차가워요~",     "syllables": ["아","이","스","크","림"],"imgQuery": "ice+cream+cone" },
+        { "id": 45, "word": "피자",     "emoji": "🍕", "hint": "동그란 음식",   "syllables": ["피","자"],      "imgQuery": "pizza+slice" },
+        { "id": 46, "word": "라면",     "emoji": "🍜", "hint": "후루룩~",       "syllables": ["라","면"],      "imgQuery": "ramen+noodles+bowl" },
+        { "id": 47, "word": "햄버거",   "emoji": "🍔", "hint": "빵 사이에 패티","syllables": ["햄","버","거"], "imgQuery": "hamburger+burger" },
+        { "id": 48, "word": "우유",     "emoji": "🥛", "hint": "흰색 음료",     "syllables": ["우","유"],      "imgQuery": "milk+glass+white" }
+      ]
+    },
+    {
+      "id": "body",
+      "name": "신체",
+      "icon": "👶",
+      "color": "#9C27B0",
+      "gradient": "linear-gradient(135deg,#9C27B0,#E91E63)",
+      "words": [
+        { "id": 51, "word": "눈", "emoji": "👁️", "hint": "볼 때 써요",   "syllables": ["눈"], "imgQuery": "human+eye+close" },
+        { "id": 52, "word": "코", "emoji": "👃", "hint": "냄새 맡아요", "syllables": ["코"], "imgQuery": "human+nose" },
+        { "id": 53, "word": "입", "emoji": "👄", "hint": "말하고 먹어요","syllables": ["입"], "imgQuery": "mouth+lips+smile" },
+        { "id": 54, "word": "귀", "emoji": "👂", "hint": "들을 때 써요", "syllables": ["귀"], "imgQuery": "ear+human" },
+        { "id": 55, "word": "손", "emoji": "✋", "hint": "잡을 때 써요", "syllables": ["손"], "imgQuery": "hand+open+palm" },
+        { "id": 56, "word": "발", "emoji": "🦶", "hint": "걸을 때 써요", "syllables": ["발"], "imgQuery": "foot+barefoot" }
+      ]
+    }
+  ]
+}

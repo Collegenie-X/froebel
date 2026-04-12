@@ -482,7 +482,7 @@
         },
         {
           "turn": 2,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "물론이죠! 어디 가시려고요?",
           "english": "Of course! Where are you trying to go?",
@@ -504,7 +504,7 @@
         },
         {
           "turn": 4,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "아, 여기서 꽤 멀어요. 지하철 타는 게 나아요.",
           "english": "Oh, it's quite far from here. It's better to take the subway.",
@@ -526,7 +526,7 @@
         },
         {
           "turn": 6,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "저 코너를 돌면 바로 있어요. 5분쯤 걸려요.",
           "english": "It's right around that corner. About 5 minutes.",
@@ -548,7 +548,7 @@
         },
         {
           "turn": 8,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "4호선 타고 종점에서 내리세요.",
           "english": "Take line 4 and get off at the last stop.",
@@ -570,7 +570,7 @@
         },
         {
           "turn": 10,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "자동판매기에서 카드로 살 수 있어요.",
           "english": "You can buy one at the vending machine with a card.",
@@ -592,7 +592,7 @@
         },
         {
           "turn": 12,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "네, 저기 약국 옆에 있어요.",
           "english": "Yes, it's right next to the pharmacy over there.",
@@ -614,7 +614,7 @@
         },
         {
           "turn": 14,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "여기는 12번가예요. 지도에 표시해 드릴게요.",
           "english": "This is 12th Street. Let me mark it on your map.",
@@ -636,7 +636,7 @@
         },
         {
           "turn": 16,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "네, 와이파이가 연결되어 있으면 쓸 수 있어요.",
           "english": "Yes, you can if you're connected to Wi-Fi.",
@@ -658,7 +658,7 @@
         },
         {
           "turn": 18,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "저 카페에 가면 충전할 수 있어요. 무선 충전기 있어요.",
           "english": "You can charge at that cafe. They have wireless chargers.",
@@ -680,7 +680,7 @@
         },
         {
           "turn": 20,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "안전하게 잘 다녀오세요!",
           "english": "Have a safe trip!",
@@ -938,7 +938,7 @@
         },
         {
           "turn": 2,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "네, 15번 버스 타세요. 10분마다 와요.",
           "english": "Yes, take bus number 15. It comes every 10 minutes.",
@@ -960,7 +960,7 @@
         },
         {
           "turn": 4,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "1,500원이에요. 현금도 카드도 돼요.",
           "english": "It's 1,500 won. Both cash and card are accepted.",
@@ -982,7 +982,7 @@
         },
         {
           "turn": 6,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "박물관 앞에서 내리세요. 세 번째 정류장이에요.",
           "english": "Get off in front of the museum. It's the third stop.",
@@ -1004,7 +1004,7 @@
         },
         {
           "turn": 8,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "아니요, 이 버스는 강남 가요. 건너편에서 타세요.",
           "english": "No, this bus goes to Gangnam. Take the bus on the other side.",
@@ -1026,7 +1026,7 @@
         },
         {
           "turn": 10,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "저 횡단보도 건너면 바로 있어요.",
           "english": "It's right across that crosswalk.",
@@ -1048,7 +1048,7 @@
         },
         {
           "turn": 12,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "다음 정류장에서 내리세요. 곧 도착해요.",
           "english": "Get off at the next stop. We're arriving soon.",
@@ -1070,7 +1070,7 @@
         },
         {
           "turn": 14,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "108번 버스 타시면 돼요. 바로 저쪽에서 타세요.",
           "english": "Take bus 108. You can catch it right over there.",
@@ -1092,7 +1092,7 @@
         },
         {
           "turn": 16,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "20분마다 와요. 5분 있으면 올 거예요.",
           "english": "Every 20 minutes. One should come in about 5 minutes.",
@@ -1114,7 +1114,7 @@
         },
         {
           "turn": 18,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "화요일은 휴관이에요. 오늘은 수요일이라 열어요.",
           "english": "It's closed on Tuesdays. Since today is Wednesday, it's open.",
@@ -1136,7 +1136,7 @@
         },
         {
           "turn": 20,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "즐거운 관람 하세요!",
           "english": "Enjoy your visit!",
@@ -1166,7 +1166,7 @@
         },
         {
           "turn": 2,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "약 20분이요. 교통이 좀 막히네요.",
           "english": "About 20 minutes. Traffic is a bit heavy.",
@@ -1188,7 +1188,7 @@
         },
         {
           "turn": 4,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "네, 그렇게 하겠습니다.",
           "english": "Yes, I'll do that.",
@@ -1210,7 +1210,7 @@
         },
         {
           "turn": 6,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "8만 원이요.",
           "english": "80,000 won.",
@@ -1232,7 +1232,7 @@
         },
         {
           "turn": 8,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "야간 할증이에요.",
           "english": "It's the late-night surcharge.",
@@ -1254,7 +1254,7 @@
         },
         {
           "turn": 10,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "아, 맞아요. 죄송해요. 45,000원이에요.",
           "english": "Oh, you're right. I'm sorry. It's 45,000 won.",
@@ -1276,7 +1276,7 @@
         },
         {
           "turn": 12,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "네, 잠깐요. 여기 있어요.",
           "english": "Yes, one moment. Here you go.",
@@ -1298,7 +1298,7 @@
         },
         {
           "turn": 14,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "아이고! 죄송해요. 바로 열어드릴게요.",
           "english": "Oh my! I'm sorry. Let me open it right away.",
@@ -1320,7 +1320,7 @@
         },
         {
           "turn": 16,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "공사 중이라 돌아왔어요. 더 빠른 길이 없었어요.",
           "english": "There was construction so we went around. There was no faster route.",
@@ -1342,7 +1342,7 @@
         },
         {
           "turn": 18,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "불편하셨다면 죄송해요.",
           "english": "I'm sorry if it was inconvenient.",
@@ -1364,7 +1364,7 @@
         },
         {
           "turn": 20,
-          "role": "c",
+          "role": "b",
           "speaker": "👨 기사",
           "korean": "네, 명심하겠습니다. 감사합니다.",
           "english": "Yes, I'll keep that in mind. Thank you.",
@@ -1850,7 +1850,7 @@
         },
         {
           "turn": 2,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 승객",
           "korean": "아, 정말요? 제 좌석 번호가 15A인데요.",
           "english": "Oh, really? My seat number is 15A.",
@@ -1872,7 +1872,7 @@
         },
         {
           "turn": 4,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 승객",
           "korean": "어머, 제가 잘못 앉았나봐요. 어떻게 하죠?",
           "english": "Oh my, I must have sat in the wrong seat. What should we do?",
@@ -1905,7 +1905,7 @@
         },
         {
           "turn": 7,
-          "role": "c",
+          "role": "b",
           "speaker": "👩‍✈️ 직원",
           "korean": "티켓 두 장 다 보여주세요.",
           "english": "Please show me both tickets.",
@@ -1927,7 +1927,7 @@
         },
         {
           "turn": 9,
-          "role": "c",
+          "role": "b",
           "speaker": "👩‍✈️ 직원",
           "korean": "아, 이 분이 다른 열차 티켓을 갖고 계시네요.",
           "english": "I see, this person has a ticket for a different train.",
@@ -1960,7 +1960,7 @@
         },
         {
           "turn": 12,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 승객",
           "korean": "제 티켓도 C열 11번인데요.",
           "english": "My ticket also says row C, seat 11.",
@@ -1982,7 +1982,7 @@
         },
         {
           "turn": 14,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 승객",
           "korean": "어, 제 것은 D열이네요. 잘못 봤어요. 죄송해요!",
           "english": "Oh, mine says row D. I misread it. I'm sorry!",
@@ -2004,7 +2004,7 @@
         },
         {
           "turn": 16,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 승객",
           "korean": "제 자리 옆에 아무도 없네요. 여기 앉아도 될까요?",
           "english": "There's no one next to my seat. Can I sit here?",
@@ -2026,7 +2026,7 @@
         },
         {
           "turn": 18,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 승객",
           "korean": "맞아요. 불편하게 해서 죄송해요.",
           "english": "You're right. I'm sorry for the inconvenience.",
@@ -2048,7 +2048,7 @@
         },
         {
           "turn": 20,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 승객",
           "korean": "감사해요! 당신도요.",
           "english": "Thank you! You too.",
@@ -2762,7 +2762,7 @@
         },
         {
           "turn": 2,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 상인",
           "korean": "8만 원이에요.",
           "english": "80,000 won.",
@@ -2784,7 +2784,7 @@
         },
         {
           "turn": 4,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 상인",
           "korean": "최저 7만 원이에요. 이 이상은 못 내려요.",
           "english": "The lowest is 70,000 won. I can't go lower than that.",
@@ -2806,7 +2806,7 @@
         },
         {
           "turn": 6,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 상인",
           "korean": "아이고, 그건 너무 적어요. 6만 5천 원에 드릴게요.",
           "english": "Oh my, that's too little. I'll give it to you for 65,000 won.",
@@ -2828,7 +2828,7 @@
         },
         {
           "turn": 8,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 상인",
           "korean": "두 개에 11만 원 어때요?",
           "english": "How about 110,000 won for two?",
@@ -2850,7 +2850,7 @@
         },
         {
           "turn": 10,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 상인",
           "korean": "본전도 안 나와요. 10만 5천 원에 해드릴게요.",
           "english": "I'm barely breaking even. I'll do 105,000 won.",
@@ -2872,7 +2872,7 @@
         },
         {
           "turn": 12,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 상인",
           "korean": "감사해요! 이 가방 정말 좋아할 거예요. 가죽이 진짜예요.",
           "english": "Thank you! You'll love this bag. It's real leather.",
@@ -2894,7 +2894,7 @@
         },
         {
           "turn": 14,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 상인",
           "korean": "2만 원이에요. 은으로 만든 거예요.",
           "english": "20,000 won. It's made of silver.",
@@ -2916,7 +2916,7 @@
         },
         {
           "turn": 16,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 상인",
           "korean": "1만 8천 원이요. 이게 마지막이에요.",
           "english": "18,000 won. That's my final price.",
@@ -2938,7 +2938,7 @@
         },
         {
           "turn": 18,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 상인",
           "korean": "선물 포장도 해드릴게요! 예쁘게 해드릴게요.",
           "english": "I'll gift-wrap it too! I'll make it pretty.",
@@ -2960,7 +2960,7 @@
         },
         {
           "turn": 20,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 상인",
           "korean": "감사합니다! 또 오세요!",
           "english": "Thank you! Come again!",
@@ -3674,7 +3674,7 @@
         },
         {
           "turn": 2,
-          "role": "c",
+          "role": "b",
           "speaker": "👩‍✈️ 직원",
           "korean": "크기가 너무 크네요. 아래에 넣어드릴게요.",
           "english": "It's too large. We'll store it below.",
@@ -3696,7 +3696,7 @@
         },
         {
           "turn": 4,
-          "role": "c",
+          "role": "b",
           "speaker": "👩‍✈️ 직원",
           "korean": "걱정하지 마세요. 착륙 후 수화물 찾는 곳에서 받으실 수 있어요.",
           "english": "Don't worry. You can collect it at baggage claim after landing.",
@@ -3718,7 +3718,7 @@
         },
         {
           "turn": 6,
-          "role": "c",
+          "role": "b",
           "speaker": "👩‍✈️ 직원",
           "korean": "취급 주의 스티커 붙여드릴게요.",
           "english": "I'll put a fragile sticker on it.",
@@ -3740,7 +3740,7 @@
         },
         {
           "turn": 8,
-          "role": "c",
+          "role": "b",
           "speaker": "👩‍✈️ 직원",
           "korean": "확인해 드릴게요. 죄송해요, 고장난 것 같아요.",
           "english": "Let me check. I'm sorry, it seems broken.",
@@ -3762,7 +3762,7 @@
         },
         {
           "turn": 10,
-          "role": "c",
+          "role": "b",
           "speaker": "👩‍✈️ 직원",
           "korean": "잠깐 확인해 볼게요.",
           "english": "Let me check for a moment.",
@@ -3773,7 +3773,7 @@
         },
         {
           "turn": 11,
-          "role": "c",
+          "role": "b",
           "speaker": "👩‍✈️ 직원",
           "korean": "비즈니스 클래스에 빈 자리가 있어요. 옮겨드릴게요.",
           "english": "There's a free seat in business class. We'll move you there.",
@@ -4358,7 +4358,7 @@
         },
         {
           "turn": 2,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "어디예요? 지금 가볼게요.",
           "english": "Where? I'll come right now.",
@@ -4380,7 +4380,7 @@
         },
         {
           "turn": 4,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "119에 전화했나요?",
           "english": "Did you call 119?",
@@ -4402,7 +4402,7 @@
         },
         {
           "turn": 6,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "제가 지금 119에 전화할게요.",
           "english": "I'll call 119 right now.",
@@ -4424,7 +4424,7 @@
         },
         {
           "turn": 8,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "편의점에서 사탕이나 주스 가져올게요!",
           "english": "I'll get candy or juice from the convenience store!",
@@ -4446,7 +4446,7 @@
         },
         {
           "turn": 10,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "네, 5분 안에 와요. 제가 말했어요.",
           "english": "Yes, they'll be here in 5 minutes. I told them.",
@@ -4468,7 +4468,7 @@
         },
         {
           "turn": 12,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "눕혀 놓고 호흡 확인하세요. CPR 할 줄 알아요?",
           "english": "Lay him down and check his breathing. Do you know CPR?",
@@ -4490,7 +4490,7 @@
         },
         {
           "turn": 14,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "제가 할게요. 같이 해요.",
           "english": "I'll do it. Let's do it together.",
@@ -4512,7 +4512,7 @@
         },
         {
           "turn": 16,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 행인",
           "korean": "응급대원에게 친구 상태 알려주세요.",
           "english": "Tell the paramedics about your friend's condition.",
@@ -4545,7 +4545,7 @@
         },
         {
           "turn": 19,
-          "role": "c",
+          "role": "b",
           "speaker": "👩 응급대원",
           "korean": "네, 같이 타세요. 걱정하지 마세요.",
           "english": "Yes, come along. Don't worry.",

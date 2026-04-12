@@ -1931,8 +1931,8 @@ function confirmQuizCard(id) {
     if (chunksBox) chunksBox.classList.add('visible');
   }
 
-  // 정답 공개 즉시 영어 음성 재생
-  playSentence(id);
+  // 전체 듣기 / 섹션 재생 중이 아닐 때만 음성 재생 (이중 재생 방지)
+  if (!isPlayingAll && !sitPlayActive) playSentence(id);
 }
 
 function checkQuizAnswerById(sentenceId) {

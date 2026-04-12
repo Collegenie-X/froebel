@@ -264,7 +264,21 @@
       transition: box-shadow 0.2s;
       overflow: hidden;
     }
-    .turn-item.speaking-global { border-color: #f6ad55; box-shadow: 0 0 0 2px #f6ad5566; }
+    /* 전체 듣기 포커스 — 강한 강조 */
+    @keyframes speakingPulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(246,173,85,0.45), 0 8px 28px rgba(246,173,85,0.30); }
+      50%       { box-shadow: 0 0 0 9px rgba(246,173,85,0.20), 0 12px 36px rgba(246,173,85,0.45); }
+    }
+    .turn-item.speaking-global {
+      border-color: #f6ad55;
+      border-width: 2.5px;
+      background: linear-gradient(135deg, #fffbf0 0%, #fff3d6 100%);
+      transform: scale(1.018);
+      transform-origin: center;
+      animation: speakingPulse 1.4s ease-in-out infinite;
+      z-index: 2;
+      position: relative;
+    }
     .turn-item details { }
     .turn-item details > summary {
       display: flex; align-items: center; gap: 8px;
@@ -331,7 +345,7 @@
       display: flex; gap: 10px; align-items: flex-start;
     }
     .conv-tip-icon { font-size: 0.85rem; flex-shrink: 0; margin-top: 1px; }
-    .conv-tip-body { flex: 1; }
+    .conv-tip-body { flex: 1; font-size: 1.12em; }
     .conv-tip-pattern {
       display: inline-block; background: var(--primary); color: #fff;
       border-radius: 4px; padding: 1px 7px; font-size: 0.7rem; font-weight: 700;
@@ -1240,12 +1254,42 @@ function applyMode(mode) {
       var det = item.querySelector('details');
       if (det) det.open = true;
       engEl.classList.add('hidden-answer');
-      engEl.onclick = function() { this.classList.add('revealed'); this.onclick = null; };
+      (function(capturedItem, capturedEngEl) {
+        capturedEngEl.onclick = function() {
+          if (capturedEngEl.classList.contains('revealed')) return;
+          capturedEngEl.classList.add('revealed');
+          capturedEngEl.onclick = null;
+          // 청크 표시
+          var chunksBox = capturedItem.querySelector('.chunks-box');
+          if (chunksBox) chunksBox.classList.add('visible');
+          // 전체/섹션 재생 중이 아닐 때만 TTS
+          if (!_gp.playing && !_secPlaying) {
+            var eng  = capturedItem.dataset.eng  || '';
+            var role = capturedItem.dataset.role || 'c';
+            if (eng) _speak(eng, null, role);
+          }
+        };
+      })(item, engEl);
 
     } else if (mode === 'en-ko') {
       // 한국어 텍스트 블러 처리 (클릭 시 공개)
       korEl.classList.add('hidden-answer');
-      korEl.onclick = function() { this.classList.add('revealed'); this.onclick = null; };
+      (function(capturedItem, capturedKorEl) {
+        capturedKorEl.onclick = function() {
+          if (capturedKorEl.classList.contains('revealed')) return;
+          capturedKorEl.classList.add('revealed');
+          capturedKorEl.onclick = null;
+          // 청크 표시
+          var chunksBox = capturedItem.querySelector('.chunks-box');
+          if (chunksBox) chunksBox.classList.add('visible');
+          // 전체/섹션 재생 중이 아닐 때만 TTS
+          if (!_gp.playing && !_secPlaying) {
+            var eng  = capturedItem.dataset.eng  || '';
+            var role = capturedItem.dataset.role || 'c';
+            if (eng) _speak(eng, null, role);
+          }
+        };
+      })(item, korEl);
     }
     // off: 초기화만으로 완료
   });

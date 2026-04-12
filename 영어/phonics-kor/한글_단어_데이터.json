@@ -1,0 +1,1351 @@
+{
+  "title": "유아 한글 단어 학습",
+  "version": "2.0",
+  "categories": [
+    {
+      "id": "animals",
+      "name": "동물",
+      "icon": "🐾",
+      "level": 1,
+      "color": "#FF3838",
+      "gradient": "linear-gradient(135deg,#FF3838,#FF6B6B)",
+      "words": [
+        {
+          "id": 1,
+          "word": "강아지",
+          "emoji": "🐶",
+          "hint": "멍멍!",
+          "syllables": [
+            "강",
+            "아",
+            "지"
+          ],
+          "imgQuery": "cute+puppy+dog",
+          "sentences": [
+            "강아지 작고 귀여워요.",
+            "강아지랑 같이 뛰어!"
+          ]
+        },
+        {
+          "id": 2,
+          "word": "고양이",
+          "emoji": "🐱",
+          "hint": "야옹!",
+          "syllables": [
+            "고",
+            "양",
+            "이"
+          ],
+          "imgQuery": "cute+kitten+cat",
+          "sentences": [
+            "고양이 부드럽고 예뻐요.",
+            "고양이 등을 쓰다듬어."
+          ]
+        },
+        {
+          "id": 3,
+          "word": "토끼",
+          "emoji": "🐰",
+          "hint": "폴짝!",
+          "syllables": [
+            "토",
+            "끼"
+          ],
+          "imgQuery": "bunny+rabbit+cute",
+          "sentences": [
+            "토끼 귀가 길어요.",
+            "토끼 폴짝폴짝 뛰어!"
+          ]
+        },
+        {
+          "id": 4,
+          "word": "사자",
+          "emoji": "🦁",
+          "hint": "어흥!",
+          "syllables": [
+            "사",
+            "자"
+          ],
+          "imgQuery": "lion+animal",
+          "sentences": [
+            "사자 크고 무서워요.",
+            "사자 갈기 멋지다!"
+          ]
+        },
+        {
+          "id": 5,
+          "word": "코끼리",
+          "emoji": "🐘",
+          "hint": "뿌우~",
+          "syllables": [
+            "코",
+            "끼",
+            "리"
+          ],
+          "imgQuery": "elephant+animal",
+          "sentences": [
+            "코끼리 크고 힘이 세요.",
+            "코끼리 코 길어요!"
+          ]
+        },
+        {
+          "id": 6,
+          "word": "기린",
+          "emoji": "🦒",
+          "hint": "목이 길어요!",
+          "syllables": [
+            "기",
+            "린"
+          ],
+          "imgQuery": "giraffe",
+          "sentences": [
+            "기린 목이 아주 길어.",
+            "기린 키가 제일 커요!"
+          ]
+        },
+        {
+          "id": 7,
+          "word": "돼지",
+          "emoji": "🐷",
+          "hint": "꿀꿀!",
+          "syllables": [
+            "돼",
+            "지"
+          ],
+          "imgQuery": "pig+farm+cute",
+          "sentences": [
+            "돼지 통통하고 귀여워.",
+            "돼지 꿀꿀 소리 내요!"
+          ]
+        },
+        {
+          "id": 8,
+          "word": "소",
+          "emoji": "🐮",
+          "hint": "음메~",
+          "syllables": [
+            "소"
+          ],
+          "imgQuery": "cow+farm",
+          "sentences": [
+            "소 크고 착해요.",
+            "소 음메 울어요."
+          ]
+        },
+        {
+          "id": 9,
+          "word": "곰",
+          "emoji": "🐻",
+          "hint": "으르르~",
+          "syllables": [
+            "곰"
+          ],
+          "imgQuery": "bear+brown",
+          "sentences": [
+            "곰 크고 털이 많아.",
+            "곰 겨울에 자요!"
+          ]
+        },
+        {
+          "id": 10,
+          "word": "닭",
+          "emoji": "🐔",
+          "hint": "꼬끼오!",
+          "syllables": [
+            "닭"
+          ],
+          "imgQuery": "chicken+rooster",
+          "sentences": [
+            "닭 빨간 볏 멋져요.",
+            "닭 아침에 울어요!"
+          ]
+        },
+        {
+          "id": 11,
+          "word": "오리",
+          "emoji": "🦆",
+          "hint": "꽥꽥!",
+          "syllables": [
+            "오",
+            "리"
+          ],
+          "imgQuery": "duck+cute",
+          "sentences": [
+            "오리 노랗고 귀여워.",
+            "오리 물에서 헤엄쳐요!"
+          ]
+        },
+        {
+          "id": 12,
+          "word": "펭귄",
+          "emoji": "🐧",
+          "hint": "뒤뚱뒤뚱!",
+          "syllables": [
+            "펭",
+            "귄"
+          ],
+          "imgQuery": "penguin+cute",
+          "sentences": [
+            "펭귄 검고 하얀색이야.",
+            "펭귄 뒤뚱뒤뚱 걸어요!"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fruits",
+      "name": "과일",
+      "icon": "🍎",
+      "level": 2,
+      "color": "#F0A500",
+      "gradient": "linear-gradient(135deg,#F0A500,#FFD32A)",
+      "words": [
+        {
+          "id": 21,
+          "word": "사과",
+          "emoji": "🍎",
+          "hint": "빨간 과일",
+          "syllables": [
+            "사",
+            "과"
+          ],
+          "imgQuery": "red+apple",
+          "sentences": [
+            "사과 빨갛고 달콤해요.",
+            "사과 아삭아삭 맛있어!"
+          ]
+        },
+        {
+          "id": 22,
+          "word": "바나나",
+          "emoji": "🍌",
+          "hint": "노란 과일",
+          "syllables": [
+            "바",
+            "나",
+            "나"
+          ],
+          "imgQuery": "banana+yellow",
+          "sentences": [
+            "바나나 노랗고 길어요.",
+            "바나나 달고 부드러워!"
+          ]
+        },
+        {
+          "id": 23,
+          "word": "포도",
+          "emoji": "🍇",
+          "hint": "보라색 과일",
+          "syllables": [
+            "포",
+            "도"
+          ],
+          "imgQuery": "grapes+purple",
+          "sentences": [
+            "포도 보랗고 알록달록.",
+            "포도 송이째 먹어요!"
+          ]
+        },
+        {
+          "id": 24,
+          "word": "딸기",
+          "emoji": "🍓",
+          "hint": "빨간 열매",
+          "syllables": [
+            "딸",
+            "기"
+          ],
+          "imgQuery": "strawberry",
+          "sentences": [
+            "딸기 빨갛고 새콤달콤.",
+            "딸기 씨가 많이 있어."
+          ]
+        },
+        {
+          "id": 25,
+          "word": "수박",
+          "emoji": "🍉",
+          "hint": "크고 달아요",
+          "syllables": [
+            "수",
+            "박"
+          ],
+          "imgQuery": "watermelon",
+          "sentences": [
+            "수박 크고 시원해요.",
+            "수박 초록 줄무늬 있어!"
+          ]
+        },
+        {
+          "id": 26,
+          "word": "오렌지",
+          "emoji": "🍊",
+          "hint": "주황색 과일",
+          "syllables": [
+            "오",
+            "렌",
+            "지"
+          ],
+          "imgQuery": "orange+fruit",
+          "sentences": [
+            "오렌지 주황색 새콤해요.",
+            "오렌지 즙 많이 나와!"
+          ]
+        },
+        {
+          "id": 27,
+          "word": "복숭아",
+          "emoji": "🍑",
+          "hint": "분홍색 과일",
+          "syllables": [
+            "복",
+            "숭",
+            "아"
+          ],
+          "imgQuery": "peach+fruit",
+          "sentences": [
+            "복숭아 분홍색 달콤해.",
+            "복숭아 솜털이 있어요."
+          ]
+        },
+        {
+          "id": 28,
+          "word": "귤",
+          "emoji": "🍊",
+          "hint": "작은 오렌지",
+          "syllables": [
+            "귤"
+          ],
+          "imgQuery": "tangerine+mandarin",
+          "sentences": [
+            "귤 작고 달콤새콤해.",
+            "귤 껍질 쉽게 까요!"
+          ]
+        },
+        {
+          "id": 29,
+          "word": "키위",
+          "emoji": "🥝",
+          "hint": "초록 속살",
+          "syllables": [
+            "키",
+            "위"
+          ],
+          "imgQuery": "kiwi+fruit",
+          "sentences": [
+            "키위 초록색 새콤해요.",
+            "키위 씨가 작고 많아!"
+          ]
+        },
+        {
+          "id": 30,
+          "word": "레몬",
+          "emoji": "🍋",
+          "hint": "새콤해요!",
+          "syllables": [
+            "레",
+            "몬"
+          ],
+          "imgQuery": "lemon+yellow",
+          "sentences": [
+            "레몬 노랗고 아주 셔요.",
+            "레몬 향기 상쾌해요!"
+          ]
+        },
+        {
+          "id": 31,
+          "word": "망고",
+          "emoji": "🥭",
+          "hint": "열대 과일",
+          "syllables": [
+            "망",
+            "고"
+          ],
+          "imgQuery": "mango+tropical",
+          "sentences": [
+            "망고 달고 향기로워요.",
+            "망고 노랗게 익었어!"
+          ]
+        },
+        {
+          "id": 32,
+          "word": "체리",
+          "emoji": "🍒",
+          "hint": "작고 빨간",
+          "syllables": [
+            "체",
+            "리"
+          ],
+          "imgQuery": "cherry+red",
+          "sentences": [
+            "체리 빨갛고 새콤달콤.",
+            "체리 두 개 묶여 있어!"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "veggies",
+      "name": "채소",
+      "icon": "🥕",
+      "level": 2,
+      "color": "#05C46B",
+      "gradient": "linear-gradient(135deg,#05C46B,#0BE881)",
+      "words": [
+        {
+          "id": 41,
+          "word": "당근",
+          "emoji": "🥕",
+          "hint": "주황색 채소",
+          "syllables": [
+            "당",
+            "근"
+          ],
+          "imgQuery": "carrot+vegetable",
+          "sentences": [
+            "당근 주황색 달콤해요.",
+            "당근 아삭아삭 씹혀요!"
+          ]
+        },
+        {
+          "id": 42,
+          "word": "오이",
+          "emoji": "🥒",
+          "hint": "초록색 채소",
+          "syllables": [
+            "오",
+            "이"
+          ],
+          "imgQuery": "cucumber+green",
+          "sentences": [
+            "오이 초록색 시원해요.",
+            "오이 물이 많이 나와!"
+          ]
+        },
+        {
+          "id": 43,
+          "word": "토마토",
+          "emoji": "🍅",
+          "hint": "빨간 채소",
+          "syllables": [
+            "토",
+            "마",
+            "토"
+          ],
+          "imgQuery": "tomato+red",
+          "sentences": [
+            "토마토 빨갛고 새콤해.",
+            "토마토 동글동글 예뻐!"
+          ]
+        },
+        {
+          "id": 44,
+          "word": "양파",
+          "emoji": "🧅",
+          "hint": "눈물 나요",
+          "syllables": [
+            "양",
+            "파"
+          ],
+          "imgQuery": "onion",
+          "sentences": [
+            "양파 하얗고 매워요.",
+            "양파 자르면 눈 따가워!"
+          ]
+        },
+        {
+          "id": 45,
+          "word": "감자",
+          "emoji": "🥔",
+          "hint": "갈색 채소",
+          "syllables": [
+            "감",
+            "자"
+          ],
+          "imgQuery": "potato",
+          "sentences": [
+            "감자 갈색 껍질 있어요.",
+            "감자 삶으면 부드러워!"
+          ]
+        },
+        {
+          "id": 46,
+          "word": "옥수수",
+          "emoji": "🌽",
+          "hint": "노란 채소",
+          "syllables": [
+            "옥",
+            "수",
+            "수"
+          ],
+          "imgQuery": "corn+yellow",
+          "sentences": [
+            "옥수수 노랗고 달아요.",
+            "옥수수 알이 많아요!"
+          ]
+        },
+        {
+          "id": 47,
+          "word": "버섯",
+          "emoji": "🍄",
+          "hint": "우산 모양",
+          "syllables": [
+            "버",
+            "섯"
+          ],
+          "imgQuery": "mushroom",
+          "sentences": [
+            "버섯 갈색 우산 모양.",
+            "버섯 쫄깃하게 먹어요!"
+          ]
+        },
+        {
+          "id": 48,
+          "word": "고추",
+          "emoji": "🌶️",
+          "hint": "매워요!",
+          "syllables": [
+            "고",
+            "추"
+          ],
+          "imgQuery": "red+chili+pepper",
+          "sentences": [
+            "고추 빨갛고 아주 매워.",
+            "고추 먹으면 입 불나!"
+          ]
+        },
+        {
+          "id": 49,
+          "word": "상추",
+          "emoji": "🥬",
+          "hint": "초록 잎채소",
+          "syllables": [
+            "상",
+            "추"
+          ],
+          "imgQuery": "lettuce+green",
+          "sentences": [
+            "상추 초록색 싱싱해요.",
+            "상추 고기 싸서 먹어!"
+          ]
+        },
+        {
+          "id": 50,
+          "word": "브로콜리",
+          "emoji": "🥦",
+          "hint": "나무 모양",
+          "syllables": [
+            "브",
+            "로",
+            "콜",
+            "리"
+          ],
+          "imgQuery": "broccoli+green",
+          "sentences": [
+            "브로콜리 초록 나무 모양.",
+            "브로콜리 건강에 좋아요!"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vehicles",
+      "name": "탈것",
+      "icon": "🚗",
+      "level": 3,
+      "color": "#0984E3",
+      "gradient": "linear-gradient(135deg,#0652DD,#0984E3)",
+      "words": [
+        {
+          "id": 61,
+          "word": "자동차",
+          "emoji": "🚗",
+          "hint": "부릉부릉~",
+          "syllables": [
+            "자",
+            "동",
+            "차"
+          ],
+          "imgQuery": "red+car",
+          "sentences": [
+            "자동차 빠르고 멋있어요.",
+            "자동차 부릉부릉 달려!"
+          ]
+        },
+        {
+          "id": 62,
+          "word": "버스",
+          "emoji": "🚌",
+          "hint": "많이 태워요",
+          "syllables": [
+            "버",
+            "스"
+          ],
+          "imgQuery": "school+bus+yellow",
+          "sentences": [
+            "버스 크고 노란색이야.",
+            "버스 사람 많이 타요!"
+          ]
+        },
+        {
+          "id": 63,
+          "word": "기차",
+          "emoji": "🚂",
+          "hint": "칙칙폭폭!",
+          "syllables": [
+            "기",
+            "차"
+          ],
+          "imgQuery": "train+locomotive",
+          "sentences": [
+            "기차 길고 빠르게 달려.",
+            "기차 칙칙폭폭 소리 나!"
+          ]
+        },
+        {
+          "id": 64,
+          "word": "비행기",
+          "emoji": "✈️",
+          "hint": "하늘을 날아요",
+          "syllables": [
+            "비",
+            "행",
+            "기"
+          ],
+          "imgQuery": "airplane+sky",
+          "sentences": [
+            "비행기 빠르게 높이 날아.",
+            "비행기 하늘에서 커요!"
+          ]
+        },
+        {
+          "id": 65,
+          "word": "자전거",
+          "emoji": "🚲",
+          "hint": "페달 밟아요",
+          "syllables": [
+            "자",
+            "전",
+            "거"
+          ],
+          "imgQuery": "bicycle",
+          "sentences": [
+            "자전거 두 바퀴 달려요.",
+            "자전거 페달 밟아 가자!"
+          ]
+        },
+        {
+          "id": 66,
+          "word": "오토바이",
+          "emoji": "🏍️",
+          "hint": "씽씽~",
+          "syllables": [
+            "오",
+            "토",
+            "바",
+            "이"
+          ],
+          "imgQuery": "motorcycle",
+          "sentences": [
+            "오토바이 빠르고 시끄러워.",
+            "오토바이 씽씽 달려요!"
+          ]
+        },
+        {
+          "id": 67,
+          "word": "소방차",
+          "emoji": "🚒",
+          "hint": "불을 꺼요!",
+          "syllables": [
+            "소",
+            "방",
+            "차"
+          ],
+          "imgQuery": "fire+truck",
+          "sentences": [
+            "소방차 빨갛고 크네요.",
+            "소방차 삐뽀삐뽀 달려!"
+          ]
+        },
+        {
+          "id": 68,
+          "word": "로켓",
+          "emoji": "🚀",
+          "hint": "우주로 가요!",
+          "syllables": [
+            "로",
+            "켓"
+          ],
+          "imgQuery": "rocket+launch",
+          "sentences": [
+            "로켓 빠르고 멀리 가요.",
+            "로켓 우주로 슝 날아!"
+          ]
+        },
+        {
+          "id": 69,
+          "word": "배",
+          "emoji": "⛵",
+          "hint": "바다에 떠요",
+          "syllables": [
+            "배"
+          ],
+          "imgQuery": "sailboat+sea",
+          "sentences": [
+            "배 바다 위 둥둥 떠.",
+            "배 바람 받아 가요!"
+          ]
+        },
+        {
+          "id": 70,
+          "word": "헬리콥터",
+          "emoji": "🚁",
+          "hint": "위로 올라가요",
+          "syllables": [
+            "헬",
+            "리",
+            "콥",
+            "터"
+          ],
+          "imgQuery": "helicopter+flying",
+          "sentences": [
+            "헬리콥터 프로펠러 돌아요.",
+            "헬리콥터 위로 붕 날아!"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "food",
+      "name": "음식",
+      "icon": "🍚",
+      "level": 2,
+      "color": "#8E44AD",
+      "gradient": "linear-gradient(135deg,#8E44AD,#A29BFE)",
+      "words": [
+        {
+          "id": 81,
+          "word": "밥",
+          "emoji": "🍚",
+          "hint": "쌀로 만들어요",
+          "syllables": [
+            "밥"
+          ],
+          "imgQuery": "rice+bowl",
+          "sentences": [
+            "밥 하얗고 따뜻해요.",
+            "밥 맛있게 먹어요!"
+          ]
+        },
+        {
+          "id": 82,
+          "word": "빵",
+          "emoji": "🍞",
+          "hint": "밀로 만들어요",
+          "syllables": [
+            "빵"
+          ],
+          "imgQuery": "bread+loaf",
+          "sentences": [
+            "빵 부드럽고 달콤해요.",
+            "빵 오븐에서 갓 나왔어!"
+          ]
+        },
+        {
+          "id": 83,
+          "word": "케이크",
+          "emoji": "🎂",
+          "hint": "생일에 먹어요",
+          "syllables": [
+            "케",
+            "이",
+            "크"
+          ],
+          "imgQuery": "birthday+cake",
+          "sentences": [
+            "케이크 달고 예뻐요.",
+            "케이크 생일에 먹어요!"
+          ]
+        },
+        {
+          "id": 84,
+          "word": "아이스크림",
+          "emoji": "🍦",
+          "hint": "차가워요~",
+          "syllables": [
+            "아",
+            "이",
+            "스",
+            "크",
+            "림"
+          ],
+          "imgQuery": "ice+cream",
+          "sentences": [
+            "아이스크림 차갑고 달콤.",
+            "아이스크림 여름에 맛있어!"
+          ]
+        },
+        {
+          "id": 85,
+          "word": "피자",
+          "emoji": "🍕",
+          "hint": "동그란 음식",
+          "syllables": [
+            "피",
+            "자"
+          ],
+          "imgQuery": "pizza",
+          "sentences": [
+            "피자 치즈 많고 맛있어.",
+            "피자 조각조각 나눠요!"
+          ]
+        },
+        {
+          "id": 86,
+          "word": "라면",
+          "emoji": "🍜",
+          "hint": "후루룩~",
+          "syllables": [
+            "라",
+            "면"
+          ],
+          "imgQuery": "ramen+noodles",
+          "sentences": [
+            "라면 뜨겁고 매워요.",
+            "라면 후루룩 먹어요!"
+          ]
+        },
+        {
+          "id": 87,
+          "word": "햄버거",
+          "emoji": "🍔",
+          "hint": "빵 사이 패티",
+          "syllables": [
+            "햄",
+            "버",
+            "거"
+          ],
+          "imgQuery": "hamburger",
+          "sentences": [
+            "햄버거 크고 맛있어요.",
+            "햄버거 크게 한입 먹어!"
+          ]
+        },
+        {
+          "id": 88,
+          "word": "우유",
+          "emoji": "🥛",
+          "hint": "흰색 음료",
+          "syllables": [
+            "우",
+            "유"
+          ],
+          "imgQuery": "milk+glass",
+          "sentences": [
+            "우유 하얗고 고소해요.",
+            "우유 마시면 키 커요!"
+          ]
+        },
+        {
+          "id": 89,
+          "word": "떡볶이",
+          "emoji": "🍢",
+          "hint": "매콤달콤!",
+          "syllables": [
+            "떡",
+            "볶",
+            "이"
+          ],
+          "imgQuery": "tteokbokki+korean",
+          "sentences": [
+            "떡볶이 빨갛고 매워요.",
+            "떡볶이 쫄깃하게 먹어!"
+          ]
+        },
+        {
+          "id": 90,
+          "word": "김밥",
+          "emoji": "🍙",
+          "hint": "김으로 싸요",
+          "syllables": [
+            "김",
+            "밥"
+          ],
+          "imgQuery": "gimbap+korean+rice",
+          "sentences": [
+            "김밥 까맣고 맛있어요.",
+            "김밥 동글동글 잘라요!"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "body",
+      "name": "신체",
+      "icon": "👶",
+      "level": 3,
+      "color": "#E84393",
+      "gradient": "linear-gradient(135deg,#E84393,#F368E0)",
+      "words": [
+        {
+          "id": 101,
+          "word": "눈",
+          "emoji": "👁️",
+          "hint": "볼 때 써요",
+          "syllables": [
+            "눈"
+          ],
+          "imgQuery": "human+eye",
+          "sentences": [
+            "눈 크고 반짝여요.",
+            "눈으로 예쁜 것 봐요!"
+          ]
+        },
+        {
+          "id": 102,
+          "word": "코",
+          "emoji": "👃",
+          "hint": "냄새 맡아요",
+          "syllables": [
+            "코"
+          ],
+          "imgQuery": "human+nose",
+          "sentences": [
+            "코 작고 높이 있어요.",
+            "코로 향기 맡아요!"
+          ]
+        },
+        {
+          "id": 103,
+          "word": "입",
+          "emoji": "👄",
+          "hint": "먹고 말해요",
+          "syllables": [
+            "입"
+          ],
+          "imgQuery": "mouth+lips",
+          "sentences": [
+            "입 붉고 말을 해요.",
+            "입으로 맛있게 먹어!"
+          ]
+        },
+        {
+          "id": 104,
+          "word": "귀",
+          "emoji": "👂",
+          "hint": "들을 때 써요",
+          "syllables": [
+            "귀"
+          ],
+          "imgQuery": "human+ear",
+          "sentences": [
+            "귀 쫑긋 소리 들어요.",
+            "귀로 음악 들어요!"
+          ]
+        },
+        {
+          "id": 105,
+          "word": "손",
+          "emoji": "✋",
+          "hint": "잡을 때 써요",
+          "syllables": [
+            "손"
+          ],
+          "imgQuery": "open+hand",
+          "sentences": [
+            "손 따뜻하게 잡아요.",
+            "손으로 그림 그려요!"
+          ]
+        },
+        {
+          "id": 106,
+          "word": "발",
+          "emoji": "🦶",
+          "hint": "걸을 때 써요",
+          "syllables": [
+            "발"
+          ],
+          "imgQuery": "barefoot",
+          "sentences": [
+            "발 두 개로 걸어요.",
+            "발 동동 구르며 달려!"
+          ]
+        },
+        {
+          "id": 107,
+          "word": "머리",
+          "emoji": "🧠",
+          "hint": "생각해요!",
+          "syllables": [
+            "머",
+            "리"
+          ],
+          "imgQuery": "head+hair+child",
+          "sentences": [
+            "머리 크고 생각해요.",
+            "머리로 좋은 생각 해요!"
+          ]
+        },
+        {
+          "id": 108,
+          "word": "배",
+          "emoji": "🫃",
+          "hint": "배꼽 있어요",
+          "syllables": [
+            "배"
+          ],
+          "imgQuery": "belly+tummy",
+          "sentences": [
+            "배 따뜻하고 둥글어요.",
+            "배 고프면 꼬르륵 나!"
+          ]
+        },
+        {
+          "id": 109,
+          "word": "어깨",
+          "emoji": "💪",
+          "hint": "팔이 달려요",
+          "syllables": [
+            "어",
+            "깨"
+          ],
+          "imgQuery": "shoulder+strong",
+          "sentences": [
+            "어깨 넓고 힘세요.",
+            "어깨 으쓱으쓱 해요!"
+          ]
+        },
+        {
+          "id": 110,
+          "word": "무릎",
+          "emoji": "🦵",
+          "hint": "구부릴 수 있어요",
+          "syllables": [
+            "무",
+            "릎"
+          ],
+          "imgQuery": "knee+leg",
+          "sentences": [
+            "무릎 구부려 앉아요.",
+            "무릎 탁 치면 아파!"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nature",
+      "name": "자연",
+      "icon": "🌿",
+      "level": 4,
+      "color": "#00B894",
+      "gradient": "linear-gradient(135deg,#00B894,#00CEC9)",
+      "words": [
+        {
+          "id": 121,
+          "word": "꽃",
+          "emoji": "🌸",
+          "hint": "예쁘게 피어요!",
+          "syllables": [
+            "꽃"
+          ],
+          "imgQuery": "pink+flower+bloom",
+          "sentences": [
+            "꽃 알록달록 예뻐요.",
+            "꽃 향기 맡아 보자!"
+          ]
+        },
+        {
+          "id": 122,
+          "word": "나무",
+          "emoji": "🌳",
+          "hint": "초록 잎 많아요",
+          "syllables": [
+            "나",
+            "무"
+          ],
+          "imgQuery": "green+tree+forest",
+          "sentences": [
+            "나무 크고 초록해요.",
+            "나무 그늘 시원해요!"
+          ]
+        },
+        {
+          "id": 123,
+          "word": "산",
+          "emoji": "⛰️",
+          "hint": "높이 솟아요",
+          "syllables": [
+            "산"
+          ],
+          "imgQuery": "mountain+green",
+          "sentences": [
+            "산 높고 웅장해요.",
+            "산 올라가면 멀리 봐!"
+          ]
+        },
+        {
+          "id": 124,
+          "word": "강",
+          "emoji": "🏞️",
+          "hint": "물이 흘러요",
+          "syllables": [
+            "강"
+          ],
+          "imgQuery": "river+nature",
+          "sentences": [
+            "강 맑고 시원해요.",
+            "강 물고기 많이 살아!"
+          ]
+        },
+        {
+          "id": 125,
+          "word": "바다",
+          "emoji": "🌊",
+          "hint": "넓고 파래요",
+          "syllables": [
+            "바",
+            "다"
+          ],
+          "imgQuery": "ocean+sea+blue",
+          "sentences": [
+            "바다 넓고 깊어요.",
+            "바다 파랗고 시원해!"
+          ]
+        },
+        {
+          "id": 126,
+          "word": "하늘",
+          "emoji": "🌤️",
+          "hint": "파란 하늘",
+          "syllables": [
+            "하",
+            "늘"
+          ],
+          "imgQuery": "blue+sky+clouds",
+          "sentences": [
+            "하늘 파랗고 넓어요.",
+            "하늘 높이 구름 있어!"
+          ]
+        },
+        {
+          "id": 127,
+          "word": "구름",
+          "emoji": "☁️",
+          "hint": "뭉게뭉게~",
+          "syllables": [
+            "구",
+            "름"
+          ],
+          "imgQuery": "white+fluffy+clouds",
+          "sentences": [
+            "구름 하얗고 폭신해요.",
+            "구름 뭉게뭉게 떠요!"
+          ]
+        },
+        {
+          "id": 128,
+          "word": "별",
+          "emoji": "⭐",
+          "hint": "반짝반짝!",
+          "syllables": [
+            "별"
+          ],
+          "imgQuery": "stars+night+sky",
+          "sentences": [
+            "별 반짝반짝 빛나요.",
+            "별 밤하늘 가득해요!"
+          ]
+        },
+        {
+          "id": 129,
+          "word": "달",
+          "emoji": "🌙",
+          "hint": "밤에 빛나요",
+          "syllables": [
+            "달"
+          ],
+          "imgQuery": "moon+night+glow",
+          "sentences": [
+            "달 둥글고 밝아요.",
+            "달 밤하늘 환히 비춰!"
+          ]
+        },
+        {
+          "id": 130,
+          "word": "비",
+          "emoji": "🌧️",
+          "hint": "쏴아 내려요",
+          "syllables": [
+            "비"
+          ],
+          "imgQuery": "rain+drops+window",
+          "sentences": [
+            "비 시원하게 내려요.",
+            "비 우산 쓰고 걸어!"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "school",
+      "name": "학교",
+      "icon": "📚",
+      "level": 3,
+      "color": "#F0932B",
+      "gradient": "linear-gradient(135deg,#F0932B,#F9CA24)",
+      "words": [
+        {
+          "id": 141,
+          "word": "책",
+          "emoji": "📚",
+          "hint": "읽어요!",
+          "syllables": [
+            "책"
+          ],
+          "imgQuery": "book+colorful+reading",
+          "sentences": [
+            "책 재미있고 신기해요.",
+            "책 열심히 읽어요!"
+          ]
+        },
+        {
+          "id": 142,
+          "word": "연필",
+          "emoji": "✏️",
+          "hint": "글씨 써요",
+          "syllables": [
+            "연",
+            "필"
+          ],
+          "imgQuery": "pencil+yellow+drawing",
+          "sentences": [
+            "연필 노랗고 얇아요.",
+            "연필로 글씨 써요!"
+          ]
+        },
+        {
+          "id": 143,
+          "word": "가방",
+          "emoji": "🎒",
+          "hint": "메고 가요",
+          "syllables": [
+            "가",
+            "방"
+          ],
+          "imgQuery": "school+backpack+kids",
+          "sentences": [
+            "가방 크고 무거워요.",
+            "가방 메고 학교 가!"
+          ]
+        },
+        {
+          "id": 144,
+          "word": "지우개",
+          "emoji": "🔲",
+          "hint": "지워요!",
+          "syllables": [
+            "지",
+            "우",
+            "개"
+          ],
+          "imgQuery": "eraser+pink+pencil",
+          "sentences": [
+            "지우개 분홍색 작아요.",
+            "지우개 꼭꼭 눌러 지워!"
+          ]
+        },
+        {
+          "id": 145,
+          "word": "공책",
+          "emoji": "📓",
+          "hint": "필기해요",
+          "syllables": [
+            "공",
+            "책"
+          ],
+          "imgQuery": "notebook+spiral+school",
+          "sentences": [
+            "공책 새거 반질반질.",
+            "공책에 예쁘게 써요!"
+          ]
+        },
+        {
+          "id": 146,
+          "word": "가위",
+          "emoji": "✂️",
+          "hint": "싹둑싹둑!",
+          "syllables": [
+            "가",
+            "위"
+          ],
+          "imgQuery": "scissors+red+craft",
+          "sentences": [
+            "가위 날카롭고 잘 잘려.",
+            "가위 싹둑싹둑 잘라!"
+          ]
+        },
+        {
+          "id": 147,
+          "word": "풀",
+          "emoji": "🧴",
+          "hint": "붙여요!",
+          "syllables": [
+            "풀"
+          ],
+          "imgQuery": "glue+stick+craft",
+          "sentences": [
+            "풀 끈적끈적 잘 붙어.",
+            "풀 발라서 붙여요!"
+          ]
+        },
+        {
+          "id": 148,
+          "word": "색연필",
+          "emoji": "🖍️",
+          "hint": "색칠해요!",
+          "syllables": [
+            "색",
+            "연",
+            "필"
+          ],
+          "imgQuery": "colored+pencils+bright",
+          "sentences": [
+            "색연필 알록달록 예뻐요.",
+            "색연필 색칠하자!"
+          ]
+        },
+        {
+          "id": 149,
+          "word": "칠판",
+          "emoji": "🖊️",
+          "hint": "선생님이 써요",
+          "syllables": [
+            "칠",
+            "판"
+          ],
+          "imgQuery": "blackboard+chalk+school",
+          "sentences": [
+            "칠판 까맣고 매끄러워.",
+            "칠판 분필로 써요!"
+          ]
+        },
+        {
+          "id": 150,
+          "word": "선생님",
+          "emoji": "👩‍🏫",
+          "hint": "가르쳐 줘요",
+          "syllables": [
+            "선",
+            "생",
+            "님"
+          ],
+          "imgQuery": "teacher+classroom+smile",
+          "sentences": [
+            "선생님 친절하고 멋져요.",
+            "선생님 고맙습니다!"
+          ]
+        }
+      ]
+    }
+  ]
+}
