@@ -25,6 +25,7 @@
       padding: 12px;
     }
 
+
     /* =========================================
        HEADER
     ========================================= */
@@ -65,7 +66,6 @@
     .mode-btn.active { color: white; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
     /* .mode-btn.active::before removed — single select mode */
     .mode-btn[data-mode="learn"].active  { background: linear-gradient(135deg,#4CAF50,#8BC34A); }
-    .mode-btn[data-mode="listen"].active { background: linear-gradient(135deg,#2196F3,#03A9F4); }
     .mode-btn[data-mode="quiz"].active   { background: linear-gradient(135deg,#FF9800,#FF5722); }
 
     /* =========================================
@@ -502,7 +502,7 @@
       font-size: 0.6em; font-weight: 900; color: #888;
       transition: all var(--transition);
     }
-    .choice-word { flex: 1; text-align: center; }
+    .choice-word { flex: 1; text-align: center; font-size: 0.88em; }
     .choice-speaker-btn {
       flex-shrink: 0; width: 40px; height: 40px;
       background: rgba(102,126,234,0.12); border-radius: 50%;
@@ -905,6 +905,40 @@
     .sp-3 { background: linear-gradient(135deg,#43e97b,#38f9d7) !important; color: #1a5c3a !important; }
     .sp-4 { background: linear-gradient(135deg,#fa709a,#fee140) !important; color: #5c3010 !important; }
 
+    /* ── 자모 분해 행 (듣기 다이얼로그) ── */
+    .jamo-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 5px; flex-wrap: wrap; margin-bottom: 4px;
+    }
+    .jamo-syl-sep {
+      width: 5px; height: 5px; background: #d0d0d0; border-radius: 50%;
+      display: inline-block; margin: 0 4px;
+    }
+    .jamo-plus {
+      font-size: 1.1em; color: #ccc; font-weight: 900; line-height: 1;
+    }
+    .jamo-btn {
+      border: none; border-radius: 12px;
+      padding: 7px 14px; font-size: 1.4em; font-weight: 900;
+      cursor: pointer; font-family: var(--font);
+      transition: all 0.18s; line-height: 1.1;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      position: relative; z-index: 1;  /* wv-dialog 내부에서 보임 보장 */
+    }
+    .jamo-btn.jamo-cho  { background: #EDE7F6; color: #4527A0; }
+    .jamo-btn.jamo-jung { background: #E8F5E9; color: #1B5E20; }
+    .jamo-btn.jamo-jong { background: #FFF3E0; color: #E65100; }
+    .jamo-btn:hover {
+      transform: scale(1.2) translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+      filter: brightness(1.05);
+    }
+    .jamo-btn:active { transform: scale(0.95); }
+    .jamo-btn .jamo-name-badge {
+      display: block; font-size: 0.42em; font-weight: 700;
+      opacity: 0.75; letter-spacing: 0; margin-top: 2px;
+    }
+
     /* 듣기모드 음절 필 */
     .listen-syllable-pill {
       border-radius: 12px !important; padding: 7px 18px !important;
@@ -922,8 +956,8 @@
        PHONICS MODAL (음운 확장)
     ========================================= */
     .phonics-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-      z-index: 1000; opacity: 0; pointer-events: none;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+      z-index: 1400; opacity: 0; pointer-events: none;  /* wv-overlay(1200) 위 */
       transition: opacity 0.3s;
       display: flex; align-items: flex-end; justify-content: center;
     }
@@ -1106,7 +1140,7 @@
     .quiz-dialog-box {
       background: white; border-radius: 28px;
       box-shadow: 0 28px 70px rgba(0,0,0,0.32);
-      width: 100%; max-width: 540px;
+      width: 100%; max-width: 480px;
       max-height: 92vh; overflow-y: auto;
       transform: scale(0.82) translateY(30px);
       transition: transform 0.32s cubic-bezier(0.34,1.4,0.64,1);
@@ -1130,6 +1164,70 @@
       transition: background 0.2s;
     }
     .qdlg-close-btn:hover { background: rgba(255,255,255,0.45); }
+
+    /* ============================================================
+       단어 카드 → 듣기모드 다이얼로그 오버레이
+    ============================================================ */
+    .wv-overlay {
+      position: fixed; inset: 0; z-index: 1200;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .wv-overlay.open { opacity: 1; pointer-events: all; }
+
+    .wv-dialog {
+      background: white; border-radius: 22px; overflow: hidden;
+      width: min(480px, 96vw); max-height: 94vh; overflow-y: auto;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .wv-overlay.open .wv-dialog { transform: scale(1) translateY(0); }
+
+    /* 닫기 바 */
+    .wv-dialog-close-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px 6px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .wv-dialog-cat-info {
+      font-size: 0.88em; font-weight: 700; color: #555;
+    }
+    .wv-close-btn {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: #f0f0f0; border: none; cursor: pointer;
+      font-size: 1em; color: #555; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .wv-close-btn:hover { background: #e0e0e0; }
+
+    /* ============================================================
+       섹션별 재생 컨트롤 바
+    ============================================================ */
+    .cat-play-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px 10px; flex-wrap: wrap;
+      background: rgba(255,255,255,0.55);
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .cat-play-btn {
+      padding: 6px 16px; border: none; border-radius: 20px;
+      cursor: pointer; font-family: var(--font); font-size: 0.82em; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 5px;
+      transition: all 0.18s; box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      letter-spacing: -0.2px;
+    }
+    .cat-play-btn.cpb-play {
+      background: linear-gradient(135deg,#43a047,#66bb6a); color:white;
+    }
+    .cat-play-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.18); }
+    .cat-play-btn:active { transform: translateY(0); }
+    .cat-play-count {
+      font-size: 0.78em; color: #aaa; margin-left: auto;
+      font-weight: 600; white-space: nowrap;
+    }
 
     /* 다이얼로그 본문 */
     .qdlg-body {
@@ -1248,6 +1346,83 @@
       border-radius: 2px; transition: width 0.5s ease;
     }
 
+    /* =========================================
+       퀴즈 모드 탭 (객관식 / 주관식)
+    ========================================= */
+    .quiz-type-tabs {
+      display: flex; gap: 6px; justify-content: center;
+      margin-bottom: 16px; background: #f5f5f5;
+      border-radius: 20px; padding: 4px;
+    }
+    .quiz-type-btn {
+      flex: 1; padding: 9px 14px; border: none; border-radius: 16px;
+      cursor: pointer; font-family: var(--font); font-size: 0.95em; font-weight: 700;
+      background: transparent; color: #888; transition: all 0.22s;
+    }
+    .quiz-type-btn.active {
+      background: white; color: #333;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+    .quiz-type-btn[data-type="multiple"].active { color: #FF6F00; }
+    .quiz-type-btn[data-type="typing"].active   { color: #1565C0; }
+
+    /* ── 주관식 입력 영역 ── */
+    .typing-quiz-area {
+      margin-bottom: 16px;
+    }
+    .typing-hint-row {
+      display: flex; gap: 6px; justify-content: center;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .typing-blank {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: #f0f2f5; border: 2.5px solid #ddd;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.35em; font-weight: 900; color: #2c3e50;
+      transition: all 0.25s;
+    }
+    .typing-blank.filled  { background: #E3F2FD; border-color: #2196F3; color: #1565C0; }
+    .typing-blank.correct { background: #E8F5E9; border-color: #4CAF50; color: #2E7D32; animation: correctPop 0.4s ease; }
+    .typing-blank.wrong   { background: #FFEBEE; border-color: #ef5350; color: #c62828; animation: wrongShake 0.4s ease; }
+
+    .typing-input-wrap {
+      display: flex; gap: 8px; align-items: center;
+    }
+    .typing-input {
+      flex: 1; padding: 14px 18px; border: 3px solid #ddd; border-radius: 18px;
+      font-family: var(--font); font-size: 1.5em; font-weight: 700;
+      text-align: center; outline: none; transition: all 0.22s;
+      color: #2c3e50; background: white;
+      letter-spacing: 4px;
+    }
+    .typing-input:focus { border-color: #2196F3; box-shadow: 0 0 0 4px rgba(33,150,243,0.15); }
+    .typing-input.correct-input { border-color: #4CAF50; background: #E8F5E9; }
+    .typing-input.wrong-input   { border-color: #ef5350; background: #FFEBEE; }
+
+    .typing-submit-btn {
+      padding: 14px 20px; border: none; border-radius: 18px;
+      background: linear-gradient(135deg,#2196F3,#03A9F4); color: white;
+      font-family: var(--font); font-size: 1.1em; font-weight: 700;
+      cursor: pointer; transition: all 0.22s; white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(33,150,243,0.35);
+    }
+    .typing-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(33,150,243,0.45); }
+    .typing-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .typing-hint-btn {
+      width: 100%; padding: 9px; border: 2px dashed #ddd; border-radius: 14px;
+      background: white; color: #888; font-family: var(--font); font-size: 0.88em;
+      cursor: pointer; margin-top: 10px; transition: all 0.2s;
+    }
+    .typing-hint-btn:hover { border-color: #aaa; color: #555; background: #f9f9f9; }
+
+    .typing-char-count {
+      font-size: 0.82em; color: #aaa; text-align: center; margin-top: 6px;
+    }
+
+    /* =========================================
+       마스터 전체 펼치기/접기 버튼
+    ========================================= */
     /* 마스터 전체 펼치기/접기 버튼 */
     .master-toggle-btn {
       display: flex; align-items: center; gap: 7px;
@@ -1296,7 +1471,7 @@
 
   <!-- ===== HEADER ===== -->
   <header class="app-header">
-    <h1>🌈 유아 한글 단어 학습</h1>
+    <h1 id="app-title">🌈 유아 한글 단어 학습</h1>
     <p class="subtitle">귀엽고 재미있는 한글 단어 배우기 ✨</p>
     <div class="word-count-badges">
       <span class="badge badge-green">📚 총 84단어</span>
@@ -1305,7 +1480,6 @@
     </div>
     <div class="mode-tabs">
       <button class="mode-btn active" data-mode="learn"  onclick="switchMode('learn')">📚 학습모드</button>
-      <button class="mode-btn"        data-mode="listen" onclick="switchMode('listen')">🎵 듣기모드</button>
       <button class="mode-btn"        data-mode="quiz"   onclick="openQuizDialog()">🎯 퀴즈모드</button>
     </div>
   </header>
@@ -1353,10 +1527,7 @@
         </div>
         <div class="learn-btns-row">
           <button class="master-toggle-btn" id="master-accordion-btn" onclick="toggleAllAccordion()" title="전체 펼치기/접기">📂 전체 펼치기</button>
-          <button class="btn btn-green"   id="play-all-btn"   onclick="startPlayAll()" title="전체 듣기 (Enter)">▶️ 전체 듣기</button>
-          <button class="btn btn-orange"  id="pause-all-btn"  onclick="pausePlayAll()"  style="display:none" title="일시정지 (Space)">⏸️ 일시정지</button>
-          <button class="btn btn-green"   id="resume-all-btn" onclick="resumePlayAll()" style="display:none" title="계속 듣기 (Space)">▶️ 계속 듣기</button>
-          <button class="btn btn-red"     id="stop-all-btn"   onclick="stopPlayAll()"   style="display:none" title="처음부터 (Enter)">⏹️ 멈추기</button>
+          <button class="btn btn-green"   id="play-all-btn"   onclick="startPlayAll()" title="전체 듣기 (Space / Enter)">▶️ 전체 듣기</button>
           <button class="btn btn-gray btn-sm" onclick="resetListened()" title="듣기 기록 초기화">🔄 초기화</button>
           <button class="settings-open-btn" onclick="openSettings()" title="음성 설정">⚙️ 음성 설정</button>
           <span style="font-size:0.82em;color:#aaa;align-self:center">💡 음절 클릭 → 음운 확장</span>
@@ -1366,74 +1537,6 @@
     </section>
 
     <!-- ── LISTEN MODE ── -->
-    <section class="mode-section" id="listen-mode">
-      <div class="section-divider">
-        <div class="divider-icon" style="background:linear-gradient(135deg,#2196F3,#03A9F4)">🎵</div>
-        <span class="divider-title">듣기모드</span>
-        <div class="divider-line"></div>
-      </div>
-      <div class="listen-panel">
-
-        <!-- [ ← ] CENTER CONTENT [ → ] -->
-        <div class="listen-nav-layout">
-
-          <!-- Left arrow -->
-          <button class="listen-side-btn" title="이전" onclick="listenPrev()">◀</button>
-
-          <!-- Center -->
-          <div class="listen-center">
-
-            <!-- Image (클릭 → 음성) -->
-            <div class="listen-img-wrap" id="listen-img-wrap" onclick="listenRepeat()" title="클릭하면 음성이 나와요!">
-              <div class="listen-emoji-wrap" id="listen-emoji"></div>
-              <img class="listen-photo" id="listen-photo" alt="">
-              <div class="listen-img-overlay">🔊</div>
-            </div>
-
-            <!-- Audio wave -->
-            <div class="audio-wave hidden" id="audio-wave">
-              <div class="wave-bar"></div><div class="wave-bar"></div>
-              <div class="wave-bar"></div><div class="wave-bar"></div>
-              <div class="wave-bar"></div><div class="wave-bar"></div>
-              <div class="wave-bar"></div>
-            </div>
-
-            <div class="listen-word"      id="listen-word">-</div>
-            <div class="listen-syllables" id="listen-syllables"></div>
-            <div class="listen-hint"      id="listen-hint"></div>
-
-            <!-- Sentences -->
-            <div class="listen-sentences" id="listen-sentences"></div>
-
-          </div><!-- /listen-center -->
-
-          <!-- Right arrow -->
-          <button class="listen-side-btn" title="다음" onclick="listenNext()">▶</button>
-
-        </div><!-- /listen-nav-layout -->
-
-        <!-- Speed -->
-        <div class="speed-row">
-          <button class="speed-btn"       data-speed="3500" onclick="setSpeed(3500)">🐌 느리게</button>
-          <button class="speed-btn active" data-speed="2200" onclick="setSpeed(2200)">🐸 보통</button>
-          <button class="speed-btn"       data-speed="1300" onclick="setSpeed(1300)">🐇 빠르게</button>
-        </div>
-
-        <!-- Controls (autoplay + repeat only) -->
-        <div class="listen-controls">
-          <button class="btn btn-green"  id="autoplay-btn" onclick="toggleAutoPlay()">▶️ 자동재생</button>
-          <button class="btn btn-orange" onclick="listenRepeat()">🔊 다시 듣기</button>
-        </div>
-
-        <!-- Progress -->
-        <div class="listen-progress-text" id="listen-progress-text">1 / 10</div>
-        <div class="progress-bar-wrap">
-          <div class="progress-bar-fill" id="listen-progress-bar" style="width:10%"></div>
-        </div>
-
-      </div>
-    </section>
-
     <!-- ── QUIZ MODE ── -->
     <section class="mode-section" id="quiz-mode">
       <div class="section-divider">
@@ -1469,10 +1572,66 @@
     </div>
     <!-- 본문: 퀴즈 바로 시작 -->
     <div class="qdlg-body" id="qdlg-body">
+      <!-- 퀴즈 타입 탭 -->
+      <div class="quiz-type-tabs" id="quiz-type-tabs">
+        <button class="quiz-type-btn active" data-type="multiple"
+                onclick="setQuizType('multiple')">📋 객관식</button>
+        <button class="quiz-type-btn" data-type="typing"
+                onclick="setQuizType('typing')">⌨️ 주관식 (타자)</button>
+      </div>
       <div class="qdlg-quiz-panel" id="qdlg-quiz-panel">
         <div class="quiz-panel">
           <div id="qdlg-quiz-content"></div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 단어 카드 → 듣기모드 다이얼로그 오버레이 ===== -->
+<!-- listen-mode 섹션을 그대로 다이얼로그로 감싸서 사용 -->
+<div class="wv-overlay" id="wv-overlay" onclick="wvOverlayClick(event)">
+  <div class="wv-dialog" id="wv-dialog">
+    <!-- 닫기 버튼 (오버레이 모드에서만 표시) -->
+    <div class="wv-dialog-close-bar">
+      <div class="wv-dialog-cat-info" id="wv-dialog-cat-info"></div>
+      <button class="wv-close-btn" onclick="closeWvDialog()" title="닫기">✕</button>
+    </div>
+    <!-- ↓ 기존 listen-mode 섹션을 그대로 이식 -->
+    <div class="listen-panel">
+      <div class="listen-nav-layout">
+        <button class="listen-side-btn" title="이전" onclick="listenPrev()">◀</button>
+        <div class="listen-center">
+          <div class="listen-img-wrap" id="listen-img-wrap" onclick="listenRepeat()" title="클릭하면 음성이 나와요!">
+            <div class="listen-emoji-wrap" id="listen-emoji"></div>
+            <img class="listen-photo" id="listen-photo" alt="">
+            <div class="listen-img-overlay">🔊</div>
+          </div>
+          <div class="audio-wave hidden" id="audio-wave">
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+          <div class="listen-word"      id="listen-word">-</div>
+          <div class="listen-syllables" id="listen-syllables"></div>
+          <div class="listen-hint"      id="listen-hint"></div>
+          <div class="listen-sentences" id="listen-sentences"></div>
+        </div>
+        <button class="listen-side-btn" title="다음" onclick="listenNext()">▶</button>
+      </div>
+      <div class="speed-row">
+        <button class="speed-btn"        data-speed="3000" onclick="setSpeed(3000)">🐌 느리게</button>
+        <button class="speed-btn active" data-speed="1200" onclick="setSpeed(1200)">🐸 보통</button>
+        <button class="speed-btn"        data-speed="500"  onclick="setSpeed(500)">🐇 빠르게</button>
+      </div>
+      <div class="listen-controls">
+        <button class="btn btn-green"  id="autoplay-btn" onclick="toggleAutoPlay()">▶️ 자동재생</button>
+        <button class="btn btn-orange" onclick="listenRepeat()">🔊 다시 듣기</button>
+      </div>
+      <div class="listen-progress-text" id="listen-progress-text">1 / 10</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="listen-progress-bar" style="width:10%"></div>
       </div>
     </div>
   </div>
@@ -1494,16 +1653,16 @@ let state = {
   mode: 'learn',
   catId: 'animals',
   selectedCats: [],  // 다중 선택된 카테고리 ID 배열
-  listen: { idx:0, playing:false, speed:2200, timer:null },
-  quiz: { words:[], idx:0, score:0, answered:false, started:false, streak:0, maxStreak:0, countdownTimer:null }
+  listen: { idx:0, playing:false, speed:1200, timer:null }, // speed = voiceSettings.wordGap 와 동기화
+  quiz: { words:[], idx:0, score:0, answered:false, started:false, streak:0, maxStreak:0, countdownTimer:null,
+          quizType: 'multiple', // 'multiple' | 'typing'
+          hintUsed: false }
 };
 
 let koreanVoice = null;
 let audioCtx = null;
 let listenedMap = {};
-let playAllActive = false;
-let playAllPaused = false;
-let playAllIdx    = 0;    // 현재 재생 중인 단어 인덱스 (일시정지 복귀용)
+/* playAllActive/Paused/Idx 제거됨 — 모든 재생은 wv-overlay 다이얼로그가 담당 */
 
 /* ── 아코디언 상태 ── */
 let accordionState = {};  // catId → true(열림) / false(닫힘)
@@ -1524,6 +1683,63 @@ function decompose(char) {
   const jung = Math.floor((code % (21 * 28)) / 28);
   const jong = code % 28;
   return { cho: CHO[cho], jung: JUNG[jung], jong: JONG[jong] };
+}
+
+/* ============================================================
+   자모(자음/모음) 발음 & 듣기 다이얼로그 표시
+============================================================ */
+/* 자모 하나 발음:
+   - 자음(초성·종성) → 이름으로 읽기 (ㅁ→미음, ㄹ→리을)
+   - 모음(중성)      → 소리로 읽기  (ㅏ→아, ㅣ→이) */
+function speakJamo(jamo, type) {
+  if (!jamo) return;
+  const name = (type === 'jung')
+    ? (JUNG_NAME[jamo] || jamo)
+    : (CHO_NAME[jamo]  || jamo);
+  speak(name);
+}
+
+/* 음절 배열 → 자모 분해 행 HTML 생성
+   "말"     →  [ㅁ초] + [ㅏ중] + [ㄹ종]
+   "토끼"   →  [ㅌ초]+[ㅗ중] · [ㄲ초]+[ㅣ중]  */
+function buildJamoRowHTML(syllables) {
+  if (!syllables || !syllables.length) return '';
+
+  const groups = syllables.map(syl => {
+    const d = decompose(syl);
+    if (!d) {
+      // 한글 음절이 아닌 경우 (영문자 등) — 그냥 1개 버튼
+      return `<button class="jamo-btn jamo-cho"
+                style="background:#f0f0f0;color:#555"
+                onclick="event.stopPropagation();speak('${escStr(syl)}')"
+                title="클릭하면 발음해요">
+                ${syl}
+              </button>`;
+    }
+    const parts = [];
+    const addBtn = (char, type, name) => {
+      if (parts.length > 0) parts.push('<span class="jamo-plus">+</span>');
+      parts.push(`<button class="jamo-btn jamo-${type}"
+                          onclick="event.stopPropagation();speakJamo('${char}','${type}')"
+                          title="${name} (${type==='cho'?'초성':type==='jung'?'중성':'종성'}) — 클릭하면 발음">
+                   ${char}
+                   <span class="jamo-name-badge">${name}</span>
+                 </button>`);
+    };
+    addBtn(d.cho,  'cho',  CHO_NAME[d.cho]  || d.cho);
+    addBtn(d.jung, 'jung', JUNG_NAME[d.jung] || d.jung);
+    if (d.jong) addBtn(d.jong, 'jong', CHO_NAME[d.jong] || d.jong);
+    return parts.join('');
+  });
+
+  // 음절 그룹 사이에 구분점 삽입
+  const html = groups.reduce((acc, g, i) => {
+    if (i > 0) acc += '<span class="jamo-syl-sep"></span>';
+    acc += g;
+    return acc;
+  }, '');
+
+  return `<div class="jamo-row">${html}</div>`;
 }
 
 function getRelatedWords(syllable, excludeId) {
@@ -1621,57 +1837,12 @@ function showChipPlaying(el) {
 }
 
 /* ============================================================
-   전체 듣기 (Play All) — 실제 구현은 하단 VOICE SETTINGS 블록
+   전체 듣기 — wv-overlay 다이얼로그 통합
+   startPlayAll / catPlayStart 모두 다이얼로그를 엽니다
 ============================================================ */
-/* startPlayAll 은 VOICE SETTINGS 섹션에서 정의 (wordGap, readSentences 연동) */
-
 function stopPlayAll() {
-  playAllActive = false;
-  playAllPaused = false;
-  playAllIdx    = 0;
+  stopAutoPlay();
   speechSynthesis.cancel && speechSynthesis.cancel();
-  document.querySelectorAll('.word-card.focused').forEach(el => el.classList.remove('focused'));
-  _updatePlayAllBtns('idle');
-}
-
-function pausePlayAll() {
-  if (!playAllActive || playAllPaused) return;
-  playAllPaused = true;
-  speechSynthesis.cancel && speechSynthesis.cancel();
-  document.querySelectorAll('.word-card.focused').forEach(el => el.classList.remove('focused'));
-  _updatePlayAllBtns('paused');
-}
-
-function resumePlayAll() {
-  if (!playAllPaused) { startPlayAll(); return; }
-  playAllPaused = false;
-  _updatePlayAllBtns('playing');
-  _runPlayAll();   // 중단된 인덱스부터 재개
-}
-
-/* 버튼 표시 상태 제어 */
-function _updatePlayAllBtns(state) {
-  const play   = document.getElementById('play-all-btn');
-  const pause  = document.getElementById('pause-all-btn');
-  const resume = document.getElementById('resume-all-btn');
-  const stop   = document.getElementById('stop-all-btn');
-  const none = 'none', flex = 'flex';
-  if (state === 'idle') {
-    if (play)   play.style.display   = flex;
-    if (pause)  pause.style.display  = none;
-    if (resume) resume.style.display = none;
-    if (stop)   stop.style.display   = none;
-  } else if (state === 'playing') {
-    if (play)   play.style.display   = none;
-    if (pause)  pause.style.display  = flex;
-    if (resume) resume.style.display = none;
-    if (stop)   stop.style.display   = flex;
-  } else if (state === 'paused') {
-    if (play)   play.style.display   = none;
-    if (pause)  pause.style.display  = none;
-    if (resume) resume.style.display = flex;
-    if (stop)   stop.style.display   = flex;
-  }
 }
 
 /* ============================================================
@@ -1821,7 +1992,7 @@ function resetCategorySelection() {
   state.listen.idx = 0;
   renderCategoryNav();
   if (state.mode === 'learn')  renderLearnMode();
-  if (state.mode === 'listen') renderListenMode();
+  /* listen mode 탭 제거됨 */
   if (state.mode === 'quiz')   { state.quiz.started = false; renderQuizMode(); }
 }
 
@@ -1843,7 +2014,7 @@ function toggleAllCategories() {
   state.listen.idx = 0;
   renderCategoryNav();
   if (state.mode === 'learn')  renderLearnMode();
-  if (state.mode === 'listen') renderListenMode();
+  /* listen mode 탭 제거됨 */
   if (state.mode === 'quiz')   { state.quiz.started = false; renderQuizMode(); }
 }
 
@@ -1879,10 +2050,11 @@ function renderLearnMode() {
     const cardsHtml = cat.words.map(w => {
       const isHeard = lMap.has(w.id);
       return `
-      <div class="word-card ${isHeard?'listened':''}" id="wcard-${w.id}" style="border-top:5px solid ${cat.color}">
-        <div class="card-img-area" style="background:${cat.gradient}"
-             onclick="speakCard(${w.id})"
-             title="클릭하면 음성이 나와요!">
+      <div class="word-card ${isHeard?'listened':''}" id="wcard-${w.id}"
+           style="border-top:5px solid ${cat.color}; cursor:pointer;"
+           onclick="openWvDialog(${w.id},'${cat.id}')"
+           title="${w.word} — 클릭하면 상세보기">
+        <div class="card-img-area" style="background:${cat.gradient}">
           <div class="card-emoji-wrap" id="ce-${w.id}">${w.emoji}</div>
           <img class="card-photo" id="cp-${w.id}"
                src="${unsplashUrl(w.imgQuery)}" alt="${w.word}" loading="lazy">
@@ -1921,6 +2093,14 @@ function renderLearnMode() {
           </div>
         </div>
         <span class="acc-toggle-icon" id="acc-icon-${cat.id}">▼</span>
+      </div>
+      <!-- 섹션별 재생 컨트롤 바 -->
+      <div class="cat-play-bar">
+        <button class="cat-play-btn cpb-play"
+                onclick="event.stopPropagation();catPlayStart('${cat.id}')">
+          ▶ 전체 듣기
+        </button>
+        <span class="cat-play-count">${total}단어</span>
       </div>
       <div class="cat-words-body" id="acc-body-${cat.id}">
         <div class="word-cards-grid">${cardsHtml}</div>
@@ -1993,6 +2173,99 @@ function updateMasterAccordionBtn() {
   btn.classList.toggle('all-open', allOpen);
 }
 
+/* ============================================================
+   카드 클릭 → 듣기모드 다이얼로그
+   ★ 기존 listen mode UI/함수를 100% 재활용
+============================================================ */
+
+/* 카드 클릭 시 호출: 해당 카테고리 단어들로 듣기모드 다이얼로그 오픈 */
+function openWvDialog(wordId, catId) {
+  stopAllPlayback();
+  const cat = WORD_DATA.categories.find(c => c.id === catId);
+  if (!cat) return;
+
+  // listen 상태: 해당 카테고리 단어 중 클릭한 단어 인덱스로 설정
+  // → getSelectedWords()가 이 카테고리를 포함하도록 selectedCats 임시 설정
+  state._prevSelectedCats = [...state.selectedCats]; // 복원용 저장
+  state.selectedCats = [catId];
+  state.catId = catId;
+  const wordIdx = cat.words.findIndex(w => w.id === wordId);
+  state.listen.idx = wordIdx >= 0 ? wordIdx : 0;
+
+  // 다이얼로그 카테고리 정보 표시
+  const info = document.getElementById('wv-dialog-cat-info');
+  if (info) {
+    info.textContent = `${cat.icon} ${cat.name}  ·  ${cat.words.length}단어`;
+    info.style.color = cat.color;
+  }
+
+  // 오버레이 오픈 후 기존 updateListenDisplay() 호출 (UI 재활용)
+  document.getElementById('wv-overlay').classList.add('open');
+  stopAutoPlay();
+  updateListenDisplay();
+}
+
+/* 듣기 모드 탭에서 직접 열기 */
+function openListenDialog() {
+  if (!WORD_DATA || !state.selectedCats.length) return;
+  state.listen.idx = 0;
+  const cat = getCat(state.catId);
+  const info = document.getElementById('wv-dialog-cat-info');
+  if (info && cat) {
+    info.textContent = `${cat.icon} ${cat.name}  ·  ${getSelectedWords().length}단어`;
+    info.style.color = cat.color;
+  }
+  document.getElementById('wv-overlay').classList.add('open');
+  stopAutoPlay();
+  updateListenDisplay();
+}
+
+function closeWvDialog() {
+  document.getElementById('wv-overlay').classList.remove('open');
+  stopAutoPlay();
+  speechSynthesis.cancel && speechSynthesis.cancel();
+  // selectedCats 복원 (카드 클릭으로 열었을 때만)
+  if (state._prevSelectedCats) {
+    state.selectedCats = state._prevSelectedCats;
+    delete state._prevSelectedCats;
+    renderCategoryNav();
+  }
+}
+
+function wvOverlayClick(e) {
+  if (e.target === document.getElementById('wv-overlay')) closeWvDialog();
+}
+
+/* ============================================================
+   섹션별 재생 — wv-overlay 다이얼로그로 위임
+============================================================ */
+
+/* 모든 재생(전체+다이얼로그 자동재생)을 중지하는 마스터 함수 */
+function stopAllPlayback() {
+  stopAutoPlay();
+  speechSynthesis.cancel && speechSynthesis.cancel();
+}
+
+/* 주제 섹션 "▶ 전체 듣기" → 해당 카테고리를 다이얼로그로 열고 자동재생 */
+function catPlayStart(catId) {
+  const cat = WORD_DATA && WORD_DATA.categories.find(c => c.id === catId);
+  if (!cat) return;
+  stopAllPlayback();
+  state._prevSelectedCats = [...state.selectedCats];
+  state.selectedCats = [catId];
+  state.catId = catId;
+  state.listen.idx = 0;
+  const info = document.getElementById('wv-dialog-cat-info');
+  if (info) {
+    info.textContent = `${cat.icon} ${cat.name}  ·  ${cat.words.length}단어`;
+    info.style.color = cat.color;
+  }
+  document.getElementById('wv-overlay').classList.add('open');
+  updateListenDisplay(); // 첫 단어 표시 + TTS 발음
+  // updateListenDisplay가 speak()를 호출하므로, 자동재생 타이머만 바로 시작
+  startAutoPlay();
+}
+
 function speakCard(id) {
   const w = getAllWords().find(w=>w.id===id);
   if (!w) return;
@@ -2060,13 +2333,9 @@ function updateListenDisplay() {
   document.getElementById('listen-word').textContent = w.word;
   document.getElementById('listen-hint').textContent = w.hint;
 
+  /* 자모 분해 행: ㅁ+ㅏ+ㄹ 형태로 각 자모 버튼 표시 */
   document.getElementById('listen-syllables').innerHTML =
-    w.syllables.map((s,i)=>`
-      <span class="listen-syllable-pill ${getSyllableClass(i)}"
-            onclick="openPhonicsModal('${s}',${i},${w.id})"
-            title="'${s}' 음운 확장">
-        ${s}
-      </span>`).join('');
+    buildJamoRowHTML(w.syllables);
 
   // Sentences
   document.getElementById('listen-sentences').innerHTML =
@@ -2114,10 +2383,13 @@ function startAutoPlay() {
   if (btn) { btn.textContent='⏸️ 일시정지'; btn.className='btn btn-red'; }
   function go() {
     if (!state.listen.playing) return;
+    // voiceSettings.wordGap = 설정에서 지정한 단어 간격 (전체/주제별/개별 자동재생 공통 적용)
+    const gap = voiceSettings.wordGap || 1200;
     listenNext();
-    state.listen.timer = setTimeout(go, state.listen.speed + 1400);
+    state.listen.timer = setTimeout(go, gap);
   }
-  state.listen.timer = setTimeout(go, state.listen.speed + 1400);
+  const initGap = voiceSettings.wordGap || 1200;
+  state.listen.timer = setTimeout(go, initGap);
 }
 
 function stopAutoPlay() {
@@ -2129,7 +2401,21 @@ function stopAutoPlay() {
 
 function setSpeed(s) {
   state.listen.speed = s;
-  document.querySelectorAll('.speed-btn').forEach(b=>b.classList.toggle('active', parseInt(b.dataset.speed)===s));
+  voiceSettings.wordGap = s;  // 설정 슬라이더와 동기화
+  // 설정 모달 슬라이더 & 값 칩 업데이트
+  const sl   = document.getElementById('vs-gap');
+  const chip = document.getElementById('vs-gap-val');
+  if (sl)   sl.value = s;
+  if (chip) chip.textContent = (s / 1000).toFixed(1) + '초';
+  // 속도 버튼 active 상태 갱신
+  _syncSpeedBtns(s);
+}
+
+/* 설정 슬라이더 변경 시 speed 버튼 active 상태 갱신 */
+function _syncSpeedBtns(gap) {
+  document.querySelectorAll('.speed-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.speed) === gap);
+  });
 }
 
 /* ============================================================
@@ -2161,10 +2447,15 @@ function openQuizDialog() {
   state.quiz.streak   = 0;
   state.quiz.maxStreak= 0;
 
+  // 탭 active 상태 초기화
+  document.querySelectorAll('.quiz-type-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.type === state.quiz.quizType);
+  });
+
   // 다이얼로그 열기 → 바로 문제 표시
   document.getElementById('quiz-dialog-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  renderQuizDialogQuestion();
+  renderCurrentQuizQuestion();
 }
 
 function closeQuizDialog() {
@@ -2215,7 +2506,7 @@ function startQuizDialog() {
   document.getElementById('qdlg-quiz-panel').style.display = 'block';
   document.getElementById('qdlg-title').textContent = `🎯 퀴즈 (${state.quiz.words.length}문제)`;
 
-  renderQuizDialogQuestion();
+  renderCurrentQuizQuestion();
 }
 
 function renderQuizDialogQuestion() {
@@ -2366,48 +2657,55 @@ function qdlgNextQuestion() {
   }
   state.quiz.idx++;
   state.quiz.answered = false;
-  renderQuizDialogQuestion();
+  state.quiz.hintUsed = false;
+  renderCurrentQuizQuestion();
 }
 
 function renderQuizDialogResult() {
   const score = state.quiz.score, total = state.quiz.words.length;
   const pct = Math.round((score/total)*100);
+  const isEn = currentLang === 'en';
   let emoji, msg, voiceMsg;
   if (pct===100) {
-    emoji='🏆'; msg='완벽해요! 정말 최고에요! 🎊';
-    voiceMsg=`만점입니다! ${total}문제 모두 맞았어요! 정말 대단해요!`;
+    emoji='🏆';
+    msg   = isEn ? 'Perfect! Amazing job! 🎊'       : '완벽해요! 정말 최고에요! 🎊';
+    voiceMsg = isEn ? `Perfect score! All ${total} correct! Amazing!` : `만점입니다! ${total}문제 모두 맞았어요! 정말 대단해요!`;
     showConfetti(60);
   } else if (pct>=80) {
-    emoji='🥇'; msg='정말 잘했어요!';
-    voiceMsg=`${total}문제 중 ${score}개 맞았어요! 정말 잘했어요!`;
+    emoji='🥇';
+    msg   = isEn ? 'Great job!'     : '정말 잘했어요!';
+    voiceMsg = isEn ? `${score} out of ${total} correct! Great job!` : `${total}문제 중 ${score}개 맞았어요! 정말 잘했어요!`;
     showConfetti(30);
   } else if (pct>=60) {
-    emoji='🥈'; msg='잘했어요! 조금 더 연습해요!';
-    voiceMsg=`${total}문제 중 ${score}개 맞았어요! 잘했어요! 조금 더 연습하면 완벽해요!`;
+    emoji='🥈';
+    msg   = isEn ? 'Good try! Keep practicing!' : '잘했어요! 조금 더 연습해요!';
+    voiceMsg = isEn ? `${score} out of ${total}! Good try! Keep practicing!` : `${total}문제 중 ${score}개 맞았어요! 잘했어요! 조금 더 연습하면 완벽해요!`;
   } else {
-    emoji='🌟'; msg='다시 도전해봐요! 화이팅!';
-    voiceMsg=`${total}문제 중 ${score}개 맞았어요. 다시 도전해봐요! 화이팅!`;
+    emoji='🌟';
+    msg   = isEn ? 'Try again! You can do it!' : '다시 도전해봐요! 화이팅!';
+    voiceMsg = isEn ? `${score} out of ${total}. Try again! You can do it!` : `${total}문제 중 ${score}개 맞았어요. 다시 도전해봐요! 화이팅!`;
   }
 
-  document.getElementById('qdlg-title').textContent = '🏆 퀴즈 결과';
+  document.getElementById('qdlg-title').textContent = isEn ? '🏆 Quiz Result' : '🏆 퀴즈 결과';
   document.getElementById('qdlg-quiz-content').innerHTML = `
     <div class="quiz-result-screen">
       <div class="big-icon">${emoji}</div>
-      <h2 style="font-size:1.8em;color:#2c3e50;margin-bottom:6px">퀴즈 완료!</h2>
+      <h2 style="font-size:1.8em;color:#2c3e50;margin-bottom:6px">${isEn?'Quiz Done!':'퀴즈 완료!'}</h2>
       <div class="result-score">${score} / ${total}</div>
       <div class="result-message">${msg}</div>
       <div class="result-analysis">
-        <label>📊 정답률</label>
+        <label>${isEn?'📊 Accuracy':'📊 정답률'}</label>
         <div class="progress-bar-wrap" style="margin-bottom:8px">
           <div class="progress-bar-fill" style="width:${pct}%;background:linear-gradient(135deg,#667eea,#764ba2)"></div>
         </div>
-        <div style="font-size:.88em;color:#666;margin-bottom:8px">${pct}% — ${score}개 정답</div>
+        <div style="font-size:.88em;color:#666;margin-bottom:8px">${pct}% — ${score}${isEn?' correct':' 개 정답'}</div>
         ${(state.quiz.maxStreak||0)>=2
           ? `<div style="font-size:.88em;color:#F57F17">🔥 최고 연속 정답: <strong>${state.quiz.maxStreak}연속!</strong></div>`
           : ''}
       </div>
       <div class="result-buttons">
         <button class="btn btn-orange" onclick="restartQuizDialog()">🔄 다시 도전</button>
+        <button class="btn btn-blue" onclick="toggleQuizTypeFromResult()" id="result-toggle-type-btn">⌨️ 모드 전환</button>
         <button class="btn btn-gray"   onclick="closeQuizDialog()">✕ 닫기</button>
       </div>
     </div>`;
@@ -2427,36 +2725,295 @@ function restartQuizDialog() {
   state.quiz.answered = false;
   state.quiz.streak   = 0;
   state.quiz.maxStreak= 0;
-  renderQuizDialogQuestion();
+  state.quiz.hintUsed = false;
+  renderCurrentQuizQuestion();
 }
 
-/* 퀴즈 음성 피드백 (정답/오답) */
+/* ============================================================
+   퀴즈 타입 전환 (객관식 / 주관식)
+============================================================ */
+function setQuizType(type) {
+  state.quiz.quizType = type;
+  // 탭 UI 갱신
+  document.querySelectorAll('.quiz-type-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.type === type);
+  });
+  // 진행 중이라면 현재 문제 다시 렌더
+  if (state.quiz.started && state.quiz.words.length) {
+    if (state.quiz.countdownTimer) {
+      clearInterval(state.quiz.countdownTimer);
+      state.quiz.countdownTimer = null;
+    }
+    state.quiz.answered = false;
+    state.quiz.hintUsed = false;
+    renderCurrentQuizQuestion();
+  }
+}
+
+function renderCurrentQuizQuestion() {
+  if (state.quiz.quizType === 'typing') {
+    renderQuizTypingQuestion();
+  } else {
+    renderQuizDialogQuestion();
+  }
+}
+
+/* ============================================================
+   주관식 (타이핑) 퀴즈
+============================================================ */
+function renderQuizTypingQuestion() {
+  const words = state.quiz.words;
+  if (state.quiz.idx >= words.length) { renderQuizDialogResult(); return; }
+
+  const correct = words[state.quiz.idx];
+  const cat     = findCatByWordId(correct.id) || getCat();
+  const cur     = state.quiz.idx + 1;
+  const total   = words.length;
+  const sylLen  = correct.syllables ? correct.syllables.length : correct.word.length;
+
+  const streakHtml = (state.quiz.streak >= 2)
+    ? `<div class="streak-badge combo-pop">🔥 ${state.quiz.streak}연속!</div>`
+    : `<div style="width:60px"></div>`;
+
+  // 빈칸 힌트 박스 (각 음절마다)
+  const blanksHtml = Array.from({length: sylLen}, (_,i) =>
+    `<div class="typing-blank" id="tblank-${i}">?</div>`
+  ).join('');
+
+  document.getElementById('qdlg-quiz-content').innerHTML = `
+    <div class="quiz-header-bar">
+      <div class="quiz-score-chip">⭐ ${state.quiz.score}점</div>
+      ${streakHtml}
+      <div class="quiz-counter-chip">${cur} / ${total}</div>
+    </div>
+    <div class="quiz-progress-label">${cur} / ${total}</div>
+    <div class="progress-bar-wrap" style="margin-bottom:14px">
+      <div class="progress-bar-fill" style="width:${(cur/total)*100}%;background:${cat.gradient||'#667eea'}"></div>
+    </div>
+    <div class="quiz-img-wrap" style="background:${cat.gradient||'#667eea'}"
+         onclick="speak('${escStr(correct.word)}')" title="🔊 클릭하면 음성이 나와요!">
+      <div class="quiz-emoji-wrap" id="qdlg-emoji">${correct.emoji}</div>
+      <img class="quiz-photo" id="qdlg-photo" src="${unsplashUrl(correct.imgQuery||correct.word)}" alt="?">
+      <div class="quiz-img-overlay">🔊</div>
+    </div>
+    <div class="quiz-question-label" style="font-size:1.05em;margin:10px 0 12px">
+      이 그림의 단어를 입력하세요! (${sylLen}글자)
+    </div>
+    <div class="typing-quiz-area">
+      <div class="typing-hint-row" id="typing-hint-row">
+        ${blanksHtml}
+      </div>
+      <div class="typing-input-wrap">
+        <input type="text" class="typing-input" id="typing-input"
+               maxlength="${sylLen}"
+               placeholder="${'_'.repeat(sylLen)}"
+               oninput="typingInputChange()"
+               onkeydown="typingKeyDown(event)"
+               autocomplete="off" autocorrect="off" spellcheck="false">
+        <button class="typing-submit-btn" id="typing-submit-btn"
+                onclick="typingSubmit()">확인 ✓</button>
+      </div>
+      <div class="typing-char-count" id="typing-char-count">0 / ${sylLen} 글자</div>
+      <button class="typing-hint-btn" id="typing-hint-btn"
+              onclick="showTypingHint()">💡 힌트 보기 (첫 글자 공개)</button>
+    </div>
+    <div class="quiz-feedback" id="qdlg-feedback"></div>
+    <div id="qdlg-next-wrap" style="display:none"></div>`;
+
+  // 이미지 처리
+  const qEmoji = document.getElementById('qdlg-emoji');
+  const qPhoto = document.getElementById('qdlg-photo');
+  if (qEmoji) applyTwemoji(qEmoji);
+  if (qPhoto) {
+    qPhoto.onload  = () => { qPhoto.classList.add('loaded'); if (qEmoji) qEmoji.style.opacity='0.2'; };
+    qPhoto.onerror = () => { qPhoto.style.display='none'; };
+  }
+
+  // 포커스 + 음성
+  setTimeout(() => {
+    speak(correct.word);
+    const inp = document.getElementById('typing-input');
+    if (inp) inp.focus();
+  }, 600);
+}
+
+/* 입력창 변경 시 힌트 박스 업데이트 */
+function typingInputChange() {
+  const inp = document.getElementById('typing-input');
+  if (!inp) return;
+  const val = inp.value;
+  const correct = state.quiz.words[state.quiz.idx];
+  const sylLen = correct.syllables ? correct.syllables.length : correct.word.length;
+
+  // 글자수 표시
+  const cc = document.getElementById('typing-char-count');
+  if (cc) cc.textContent = `${val.length} / ${sylLen} 글자`;
+
+  // 빈칸 업데이트
+  for (let i = 0; i < sylLen; i++) {
+    const blank = document.getElementById(`tblank-${i}`);
+    if (!blank) continue;
+    if (i < val.length) {
+      blank.textContent = val[i];
+      blank.className = 'typing-blank filled';
+    } else {
+      blank.textContent = '?';
+      blank.className = 'typing-blank';
+    }
+  }
+
+}
+
+/* Enter 키 → 제출 */
+function typingKeyDown(e) {
+  if (e.key === 'Enter') typingSubmit();
+}
+
+/* 정답 확인 */
+function typingSubmit() {
+  if (state.quiz.answered) return;
+  const inp = document.getElementById('typing-input');
+  if (!inp) return;
+  const answer = inp.value.trim();
+  if (!answer) return;
+
+  const correct = state.quiz.words[state.quiz.idx];
+  const isCorrect = (answer === correct.word);
+  const sylLen = correct.syllables ? correct.syllables.length : correct.word.length;
+
+  state.quiz.answered = true;
+  inp.disabled = true;
+  const submitBtn = document.getElementById('typing-submit-btn');
+  if (submitBtn) submitBtn.disabled = true;
+
+  // 힌트 버튼 숨기기
+  const hintBtn = document.getElementById('typing-hint-btn');
+  if (hintBtn) hintBtn.style.display = 'none';
+
+  // 빈칸 박스 결과 표시
+  for (let i = 0; i < sylLen; i++) {
+    const blank = document.getElementById(`tblank-${i}`);
+    if (!blank) continue;
+    if (isCorrect) {
+      blank.textContent = correct.word[i] || correct.syllables[i];
+      blank.className = 'typing-blank correct';
+    } else {
+      // 맞은 글자 / 틀린 글자 구분
+      const typed = answer[i] || '';
+      const correctChar = correct.word[i] || correct.syllables[i] || '';
+      blank.textContent = typed === correctChar ? typed : correctChar;
+      blank.className = typed === correctChar ? 'typing-blank correct' : 'typing-blank wrong';
+    }
+  }
+
+  // input 스타일
+  inp.className = 'typing-input ' + (isCorrect ? 'correct-input' : 'wrong-input');
+
+  // 피드백
+  const fb = document.getElementById('qdlg-feedback');
+  if (isCorrect) {
+    state.quiz.score++;
+    state.quiz.streak = (state.quiz.streak||0) + 1;
+    if (state.quiz.streak > (state.quiz.maxStreak||0)) state.quiz.maxStreak = state.quiz.streak;
+    fb.className = 'quiz-feedback correct bounce-in';
+    const comboMsg = state.quiz.streak >= 3 ? ` 🔥 ${state.quiz.streak}연속!` : '';
+    fb.textContent = '🎉 정답이에요!' + comboMsg;
+    playCorrectSound();
+    showConfetti(state.quiz.streak >= 3 ? 40 : 22);
+    speakQuizFeedback(true, state.quiz.streak);
+  } else {
+    state.quiz.streak = 0;
+    fb.className = 'quiz-feedback wrong';
+    fb.innerHTML = `❌ 아쉬워요! 정답은 <strong>${correct.word}</strong> 이에요.`;
+    playWrongSound();
+    // 정답 말해주기
+    setTimeout(() => speak(correct.word), 800);
+    speakQuizFeedback(false, 0, correct.word);
+  }
+
+  // 카운트다운
+  let secs = 5;
+  const nw = document.getElementById('qdlg-next-wrap');
+  if (nw) {
+    nw.style.display = 'block';
+    nw.innerHTML = `
+      <div style="font-size:0.9em;color:#888;margin-top:8px">
+        ⏳ <span id="qdlg-countdown">${secs}</span>초 후 다음 문제!
+        <button class="btn btn-sm btn-purple" style="margin-left:10px" onclick="qdlgNextQuestion()">▶ 바로 다음</button>
+      </div>
+      <div style="margin-top:8px;height:7px;background:#f0f2f5;border-radius:6px;overflow:hidden">
+        <div id="qdlg-countdown-bar" style="height:100%;background:linear-gradient(90deg,#667eea,#764ba2);width:100%;transition:width 4.85s linear"></div>
+      </div>`;
+    setTimeout(() => {
+      const bar = document.getElementById('qdlg-countdown-bar');
+      if (bar) bar.style.width = '0%';
+    }, 60);
+  }
+  if (state.quiz.countdownTimer) clearInterval(state.quiz.countdownTimer);
+  state.quiz.countdownTimer = setInterval(() => {
+    secs--;
+    const cd = document.getElementById('qdlg-countdown');
+    if (cd) cd.textContent = secs;
+    if (secs <= 0) {
+      clearInterval(state.quiz.countdownTimer);
+      state.quiz.countdownTimer = null;
+      qdlgNextQuestion();
+    }
+  }, 1000);
+}
+
+/* 힌트: 첫 글자 공개 */
+function showTypingHint() {
+  const correct = state.quiz.words[state.quiz.idx];
+  if (!correct || state.quiz.answered) return;
+  const firstChar = correct.syllables ? correct.syllables[0] : correct.word[0];
+  const inp = document.getElementById('typing-input');
+  if (inp && !inp.value) {
+    inp.value = firstChar;
+    typingInputChange();
+    inp.focus();
+    // 커서 맨 끝으로
+    inp.setSelectionRange(inp.value.length, inp.value.length);
+  }
+  const hintBtn = document.getElementById('typing-hint-btn');
+  if (hintBtn) hintBtn.style.opacity = '0.4';
+  speak(firstChar);
+  state.quiz.hintUsed = true;
+}
+
+/* 결과 화면에서 퀴즈 타입 전환 후 재시작 */
+function toggleQuizTypeFromResult() {
+  const newType = state.quiz.quizType === 'multiple' ? 'typing' : 'multiple';
+  setQuizType(newType);
+  restartQuizDialog();
+}
+
+/* 퀴즈 음성 피드백 (정답/오답) — 한/영 지원 */
 function speakQuizFeedback(isCorrect, streak, correctWord) {
   if (!window.speechSynthesis) return;
   speechSynthesis.cancel();
+  const isEn = currentLang === 'en';
   setTimeout(() => {
     if (isCorrect) {
-      const msgs = [
-        '정답이에요! 잘했어요!',
-        '훌륭해요! 맞았어요!',
-        '대단해요! 정답입니다!',
-        '완벽해요! 정답이에요!',
-      ];
-      const comboMsgs = [
-        '와! 연속 정답이에요! 정말 대단해요!',
-        '세 개 연속 정답! 최고예요!',
-        '계속 정답이에요! 정말 잘하고 있어요!',
-      ];
+      const msgs = isEn
+        ? ['Correct! Great job!', 'Excellent! Well done!', 'Amazing! That\'s right!', 'Perfect answer!']
+        : ['정답이에요! 잘했어요!', '훌륭해요! 맞았어요!', '대단해요! 정답입니다!', '완벽해요! 정답이에요!'];
+      const comboMsgs = isEn
+        ? ['Wow! On a roll! Amazing!', '3 in a row! Fantastic!', 'Keep it up! You\'re incredible!']
+        : ['와! 연속 정답이에요! 정말 대단해요!', '세 개 연속 정답! 최고예요!', '계속 정답이에요! 정말 잘하고 있어요!'];
       const msg = (streak && streak >= 3)
         ? comboMsgs[Math.min(streak-3, comboMsgs.length-1)]
         : msgs[Math.floor(Math.random()*msgs.length)];
       speak(msg, 0.9);
       showVoiceFeedbackToast('🎉 ' + msg, 'correct-toast');
     } else {
-      speak('틀렸습니다. 다시 한번 들어보세요.', 0.9);
-      showVoiceFeedbackToast('❌ 틀렸습니다!', 'wrong-toast');
+      const wrongMsg  = isEn ? 'Not quite! Try again!'     : '틀렸습니다. 다시 한번 들어보세요.';
+      const wrongToast= isEn ? '❌ Wrong!'                  : '❌ 틀렸습니다!';
+      speak(wrongMsg, 0.9);
+      showVoiceFeedbackToast(wrongToast, 'wrong-toast');
       if (correctWord) {
-        setTimeout(() => speak(`정답은 ${correctWord} 입니다`, 0.85), 1800);
+        const answerMsg = isEn ? `The answer is ${correctWord}` : `정답은 ${correctWord} 입니다`;
+        setTimeout(() => speak(answerMsg, 0.85), 1800);
       }
     }
   }, 400);
@@ -2740,7 +3297,6 @@ function switchMode(mode) {
 
   state.mode = mode;
   if (mode==='learn')  renderLearnMode();
-  if (mode==='listen') { state.listen.idx = 0; renderListenMode(); }
   if (mode==='quiz')   { state.quiz.started = false; renderQuizMode(); }
 }
 
@@ -2763,7 +3319,7 @@ function toggleCategory(catId) {
   renderCategoryNav();
   // 현재 모드 다시 렌더링
   if (state.mode==='learn')  renderLearnMode();
-  if (state.mode==='listen') renderListenMode();
+  /* listen mode 탭 제거됨 */
   if (state.mode==='quiz')   { state.quiz.started = false; renderQuizMode(); }
 }
 
@@ -2802,53 +3358,104 @@ function escStr(s) { return s.replace(/'/g,"\\'").replace(/"/g,"&quot;"); }
 /* ============================================================
    VOICE SETTINGS
 ============================================================ */
+/* ============================================================
+   언어 감지 (JSON 로드 시 결정)
+============================================================ */
+let currentLang = 'ko'; // 'ko' | 'en'
+
+function detectLang(data) {
+  // 1순위: JSON 에 lang 필드 있으면 사용
+  if (data.lang) {
+    return data.lang.toLowerCase().startsWith('en') ? 'en' : 'ko';
+  }
+  // 2순위: title 필드 영어 판단
+  if (data.title) {
+    const hasKorean = /[가-힣]/.test(data.title);
+    if (!hasKorean) return 'en';
+  }
+  // 3순위: 첫 번째 단어로 판단
+  const firstWord = data.categories?.[0]?.words?.[0]?.word || '';
+  return /[가-힣]/.test(firstWord) ? 'ko' : 'en';
+}
+
+/* ============================================================
+   VOICE SETTINGS
+============================================================ */
 let voiceSettings = {
-  rate:          0.82,   // 읽기 속도 (0.4 ~ 1.8)
-  pitch:         1.1,    // 음높이 (0.5 ~ 2.0)
-  volume:        1.0,    // 볼륨 (0.1 ~ 1.0)
-  voiceIdx:      -1,     // -1 = 자동(ko-KR), 그 외 = availableVoices 인덱스
-  wordGap:       1200,   // 단어 사이 간격 ms (500 ~ 4000)
-  readSentences: false   // 문장도 함께 읽기
+  rate:          0.82,
+  pitch:         1.1,
+  volume:        1.0,
+  voiceIdx:      -1,   // -1 = 자동, 그 외 = 해당 언어 availableVoices 인덱스
+  wordGap:       1200,
+  readSentences: false
 };
-let availableVoices = [];
+
+// 언어별 사용 가능한 음성 목록
+let koVoices = [];
+let enVoices = [];
+
+function getVoices() {
+  return currentLang === 'en' ? enVoices : koVoices;
+}
+
+function getLangCode() {
+  return currentLang === 'en' ? 'en-US' : 'ko-KR';
+}
 
 function loadVoicesEnhanced() {
   const all = speechSynthesis.getVoices();
-  availableVoices = all.filter(v => v.lang.startsWith('ko'));
-  if (!availableVoices.length) availableVoices = all.slice(0, 8);
-  koreanVoice = availableVoices[0] || all.find(v => v.lang === 'ko-KR') || null;
-  // 설정 모달이 열려 있으면 음성 목록 새로고침
+  koVoices = all.filter(v => v.lang.startsWith('ko'));
+  enVoices = all.filter(v => v.lang.startsWith('en'));
+  if (!koVoices.length) koVoices = [];
+  if (!enVoices.length) enVoices = [];
+  // 기존 호환성 유지
+  koreanVoice = koVoices[0] || all.find(v => v.lang === 'ko-KR') || null;
   refreshVoiceSelect();
 }
 
 function refreshVoiceSelect() {
   const sel = document.getElementById('vs-voice-select');
   if (!sel) return;
-  const prev = sel.value;
-  sel.innerHTML = `<option value="-1">🤖 자동 (한국어 기본)</option>` +
-    availableVoices.map((v, i) =>
+  const prev = voiceSettings.voiceIdx;
+  const voices = getVoices();
+  const langLabel = currentLang === 'en' ? '영어 기본 (en-US)' : '한국어 기본 (ko-KR)';
+  sel.innerHTML = `<option value="-1">🤖 자동 (${langLabel})</option>` +
+    voices.map((v, i) =>
       `<option value="${i}">${v.name} (${v.lang})</option>`
     ).join('');
-  sel.value = prev !== undefined ? prev : '-1';
+  sel.value = (prev >= -1 && prev < voices.length) ? prev : -1;
+
+  // 언어 뱃지 업데이트
+  const badge = document.getElementById('vs-lang-badge');
+  if (badge) {
+    badge.textContent = currentLang === 'en' ? '🇺🇸 English' : '🇰🇷 한국어';
+    badge.style.background = currentLang === 'en' ? '#1976D2' : '#E53935';
+  }
+  // 미리듣기 프리셋 텍스트도 언어에 맞게
+  const previewBtn = document.getElementById('vs-preview-btn');
+  if (previewBtn) previewBtn.textContent = currentLang === 'en' ? '🔊 Preview' : '🔊 미리 듣기';
 }
 
 /* ============================================================
-   SPEAK (설정 반영 버전)
+   SPEAK (언어 자동 반영)
 ============================================================ */
 function speak(text, rateOverride = null) {
   if (!window.speechSynthesis) return Promise.resolve();
   return new Promise(resolve => {
     speechSynthesis.cancel();
     const utt = new SpeechSynthesisUtterance(text);
-    utt.lang   = 'ko-KR';
+    const voices = getVoices();
+    const selIdx = voiceSettings.voiceIdx;
+    // 언어 코드 설정
+    utt.lang   = getLangCode();
     utt.rate   = rateOverride !== null ? rateOverride : voiceSettings.rate;
     utt.pitch  = voiceSettings.pitch;
     utt.volume = voiceSettings.volume;
-    const selIdx = voiceSettings.voiceIdx;
-    if (selIdx >= 0 && availableVoices[selIdx]) {
-      utt.voice = availableVoices[selIdx];
-    } else if (koreanVoice) {
-      utt.voice = koreanVoice;
+    // 선택된 음성 또는 기본 음성 사용
+    if (selIdx >= 0 && voices[selIdx]) {
+      utt.voice = voices[selIdx];
+    } else if (voices.length > 0) {
+      utt.voice = voices[0];
     }
     utt.onend = resolve; utt.onerror = resolve;
     speechSynthesis.speak(utt);
@@ -2882,8 +3489,11 @@ function syncSettingsUI() {
   if (sel) sel.value = voiceSettings.voiceIdx;
   const tog = document.getElementById('vs-read-sentences');
   if (tog) tog.checked = voiceSettings.readSentences;
-  // 프리셋 버튼 상태
+  // 프리셋 버튼 & 속도 버튼 상태
   updatePresetBtns();
+  _syncSpeedBtns(voiceSettings.wordGap);
+  // state.listen.speed도 wordGap과 동기화
+  state.listen.speed = voiceSettings.wordGap;
 }
 
 function setSliderVal(id, val, fmt) {
@@ -2922,14 +3532,13 @@ function applyPreset(rate, pitch, label) {
   voiceSettings.rate  = rate;
   voiceSettings.pitch = pitch;
   syncSettingsUI();
-  // 미리 듣기
-  speak('안녕하세요! 잘 들려요?');
+  previewVoice();
 }
 
 function onVoiceSelectChange() {
   const sel = document.getElementById('vs-voice-select');
   if (sel) voiceSettings.voiceIdx = parseInt(sel.value);
-  speak('안녕하세요! 이 목소리예요.');
+  previewVoice();
 }
 
 function onToggleSentences() {
@@ -2938,59 +3547,39 @@ function onToggleSentences() {
 }
 
 function previewVoice() {
-  speak('안녕하세요! 잘 들려요?');
+  const text = currentLang === 'en'
+    ? 'Hello! Can you hear me clearly?'
+    : '안녕하세요! 잘 들려요?';
+  speak(text);
+}
+
+/* 언어에 따른 UI 텍스트 가져오기 */
+function t(ko, en) {
+  return currentLang === 'en' ? en : ko;
 }
 
 /* ============================================================
-   전체 듣기 — 설정 연동 (wordGap, readSentences)
+   전체 듣기 — 선택된 모든 카테고리를 wv-overlay 다이얼로그로 재생
 ============================================================ */
-async function startPlayAll() {
-  if (playAllActive && !playAllPaused) return;
-  // 처음부터 시작
-  playAllActive = true;
-  playAllPaused = false;
-  playAllIdx    = 0;
-  _updatePlayAllBtns('playing');
-  _runPlayAll();
-}
-
-/* 일시정지 복귀 or 처음부터 실행 공통 루프 */
-async function _runPlayAll() {
-  // 선택된 모든 주제의 단어 합산
-  const words = getSelectedWords();
-  for (let i = playAllIdx; i < words.length; i++) {
-    if (!playAllActive) break;
-    // 일시정지 대기
-    while (playAllPaused) {
-      await new Promise(r => setTimeout(r, 100));
-      if (!playAllActive) return;
-    }
-    playAllIdx = i;
-    const w    = words[i];
-    const card = document.getElementById('wcard-' + w.id);
-    document.querySelectorAll('.word-card.focused').forEach(el => el.classList.remove('focused'));
-    if (card) {
-      card.classList.add('focused');
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    await speak(w.word);
-    if (!playAllActive) break;
-    // 문장 읽기 옵션
-    if (voiceSettings.readSentences && w.sentences && w.sentences.length) {
-      await new Promise(r => setTimeout(r, 300));
-      for (const s of w.sentences) {
-        if (!playAllActive || playAllPaused) break;
-        await speak(s, Math.min(voiceSettings.rate * 1.05, 1.5));
-        await new Promise(r => setTimeout(r, 200));
-      }
-    }
-    if (!playAllActive) break;
-    if (card) card.classList.remove('focused');
-    markListened(w.id);
-    // wordGap 적용
-    await new Promise(r => setTimeout(r, voiceSettings.wordGap));
+function startPlayAll() {
+  if (!WORD_DATA || !state.selectedCats.length) return;
+  stopAllPlayback();
+  // 선택 상태를 그대로 유지하며 다이얼로그 오픈 (저장하지 않음)
+  state.listen.idx = 0;
+  const selCount = getSelectedWords().length;
+  const info = document.getElementById('wv-dialog-cat-info');
+  if (info) {
+    const catNames = state.selectedCats
+      .map(id => WORD_DATA.categories.find(c => c.id === id))
+      .filter(Boolean)
+      .map(c => c.icon + ' ' + c.name)
+      .join('  ·  ');
+    info.textContent = catNames + '  (' + selCount + '단어)';
+    info.style.color = '#1565c0';
   }
-  if (playAllActive && !playAllPaused) stopPlayAll();
+  document.getElementById('wv-overlay').classList.add('open');
+  updateListenDisplay(); // 첫 단어 표시 + TTS 발음
+  startAutoPlay();       // 자동재생 타이머 시작 (첫 단어 발음 후 다음으로 넘어감)
 }
 
 /* ============================================================
@@ -3000,16 +3589,35 @@ async function _runPlayAll() {
    JSON FILE UPLOAD HANDLER
 ============================================================ */
 function handleJsonFile(file) {
-  if (!file || !file.name.endsWith('.json')) {
-    alert('JSON 파일만 업로드할 수 있어요!');
+  if (!file) return;
+  if (!file.name.toLowerCase().endsWith('.json')) {
+    alert('❌ JSON 파일만 업로드할 수 있어요!\n파일 확장자가 .json 이어야 합니다.');
     return;
   }
+  if (file.size === 0) {
+    alert('❌ 파일이 비어있어요! (0 bytes)\n\n올바른 JSON 파일을 선택해 주세요.\n파일 크기: ' + file.size + ' bytes');
+    return;
+  }
+
   const reader = new FileReader();
+  reader.onerror = function() {
+    alert('❌ 파일 읽기 오류가 발생했어요.\n다시 시도해 주세요.');
+  };
   reader.onload = function(e) {
+    const rawText = e.target.result;
+    if (!rawText || rawText.trim() === '') {
+      alert('❌ 파일 내용이 비어있어요.\n올바른 JSON 파일을 선택해 주세요.');
+      return;
+    }
     try {
-      const data = JSON.parse(e.target.result);
+      // BOM 제거 (UTF-8 BOM: \uFEFF)
+      const cleanText = rawText.replace(/^\uFEFF/, '');
+      const data = JSON.parse(cleanText);
       if (!data.categories || !Array.isArray(data.categories)) {
-        throw new Error('categories 배열이 없습니다');
+        throw new Error('categories 배열이 없습니다.\n\n올바른 단어 데이터 JSON 형식인지 확인해 주세요.');
+      }
+      if (data.categories.length === 0) {
+        throw new Error('categories 배열이 비어있습니다.');
       }
       WORD_DATA = data;
       // 재업로드 시 기존 상태 초기화 — 첫 번째 카테고리만 선택
@@ -3022,7 +3630,10 @@ function handleJsonFile(file) {
       stopPlayAll();
       onDataLoaded(file.name);
     } catch(err) {
-      alert('JSON 파싱 오류: ' + err.message);
+      alert('❌ JSON 파싱 오류\n\n' + err.message +
+            '\n\n파일명: ' + file.name +
+            '\n파일크기: ' + (file.size).toLocaleString() + ' bytes' +
+            '\n\n해결방법:\n• 파일이 올바른 JSON 형식인지 확인\n• 메모장으로 열어 내용이 있는지 확인\n• 파일을 다시 다운로드하여 시도');
     }
   };
   reader.readAsText(file, 'UTF-8');
@@ -3047,15 +3658,33 @@ function onDataLoaded(filename) {
   const app = document.getElementById('app');
   if (app) app.classList.remove('not-loaded');
 
+  // ★ 언어 감지 — 음성 초기화보다 먼저!
+  currentLang = detectLang(WORD_DATA);
+  voiceSettings.voiceIdx = -1; // 언어 바뀌면 음성 선택 초기화
+
   // 헤더 뱃지 업데이트
   const totalWords = WORD_DATA.categories.reduce((s,c) => s + c.words.length, 0);
   const badges = document.querySelector('.word-count-badges');
   if (badges) {
+    const langBadge = currentLang === 'en'
+      ? '<span class="badge" style="background:linear-gradient(135deg,#1565C0,#1976D2);color:white">🇺🇸 English</span>'
+      : '<span class="badge" style="background:linear-gradient(135deg,#B71C1C,#E53935);color:white">🇰🇷 한국어</span>';
+    const wordLabel = currentLang === 'en' ? ' words' : '단어';
+    const topicLabel = currentLang === 'en' ? ' topics' : '개 주제';
     badges.innerHTML =
-      '<span class="badge badge-green">📚 총 ' + totalWords + '단어</span>' +
-      '<span class="badge badge-blue">🗂️ ' + WORD_DATA.categories.length + '개 주제</span>' +
-      '<span class="badge badge-purple">🔊 그림 클릭 → 음성!</span>';
+      langBadge +
+      '<span class="badge badge-green">📚 ' + totalWords + wordLabel + '</span>' +
+      '<span class="badge badge-blue">🗂️ ' + WORD_DATA.categories.length + topicLabel + '</span>' +
+      '<span class="badge badge-purple">🔊 ' + (currentLang==='en'?'Click → Voice!':'그림 클릭 → 음성!') + '</span>';
   }
+
+  // 앱 타이틀 업데이트
+  const appTitle = document.getElementById('app-title');
+  if (appTitle && WORD_DATA.title) appTitle.textContent = WORD_DATA.title;
+
+  // 음성 설정 헤더 업데이트
+  const settingsTitle = document.getElementById('settings-title');
+  if (settingsTitle) settingsTitle.textContent = currentLang === 'en' ? '⚙️ Voice Settings' : '⚙️ 음성 설정';
 
   // 음성 엔진 초기화
   if (window.speechSynthesis) {
@@ -3124,36 +3753,54 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 
   /* ============================================================
-     키보드 단축키 (학습모드 전체 듣기)
-     - Enter  : 처음부터 시작 / 완료 후 재시작
-     - Space  : 일시정지 ↔ 재개 토글
+     키보드 단축키 — wv-overlay 다이얼로그 + 학습모드
+     ┌─────────────────────────────────────────────────────────┐
+     │  다이얼로그 열려있을 때                                 │
+     │    Space       : 자동재생 토글 (재생 ↔ 일시정지)       │
+     │    Enter       : 다음 단어                              │
+     │    ←/ArrowLeft : 이전 단어                              │
+     │    →/ArrowRight: 다음 단어                              │
+     │    Escape      : 다이얼로그 닫기                        │
+     ├─────────────────────────────────────────────────────────┤
+     │  다이얼로그 닫혀있을 때 (학습모드 활성)                 │
+     │    Space / Enter : 전체 듣기 다이얼로그 열기 + 자동재생 │
+     └─────────────────────────────────────────────────────────┘
      ============================================================ */
   document.addEventListener('keydown', e => {
-    // 입력 필드나 모달이 활성화 중이면 무시
     const tag = document.activeElement.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
     if (document.getElementById('settings-overlay')?.classList.contains('open')) return;
     if (document.getElementById('phonics-overlay')?.classList.contains('open')) return;
 
-    // 학습모드가 활성 상태일 때만 동작
+    const wvOpen = document.getElementById('wv-overlay')?.classList.contains('open');
+
+    /* ── 다이얼로그 열려있을 때 ── */
+    if (wvOpen) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeWvDialog();
+      } else if (e.key === ' ') {
+        e.preventDefault();
+        toggleAutoPlay();   // Space: 자동재생 토글
+      } else if (e.key === 'Enter' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        stopAutoPlay();
+        listenNext();       // Enter / →: 다음 단어
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        stopAutoPlay();
+        listenPrev();       // ←: 이전 단어
+      }
+      return;
+    }
+
+    /* ── 다이얼로그 닫혀있을 때 (학습모드) ── */
     const learnSec = document.getElementById('learn-mode');
     if (!learnSec || !learnSec.classList.contains('active')) return;
 
-    if (e.key === 'Enter') {
+    if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault();
-      // Enter: 처음부터 시작 (현재 재생 중이면 정지 후 재시작)
-      stopPlayAll();
-      setTimeout(() => startPlayAll(), 100);
-    } else if (e.key === ' ') {
-      e.preventDefault();
-      // Space: 일시정지 ↔ 재개 토글
-      if (!playAllActive && !playAllPaused) {
-        startPlayAll();           // 아직 시작 전 → 시작
-      } else if (playAllPaused) {
-        resumePlayAll();          // 일시정지 중 → 재개
-      } else {
-        pausePlayAll();           // 재생 중 → 일시정지
-      }
+      startPlayAll();   // 전체 듣기 다이얼로그 열기
     }
   });
 });
@@ -3163,18 +3810,25 @@ document.addEventListener('DOMContentLoaded', ()=>{
 <div class="settings-overlay" id="settings-overlay">
   <div class="settings-modal">
     <div class="settings-header">
-      <h2>⚙️ 음성 설정</h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <h2 id="settings-title">⚙️ 음성 설정</h2>
+        <span id="vs-lang-badge" style="
+          background:#E53935; color:white; border-radius:12px;
+          padding:3px 10px; font-size:0.75em; font-weight:800;">
+          🇰🇷 한국어
+        </span>
+      </div>
       <button class="settings-close-btn" onclick="closeSettings()">✕</button>
     </div>
 
     <!-- ① 음성 선택 -->
     <div class="settings-section">
-      <div class="settings-section-title">🎤 음성 선택</div>
+      <div class="settings-section-title">🎤 음성 선택 (TTS Voice)</div>
       <select class="settings-select" id="vs-voice-select" onchange="onVoiceSelectChange()">
         <option value="-1">🤖 자동 (한국어 기본)</option>
       </select>
       <div style="margin-top:10px;text-align:right">
-        <button class="preset-btn" onclick="previewVoice()" style="font-size:0.82em">
+        <button class="preset-btn" id="vs-preview-btn" onclick="previewVoice()" style="font-size:0.82em">
           🔊 미리 듣기
         </button>
       </div>
@@ -3182,7 +3836,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     <!-- ② 속도 설정 -->
     <div class="settings-section">
-      <div class="settings-section-title">🐇 읽기 속도</div>
+      <div class="settings-section-title">🐇 읽기 속도 (Speed)</div>
       <div class="settings-row">
         <span class="settings-row-label">속도</span>
         <span class="settings-value-chip" id="vs-rate-val">0.8x</span>
@@ -3190,13 +3844,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
       <input type="range" class="settings-range" id="vs-rate"
              min="0.4" max="1.8" step="0.05" value="0.82"
              oninput="onSliderChange('vs-rate', v=>voiceSettings.rate=v, v=>v.toFixed(2)+'x')">
-      <div class="range-labels"><span>🐌 느리게</span><span>보통</span><span>🐇 빠르게</span></div>
+      <div class="range-labels"><span>🐌 Slow</span><span>Normal</span><span>🐇 Fast</span></div>
 
       <!-- 프리셋 -->
       <div class="preset-row">
-        <button class="preset-btn" id="preset-child"  onclick="applyPreset(0.65,1.3,'아이')">🧒 아이 속도</button>
-        <button class="preset-btn active" id="preset-normal" onclick="applyPreset(0.82,1.1,'보통')">😊 기본</button>
-        <button class="preset-btn" id="preset-fast"   onclick="applyPreset(1.1,1.0,'빠름')">⚡ 빠름</button>
+        <button class="preset-btn" id="preset-child"  onclick="applyPreset(0.65,1.3,'slow')">🧒 천천히</button>
+        <button class="preset-btn active" id="preset-normal" onclick="applyPreset(0.82,1.1,'normal')">😊 기본</button>
+        <button class="preset-btn" id="preset-fast"   onclick="applyPreset(1.1,1.0,'fast')">⚡ 빠름</button>
       </div>
     </div>
 
@@ -3228,14 +3882,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     <!-- ⑤ 단어 간격 -->
     <div class="settings-section">
-      <div class="settings-section-title">⏱️ 단어 사이 간격 (전체 듣기)</div>
+      <div class="settings-section-title">⏱️ 단어 사이 간격 (자동재생 공통)</div>
       <div class="settings-row">
         <span class="settings-row-label">단어 간격</span>
         <span class="settings-value-chip" id="vs-gap-val">1.2초</span>
       </div>
       <input type="range" class="settings-range" id="vs-gap"
              min="500" max="4000" step="100" value="1200"
-             oninput="onSliderChange('vs-gap', v=>voiceSettings.wordGap=v, v=>(v/1000).toFixed(1)+'초')">
+             oninput="onSliderChange('vs-gap', v=>{voiceSettings.wordGap=v;state.listen.speed=v;_syncSpeedBtns(v);}, v=>(v/1000).toFixed(1)+'초')">
       <div class="range-labels"><span>⚡ 0.5초</span><span>1.2초</span><span>🐌 4초</span></div>
     </div>
 
