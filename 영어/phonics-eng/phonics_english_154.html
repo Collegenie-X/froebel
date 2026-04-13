@@ -82,10 +82,11 @@
     .settings-header:hover { opacity: 0.92; }
     .settings-header-title { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1em; }
     .settings-body {
-      padding: 20px;
+      padding: 22px 24px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 32px;
+      align-items: end;
     }
     .setting-item label {
       display: block; font-size: 0.85em; font-weight: 700;
@@ -99,6 +100,7 @@
     }
     .setting-item select:focus { outline: none; border-color: #667eea; }
     .slider-row { display: flex; align-items: center; gap: 10px; }
+    .setting-item { display: flex; flex-direction: column; justify-content: flex-end; }
     .slider-val {
       min-width: 40px; text-align: right; font-size: 0.85em;
       font-weight: 700; color: #667eea;
@@ -674,9 +676,51 @@
     .quiz-input:focus { outline: none; border-color: #5C6BC0; }
     .quiz-input.input-correct { border-color: #4CAF50; background: #F1F8E9; }
     .quiz-input.input-wrong { border-color: #EF5350; background: #FFEBEE; }
+
+    /* ====== 1200px PAGE CONTAINER ====== */
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ====== PASTEL OVERLAY for SITUATION HEADERS & CARD IMAGES ====== */
+    .situation-header {
+      position: relative;
+      overflow: hidden;
+    }
+    .situation-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.80);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .situation-header > * {
+      position: relative;
+      z-index: 1;
+    }
+    .card-image {
+      position: relative;
+    }
+    .card-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.78);
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 12px 12px 0 0;
+    }
+    .card-image > * {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
+<div class="page-container">
+
 
 <!-- ====== HEADER ====== -->
 <div class="header">
@@ -732,7 +776,7 @@
         <span class="slider-val" id="intervalVal">1.5초</span>
       </div>
     </div>
-    <div class="setting-item" style="align-self: flex-end;">
+    <div class="setting-item">
       <label>&nbsp;</label>
       <button class="btn btn-indigo" onclick="testVoice()">🎧 테스트 듣기</button>
     </div>
@@ -826,6 +870,7 @@
   </div>
 </div>
 
+</div><!-- .page-container -->
 <script>
 /* ================================================================
    DATA: 100 Sentences — 10 Situations × 10 Sentences (Phonics Seq)
