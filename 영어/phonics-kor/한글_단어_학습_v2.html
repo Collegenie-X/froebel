@@ -400,7 +400,37 @@
       transition: all 0.3s; letter-spacing: 2px;
     }
 
-    .listen-syllables { display: flex; gap: 7px; justify-content: center; margin-bottom: 5px; flex-wrap: wrap; }
+    .listen-syllables { display: flex; gap: 10px; justify-content: center; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+
+    /* 음절 버튼 (고 · 양 · 이) */
+    .syl-btn {
+      display: inline-flex; flex-direction: column; align-items: center; gap: 3px;
+      min-width: 56px; padding: 10px 14px;
+      border: none; border-radius: 16px; cursor: pointer;
+      font-family: var(--font); font-size: 1.5em; font-weight: 900;
+      color: white; transition: all 0.2s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+      position: relative;
+    }
+    .syl-btn:hover  { transform: scale(1.18) translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.28); filter: brightness(1.08); }
+    .syl-btn:active { transform: scale(0.94); }
+    .syl-btn.playing { animation: sylPulse 0.6s ease; }
+    @keyframes sylPulse {
+      0%,100%{ transform: scale(1); }
+      40%    { transform: scale(1.25); }
+    }
+    .syl-btn-label { font-size: 0.38em; font-weight: 700; opacity: 0.85; letter-spacing: 0; line-height: 1; margin-top: 2px; }
+
+    /* 음절 사이 + 구분자 */
+    .syl-plus { font-size: 1.3em; color: #ccc; font-weight: 900; line-height: 1; }
+
+    /* 색상 세트 (5가지 순환) */
+    .syl-c0 { background: linear-gradient(135deg,#667eea,#764ba2); }
+    .syl-c1 { background: linear-gradient(135deg,#f093fb,#f5576c); }
+    .syl-c2 { background: linear-gradient(135deg,#4facfe,#00f2fe); color: #0d4a7a !important; }
+    .syl-c3 { background: linear-gradient(135deg,#43e97b,#38f9d7); color: #0d4a1a !important; }
+    .syl-c4 { background: linear-gradient(135deg,#fa709a,#fee140); color: #5c2a00 !important; }
+
     .listen-syllable-pill { background: #f0f2f5; border-radius: 10px; padding: 4px 14px; font-size: 1em; color: #555; }
 
     .listen-hint { font-size: 1em; color: #e67e22; margin-bottom: 14px; min-height: 24px; }
@@ -957,24 +987,54 @@
     ========================================= */
     .phonics-overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,0.55);
-      z-index: 1400; opacity: 0; pointer-events: none;  /* wv-overlay(1200) 위 */
+      z-index: 1400; opacity: 0; pointer-events: none;
       transition: opacity 0.3s;
-      display: flex; align-items: flex-end; justify-content: center;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px 12px;
     }
     .phonics-overlay.open { opacity: 1; pointer-events: auto; }
     .phonics-sheet {
-      background: white; border-radius: 28px 28px 0 0;
-      padding: 24px 20px 36px;
-      width: 100%; max-width: 640px; max-height: 88vh;
-      overflow-y: auto;
-      transform: translateY(100%);
-      transition: transform 0.35s cubic-bezier(0.34, 1.26, 0.64, 1);
-      box-shadow: 0 -8px 40px rgba(0,0,0,0.2);
+      background: white; border-radius: 24px;
+      width: 100%; max-width: 720px;
+      max-height: 88vh;
+      display: flex; flex-direction: column;
+      transform: scale(0.88) translateY(20px);
+      transition: transform 0.32s cubic-bezier(0.34, 1.26, 0.64, 1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+      overflow: hidden;
     }
-    .phonics-overlay.open .phonics-sheet { transform: translateY(0); }
+    .phonics-overlay.open .phonics-sheet { transform: scale(1) translateY(0); }
+
+    /* ── 고정 헤더 ── */
+    .phonics-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px 12px;
+      border-bottom: 2px solid #f0f0f0;
+      flex-shrink: 0;
+      background: white;
+      border-radius: 24px 24px 0 0;
+    }
+    .phonics-header-title {
+      font-size: 1em; font-weight: 900; color: #555;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .phonics-close-btn {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: #f0f2f5; border: none; cursor: pointer;
+      font-size: 1em; color: #555;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+    .phonics-close-btn:hover { background: #e0e0e0; transform: rotate(90deg); }
+
+    /* ── 스크롤 가능한 본문 ── */
+    .phonics-body {
+      overflow-y: auto; padding: 20px 20px 32px;
+      flex: 1;
+    }
+
     .phonics-drag-bar {
-      width: 48px; height: 5px; background: #ddd; border-radius: 3px;
-      margin: 0 auto 20px;
+      display: none; /* 중앙 다이얼로그에서는 불필요 */
     }
     .phonics-hero-syl {
       font-size: 4.5em; font-weight: 900; text-align: center;
@@ -1555,8 +1615,17 @@
 <!-- ===== PHONICS MODAL ===== -->
 <div class="phonics-overlay" id="phonics-overlay" onclick="overlayClickClose(event)">
   <div class="phonics-sheet" id="phonics-sheet">
-    <div class="phonics-drag-bar"></div>
-    <div id="phonics-content"></div>
+    <!-- 고정 헤더 -->
+    <div class="phonics-header">
+      <div class="phonics-header-title">
+        🔡 <span id="phonics-header-label">음운 분석</span>
+      </div>
+      <button class="phonics-close-btn" onclick="closePhonicsModal()" title="닫기">✕</button>
+    </div>
+    <!-- 스크롤 본문 -->
+    <div class="phonics-body">
+      <div id="phonics-content"></div>
+    </div>
   </div>
 </div>
 
@@ -1619,11 +1688,6 @@
           <div class="listen-sentences" id="listen-sentences"></div>
         </div>
         <button class="listen-side-btn" title="다음" onclick="listenNext()">▶</button>
-      </div>
-      <div class="speed-row">
-        <button class="speed-btn"        data-speed="3000" onclick="setSpeed(3000)">🐌 느리게</button>
-        <button class="speed-btn active" data-speed="1200" onclick="setSpeed(1200)">🐸 보통</button>
-        <button class="speed-btn"        data-speed="500"  onclick="setSpeed(500)">🐇 빠르게</button>
       </div>
       <div class="listen-controls">
         <button class="btn btn-green"  id="autoplay-btn" onclick="toggleAutoPlay()">▶️ 자동재생</button>
@@ -1742,6 +1806,37 @@ function buildJamoRowHTML(syllables) {
   return `<div class="jamo-row">${html}</div>`;
 }
 
+/* ============================================================
+   음절 버튼 행 — 고 · 양 · 이 형태
+   클릭 시 해당 음절 TTS 재생
+============================================================ */
+function buildSyllableButtonsHTML(syllables) {
+  if (!syllables || !syllables.length) return '';
+  const colors = ['syl-c0','syl-c1','syl-c2','syl-c3','syl-c4'];
+  return syllables.map((syl, i) => {
+    const cls = colors[i % 5];
+    const safe = escStr(syl);
+    return `${i > 0 ? '<span class="syl-plus">+</span>' : ''}
+      <button class="syl-btn ${cls}" id="syl-btn-${i}"
+              onclick="speakSyllableBtn('${safe}', ${i})"
+              title="${syl} — 클릭하면 발음해요">
+        ${syl}
+      </button>`;
+  }).join('');
+}
+
+/* 음절 버튼 클릭 → TTS + 애니메이션 */
+async function speakSyllableBtn(syl, idx) {
+  const btn = document.getElementById(`syl-btn-${idx}`);
+  if (btn) {
+    btn.classList.add('playing');
+    await speak(syl);
+    btn.classList.remove('playing');
+  } else {
+    speak(syl);
+  }
+}
+
 function getRelatedWords(syllable, excludeId) {
   const same = [], sameCho = [];
   const decomp = decompose(syllable);
@@ -1814,9 +1909,10 @@ function openPhonicsModal(syllable, sylIdx, excludeId) {
     <div class="phonics-related-grid">
       ${sameCho.length ? sameCho.map(chipHTML).join('') : '<span class="phonics-empty">같은 초성 단어가 없어요</span>'}
     </div>` : ''}
-    <div style="text-align:center;margin-top:16px">
-      <button class="btn btn-gray btn-sm" onclick="closePhonicsModal()">✕ 닫기</button>
-    </div>`;
+  `;
+  // 헤더 라벨 업데이트
+  const hl = document.getElementById('phonics-header-label');
+  if (hl) hl.textContent = `'${syllable}' 음운 분석`;
   document.getElementById('phonics-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -2333,9 +2429,9 @@ function updateListenDisplay() {
   document.getElementById('listen-word').textContent = w.word;
   document.getElementById('listen-hint').textContent = w.hint;
 
-  /* 자모 분해 행: ㅁ+ㅏ+ㄹ 형태로 각 자모 버튼 표시 */
+  /* 음절 버튼 행: 고 · 양 · 이 형태로 각 음절 클릭 → TTS */
   document.getElementById('listen-syllables').innerHTML =
-    buildJamoRowHTML(w.syllables);
+    buildSyllableButtonsHTML(w.syllables);
 
   // Sentences
   document.getElementById('listen-sentences').innerHTML =
