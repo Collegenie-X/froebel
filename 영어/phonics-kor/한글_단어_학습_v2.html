@@ -2427,6 +2427,30 @@ function _syncSpeedBtns(gap) {
 function openQuizDialog() {
   if (!WORD_DATA) return;
 
+  // ── 모든 재생 완전 중단 ──
+  // 1) 자동재생 타이머 중단
+  stopAutoPlay();
+  // 2) TTS 즉시 취소
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  // 3) wv-overlay (전체 듣기 다이얼로그) 닫기
+  const wvOv = document.getElementById('wv-overlay');
+  if (wvOv && wvOv.classList.contains('open')) {
+    wvOv.classList.remove('open');
+    // selectedCats 복원 (카드 클릭으로 열렸을 때)
+    if (state._prevSelectedCats) {
+      state.selectedCats = state._prevSelectedCats;
+      delete state._prevSelectedCats;
+    }
+  }
+  // 4) 퀴즈 카운트다운 타이머 중단
+  if (state.quiz.countdownTimer) {
+    clearInterval(state.quiz.countdownTimer);
+    state.quiz.countdownTimer = null;
+  }
+  // 5) 재생 중인 카드 하이라이트 초기화
+  document.querySelectorAll('.word-card.playing, .word-card.focused, .word-card.reading-highlight')
+    .forEach(el => el.classList.remove('playing', 'focused', 'reading-highlight'));
+
   // 선택된 카테고리 기반으로 바로 퀴즈 시작
   const cats = getSelectedCats();
   const pool = cats.length ? cats.flatMap(c => c.words) : getAllWords();
