@@ -480,7 +480,24 @@
       display: flex; justify-content: space-between;
       align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;
     }
+    .quiz-refresh-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid #e0d5ff; background: #f4f0ff;
+      cursor: pointer; font-size: 1em; color: #9C27B0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+    .quiz-refresh-btn:hover { background: #e8d5ff; transform: rotate(180deg) scale(1.15); }
+    @keyframes refreshSpin { to { transform: rotate(360deg); } }
+    .quiz-refresh-btn.spinning { animation: refreshSpin 0.45s ease; }
     .quiz-score-chip   { background: #FFF9C4; border: 2px solid #FDD835; border-radius: 20px; padding: 6px 18px; font-size: 1em; color: #F57F17; }
+    @keyframes scoreChipPop {
+      0%   { transform: scale(1); }
+      35%  { transform: scale(1.38); background: #FFD700; border-color: #FFA000; }
+      70%  { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+    .quiz-score-chip.score-pop-anim { animation: scoreChipPop 0.45s cubic-bezier(.36,.07,.19,.97); }
     .quiz-counter-chip { background: #f5f5f5; border-radius: 20px; padding: 6px 18px; font-size: 0.9em; color: #888; }
 
     /* Quiz image — clickable */
@@ -582,26 +599,26 @@
     .quiz-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-bottom: 16px; }
 
     .choice-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 14px 10px 14px 14px;
-      border: 3px solid #e0e0e0; border-radius: 20px;
-      cursor: pointer; font-family: var(--font); font-size: 1.4em;
+      display: flex; align-items: center; gap: 5px;
+      padding: 9px 7px 9px 10px;
+      border: 2px solid #e0e0e0; border-radius: 16px;
+      cursor: pointer; font-family: var(--font); font-size: 1.15em;
       background: white; color: #2c3e50; transition: all var(--transition);
       position: relative; overflow: visible;
     }
     .choice-num {
-      width: 32px; height: 32px; flex-shrink: 0;
+      width: 26px; height: 26px; flex-shrink: 0;
       border-radius: 50%; background: #f0f2f5;
       display: flex; align-items: center; justify-content: center;
       font-size: 0.6em; font-weight: 900; color: #888;
       transition: all var(--transition);
     }
-    .choice-word { flex: 1; text-align: center; font-size: 0.88em; }
+    .choice-word { flex: 1; text-align: center; font-size: 0.9em; }
     .choice-speaker-btn {
-      flex-shrink: 0; width: 40px; height: 40px;
-      background: rgba(102,126,234,0.12); border-radius: 50%;
-      border: 2px solid rgba(102,126,234,0.25);
-      cursor: pointer; font-size: 0.75em;
+      flex-shrink: 0; width: 30px; height: 30px;
+      background: rgba(102,126,234,0.10); border-radius: 50%;
+      border: 1.5px solid rgba(102,126,234,0.22);
+      cursor: pointer; font-size: 0.65em;
       display: flex; align-items: center; justify-content: center;
       transition: all 0.2s; color: #667eea;
     }
@@ -1365,7 +1382,7 @@
 
     /* ── 안내 문구 ── */
     .puzzle-instruction {
-      text-align: center; font-size: 0.82em; color: #7E57C2;
+      text-align: center; font-size: 0.9em; color: #7E57C2;
       margin-bottom: 12px; background: #F3E5F5;
       border-radius: 12px; padding: 8px 12px; font-weight: 700;
     }
@@ -1402,6 +1419,9 @@
       animation: cellPulse 0.9s ease infinite;
     }
     .puzzle-cell.selected-path { background: linear-gradient(135deg,#B3E5FC,#81D4FA); border-color: #0288D1; }
+    /* 드래그 경로 라이브 피드백 */
+    .puzzle-cell.selected-start { transform: scale(1.12); z-index: 3; }
+    .puzzle-cell.selected-path  { transform: scale(1.08); z-index: 2; transition: transform 0.1s, background 0.1s; }
     .puzzle-cell.wrong-flash   { animation: wrongShake 0.4s ease; background: #FFCDD2; border-color: #C62828; }
     .puzzle-cell.found-0 { background: linear-gradient(135deg,#A5D6A7,#66BB6A); color: white; border-color: #2E7D32; }
     .puzzle-cell.found-1 { background: linear-gradient(135deg,#90CAF9,#42A5F5); color: white; border-color: #1565C0; }
@@ -1880,6 +1900,47 @@
     .quiz-type-btn[data-type="multiple"].active { color: #FF6F00; }
     .quiz-type-btn[data-type="typing"].active   { color: #1565C0; }
 
+    /* ── 문제 수 슬라이더 ── */
+    .quiz-count-slider-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px; padding: 10px 14px;
+      background: #f8f4ff; border-radius: 16px;
+      border: 2px solid #e8d5ff;
+    }
+    .qcs-label {
+      font-size: 0.85em; font-weight: 700; color: #7E57C2;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .qcs-track-wrap { flex: 1; position: relative; }
+    .qcs-range {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 6px;
+      background: linear-gradient(90deg, #9C27B0 var(--pct, 30%), #e0d0f5 var(--pct, 30%));
+      border-radius: 4px; outline: none; cursor: pointer;
+    }
+    .qcs-range::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #9C27B0; border: 3px solid white;
+      box-shadow: 0 2px 8px rgba(156,39,176,0.45); cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .qcs-range::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    .qcs-range::-moz-range-thumb {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #9C27B0; border: 3px solid white;
+      box-shadow: 0 2px 8px rgba(156,39,176,0.45); cursor: pointer;
+    }
+    .qcs-value {
+      font-size: 0.9em; font-weight: 900; color: #9C27B0;
+      white-space: nowrap; flex-shrink: 0; min-width: 44px; text-align: right;
+    }
+    @keyframes qcsValuePop {
+      0%,100% { transform: scale(1); }
+      50%      { transform: scale(1.3); color: #6A1B9A; }
+    }
+    .qcs-value.pop { animation: qcsValuePop 0.3s ease; }
+
     /* ── 주관식 입력 영역 ── */
     .typing-quiz-area {
       margin-bottom: 16px;
@@ -2133,6 +2194,17 @@
         <button class="quiz-type-btn" data-type="typing"
                 onclick="setQuizType('typing')">⌨️ 주관식 (타자)</button>
       </div>
+      <!-- 문제 수 슬라이더 -->
+      <div class="quiz-count-slider-row" id="quiz-count-slider-row">
+        <span class="qcs-label">📝 문제 수</span>
+        <div class="qcs-track-wrap">
+          <input type="range" class="qcs-range" id="qdlg-count-slider"
+                 min="3" max="30" value="10"
+                 oninput="onQuizCountSliderInput(this.value)"
+                 onchange="onQuizCountSliderChange(this.value)">
+        </div>
+        <span class="qcs-value" id="qdlg-count-value">10문제</span>
+      </div>
       <div class="qdlg-quiz-panel" id="qdlg-quiz-panel">
         <div class="quiz-panel">
           <div id="qdlg-quiz-content"></div>
@@ -2205,7 +2277,7 @@ let state = {
   listen: { idx:0, playing:false, speed:1200, timer:null }, // speed = voiceSettings.wordGap 와 동기화
   quiz: { words:[], idx:0, score:0, answered:false, started:false, streak:0, maxStreak:0, countdownTimer:null,
           quizType: 'multiple', // 'multiple' | 'typing'
-          hintUsed: false }
+          hintUsed: false, pool:[], totalCount:10 }
 };
 
 let koreanVoice = null;
@@ -3044,7 +3116,10 @@ function openQuizDialog() {
     : '전체';
   document.getElementById('qdlg-title').textContent = `🎯 ${catNames}`;
 
-  state.quiz.words    = shuffle([...pool]);
+  // pool 저장 및 totalCount 설정
+  state.quiz.pool       = shuffle([...pool]);
+  state.quiz.totalCount = Math.min(state.quiz.totalCount || 10, pool.length);
+  state.quiz.words      = state.quiz.pool.slice(0, state.quiz.totalCount);
   state.quiz.idx      = 0;
   state.quiz.score    = 0;
   state.quiz.answered = false;
@@ -3060,7 +3135,62 @@ function openQuizDialog() {
   // 다이얼로그 열기 → 바로 문제 표시
   document.getElementById('quiz-dialog-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  // 슬라이더 초기화
+  _initQuizCountSlider(pool.length);
+
   renderCurrentQuizQuestion();
+}
+
+/* ── 문제 수 슬라이더 ── */
+function _initQuizCountSlider(poolSize) {
+  const slider = document.getElementById('qdlg-count-slider');
+  const valEl  = document.getElementById('qdlg-count-value');
+  if (!slider) return;
+  const maxQ = Math.min(poolSize, 50);
+  slider.max   = maxQ;
+  slider.min   = Math.min(3, maxQ);
+  slider.value = Math.min(state.quiz.totalCount, maxQ);
+  _updateSliderStyle(slider);
+  if (valEl) valEl.textContent = slider.value + '문제';
+}
+
+function onQuizCountSliderInput(val) {
+  const slider = document.getElementById('qdlg-count-slider');
+  const valEl  = document.getElementById('qdlg-count-value');
+  if (valEl) {
+    valEl.textContent = val + '문제';
+    valEl.classList.remove('pop');
+    void valEl.offsetWidth;
+    valEl.classList.add('pop');
+    setTimeout(() => valEl.classList.remove('pop'), 320);
+  }
+  if (slider) _updateSliderStyle(slider);
+}
+
+function onQuizCountSliderChange(val) {
+  const n = parseInt(val);
+  if (!state.quiz.pool || !state.quiz.pool.length) return;
+  state.quiz.totalCount = n;
+  // 결과 화면이면 무시, 문제 진행 중이면 재시작 확인
+  const newWords = shuffle([...state.quiz.pool]).slice(0, n);
+  state.quiz.words    = newWords;
+  state.quiz.idx      = 0;
+  state.quiz.score    = 0;
+  state.quiz.answered = false;
+  state.quiz.streak   = 0;
+  state.quiz.maxStreak= 0;
+  if (state.quiz.countdownTimer) { clearInterval(state.quiz.countdownTimer); state.quiz.countdownTimer = null; }
+  // 카운터 칩 즉시 업데이트
+  const counterChip = document.getElementById('qdlg-counter-chip');
+  if (counterChip) counterChip.textContent = `1 / ${n}`;
+  renderCurrentQuizQuestion();
+}
+
+function _updateSliderStyle(slider) {
+  const pct = ((slider.value - slider.min) / (slider.max - slider.min) * 100).toFixed(1) + '%';
+  slider.style.setProperty('--pct', pct);
+  slider.style.background = `linear-gradient(90deg, #9C27B0 ${pct}, #e0d0f5 ${pct})`;
 }
 
 function closeQuizDialog() {
@@ -3130,9 +3260,13 @@ function renderQuizDialogQuestion() {
 
   document.getElementById('qdlg-quiz-content').innerHTML = `
     <div class="quiz-header-bar">
-      <div class="quiz-score-chip">⭐ ${state.quiz.score}점</div>
-      ${streakHtml}
-      <div class="quiz-counter-chip">${cur} / ${total}</div>
+      <div class="quiz-score-chip" id="qdlg-score-chip">⭐ ${state.quiz.score}점</div>
+      <div id="qdlg-streak-wrap">${streakHtml}</div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="quiz-counter-chip" id="qdlg-counter-chip">${cur} / ${total}</div>
+        <button class="quiz-refresh-btn" id="qdlg-refresh-btn" title="🔄 새로고침"
+                onclick="qdlgRefreshQuiz(this)">🔄</button>
+      </div>
     </div>
     <div class="quiz-progress-label">${cur} / ${total}</div>
     <div class="progress-bar-wrap" style="margin-bottom:14px">
@@ -3180,6 +3314,143 @@ function generateChoicesDialog(correct) {
   return shuffle([correct, ...pool.slice(0,3)]);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ✅ 퀴즈 공통 이펙트 함수 (객관식·주관식 공유)
+   - quizApplyCorrectEffects(streak)  : 정답 시 모든 이펙트
+   - quizApplyWrongEffects()          : 오답 시 이미지 흔들기
+   유지보수: 이 함수만 수정하면 모든 퀴즈 모드에 반영됩니다.
+═══════════════════════════════════════════════════════════ */
+function _quizGetImgWrap() {
+  return document.querySelector('#qdlg-quiz-content .quiz-img-wrap')
+      || document.querySelector('#quiz-content .quiz-img-wrap');
+}
+
+function quizApplyCorrectEffects(streak) {
+  const imgWrap = _quizGetImgWrap();
+
+  // 1. 이미지 신나게 흔들기
+  if (imgWrap) {
+    imgWrap.classList.remove('img-wrong');
+    imgWrap.classList.add('img-correct');
+    setTimeout(() => imgWrap.classList.remove('img-correct'), 850);
+  }
+
+  // 2. 점수 칩 즉시 업데이트 + 팝 애니메이션
+  const scoreChip = document.getElementById('qdlg-score-chip');
+  if (scoreChip) {
+    scoreChip.textContent = `⭐ ${state.quiz.score}점`;
+    scoreChip.classList.remove('score-pop-anim');
+    void scoreChip.offsetWidth;
+    scoreChip.classList.add('score-pop-anim');
+    setTimeout(() => scoreChip.classList.remove('score-pop-anim'), 500);
+  }
+
+  // 3. 연속 콤보 배지 즉시 업데이트
+  const streakWrap = document.getElementById('qdlg-streak-wrap');
+  if (streakWrap) {
+    streakWrap.innerHTML = streak >= 2
+      ? `<div class="streak-badge combo-pop">🔥 ${streak}연속!</div>`
+      : `<div style="width:60px"></div>`;
+  }
+
+  // 4. 컨페티
+  showConfetti(streak >= 3 ? 40 : 22);
+
+  // 5. +N⭐ 점수 팝업 (이미지 위로 날아오름)
+  _quizSpawnScorePopup(streak, imgWrap);
+
+  // 6. 주변 이모지 스타버스트 폭발
+  _quizSpawnStarbursts(streak, imgWrap);
+}
+
+function quizApplyWrongEffects() {
+  const imgWrap = _quizGetImgWrap();
+  if (imgWrap) {
+    imgWrap.classList.remove('img-correct');
+    imgWrap.classList.add('img-wrong');
+    setTimeout(() => imgWrap.classList.remove('img-wrong'), 600);
+  }
+}
+
+function _quizSpawnScorePopup(streak, imgWrap) {
+  const wrap = imgWrap || _quizGetImgWrap();
+  if (!wrap) return;
+  const rect = wrap.getBoundingClientRect();
+  const el   = document.createElement('div');
+  el.className   = 'score-popup';
+  el.textContent = streak >= 3 ? `+${streak}🔥` : '+1⭐';
+  el.style.left  = (rect.left + rect.width / 2) + 'px';
+  el.style.top   = (rect.top + 20) + 'px';
+  el.style.transform = 'translateX(-50%)';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1200);
+}
+
+function _quizSpawnStarbursts(streak, imgWrap) {
+  const wrap   = imgWrap || _quizGetImgWrap();
+  const emojis = streak >= 5 ? ['🌟','💥','✨','🎊','🎉','🏆']
+               : streak >= 3 ? ['⭐','✨','🎉','💫','🔥']
+               :               ['⭐','✨','💫'];
+  const count  = streak >= 5 ? 7 : streak >= 3 ? 5 : 3;
+  const rect   = wrap
+    ? wrap.getBoundingClientRect()
+    : { left: window.innerWidth/2 - 95, top: window.innerHeight/2 - 95, width: 190, height: 190 };
+  const cx = rect.left + rect.width  / 2;
+  const cy = rect.top  + rect.height / 2;
+
+  // 콤보 링 파장 (3연속+)
+  if (streak >= 3) {
+    const ringColors = ['#FFD700','#FF6B6B','#4ECDC4','#A29BFE'];
+    const ring = document.createElement('div');
+    ring.className = 'combo-ring';
+    ring.style.left        = cx + 'px';
+    ring.style.top         = cy + 'px';
+    ring.style.borderColor = ringColors[(streak - 3) % ringColors.length];
+    document.body.appendChild(ring);
+    setTimeout(() => ring.remove(), 750);
+  }
+
+  // 이모지 폭발
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const angle = (360 / count) * i + Math.random() * 30;
+      const dist  = 60 + Math.random() * 80;
+      const rad   = angle * Math.PI / 180;
+      const ov    = document.createElement('div');
+      ov.className   = 'starburst-overlay';
+      ov.textContent = emojis[i % emojis.length];
+      ov.style.left  = (cx + Math.cos(rad) * dist) + 'px';
+      ov.style.top   = (cy + Math.sin(rad) * dist) + 'px';
+      document.body.appendChild(ov);
+      setTimeout(() => ov.remove(), 900);
+    }, i * 60);
+  }
+}
+
+/* ── 퀴즈 새로고침: 같은 풀에서 새로 섞어 재시작 ─── */
+function qdlgRefreshQuiz(btn) {
+  if (!state.quiz.pool || !state.quiz.pool.length) return;
+  // 버튼 스핀 애니메이션
+  if (btn) {
+    btn.classList.remove('spinning');
+    void btn.offsetWidth;
+    btn.classList.add('spinning');
+    setTimeout(() => btn.classList.remove('spinning'), 480);
+  }
+  if (state.quiz.countdownTimer) {
+    clearInterval(state.quiz.countdownTimer);
+    state.quiz.countdownTimer = null;
+  }
+  const newWords = shuffle([...state.quiz.pool]).slice(0, state.quiz.totalCount);
+  state.quiz.words    = newWords;
+  state.quiz.idx      = 0;
+  state.quiz.score    = 0;
+  state.quiz.answered = false;
+  state.quiz.streak   = 0;
+  state.quiz.maxStreak= 0;
+  renderCurrentQuizQuestion();
+}
+
 function qdlgChoiceClicked(btnIdx, wordId, correctId, wordText) {
   if (state.quiz.answered) return;
   const btn = document.getElementById(`qdlg-choice-${btnIdx}`);
@@ -3203,7 +3474,6 @@ function qdlgChoiceClicked(btnIdx, wordId, correctId, wordText) {
   });
 
   const fb = document.getElementById('qdlg-feedback');
-  const imgWrap = document.querySelector('#qdlg-quiz-content .quiz-img-wrap');
 
   if (isCorrect) {
     state.quiz.score++;
@@ -3213,17 +3483,8 @@ function qdlgChoiceClicked(btnIdx, wordId, correctId, wordText) {
     const comboMsg = state.quiz.streak >= 3 ? ` 🔥 ${state.quiz.streak}연속!` : '';
     fb.textContent = '🎉 정답이에요!' + comboMsg;
     playCorrectSound();
-    showConfetti(state.quiz.streak >= 3 ? 40 : 22);
-    // 이미지 바운스 이펙트
-    if (imgWrap) {
-      imgWrap.classList.remove('img-wrong');
-      imgWrap.classList.add('img-correct');
-      setTimeout(() => imgWrap.classList.remove('img-correct'), 850);
-    }
-    // +1⭐ 점수 팝업
-    _spawnScorePopup(state.quiz.streak);
-    // 스타버스트 이펙트
-    _spawnQuizStarbursts(state.quiz.streak, imgWrap);
+    // ── 공통 이펙트 함수 호출 ──
+    quizApplyCorrectEffects(state.quiz.streak);
     // 음성 피드백 — 정답
     speakQuizFeedback(true, state.quiz.streak);
   } else {
@@ -3232,68 +3493,10 @@ function qdlgChoiceClicked(btnIdx, wordId, correctId, wordText) {
     const correctWord = state.quiz.words[state.quiz.idx].word;
     fb.innerHTML = `❌ 아쉬워요! 정답은 <strong>${correctWord}</strong> 이에요.`;
     playWrongSound();
-    // 이미지 흔들기 이펙트
-    if (imgWrap) {
-      imgWrap.classList.remove('img-correct');
-      imgWrap.classList.add('img-wrong');
-      setTimeout(() => imgWrap.classList.remove('img-wrong'), 600);
-    }
+    // ── 공통 이펙트 함수 호출 ──
+    quizApplyWrongEffects();
     // 음성 피드백 — 오답
     speakQuizFeedback(false, 0, correctWord);
-  }
-
-  function _spawnScorePopup(streak) {
-    if (!imgWrap) return;
-    const rect = imgWrap.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + 20;
-    const el = document.createElement('div');
-    el.className = 'score-popup';
-    el.textContent = streak >= 3 ? `+${streak}🔥` : '+1⭐';
-    el.style.left = cx + 'px';
-    el.style.top  = cy + 'px';
-    el.style.transform = 'translateX(-50%)';
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 1200);
-  }
-
-  function _spawnQuizStarbursts(streak, wrap) {
-    const emojis = streak >= 5 ? ['🌟','💥','✨','🎊','🎉','🏆'] :
-                   streak >= 3 ? ['⭐','✨','🎉','💫','🔥']       :
-                                 ['⭐','✨','💫'];
-    const count = streak >= 5 ? 7 : streak >= 3 ? 5 : 3;
-    const rect = wrap ? wrap.getBoundingClientRect() : {left:window.innerWidth/2,top:window.innerHeight/2,width:190,height:190};
-    const cx = rect.left + rect.width  / 2;
-    const cy = rect.top  + rect.height / 2;
-
-    // 콤보 링 효과 (3연속+)
-    if (streak >= 3) {
-      const ringColors = ['#FFD700','#FF6B6B','#4ECDC4','#A29BFE'];
-      const ring = document.createElement('div');
-      ring.className = 'combo-ring';
-      ring.style.left  = cx + 'px';
-      ring.style.top   = cy + 'px';
-      ring.style.borderColor = ringColors[(streak - 3) % ringColors.length];
-      document.body.appendChild(ring);
-      setTimeout(() => ring.remove(), 750);
-    }
-
-    for (let i = 0; i < count; i++) {
-      setTimeout(() => {
-        const angle  = (360 / count) * i + Math.random() * 30;
-        const dist   = 60 + Math.random() * 80;
-        const rad    = angle * Math.PI / 180;
-        const px     = cx + Math.cos(rad) * dist;
-        const py     = cy + Math.sin(rad) * dist;
-        const ov     = document.createElement('div');
-        ov.className = 'starburst-overlay';
-        ov.textContent = emojis[i % emojis.length];
-        ov.style.left = px + 'px';
-        ov.style.top  = py + 'px';
-        document.body.appendChild(ov);
-        setTimeout(() => ov.remove(), 900);
-      }, i * 60);
-    }
   }
 
   // 카운트다운 다음 문제
@@ -3459,9 +3662,13 @@ function renderQuizTypingQuestion() {
 
   document.getElementById('qdlg-quiz-content').innerHTML = `
     <div class="quiz-header-bar">
-      <div class="quiz-score-chip">⭐ ${state.quiz.score}점</div>
-      ${streakHtml}
-      <div class="quiz-counter-chip">${cur} / ${total}</div>
+      <div class="quiz-score-chip" id="qdlg-score-chip">⭐ ${state.quiz.score}점</div>
+      <div id="qdlg-streak-wrap">${streakHtml}</div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="quiz-counter-chip" id="qdlg-counter-chip">${cur} / ${total}</div>
+        <button class="quiz-refresh-btn" id="qdlg-refresh-btn" title="🔄 새로고침"
+                onclick="qdlgRefreshQuiz(this)">🔄</button>
+      </div>
     </div>
     <div class="quiz-progress-label">${cur} / ${total}</div>
     <div class="progress-bar-wrap" style="margin-bottom:14px">
@@ -3596,13 +3803,16 @@ function typingSubmit() {
     const comboMsg = state.quiz.streak >= 3 ? ` 🔥 ${state.quiz.streak}연속!` : '';
     fb.textContent = '🎉 정답이에요!' + comboMsg;
     playCorrectSound();
-    showConfetti(state.quiz.streak >= 3 ? 40 : 22);
+    // ── 공통 이펙트 함수 호출 ──
+    quizApplyCorrectEffects(state.quiz.streak);
     speakQuizFeedback(true, state.quiz.streak);
   } else {
     state.quiz.streak = 0;
     fb.className = 'quiz-feedback wrong';
     fb.innerHTML = `❌ 아쉬워요! 정답은 <strong>${correct.word}</strong> 이에요.`;
     playWrongSound();
+    // ── 공통 이펙트 함수 호출 ──
+    quizApplyWrongEffects();
     // 정답 말해주기
     setTimeout(() => speak(correct.word), 800);
     speakQuizFeedback(false, 0, correct.word);
@@ -3763,9 +3973,13 @@ function renderQuizQuestion() {
 
   document.getElementById('quiz-content').innerHTML = `
     <div class="quiz-header-bar">
-      <div class="quiz-score-chip">⭐ ${state.quiz.score}점</div>
-      ${streakHtml}
-      <div class="quiz-counter-chip">${cur} / ${total}</div>
+      <div class="quiz-score-chip" id="qdlg-score-chip">⭐ ${state.quiz.score}점</div>
+      <div id="qdlg-streak-wrap">${streakHtml}</div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="quiz-counter-chip" id="qdlg-counter-chip">${cur} / ${total}</div>
+        <button class="quiz-refresh-btn" title="🔄 새로고침"
+                onclick="qdlgRefreshQuiz(this)">🔄</button>
+      </div>
     </div>
 
     <div class="quiz-progress-label">${cur} / ${total}</div>
@@ -4610,6 +4824,14 @@ function _updatePuzzleDiffBadge(diff) {
 }
 
 /* ── 선택 필터 → 랜덤 퍼즐 생성 진입점 ── */
+/* ── 새로고침: 단어 + 그리드 모두 새로 생성 (라운드 유지) ─── */
+function refreshPuzzleLayout() {
+  // 라운드 카운터는 그대로 유지하면서 새 단어 + 새 그리드 생성
+  clearTimeout(puzzleState.roundTimer);
+  _startPuzzleRound();
+}
+
+
 function startPuzzleFromSelected() {
   resetPuzzleRounds();
   _startPuzzleRound();
@@ -4971,7 +5193,11 @@ function renderPuzzleGame(cat, cfg) {
     for (let c = 0; c < gs; c++) {
       gridHtml += `<div class="puzzle-cell" id="pc-${r}-${c}"
         data-r="${r}" data-c="${c}"
-        onclick="puzzleCellClick(${r},${c})">${puzzleState.grid[r][c]}</div>`;
+        onmousedown="puzzleDragStart(event,${r},${c})"
+        onmousemove="puzzleDragOver(${r},${c})"
+        onmouseup="puzzleDragEnd(event)"
+        ontouchstart="puzzleTouchStart(event,${r},${c})"
+        >${puzzleState.grid[r][c]}</div>`;
     }
   }
 
@@ -4980,9 +5206,9 @@ function renderPuzzleGame(cat, cfg) {
   if (scattered) {
     dirHint = '🔍 음절을 <b>순서대로</b> 하나씩 탭해요!<br>숨겨진 단어를 찾아보세요!';
   } else if (cfg.directions.length === 1) {
-    dirHint = '👆 가로(→) 방향으로만 단어가 숨어있어요!<br>첫 글자 탭 → 끝 글자 탭!';
+    dirHint = '👆 가로(→) 방향으로만 단어가 숨어있어요!<br>끌거나 한 글자씩 탭해 보세요!';
   } else {
-    dirHint = '👆 가로(→)·세로(↓) 방향으로 단어가 숨어있어요!<br>첫 글자 탭 → 끝 글자 탭!';
+    dirHint = '👆 가로(→)·세로(↓) 방향으로 단어가 숨어있어요!<br>끌거나 한 글자씩 탭해 보세요!';
   }
 
   // 라운드 도트 HTML
@@ -5008,7 +5234,9 @@ function renderPuzzleGame(cat, cfg) {
     <div class="puzzle-instruction">${dirHint}</div>
     <div class="puzzle-grid-wrap">
       <div class="puzzle-grid ${cfg.cellClass}" id="puzzle-grid"
-           style="grid-template-columns:repeat(${gs},1fr)">
+           style="grid-template-columns:repeat(${gs},1fr);touch-action:none"
+           ontouchmove="puzzleTouchMove(event)"
+           ontouchend="puzzleTouchEnd(event)">
         ${gridHtml}
       </div>
     </div>
@@ -5017,7 +5245,7 @@ function renderPuzzleGame(cat, cfg) {
       <button class="btn btn-sm" style="background:linear-gradient(135deg,#7E57C2,#9C27B0);color:white"
               onclick="puzzleHint()">💡 힌트</button>
       <button class="btn btn-gray btn-sm"
-              onclick="startPuzzleFromSelected()">🔀 새 퍼즐</button>
+              onclick="refreshPuzzleLayout()">🔄 새로고침</button>
       <button class="btn btn-green btn-sm"
               onclick="speakPuzzleTargets()">🔊 단어 듣기</button>
     </div>`;
@@ -5042,6 +5270,117 @@ function renderPuzzleGame(cat, cfg) {
 }
 
 /* ── 셀 클릭 처리 (모드 분기) ──────── */
+/* ═══════════════════════════════════════════════════════════
+   초급/중급 드래그 & 탭 인터랙션
+═══════════════════════════════════════════════════════════ */
+let _puzzleDrag = { active: false, startR: -1, startC: -1,
+                    cells: [], direction: null, moved: false };
+
+function _clearDragVisual() {
+  document.querySelectorAll('.puzzle-cell.selected-start, .puzzle-cell.selected-path')
+    .forEach(el => el.classList.remove('selected-start', 'selected-path'));
+}
+
+function _buildDragCells(startR, startC, endR, endC, dir) {
+  const cells = [];
+  if (dir === 'H' && endR === startR) {
+    const lo = Math.min(startC, endC), hi = Math.max(startC, endC);
+    for (let col = lo; col <= hi; col++) cells.push({r: startR, c: col});
+  } else if (dir === 'V' && endC === startC) {
+    const lo = Math.min(startR, endR), hi = Math.max(startR, endR);
+    for (let row = lo; row <= hi; row++) cells.push({r: row, c: startC});
+  }
+  return cells;
+}
+
+function _applyDragVisual(cells) {
+  cells.forEach(({r, c}, i) => {
+    const el = document.getElementById(`pc-${r}-${c}`);
+    if (el) el.classList.add(i === 0 ? 'selected-start' : 'selected-path');
+  });
+}
+
+function puzzleDragStart(event, r, c) {
+  if (puzzleState.scatteredMode) {
+    // 고급: 드래그 없이 즉시 탭 처리 (한 글자씩 선택)
+    puzzleCellClickScattered(r, c);
+    return;
+  }
+  event.preventDefault();
+  const foundClasses = ['found-0','found-1','found-2','found-3','found-4'];
+  const cellEl = document.getElementById(`pc-${r}-${c}`);
+  if (!cellEl || foundClasses.some(cls => cellEl.classList.contains(cls))) return;
+  _clearDragVisual();
+  _puzzleDrag = { active: true, startR: r, startC: c, cells: [{r,c}], direction: null, moved: false };
+}
+
+function puzzleDragOver(r, c) {
+  if (!_puzzleDrag.active) return;
+  const { startR, startC } = _puzzleDrag;
+  if (r === startR && c === startC) return;
+
+  // 방향 결정 (첫 이동 시 고정)
+  if (!_puzzleDrag.direction) {
+    if (r === startR)      _puzzleDrag.direction = 'H';
+    else if (c === startC) _puzzleDrag.direction = 'V';
+    else return; // 대각선 무시
+  }
+
+  const dir = _puzzleDrag.direction;
+  // 방향 제약 이탈 시 무시
+  if (dir === 'H' && r !== startR) return;
+  if (dir === 'V' && c !== startC) return;
+
+  const newCells = _buildDragCells(startR, startC, r, c, dir);
+  if (!newCells.length) return;
+
+  _puzzleDrag.moved = true;
+  _puzzleDrag.cells = newCells;
+  _clearDragVisual();
+  _applyDragVisual(newCells);
+}
+
+function puzzleDragEnd(event) {
+  if (!_puzzleDrag.active) return;
+  _puzzleDrag.active = false;
+  const { moved, startR, startC, cells } = _puzzleDrag;
+
+  if (!moved) {
+    // 이동 없음 → 탭으로 처리 (난이도에 맞는 클릭 함수로 라우팅)
+    _clearDragVisual();
+    puzzleCellClick(startR, startC);
+    return;
+  }
+
+  // 드래그 완료 → 단어 체크
+  const wordText = cells.map(({r, c}) => puzzleState.grid[r][c]).join('');
+  setTimeout(() => puzzleCheckWord(wordText, cells), 80);
+}
+
+function puzzleTouchStart(event, r, c) {
+  event.preventDefault();
+  if (puzzleState.scatteredMode) {
+    // 고급: 터치도 한 글자씩 탭 처리
+    puzzleCellClickScattered(r, c);
+    return;
+  }
+  puzzleDragStart(event, r, c);
+}
+
+function puzzleTouchMove(event) {
+  event.preventDefault();
+  const touch = event.touches[0];
+  const target = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (!target) return;
+  const r = parseInt(target.dataset.r), c = parseInt(target.dataset.c);
+  if (!isNaN(r) && !isNaN(c)) puzzleDragOver(r, c);
+}
+
+function puzzleTouchEnd(event) {
+  event.preventDefault();
+  puzzleDragEnd(event);
+}
+
 function puzzleCellClick(r, c) {
   if (puzzleState.scatteredMode) {
     puzzleCellClickScattered(r, c);
@@ -5059,9 +5398,11 @@ function puzzleCellClickNormal(r, c) {
 
   if (!puzzleState.selectedStart) {
     // ★ 1글자 단어: 단일 탭으로 즉시 인식
+    // ★ 위치(r,c)가 아닌 글자 매칭 → 같은 글자면 어느 셀이든 정답 인정
+    const tappedChar = puzzleState.grid[r][c];
     const oneSyl = puzzleState.allPlaced.find(p =>
-      p.isTarget && !p.found && p.cells.length === 1 &&
-      p.cells[0].r === r && p.cells[0].c === c
+      p.isTarget && !p.found && p.word.syllables.length === 1 &&
+      p.word.syllables[0] === tappedChar
     );
     if (oneSyl) {
       puzzleCheckWord(oneSyl.word.syllables.join(''), [{r, c}]);
@@ -5076,7 +5417,18 @@ function puzzleCellClickNormal(r, c) {
     const startEl = document.getElementById(`pc-${start.r}-${start.c}`);
     if (startEl) startEl.classList.remove('selected-start', 'selected-path');
 
-    if (start.r === r && start.c === c) return;
+    // 같은 셀을 두 번 탭 → 1글자 단어 체크 (글자 기반)
+    if (start.r === r && start.c === c) {
+      const tappedChar2 = puzzleState.grid[r][c];
+      const oneSyl2 = puzzleState.allPlaced.find(p =>
+        p.isTarget && !p.found && p.word.syllables.length === 1 &&
+        p.word.syllables[0] === tappedChar2
+      );
+      if (oneSyl2) {
+        puzzleCheckWord(oneSyl2.word.syllables.join(''), [{r, c}]);
+      }
+      return;
+    }
 
     let selectedCells = [];
     if (start.r === r) {
@@ -5247,6 +5599,7 @@ function puzzleCheckWord(wordText, cells) {
     matched.found = true;
     const colorIdx = puzzleState.foundCount++;
 
+    // 선택한 셀 하이라이트 (글자 매칭 → 어느 셀이든 정답 인정)
     cells.forEach(({r, c}) => {
       const el = document.getElementById(`pc-${r}-${c}`);
       if (el) {
@@ -5255,6 +5608,13 @@ function puzzleCheckWord(wordText, cells) {
         el.classList.add(`found-${colorIdx}`, 'found-bounce');
         setTimeout(() => el.classList.remove('found-bounce'), 500);
       }
+    });
+
+    // 원래 배치된 셀에 힌트 클래스가 남아있으면 제거 (위치 다른 경우 대비)
+    const hintCls = ['easy-hint-0','easy-hint-1','easy-hint-2','easy-hint-3','easy-hint-4'];
+    matched.cells.forEach(({r, c}) => {
+      const el = document.getElementById(`pc-${r}-${c}`);
+      if (el) el.classList.remove(...hintCls, 'selected-start', 'selected-path');
     });
 
     // 타겟 카드 업데이트 + 흔들림 효과
