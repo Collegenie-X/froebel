@@ -260,8 +260,8 @@
     .listen-emoji-wrap,
     .quiz-emoji-wrap,
     .puzzle-target-emoji {
-      filter: drop-shadow(0 3px 6px rgba(255,255,255,0.52))
-              drop-shadow(0 1px 6px  rgba(255,255,255,0.28))
+      filter: drop-shadow(0 3px 14px rgba(255,255,255,0.72))
+              drop-shadow(0 1px 6px  rgba(255,255,255,0.48))
               drop-shadow(0 2px 5px  rgba(0,0,0,0.09));
     }
 
@@ -352,7 +352,7 @@
     .listen-img-wrap {
       width: 220px; height: 220px; margin: 0 auto 16px;
       border-radius: 22px; overflow: hidden; position: relative;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.18), 0 0 10px rgba(190,190,190,0.28);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18), 0 0 20px rgba(255,255,255,0.28);
       cursor: pointer;
     }
 
@@ -4757,7 +4757,7 @@ const PUZZLE_CONFIG = {
   medium: {
     name:          '중급',
     gridSize:      5,
-    targetCount:   4,        // ★ 라운드당 고정 단어 수
+    targetCount:   3,        // ★ 라운드당 고정 단어 수
     totalRounds:   3,        // ★ 총 라운드 수
     fillerCount:   4,
     directions:    ['H','V'],
@@ -4769,7 +4769,7 @@ const PUZZLE_CONFIG = {
   hard: {
     name:          '고급',
     gridSize:      6,
-    targetCount:   4,        // ★ 라운드당 고정 단어 수
+    targetCount:   3,        // ★ 라운드당 고정 단어 수
     totalRounds:   3,        // ★ 총 라운드 수
     fillerCount:   0,
     directions:    [],
@@ -5235,10 +5235,6 @@ function renderPuzzleGame(cat, cfg) {
   }).join('');
 
   content.innerHTML = `
-    <div class="puzzle-round-bar">
-      <span class="round-label">라운드</span>
-      <div class="round-dots">${roundDots}</div>
-    </div>
     <div class="puzzle-progress-text" id="puzzle-prog-text">
       0 / ${puzzleState.targetWords.length} 단어 발견! 🔍
     </div>
@@ -5246,7 +5242,6 @@ function renderPuzzleGame(cat, cfg) {
       <div class="puzzle-progress-fill" id="puzzle-prog-fill" style="width:0%"></div>
     </div>
     <div class="puzzle-targets">${targetCardsHtml}</div>
-    <div class="puzzle-instruction">${dirHint}</div>
     <div class="puzzle-grid-wrap">
       <div class="puzzle-grid ${cfg.cellClass}" id="puzzle-grid"
            style="grid-template-columns:repeat(${gs},1fr);touch-action:none"
