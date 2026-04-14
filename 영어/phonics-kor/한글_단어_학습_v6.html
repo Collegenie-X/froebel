@@ -1277,7 +1277,7 @@
       position: fixed; inset: 0; z-index: 6000;
       background: rgba(0,0,0,0.6);
       display: flex; align-items: center; justify-content: center;
-      padding: 12px;
+      padding: 8px;
       opacity: 0; pointer-events: none;
       transition: opacity 0.28s;
       backdrop-filter: blur(6px);
@@ -1286,7 +1286,7 @@
     .puzzle-dialog {
       background: white; border-radius: 28px;
       box-shadow: 0 28px 70px rgba(0,0,0,0.32);
-      width: 100%; max-width: 540px;
+      width: 100%; max-width: 430px;
       max-height: 96vh; overflow-y: auto;
       transform: scale(0.82) translateY(30px);
       transition: transform 0.32s cubic-bezier(0.34,1.4,0.64,1);
@@ -1309,6 +1309,19 @@
       transition: background 0.2s; flex-shrink: 0;
     }
     .pdlg-close-btn:hover { background: rgba(255,255,255,0.45); }
+    .pdlg-refresh-btn {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: #ede7f6; border: 1.5px solid #ce93d8; cursor: pointer;
+      font-size: 0.95em; color: #7E57C2;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.45s; flex-shrink: 0;
+      vertical-align: middle;
+    }
+    .pdlg-refresh-btn:hover { background: #d1c4e9; }
+    .pdlg-refresh-btn.spinning { animation: refreshSpin 0.45s ease; }
+    @keyframes refreshSpin {
+      from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+    }
 
     /* ── 난이도 탭 ── */
     .puzzle-diff-tabs {
@@ -1339,18 +1352,31 @@
 
     /* ── 선택 주제 정보 표시 ── */
     .puzzle-source-info {
-      padding: 8px 16px 0;
-      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
-      justify-content: center; font-size: 0.8em; color: #888;
+      padding: 6px 10px 0;
+      display: flex; align-items: center; gap: 4px; flex-wrap: nowrap;
+      justify-content: center; font-size: 0.8em; color: #888; overflow: hidden;
     }
     .puzzle-source-chip {
-      display: inline-flex; align-items: center; gap: 3px;
-      background: #f3f0ff; border-radius: 12px; padding: 3px 9px;
-      font-size: 0.9em; color: #6A1B9A; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #f3f0ff; border-radius: 10px; padding: 2px 5px;
+      font-size: 1.1em; color: #6A1B9A; font-weight: 700;
       border: 1.5px solid #d1c4e9;
+    }
+    .puzzle-source-more {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #ede7f6; border-radius: 10px; padding: 2px 6px;
+      font-size: 0.82em; color: #7B1FA2; font-weight: 700;
+      border: 1.5px solid #ce93d8;
     }
     .puzzle-word-count {
       color: #9C27B0; font-weight: 900;
+    }
+    /* 진행 카운트 칩 (총 N단어 풀 옆) */
+    .puzzle-prog-chip {
+      display: inline-flex; align-items: center; gap: 3px;
+      background: #fdf4ff; border-radius: 12px; padding: 3px 9px;
+      font-size: 0.9em; color: #7E57C2; font-weight: 900;
+      border: 1.5px solid #ce93d8;
     }
 
     /* ── 퍼즐 바디 ── */
@@ -1358,13 +1384,16 @@
 
     /* ── 상단 타겟 이미지 카드 3개 ── */
     .puzzle-targets {
-      display: flex; gap: 8px; justify-content: center;
-      margin-bottom: 14px; flex-wrap: wrap;
+      width: 340px; margin: 0 auto;
+      height: 135px;
+      padding-top: 10px;
+      display: flex; gap: 4px; justify-content: center;
+      margin-bottom: 14px; flex-wrap: nowrap; overflow-x: hidden; align-items: stretch;
     }
     .puzzle-target-card {
-      background: #f5f0ff; border-radius: 16px;
-      border: 2.5px solid #d1c4e9; padding: 8px 10px;
-      text-align: center; min-width: 82px; max-width: 120px; flex: 1;
+      background: #f5f0ff; border-radius: 12px;
+      border: 2.5px solid #d1c4e9; padding: 10px 6px;
+      text-align: center; min-width: 0; max-width: none; flex: 1 1 0;
       transition: all var(--transition); position: relative;
       box-shadow: 0 2px 10px rgba(0,0,0,0.09), 0 0 14px rgba(255,255,255,0.32);
     }
@@ -1376,9 +1405,9 @@
       content: '✅'; position: absolute; top: -10px; right: -8px;
       font-size: 1.2em; animation: correctPop 0.4s ease;
     }
-    .puzzle-target-emoji { font-size: 2.4em; line-height: 1; margin-bottom: 4px; display: block; }
-    .puzzle-target-emoji img.emoji { width: 44px; height: 44px; }
-    .puzzle-target-word { font-size: 1.1em; color: #2c3e50; font-weight: 700; letter-spacing: 1px; }
+    .puzzle-target-emoji { font-size: 2.8em; line-height: 1; margin-bottom: 2px; display: block; }
+    .puzzle-target-emoji img.emoji { width: 50px; height: 50px; }
+    .puzzle-target-word { font-size: 0.78em; color: #2c3e50; font-weight: 700; letter-spacing: 0px; }
     .puzzle-target-card.found .puzzle-target-word { color: #2E7D32; }
     .puzzle-target-badge {
       display: inline-block; font-size: 0.65em;
@@ -1420,9 +1449,9 @@
       position: relative;
     }
     /* 난이도별 셀 크기 */
-    .diff-easy   .puzzle-cell { width: 72px; height: 72px; font-size: 1.55em; }
-    .diff-medium .puzzle-cell { width: 60px; height: 60px; font-size: 1.36em; }
-    .diff-hard   .puzzle-cell { width: 50px; height: 50px; font-size: 1.18em; }
+    .diff-easy   .puzzle-cell { width: 78px; height: 78px; font-size: 1.6em; }
+    .diff-medium .puzzle-cell { width: 66px; height: 66px; font-size: 1.42em; }
+    .diff-hard   .puzzle-cell { width: 56px; height: 56px; font-size: 1.24em; }
 
     .puzzle-cell:hover:not(.found-0):not(.found-1):not(.found-2):not(.found-3):not(.found-4) {
       transform: scale(1.09); box-shadow: 0 4px 12px rgba(126,87,194,0.22);
@@ -1454,11 +1483,11 @@
     /* 단어 완성 폭발 */
     .puzzle-cell.cell-burst  { animation: cellBurst 0.65s ease forwards; }
     /* 음절 진행 박스 (고급 모드) */
-    .syl-progress { display: flex; gap: 4px; justify-content: center; margin-top: 5px; flex-wrap: wrap; }
+    .syl-progress { display: flex; gap: 2px; justify-content: center; margin-top: 4px; flex-wrap: nowrap; }
     .syl-box {
       display: inline-flex; align-items: center; justify-content: center;
-      width: 26px; height: 26px; border-radius: 7px;
-      font-size: 0.82em; font-weight: 900;
+      width: 22px; height: 22px; border-radius: 6px;
+      font-size: 0.68em; font-weight: 900;
       border: 2px dashed #d0c4f0; color: #ccc; background: white;
       transition: all 0.25s;
     }
@@ -1485,6 +1514,29 @@
     @keyframes cellPulse {
       0%,100% { box-shadow: 0 4px 14px rgba(249,168,37,0.35); }
       50% { box-shadow: 0 4px 22px rgba(249,168,37,0.7); }
+    }
+    /* ── 힌트 셀 강조 깜빡임 (이미지 카드 클릭 시) ── */
+    @keyframes hintCellBlink {
+      0%   { background: linear-gradient(135deg,#FFE082,#FFCA28);
+             box-shadow: 0 0 0 4px rgba(255,160,0,0.6);
+             transform: scale(1.22); }
+      25%  { background: white;
+             box-shadow: 0 0 0 2px rgba(255,160,0,0.2);
+             transform: scale(1.05); }
+      50%  { background: linear-gradient(135deg,#FFE082,#FFCA28);
+             box-shadow: 0 0 0 6px rgba(255,160,0,0.7);
+             transform: scale(1.25); }
+      75%  { background: white;
+             box-shadow: 0 0 0 2px rgba(255,160,0,0.2);
+             transform: scale(1.05); }
+      100% { background: linear-gradient(135deg,#FFE082,#FFCA28);
+             box-shadow: 0 0 0 4px rgba(255,160,0,0.5);
+             transform: scale(1.18); }
+    }
+    .puzzle-cell.hint-blink {
+      animation: hintCellBlink 0.48s ease-in-out 2 !important;
+      border-color: #F57F17 !important;
+      z-index: 5; position: relative;
     }
     @keyframes foundBounce {
       0%{ transform: scale(1); } 30%{ transform: scale(1.28); }
@@ -4840,6 +4892,16 @@ function _updatePuzzleDiffBadge(diff) {
 
 /* ── 선택 필터 → 랜덤 퍼즐 생성 진입점 ── */
 /* ── 새로고침: 단어 + 그리드 모두 새로 생성 (라운드 유지) ─── */
+function pdlgRefresh(btn) {
+  if (btn) {
+    btn.classList.remove('spinning');
+    void btn.offsetWidth;
+    btn.classList.add('spinning');
+    setTimeout(() => btn.classList.remove('spinning'), 480);
+  }
+  refreshPuzzleLayout();
+}
+
 function refreshPuzzleLayout() {
   // 라운드 카운터는 그대로 유지하면서 새 단어 + 새 그리드 생성
   clearTimeout(puzzleState.roundTimer);
@@ -4887,13 +4949,18 @@ function renderPuzzleSourceInfo(pool) {
     return;
   }
 
-  const chips = selCats.map(c =>
-    `<span class="puzzle-source-chip">${c.icon} ${c.name}</span>`
+  const MAX_ICONS = 5;
+  const iconChips = selCats.slice(0, MAX_ICONS).map(c =>
+    `<span class="puzzle-source-chip" title="${c.name}">${c.icon}</span>`
   ).join('');
+  const moreLabel = selCats.length > MAX_ICONS
+    ? `<span class="puzzle-source-more">+${selCats.length - MAX_ICONS}</span>` : '';
 
   infoEl.innerHTML = `
-    ${chips}
-    <span class="puzzle-word-count">총 ${pool.length}단어 풀</span>`;
+    ${iconChips}${moreLabel}
+    <span class="puzzle-word-count">총 ${pool.length}단어 풀</span>
+    <button class="pdlg-refresh-btn" id="pdlg-refresh-btn"
+            onclick="pdlgRefresh(this)" title="새로고침">🔄</button>`;
 }
 
 /* ── 단어 풀로 퍼즐 생성 ─────────── */
@@ -5180,20 +5247,23 @@ function renderPuzzleGame(cat, cfg) {
 
     // 고급 모드: 음절 진행 박스 표시
     let bottomHtml = '';
-    if (scattered) {
-      const prog = puzzleState.wordProgress[w.id] || 0;
-      const boxes = w.syllables.map((syl, i) => {
-        const cls = i < prog ? `done-${wIdx}` : '';
-        return `<span class="syl-box ${cls}" id="sylbox-${w.id}-${i}">${i < prog ? syl : '?'}</span>`;
-      }).join('');
-      bottomHtml = `<div class="syl-progress">${boxes}</div>`;
-    } else {
-      bottomHtml = isFound ? `<div class="puzzle-target-badge">✓ 찾았어요!</div>` : '';
+    {  // 전체 모드 공통: 음절 진행 박스 (? → 찾으면 글자)
+      if (isFound) {
+        const boxes2 = w.syllables.map((syl, i) => `<span class="syl-box done-${wIdx}" id="sylbox-${w.id}-${i}">${syl}</span>`).join('');
+        bottomHtml = `<div class="syl-progress">${boxes2}</div>`;
+      } else {
+        const prog = puzzleState.wordProgress[w.id] || 0;
+        const boxes = w.syllables.map((syl, i) => {
+          const cls = i < prog ? `done-${wIdx}` : '';
+          return `<span class="syl-box ${cls}" id="sylbox-${w.id}-${i}">${i < prog ? syl : '?'}</span>`;
+        }).join('');
+        bottomHtml = `<div class="syl-progress">${boxes}</div>`;
+      }
     }
 
     return `
     <div class="puzzle-target-card ${isFound ? 'found' : ''}" id="ptc-${w.id}"
-         onclick="speakPuzzleCard('${w.word.replace(/'/g,"\\'")}', '${w.id}')"
+         onclick="speakPuzzleCard('${w.word.replace(/'/g,"\\'")}', '${w.id}'); puzzleCardHint(${w.id})"
          style="cursor:pointer">
       <span class="puzzle-target-emoji" id="pte-${w.id}">${w.emoji}</span>
       <div class="puzzle-target-word">${w.word}</div>
@@ -5235,12 +5305,6 @@ function renderPuzzleGame(cat, cfg) {
   }).join('');
 
   content.innerHTML = `
-    <div class="puzzle-progress-text" id="puzzle-prog-text">
-      0 / ${puzzleState.targetWords.length} 단어 발견! 🔍
-    </div>
-    <div class="puzzle-progress-bar">
-      <div class="puzzle-progress-fill" id="puzzle-prog-fill" style="width:0%"></div>
-    </div>
     <div class="puzzle-targets">${targetCardsHtml}</div>
     <div class="puzzle-grid-wrap">
       <div class="puzzle-grid ${cfg.cellClass}" id="puzzle-grid"
@@ -5250,15 +5314,7 @@ function renderPuzzleGame(cat, cfg) {
         ${gridHtml}
       </div>
     </div>
-    <div class="puzzle-hint-box" id="puzzle-hint-box">💡 단어를 찾아보세요!</div>
-    <div class="puzzle-controls">
-      <button class="btn btn-sm" style="background:linear-gradient(135deg,#7E57C2,#9C27B0);color:white"
-              onclick="puzzleHint()">💡 힌트</button>
-      <button class="btn btn-gray btn-sm"
-              onclick="refreshPuzzleLayout()">🔄 새로고침</button>
-      <button class="btn btn-green btn-sm"
-              onclick="speakPuzzleTargets()">🔊 단어 듣기</button>
-    </div>`;
+  `;
 
   // Twemoji 적용
   puzzleState.targetWords.forEach(w => {
@@ -5406,40 +5462,92 @@ function puzzleCellClickNormal(r, c) {
   const foundClasses = ['found-0','found-1','found-2','found-3','found-4'];
   if (foundClasses.some(cls => cellEl.classList.contains(cls))) return;
 
-  if (!puzzleState.selectedStart) {
-    // ★ 1글자 단어: 단일 탭으로 즉시 인식
-    // ★ 위치(r,c)가 아닌 글자 매칭 → 같은 글자면 어느 셀이든 정답 인정
-    const tappedChar = puzzleState.grid[r][c];
-    const oneSyl = puzzleState.allPlaced.find(p =>
-      p.isTarget && !p.found && p.word.syllables.length === 1 &&
-      p.word.syllables[0] === tappedChar
-    );
-    if (oneSyl) {
-      puzzleCheckWord(oneSyl.word.syllables.join(''), [{r, c}]);
-      return;
+  const tappedChar = puzzleState.grid[r][c];
+
+  // ── ① 1글자 단어: 단일 탭 즉시 정답 ──
+  const oneSyl = puzzleState.allPlaced.find(p =>
+    p.isTarget && !p.found && p.word.syllables.length === 1 &&
+    p.word.syllables[0] === tappedChar
+  );
+  if (oneSyl) {
+    puzzleState.selectedStart = null;
+    document.querySelectorAll('.puzzle-cell.selected-start, .puzzle-cell.selected-path')
+      .forEach(el => el.classList.remove('selected-start', 'selected-path'));
+    puzzleCheckWord(oneSyl.word.syllables.join(''), [{r, c}]);
+    return;
+  }
+
+  // ── ② ★ 한 글자씩 순서 탭 정답 (추가 기능) ──
+  // 진행 중 단어(prog>0) 우선 → 없으면 첫 음절 매칭
+  let seqMatch = null, seqColorIdx = -1, seqProgress = 0;
+  for (const pl of puzzleState.allPlaced) {
+    if (!pl.isTarget || pl.found) continue;
+    const prog = puzzleState.wordProgress[pl.word.id] || 0;
+    if (prog > 0 && pl.word.syllables[prog] === tappedChar) {
+      seqMatch = pl; seqProgress = prog;
+      seqColorIdx = puzzleState.targetWords.findIndex(t => t.id === pl.word.id);
+      break;
     }
+  }
+  if (!seqMatch) {
+    for (const pl of puzzleState.allPlaced) {
+      if (!pl.isTarget || pl.found) continue;
+      const prog = puzzleState.wordProgress[pl.word.id] || 0;
+      if (prog === 0 && pl.word.syllables[0] === tappedChar) {
+        seqMatch = pl; seqProgress = 0;
+        seqColorIdx = puzzleState.targetWords.findIndex(t => t.id === pl.word.id);
+        break;
+      }
+    }
+  }
+  if (seqMatch) {
+    // 기존 start 선택 초기화
+    if (puzzleState.selectedStart) {
+      const prevEl = document.getElementById(`pc-${puzzleState.selectedStart.r}-${puzzleState.selectedStart.c}`);
+      if (prevEl) prevEl.classList.remove('selected-start', 'selected-path');
+      puzzleState.selectedStart = null;
+    }
+    puzzleState.wordProgress[seqMatch.word.id] = seqProgress + 1;
+    // easy-hint 클래스 먼저 제거 (초급 힌트 색이 found 색을 덮어씌우는 문제 방지)
+    cellEl.classList.remove('easy-hint-0','easy-hint-1','easy-hint-2','easy-hint-3','easy-hint-4',
+                             'selected-start','selected-path');
+    cellEl.classList.add(`found-${seqColorIdx}`, 'found-bounce', 'seq-correct');
+    setTimeout(() => cellEl.classList.remove('found-bounce'), 500);
+    speak(tappedChar);
+    updateSylBox(seqMatch.word.id, seqProgress, seqProgress, seqColorIdx, tappedChar);
+    const totalSyls = seqMatch.word.syllables.length;
+    if (seqProgress + 1 >= totalSyls) {
+      seqMatch.found = true;
+      puzzleState.foundCount++;
+      setTimeout(() => triggerWordExplosion(r, c, seqMatch, seqColorIdx), 100);
+      showPuzzleHintBox(`🎉 "${seqMatch.word.word}" 완성! 🎆`);
+      speak(seqMatch.word.word);
+      playCorrectSound();
+      showConfetti(35);
+      updatePuzzleProgressBar();
+      updatePuzzleTargetCard(seqMatch.word.id, seqColorIdx);
+      if (puzzleState.foundCount >= puzzleState.targetWords.length) {
+        setTimeout(renderPuzzleComplete, 1600);
+      }
+    } else {
+      const rem = totalSyls - (seqProgress + 1);
+      showPuzzleHintBox(`👍 "${seqMatch.word.word}" ${seqProgress+1}/${totalSyls} — ${rem}글자 더!`);
+      updatePuzzleProgressBar();
+    }
+    return;
+  }
+
+  // ── ③ 기존: 첫 글자/끝 글자 선택 방식 (유지) ──
+  if (!puzzleState.selectedStart) {
     puzzleState.selectedStart = {r, c};
     cellEl.classList.add('selected-start');
-    speak(puzzleState.grid[r][c]);
+    speak(tappedChar);
   } else {
     const start = puzzleState.selectedStart;
     puzzleState.selectedStart = null;
     const startEl = document.getElementById(`pc-${start.r}-${start.c}`);
     if (startEl) startEl.classList.remove('selected-start', 'selected-path');
-
-    // 같은 셀을 두 번 탭 → 1글자 단어 체크 (글자 기반)
-    if (start.r === r && start.c === c) {
-      const tappedChar2 = puzzleState.grid[r][c];
-      const oneSyl2 = puzzleState.allPlaced.find(p =>
-        p.isTarget && !p.found && p.word.syllables.length === 1 &&
-        p.word.syllables[0] === tappedChar2
-      );
-      if (oneSyl2) {
-        puzzleCheckWord(oneSyl2.word.syllables.join(''), [{r, c}]);
-      }
-      return;
-    }
-
+    if (start.r === r && start.c === c) { return; }
     let selectedCells = [];
     if (start.r === r) {
       const minC = Math.min(start.c, c), maxC = Math.max(start.c, c);
@@ -5451,14 +5559,10 @@ function puzzleCellClickNormal(r, c) {
       showPuzzleHintBox('😅 가로 또는 세로로만 선택해 주세요!');
       return;
     }
-
     selectedCells.forEach(({r: pr, c: pc}) => {
       const el = document.getElementById(`pc-${pr}-${pc}`);
-      if (el && !foundClasses.some(cls => el.classList.contains(cls))) {
-        el.classList.add('selected-path');
-      }
+      if (el && !foundClasses.some(cls => el.classList.contains(cls))) el.classList.add('selected-path');
     });
-
     const wordText = selectedCells.map(({r: pr, c: pc}) => puzzleState.grid[pr][pc]).join('');
     setTimeout(() => puzzleCheckWord(wordText, selectedCells), 110);
   }
@@ -5556,7 +5660,7 @@ function updatePuzzleProgressBar() {
   const fillEl  = document.getElementById('puzzle-prog-fill');
   const textEl  = document.getElementById('puzzle-prog-text');
   if (fillEl) fillEl.style.width = pct + '%';
-  if (textEl) textEl.textContent = `${puzzleState.foundCount} / ${total} 단어 발견! 🔍`;
+  if (textEl) textEl.textContent = `${puzzleState.foundCount} / ${total} 발견 🔍`;
 }
 
 /* ── 단어 완성 폭발 효과 ────────────── */
@@ -5627,14 +5731,18 @@ function puzzleCheckWord(wordText, cells) {
       if (el) el.classList.remove(...hintCls, 'selected-start', 'selected-path');
     });
 
-    // 타겟 카드 업데이트 + 흔들림 효과
+    // 타겟 카드 업데이트 + 흔들림 효과 + 음절 박스 오픈
     const tcEl = document.getElementById(`ptc-${matched.word.id}`);
     if (tcEl) {
       tcEl.classList.add('found', 'word-explode');
-      const badge = tcEl.querySelector('.puzzle-target-badge');
-      if (badge) badge.textContent = '✓ 찾았어요!';
       setTimeout(() => tcEl.classList.remove('word-explode'), 750);
     }
+    // ★ syl-box 전체 완성 (? → 실제 글자 + 색상)
+    puzzleState.wordProgress[matched.word.id] = matched.word.syllables.length;
+    matched.word.syllables.forEach((syl, i) => {
+      const boxEl = document.getElementById(`sylbox-${matched.word.id}-${i}`);
+      if (boxEl) { boxEl.classList.add(`done-${colorIdx}`); boxEl.textContent = syl; }
+    });
 
     // ★ 별 터지기 오버레이 (초급/중급도 동일 효과)
     const lastCell = cells[cells.length - 1];
@@ -5699,7 +5807,7 @@ function puzzleHint() {
           if (!foundClasses.some(cls => el.classList.contains(cls))) {
             el.style.background = ''; el.style.borderColor = ''; el.style.transform = '';
           }
-        }, 2200);
+        }, 1050);
       }
       showPuzzleHintBox(`💡 "${target.word.word}"의 ${progress+1}번째 음절 "${target.word.syllables[progress]}"을 찾아요!`);
     }
@@ -5740,6 +5848,53 @@ async function speakPuzzleCard(word, wordId) {
     setTimeout(() => cardEl.classList.remove('speaking'), 900);
   }
   await speak(word);
+}
+
+/* ── 이미지 카드 클릭 → 한 글자 힌트 (초급/중급/고급 전체) ── */
+function puzzleCardHint(wordId) {
+  const pl = puzzleState.allPlaced.find(p => p.isTarget && p.word.id === wordId);
+  if (!pl || pl.found) return;
+  const progress   = puzzleState.wordProgress[pl.word.id] || 0;
+  const nextSyl    = pl.word.syllables[progress];
+  const foundCls   = ['found-0','found-1','found-2','found-3','found-4'];
+
+  // 힌트 셀 결정
+  let targetCell = null;
+  if (puzzleState.scatteredMode) {
+    // 고급: 다음 음절 셀
+    if (progress < pl.cells.length) targetCell = pl.cells[progress];
+  } else {
+    // 초급/중급: 단어의 첫 번째 셀
+    targetCell = pl.cells[0];
+  }
+
+  if (targetCell) {
+    const el = document.getElementById(`pc-${targetCell.r}-${targetCell.c}`);
+    if (el && !foundCls.some(cls => el.classList.contains(cls))) {
+      // 기존 inline style 초기화 (easy-hint 등 영향 방지)
+      el.style.background  = '';
+      el.style.borderColor = '';
+      el.style.transform   = '';
+      // 깜빡임 애니메이션 적용 (4회 반복 ≈ 2초)
+      el.classList.remove('hint-blink');
+      void el.offsetWidth; // reflow 강제
+      el.classList.add('hint-blink');
+      setTimeout(() => {
+        if (!foundCls.some(cls => el.classList.contains(cls))) {
+          el.classList.remove('hint-blink');
+        }
+      }, 1050);
+    }
+  }
+  showPuzzleHintBox(`💡 "${pl.word.word}"의 첫 글자 → "${nextSyl}"`);
+}
+
+/* ── 타겟 카드 found 갱신 (한 글자 탭 완성 후) ── */
+function updatePuzzleTargetCard(wordId, colorIdx) {
+  const cardEl = document.getElementById(`ptc-${wordId}`);
+  if (!cardEl) return;
+  cardEl.classList.add('found', 'word-explode');
+  setTimeout(() => cardEl.classList.remove('word-explode'), 750);
 }
 
 /* ── TTS ─────────────────────────── */
