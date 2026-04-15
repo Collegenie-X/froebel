@@ -573,27 +573,48 @@
       align-items: center;
       justify-content: center;
     }
-    /* Twemoji SVG 이미지 스타일 */
-    .card-img-emoji img.emoji {
-      width: 65px !important;
-      height: 65px !important;
-      margin: 0 4px;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.22));
-      animation: floatEmoji 3s ease-in-out infinite;
+    /* ── Twemoji 공통 베이스 ── */
+    img.emoji {
+      display: inline-block;
       vertical-align: middle;
+      border: none;
+      background: none;
+    }
+
+    /* ── 카드 이미지 영역 – 플로팅 대형 아이콘 ── */
+    .card-img-emoji img.emoji {
+      width: 68px !important;
+      height: 68px !important;
+      margin: 0 5px;
+      filter: drop-shadow(0 5px 14px rgba(0,0,0,0.25));
+      animation: floatEmoji 3s ease-in-out infinite;
     }
     .card-img-emoji img.emoji:nth-child(2) {
-      width: 44px !important; height: 44px !important;
+      width: 46px !important; height: 46px !important;
       animation-delay: 0.7s;
     }
     .card-img-emoji img.emoji:nth-child(3) {
-      width: 36px !important; height: 36px !important;
+      width: 38px !important; height: 38px !important;
       animation-delay: 1.4s;
     }
-    /* Twemoji 미로딩 시 폴백 폰트 이모지 */
+
+    /* ── 섹션 헤더 이모지 ── */
+    .sit-emoji img.emoji {
+      width: 40px !important;
+      height: 40px !important;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.20));
+    }
+
+    /* ── 필터 칩 이모지 ── */
+    .sit-chip img.emoji {
+      width: 16px !important;
+      height: 16px !important;
+      vertical-align: -2px;
+    }
+
+    /* ── 폴백: Twemoji 미로딩 시 폰트 이모지 ── */
     .card-img-emoji span.raw-emoji {
-      font-size: 4em;
-      line-height: 1;
+      font-size: 4em; line-height: 1;
       filter: drop-shadow(0 4px 12px rgba(0,0,0,0.20));
       animation: floatEmoji 3s ease-in-out infinite;
       display: inline-block;
@@ -614,6 +635,23 @@
       backdrop-filter: blur(4px);
       box-shadow: 0 1px 4px rgba(0,0,0,0.12);
     }
+
+    /* 카드 이미지 클릭 힌트 */
+    .card-dlg-hint {
+      position: absolute;
+      bottom: 8px; right: 10px; z-index: 4;
+      background: rgba(102,126,234,0.82);
+      color: white; font-size: 0.68em; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity 0.22s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .card-image:hover .card-dlg-hint { opacity: 1; }
+    .card-image:hover { filter: brightness(0.96); }
+    .card-image { transition: filter 0.2s; }
 
     /* ====== QUIZ MODE ====== */
     .quiz-controls {
@@ -947,6 +985,397 @@
     }
     #jsonLoadedBadge.visible { display: inline-block; }
     .loader-hint { font-size: 0.76em; color: #aaa; margin-top: 3px; }
+
+    /* ====== SECTION TOGGLE BUTTON ====== */
+    .sit-toggle-btn {
+      background: rgba(255,255,255,0.28);
+      border: none; border-radius: 10px;
+      padding: 6px 12px; cursor: pointer;
+      transition: background 0.2s; color: #2c3e50;
+      font-size: 0.82em; font-weight: 700;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .sit-toggle-btn:hover { background: rgba(255,255,255,0.5); }
+
+    /* ====== SENTENCE DIALOG MODAL ====== */
+    .dlg-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.60);
+      z-index: 2000;
+      display: none; align-items: center; justify-content: center;
+      padding: 16px;
+      backdrop-filter: blur(5px);
+    }
+    .dlg-overlay.active { display: flex; }
+
+    .dlg-container {
+      background: white;
+      border-radius: 24px;
+      width: 100%; max-width: 550px;
+      max-height: 94vh;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 28px 70px rgba(0,0,0,0.38);
+      animation: dlgSlideIn 0.32s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+    @keyframes dlgSlideIn {
+      from { transform: scale(0.82) translateY(24px); opacity: 0; }
+      to   { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .dlg-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white; flex-shrink: 0;
+    }
+    .dlg-sit-emoji { font-size: 1.9em; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25)); }
+    .dlg-sit-name  { font-size: 1em; font-weight: 800; flex: 1; line-height: 1.3; }
+    .dlg-close-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: none; background: rgba(255,255,255,0.22);
+      color: white; font-size: 1.1em; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; flex-shrink: 0;
+    }
+    .dlg-close-btn:hover { background: rgba(255,255,255,0.42); }
+
+    .dlg-mode-tabs {
+      display: flex; background: #f4f6fb;
+      border-bottom: 2px solid #e8eaf6; flex-shrink: 0;
+      overflow-x: auto;
+    }
+    .dlg-mode-tab {
+      flex: 1; padding: 11px 8px;
+      border: none; background: transparent;
+      font-size: 0.76em; font-weight: 700; color: #9e9e9e;
+      cursor: pointer; transition: all 0.18s;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent; margin-bottom: -2px;
+    }
+    .dlg-mode-tab.active { color: #5c6bc0; border-bottom-color: #5c6bc0; background: white; }
+    .dlg-mode-tab:hover:not(.active) { background: #ede7f6; color: #7e57c2; }
+
+    .dlg-body { flex: 1; overflow-y: auto; padding: 16px 20px 8px; }
+
+    .dlg-mode-desc-wrap { text-align: center; margin-bottom: 10px; }
+    .dlg-mode-desc {
+      font-size: 0.77em; color: #999; font-weight: 600;
+      padding: 4px 14px; background: #f0f2ff;
+      border-radius: 20px; display: inline-block;
+    }
+
+    .dlg-quiz-mode-btns {
+      display: flex; gap: 8px; justify-content: center; margin-bottom: 12px;
+    }
+    .dlg-quiz-mode-btn {
+      padding: 7px 16px; border-radius: 20px;
+      border: 2px solid #e0e0e0; background: white;
+      font-size: 0.82em; font-weight: 700; cursor: pointer;
+      transition: all 0.18s; color: #888;
+    }
+    .dlg-quiz-mode-btn.active { border-color: #5c6bc0; background: #5c6bc0; color: white; }
+
+    /* ── 새 카드형 다이얼로그 레이아웃 ── */
+    .dlg-sentence-area { text-align: left; padding: 4px 2px; }
+
+    /* 상단 미니바: 모드 레이블 + 번호 + TTS */
+    .dlg-mini-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .dlg-mode-label {
+      font-size: 0.8em; font-weight: 700; color: #888;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .dlg-mini-right { display: flex; align-items: center; gap: 8px; }
+    .dlg-idx-badge  { font-size: 0.82em; font-weight: 700; color: #aaa; }
+    .dlg-tts-mini-btn {
+      width: 34px; height: 34px; border-radius: 50%; border: none;
+      background: #e3f2fd; cursor: pointer; font-size: 1.05em;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .dlg-tts-mini-btn:hover { background: #bbdefb; transform: scale(1.1); }
+    .dlg-tts-mini-btn.playing { animation: emojiListenPulse 0.85s ease-in-out infinite; }
+
+    /* 이모지 이미지 타일 */
+    .dlg-num-tile {
+      width: 110px; height: 110px; border-radius: 24px;
+      background: linear-gradient(135deg, #f0f4ff, #e8eaf6);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 22px;
+      box-shadow: 0 6px 22px rgba(92,107,192,0.18);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .dlg-num-tile img.emoji {
+      width: 72px !important; height: 72px !important;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.15));
+    }
+    .dlg-num-tile span.raw-emoji { font-size: 3.6em; line-height: 1; }
+    .dlg-num-tile:hover { transform: scale(1.02); box-shadow: 0 8px 10px rgba(92,107,192,0.28); transition: all 0.2s; }
+    .dlg-num-tile:active { transform: scale(0.98); }
+    .dlg-num-tile.playing {
+      animation: tilePulse 0.65s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    @keyframes tilePulse {
+      0%   { transform: scale(1);    box-shadow: 0 6px 22px rgba(92,107,192,0.20); }
+      30%  { transform: scale(1.12); box-shadow: 0 14px 40px rgba(92,107,192,0.50); }
+      55%  { transform: scale(0.92); box-shadow: 0 4px 12px rgba(92,107,192,0.15); }
+      78%  { transform: scale(1.08); box-shadow: 0 10px 28px rgba(92,107,192,0.35); }
+      100% { transform: scale(1);    box-shadow: 0 6px 22px rgba(92,107,192,0.20); }
+    }
+
+    /* 섹션 레이블 (📋 문제 / 💡 정답) */
+    .dlg-section-label {
+      font-size: 0.78em; font-weight: 700; color: #999;
+      margin-bottom: 8px; padding: 0 2px;
+    }
+    .dlg-section-label.dlg-answer-label { margin-top: 18px; }
+
+    /* 문제 박스 */
+    .dlg-question-box {
+      background: #f5f6fa; border-radius: 16px;
+      padding: 18px 20px;
+      font-size: 1.55em; font-weight: 800; color: #2c3e50;
+      line-height: 1.45; word-break: keep-all;
+    }
+    .dlg-question-box.kr-text { color: #5c6bc0; }
+    @keyframes sentenceSlideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .dlg-sentence-animate { animation: sentenceSlideIn 0.28s ease forwards; }
+
+    /* 정답 박스 — 기본: 숨김(?) */
+    .dlg-answer-box {
+      border: 2px dashed #b39ddb; border-radius: 16px;
+      background: linear-gradient(135deg, #f8f4ff, #f3e5f5);
+      min-height: 74px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.22s; padding: 18px 20px;
+    }
+    .dlg-answer-box:hover { border-color: #7e57c2; }
+    .dlg-answer-box.revealed {
+      border-style: solid; border-color: #66bb6a;
+      background: #f8fff8;
+      align-items: flex-start; cursor: default;
+    }
+
+    /* ── 정답 공개 특수효과 애니메이션 ── */
+
+    /* 1) 박스 전체: 작게 → 크게 튀기며 등장 */
+    @keyframes answerBoxPop {
+      0%   { transform: scale(0.55);  opacity: 0; }
+      50%  { transform: scale(1.07);  opacity: 1; }
+      70%  { transform: scale(0.96);              }
+      85%  { transform: scale(1.03);              }
+      100% { transform: scale(1);                 }
+    }
+
+
+    /* 3) 빛 번쩍임: 초록 빛이 퍼짐 */
+    @keyframes answerGlow {
+      0%   { box-shadow: 0 0 0   0px rgba(76,175,80,0);    }
+      25%  { box-shadow: 0 0 24px 8px rgba(76,175,80,0.55); }
+      60%  { box-shadow: 0 0 40px 16px rgba(76,175,80,0.2); }
+      100% { box-shadow: 0 0 0   0px rgba(76,175,80,0);    }
+    }
+
+    /* 4) 레이블(✅ 정답): 위에서 탁 떨어지는 바운스 */
+    @keyframes labelDrop {
+      0%   { transform: translateY(-16px) scale(0.7); opacity: 0; }
+      55%  { transform: translateY(4px)   scale(1.12); opacity: 1; }
+      75%  { transform: translateY(-3px)  scale(0.96);             }
+      100% { transform: translateY(0)     scale(1);                }
+    }
+
+    /* 5) 청크/팁 영역: 아래서 올라오며 등장 */
+    @keyframes detailFadeUp {
+      0%   { transform: translateY(14px); opacity: 0; }
+      100% { transform: translateY(0);    opacity: 1; }
+    }
+
+    .dlg-answer-box.reveal-pop   { animation: answerBoxPop 0.52s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+    .dlg-answer-box.reveal-glow  { animation: answerGlow   0.75s ease-out forwards; }
+    .dlg-section-label.reveal-drop       { animation: labelDrop  0.42s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+    .dlg-reveal-detail.reveal-up         { animation: detailFadeUp 0.45s ease forwards 0.25s; opacity: 0; }
+    .dlg-answer-box.all-mode {
+      border-style: solid; border-color: #90caf9;
+      background: #f0f7ff;
+      align-items: flex-start; cursor: default;
+    }
+    .dlg-answer-hidden {
+      font-size: 2.6em; color: #ce93d8; font-weight: 900; user-select: none;
+    }
+    .dlg-answer-detail { width: 100%; }
+    .dlg-answer-main-text {
+      font-size: 1.4em; font-weight: 800; color: #1a237e;
+      line-height: 1.5; margin-bottom: 14px;
+    }
+
+    /* 정답 공개 후 상세 설명 영역 */
+    .dlg-reveal-detail {
+      border-top: 1px solid #e8f5e9; padding-top: 12px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .dlg-phonics-badge {
+      display: inline-block; background: #e8f5e9; color: #2e7d32;
+      font-size: 0.78em; font-weight: 700;
+      padding: 4px 14px; border-radius: 20px;
+    }
+    .dlg-chunks-area {
+      display: flex; flex-wrap: wrap; gap: 7px;
+    }
+    .dlg-tips {
+      font-size: 0.8em; color: #7e57c2; font-style: italic;
+      background: #f3e5f5; border-radius: 8px; padding: 7px 12px;
+    }
+    .dlg-reveal-tts {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 20px; border: none;
+      background: #e3f2fd; color: #1565c0;
+      font-size: 0.85em; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; align-self: flex-start;
+    }
+    .dlg-reveal-tts:hover { background: #bbdefb; transform: scale(1.04); }
+
+    /* 진행 바 */
+    .dlg-progress-bar-wrap {
+      height: 5px; background: #e8eaf6; border-radius: 3px;
+      margin: 18px 0 0; overflow: hidden;
+    }
+    .dlg-progress-bar-inner {
+      height: 100%; background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 3px; transition: width 0.45s ease;
+    }
+
+    /* 속도 슬라이더 */
+    .dlg-speed-row {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82em; color: #aaa;
+      justify-content: center; margin-top: 14px;
+    }
+    .dlg-speed-label { font-weight: 700; color: #5c6bc0; min-width: 38px; text-align: center; }
+    .dlg-speed-slider { width: 110px; }
+    @keyframes listenPulse {
+      0%,100% { transform: scale(1); }
+      50%      { transform: scale(1.04); }
+    }
+
+    .dlg-footer {
+      padding: 12px 20px 14px; border-top: 1px solid #eef0f6;
+      background: #fafbff; flex-shrink: 0;
+    }
+    .dlg-auto-badge-wrap { text-align: center; margin-bottom: 8px; min-height: 24px; }
+    .dlg-auto-badge {
+      display: none; align-items: center; gap: 6px;
+      font-size: 0.78em; font-weight: 700;
+      color: #4CAF50; background: #E8F5E9;
+      padding: 4px 14px; border-radius: 20px;
+    }
+    .dlg-auto-badge.visible { display: inline-flex; }
+    .dlg-auto-badge.paused  { color: #FF9800; background: #FFF3E0; }
+
+    .dlg-nav-row {
+      display: flex; gap: 10px; justify-content: center;
+      align-items: center; margin-bottom: 10px;
+    }
+    .dlg-play-row {
+      display: flex; gap: 8px; justify-content: center; align-items: center;
+    }
+    .dlg-btn {
+      padding: 10px 20px; border: none; border-radius: 22px;
+      font-size: 0.88em; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; display: flex; align-items: center; gap: 5px;
+    }
+    .dlg-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(0,0,0,0.18); }
+    .dlg-btn-outline { background: white; border: 2px solid #e0e0e0; color: #555; }
+    .dlg-btn-outline:hover { border-color: #667eea; color: #5c6bc0; }
+    .dlg-btn-icon {
+      width: 46px; height: 46px; border-radius: 50%; border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.15em; transition: all 0.2s;
+    }
+    .dlg-btn-icon:hover { transform: scale(1.12); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
+    .dlg-btn-icon-sm {
+      width: 38px; height: 38px; border-radius: 50%; border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 0.9em; transition: all 0.2s;
+    }
+    .dlg-btn-icon-sm:hover { transform: scale(1.1); }
+    .dlg-btn-icon-sm:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+
+    .dlg-score-chip.remain  { background: #E8EAF6; color: #3949AB; }
+
+    .dlg-kb-hint {
+      text-align: center; font-size: 0.66em; color: #ccc;
+      margin-top: 8px; letter-spacing: 0.2px;
+    }
+
+    /* ====== BODY WRAPPER + SIDE ARROWS ====== */
+    .dlg-body-wrapper {
+      display: flex; flex: 1;
+      overflow: hidden; position: relative;
+      min-height: 0;
+    }
+    .dlg-side-btn {
+      width: 36px; flex-shrink: 0;
+      border: none; background: transparent;
+      font-size: 2.4em; font-weight: 300;
+      color: #d0d4e8; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s, background 0.2s;
+      user-select: none; line-height: 1;
+    }
+    .dlg-side-btn:hover { color: #667eea; background: transparent; }
+    .dlg-side-btn:active { color: #3949ab; transform: scale(0.95); }
+    @media (max-width: 600px) {
+      .dlg-side-btn { width: 28px; font-size: 1.9em; }
+    }
+
+    /* ====== TTS MINI BTN HINT (unused, kept for compatibility) ====== */
+    .dlg-emoji-clickable { cursor: pointer; }
+    .dlg-emoji-speaker-hint {
+      position: absolute;
+      bottom: -6px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.42em;
+      background: rgba(102,126,234,0.85);
+      color: white; padding: 3px 11px;
+      border-radius: 20px; white-space: nowrap;
+      opacity: 0; transition: opacity 0.2s;
+      pointer-events: none; font-weight: 700;
+    }
+    .dlg-emoji-clickable:hover .dlg-emoji-speaker-hint { opacity: 1; }
+    /* 재생 중 이미지 강조 */
+    .dlg-emoji-clickable.playing {
+      animation: emojiListenPulse 0.85s ease-in-out infinite;
+    }
+    @keyframes emojiListenPulse {
+      0%,100% { transform: scale(1); filter: brightness(1); }
+      50%      { transform: scale(1.1); filter: brightness(1.1) drop-shadow(0 0 12px #667eea88); }
+    }
+
+    /* ====== QUIZ MODE: 문제/정답 구분 강조 ====== */
+    .dlg-quiz-label {
+      display: inline-block;
+      font-size: 0.72em; font-weight: 800;
+      padding: 3px 12px; border-radius: 20px;
+      margin-bottom: 8px; letter-spacing: 0.5px;
+    }
+    .dlg-quiz-label.question { background: #E3F2FD; color: #1565C0; }
+    .dlg-quiz-label.answer   { background: #F3E5F5; color: #6A1B9A; }
+
+    /* dlg-question-box quiz 한→영 (한국어 큰 글씨) */
+    .dlg-question-box.kr-text { color: #5c6bc0; }
+
+    @media (max-width: 600px) {
+      .dlg-container { border-radius: 18px; max-height: 98vh; }
+      .dlg-english { font-size: 1.4em; }
+      .dlg-emoji-row { font-size: 2.5em; min-height: 54px; }
+    }
   </style>
 </head>
 <body>
@@ -1051,7 +1480,8 @@
 
 <div class="global-controls">
   <div class="ctrl-group">
-    <button class="btn btn-green"  id="btnPlayAll"   onclick="playAll()">▶ 선택 듣기</button>
+    <button class="btn btn-purple" onclick="openGlobalDialog('study')" title="다이얼로그 학습">📖 학습 다이얼로그</button>
+    <button class="btn btn-indigo" id="btnPlayAll"   onclick="playAll()" title="전체 듣기">▶ 전체 듣기</button>
     <button class="btn btn-orange" id="btnPause"     onclick="togglePause()" disabled>⏸ 일시정지</button>
     <button class="btn btn-red"    id="btnStop"      onclick="stopAll()"   disabled>⏹ 정지</button>
   </div>
@@ -1122,6 +1552,125 @@
 </div>
 
 </div><!-- .page-container -->
+
+<!-- ====== SENTENCE DIALOG MODAL ====== -->
+<div id="dlgOverlay" class="dlg-overlay" onclick="closeDlgOnOverlay(event)">
+  <div class="dlg-container" id="dlgContainer">
+
+    <!-- Header -->
+    <div class="dlg-header" id="dlgHeader">
+      <span class="dlg-sit-emoji" id="dlgSitEmoji">🌈</span>
+      <div class="dlg-sit-name" id="dlgSitName">파닉스 학습</div>
+      <button class="dlg-close-btn" onclick="closeDlg()" title="닫기 (Esc)">✕</button>
+    </div>
+
+    <!-- 3 Mode Tabs -->
+    <div class="dlg-mode-tabs">
+      <button class="dlg-mode-tab active" id="dlgTab-all"   onclick="dlgSetMode('all')">📖 전체 보기</button>
+      <button class="dlg-mode-tab"        id="dlgTab-en2kr" onclick="dlgSetMode('en2kr')">🇺🇸→🇰🇷 영→한</button>
+      <button class="dlg-mode-tab"        id="dlgTab-kr2en" onclick="dlgSetMode('kr2en')">🇰🇷→🇺🇸 한→영</button>
+    </div>
+
+    <!-- Body Wrapper: [◀] [scroll body] [▶] -->
+    <div class="dlg-body-wrapper">
+
+      <button class="dlg-side-btn dlg-side-left" onclick="dlgPrev()" title="이전 (←)">‹</button>
+
+      <div class="dlg-body" id="dlgBody">
+
+        <!-- Sentence display -->
+        <div class="dlg-sentence-area">
+
+          <!-- 상단 미니바: 모드 + 번호 + TTS -->
+          <div class="dlg-mini-bar">
+            <span class="dlg-mode-label" id="dlgModeLabel">📖 전체 보기</span>
+            <div class="dlg-mini-right">
+              <span class="dlg-idx-badge" id="dlgProgressInfo">#1</span>
+              <button class="dlg-tts-mini-btn" id="dlgTtsBtn"
+                      onclick="dlgPlayCurrent()" title="듣기">🔊</button>
+            </div>
+          </div>
+
+          <!-- 숫자 타일 -->
+          <div class="dlg-num-tile" id="dlgNumTile">1</div>
+
+          <!-- 📋 문제 -->
+          <div class="dlg-section-label">📋 문제</div>
+          <div class="dlg-question-box dlg-sentence-animate" id="dlgEnglish">Good morning!</div>
+
+          <!-- 💡 정답 -->
+          <div class="dlg-section-label dlg-answer-label" id="dlgAnswerLabel">
+            💡 정답 — 탭하여 확인 👆
+          </div>
+          <div class="dlg-answer-box" id="dlgAnswer" onclick="dlgRevealAnswer()">
+            <span class="dlg-answer-hidden" id="dlgAnswerHidden">?</span>
+            <div class="dlg-answer-detail" id="dlgAnswerDetail" style="display:none">
+              <div class="dlg-answer-main-text" id="dlgAnswerMainText">정답</div>
+              <div class="dlg-reveal-detail" id="dlgRevealDetail">
+                <div class="dlg-chunks-area" id="dlgChunksArea"></div>
+                <div class="dlg-tips" id="dlgTips"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 진행 바 -->
+          <div class="dlg-progress-bar-wrap">
+            <div class="dlg-progress-bar-inner" id="dlgProgressBar" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Speed control -->
+        <div class="dlg-speed-row" id="dlgSpeedRow">
+          <span>🐢</span>
+          <input type="range" class="dlg-speed-slider" id="dlgSpeedSlider"
+                 min="0.4" max="1.5" step="0.05" value="0.85"
+                 oninput="document.getElementById('dlgSpeedLabel').textContent=parseFloat(this.value).toFixed(2)+'×'">
+          <span class="dlg-speed-label" id="dlgSpeedLabel">0.85×</span>
+          <span>🐇</span>
+        </div>
+
+      </div><!-- /.dlg-body -->
+
+      <button class="dlg-side-btn dlg-side-right" onclick="dlgNext()" title="다음 (→)">›</button>
+
+    </div><!-- /.dlg-body-wrapper -->
+
+    <!-- Footer: 자동재생 컨트롤만 -->
+    <div class="dlg-footer">
+
+      <!-- Auto-play status badge -->
+      <div class="dlg-auto-badge-wrap">
+        <div class="dlg-auto-badge" id="dlgAutoBadge">
+          <span id="dlgAutoDot" style="width:8px;height:8px;border-radius:50%;background:#4CAF50;animation:pulse-dot 1s ease-in-out infinite;display:inline-block;flex-shrink:0"></span>
+          <span id="dlgAutoLabel">자동재생 중</span>
+        </div>
+      </div>
+
+      <!-- Auto-play controls -->
+      <div class="dlg-play-row">
+        <button class="dlg-btn" id="dlgAutoPlayBtn"
+                style="background:linear-gradient(135deg,#4CAF50,#66BB6A);color:white;font-size:1em;padding:10px 28px;border-radius:28px;gap:8px"
+                onclick="dlgStartAutoPlay()" title="전체 자동재생">🔊 전체 듣기</button>
+        <button class="dlg-btn-icon-sm" id="dlgPauseBtn"
+                style="background:#FF9800;color:white"
+                onclick="dlgToggleAutoPlay()" title="일시정지 / 재개">⏸</button>
+        <button class="dlg-btn-icon-sm" id="dlgStopBtn"
+                style="background:#ef5350;color:white"
+                onclick="dlgStopAutoPlay()" title="정지">⏹</button>
+        <button class="dlg-btn-icon-sm" id="dlgRepeatBtn"
+                style="background:#e0e0e0;color:#555"
+                onclick="dlgToggleRepeat()" title="반복 켜기/끄기">🔁</button>
+      </div>
+
+      <!-- Keyboard hints -->
+      <div class="dlg-kb-hint">
+        ← → 이전/다음 &nbsp;|&nbsp; 이미지 탭 = 듣기 &nbsp;|&nbsp; Esc 닫기
+      </div>
+
+    </div><!-- /.dlg-footer -->
+  </div><!-- /.dlg-container -->
+</div><!-- /.dlg-overlay -->
+
 <script>
 /* ================================================================
    DATA: 100 Sentences — 10 Situations × 10 Sentences (Phonics Seq)
@@ -1231,7 +1780,7 @@ function initFilterChips() {
     const chip = document.createElement('button');
     chip.className = 'sit-chip';
     chip.dataset.sitId = sit.id;
-    chip.innerHTML = `${sit.emoji} ${sit.name}`;
+    chip.innerHTML = `${emojiToImg(sit.emoji)} ${sit.name}`;
     chip.addEventListener('click', () => toggleSitChip(sit.id, chip));
     container.appendChild(chip);
   });
@@ -1307,7 +1856,7 @@ function updateFilterBadge() {
   /* 버튼 텍스트도 업데이트 */
   const btnPlay = document.getElementById('btnPlayAll');
   if (btnPlay) {
-    btnPlay.textContent = isAll ? '▶ 전체 듣기' : `▶ 선택 듣기 (${filteredFlat.length})`;
+    btnPlay.textContent = isAll ? '▶ 전체 듣기' : `▶ 선택 듣기 (${filteredFlat.length}문장)`;
   }
 }
 
@@ -1635,9 +2184,9 @@ function renderCard(s, sit) {
   const isEn2Kr = quizMode === 'en2kr';
   const isQuiz = isKr2En || isEn2Kr;
 
-  // 이미지 이모지 생성
+  // 이미지 이모지 생성 — Twemoji SVG 고품질 아이콘
   const emojis = getCardEmojis(s.english, sit.emoji);
-  const emojiSpans = emojis.map(e => `<span class="raw-emoji">${e}</span>`).join('');
+  const emojiSpans = emojis.map(e => emojiToImg(e)).join('');
 
   // kr2en: 한글 보여주고 영어 숨김 / en2kr: 영어 보여주고 한글 숨김
   const engHidden = isKr2En ? 'quiz-hidden' : '';
@@ -1690,9 +2239,11 @@ function renderCard(s, sit) {
   // ── 일반 모드: 전체 정보 카드 ──
   return `
   <div class="sentence-card" id="card-${s.id}" style="border-left-color:${sit.border}">
-    <div class="card-image" style="background:${sit.color}">
+    <div class="card-image" style="background:${sit.color};cursor:pointer"
+         onclick="openCardDialog(${s.id})" title="클릭하여 학습 다이얼로그 열기">
       <span class="card-img-num">#${s.id}</span>
       <div class="card-img-emoji">${emojiSpans}</div>
+      <span class="card-dlg-hint">👆 탭하여 학습</span>
     </div>
     <div class="card-top">
       <span></span>
@@ -1732,7 +2283,7 @@ function render() {
     sec.innerHTML = `
       <div class="situation-header" style="background:${sit.color}" onclick="toggleSection(${sit.id})">
         <div class="sit-title-group">
-          <span class="sit-emoji">${sit.emoji}</span>
+          <span class="sit-emoji">${emojiToImg(sit.emoji)}</span>
           <div>
             <div class="sit-name">${sit.name}</div>
             <div class="sit-name-en">${sit.nameEn}</div>
@@ -1745,8 +2296,8 @@ function render() {
       </div>
       <div class="situation-body">
         <div class="sit-actions">
-          <button class="btn btn-green btn-sm" onclick="playSituation(${sit.id});event.stopPropagation()">
-            ▶ 이 섹션 전체 듣기
+          <button class="btn btn-green btn-sm" onclick="openSectionDialog(${sit.id},'listen');event.stopPropagation()">
+            🔊 전체 듣기
           </button>
         </div>
         <div class="cards-grid">${cardsHTML}</div>
@@ -1757,6 +2308,40 @@ function render() {
 
     container.appendChild(sec);
   });
+}
+
+/* ================================================================
+   TWEMOJI HELPER — 이모지 텍스트 → 고품질 SVG 이미지
+   ================================================================ */
+/**
+ * 이모지 문자 1개를 Twemoji CDN SVG <img> 태그로 변환
+ * twemoji.parse()를 임시 DOM 노드에 적용 → 변형 선택자(fe0f), ZWJ 조합 이모지 완벽 지원
+ * @param {string} emoji  - 단일 이모지 문자 (e.g. "🌅", "🍽️", "👨‍👩‍👧")
+ * @returns {string} HTML img 태그 문자열 (실패 시 raw span 폴백)
+ */
+function emojiToImg(emoji) {
+  if (typeof twemoji === 'undefined') {
+    return `<span class="raw-emoji">${emoji}</span>`;
+  }
+  try {
+    // 임시 span에 이모지 넣고 twemoji.parse() 적용
+    // → 변형 선택자(U+FE0F), ZWJ 연결 이모지 등 모든 케이스 자동 처리
+    const tmp = document.createElement('span');
+    tmp.textContent = emoji;
+    twemoji.parse(tmp, {
+      folder: 'svg',
+      ext: '.svg',
+      base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
+    });
+    const img = tmp.querySelector('img');
+    if (img) {
+      img.className = 'emoji';
+      img.setAttribute('draggable', 'false');
+      img.alt = emoji;
+      return img.outerHTML;
+    }
+  } catch (e) { /* 폴백으로 진행 */ }
+  return `<span class="raw-emoji">${emoji}</span>`;
 }
 
 /* ================================================================
@@ -2024,6 +2609,10 @@ document.getElementById('btnQuizOff').classList.add('active');
    KEYBOARD SHORTCUTS: Space = 정지/일시정지, Enter = 전체 듣기 시작
    ================================================================ */
 document.addEventListener('keydown', function(e) {
+  /* ── 다이얼로그 열려있으면 다이얼로그 키핸들러에 위임 ── */
+  if (document.getElementById('dlgOverlay') &&
+      document.getElementById('dlgOverlay').classList.contains('active')) return;
+
   const tag = e.target.tagName.toLowerCase();
 
   /* ── 퀴즈 입력창에서 Enter → 정답 확인 ── */
@@ -2033,47 +2622,26 @@ document.addEventListener('keydown', function(e) {
       const sentenceId = parseInt(e.target.id.replace('input-', ''));
       if (!isNaN(sentenceId)) checkQuizAnswerById(sentenceId);
     }
-    return; // 퀴즈 입력창에서는 다른 단축키 무시
+    return;
   }
 
   /* ── 일반 입력 필드에서는 단축키 무시 ── */
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
 
-  /* ── Space: 일시정지 / 재개 토글 ── */
+  /* ── Space: 배경재생 일시정지 / 재개 토글 ── */
   if (e.code === 'Space') {
     e.preventDefault();
-    if (isPlayingAll || sitPlayActive) {
-      togglePause();
-    }
+    if (isPlayingAll || sitPlayActive) togglePause();
   }
 
-  /* ── Enter: 전체 듣기 시작 ── */
+  /* ── Enter: 배경재생 전체 듣기 시작 ── */
   if (e.code === 'Enter') {
     e.preventDefault();
-    if (!isPlayingAll && !sitPlayActive) {
-      playAll();
-    }
+    if (!isPlayingAll && !sitPlayActive) playAll();
   }
 });
 
-/* ── Twemoji 적용: 이모지 → 고품질 SVG 일러스트 ── */
-function applyTwemoji() {
-  if (typeof twemoji === 'undefined') return;
-  document.querySelectorAll('.card-img-emoji').forEach(el => {
-    twemoji.parse(el, {
-      folder: 'svg',
-      ext: '.svg',
-      base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
-    });
-  });
-}
-
-/* setQuizMode에서도 Twemoji 재적용 */
-const _origSetQuizMode = setQuizMode;
-setQuizMode = function(mode) {
-  _origSetQuizMode(mode);
-  requestAnimationFrame(() => applyTwemoji());
-};
+/* ── emojiToImg() 로 직접 <img> 생성하므로 별도 파싱 불필요 ── */
 
 // 초기: JSON 파일 로드 대기 안내
 (function() {
@@ -2086,6 +2654,547 @@ setQuizMode = function(mode) {
 })();
  /* 상황 필터 칩 초기화 */
 requestAnimationFrame(() => applyTwemoji());
+
+/* ================================================================
+   SENTENCE DIALOG — 하나씩 강조 학습 다이얼로그
+   Modes: study | listen | section | quiz
+   ================================================================ */
+
+let dlgSentences    = [];      // 현재 다이얼로그에 로드된 문장 목록
+let dlgIndex        = 0;       // 현재 문장 인덱스
+let dlgMode         = 'study'; // study | listen | section | quiz
+let dlgQuizDir      = 'kr2en'; // kr2en | en2kr
+let dlgAutoPlaying  = false;
+let dlgPaused       = false;
+let dlgRepeat       = false;
+let dlgRevealedAnswer = false;
+let dlgCurrentSitId = null;
+let dlgKnownIds     = new Set();
+let dlgUnknownIds   = new Set();
+let dlgAutoTimer    = null;
+let dlgAnswered     = new Set(); // 이미 채점된 문장 IDs
+
+/* ────── 섹션 다이얼로그 열기 ────── */
+/* ────── 카드 이미지 클릭 → 해당 문장 위치에서 다이얼로그 열기 ────── */
+function openCardDialog(sentenceId) {
+  /* 해당 문장이 속한 섹션 찾기 */
+  const sit = SITUATIONS.find(s => s.sentences.some(x => x.id === sentenceId));
+  if (!sit) return;
+
+  const sitId = sit.id;
+  dlgCurrentSitId = sitId;
+  dlgSentences = sit.sentences.map(s => ({
+    ...s,
+    sitId: sit.id, sitName: sit.name, sitEmoji: sit.emoji,
+    sitColor: sit.color, sitBorder: sit.border
+  }));
+
+  /* 클릭한 문장 위치로 인덱스 설정 */
+  const idx = dlgSentences.findIndex(s => s.id === sentenceId);
+  dlgIndex = idx >= 0 ? idx : 0;
+
+  dlgKnownIds.clear(); dlgUnknownIds.clear(); dlgAnswered.clear();
+
+  /* Header */
+  document.getElementById('dlgSitEmoji').textContent = sit.emoji || '📖';
+  document.getElementById('dlgSitName').textContent  = sit.name + ' (' + (sit.nameEn || '') + ')';
+  document.getElementById('dlgHeader').style.background =
+    'linear-gradient(135deg, ' + (sit.border || '#667eea') + ' 0%, ' + (sit.color || '#f3e5f5') + ' 100%)';
+
+  dlgSetMode('all');
+  document.getElementById('dlgOverlay').classList.add('active');
+  dlgRenderSentence();
+  setTimeout(() => dlgPlayCurrent(), 400);
+}
+
+function openSectionDialog(sitId, mode) {
+  if (!SITUATIONS.length) { alert('📂 먼저 JSON 파일을 로드해 주세요.'); return; }
+  /* 구 모드명 → 새 탭 이름 매핑 */
+  const modeMap = { study:'all', listen:'all', section:'all', quiz:'en2kr' };
+  mode = modeMap[mode] || mode || 'all';
+  if (!['all','en2kr','kr2en'].includes(mode)) mode = 'all';
+  const sit = SITUATIONS.find(s => s.id === sitId);
+  if (!sit) return;
+
+  dlgCurrentSitId = sitId;
+  dlgSentences = sit.sentences.map(s => ({
+    ...s,
+    sitId: sit.id, sitName: sit.name, sitEmoji: sit.emoji,
+    sitColor: sit.color, sitBorder: sit.border
+  }));
+  dlgIndex = 0;
+  dlgKnownIds.clear(); dlgUnknownIds.clear(); dlgAnswered.clear();
+
+  /* Header */
+  document.getElementById('dlgSitEmoji').textContent = sit.emoji || '📖';
+  document.getElementById('dlgSitName').textContent  = sit.name + ' (' + (sit.nameEn || '') + ')';
+  document.getElementById('dlgHeader').style.background =
+    'linear-gradient(135deg, ' + (sit.border || '#667eea') + ' 0%, ' + (sit.color || '#f3e5f5') + ' 100%)';
+
+  dlgSetMode(mode);
+  document.getElementById('dlgOverlay').classList.add('active');
+  dlgRenderSentence();
+  setTimeout(() => dlgPlayCurrent(), 400);
+}
+
+/* ────── 전체(필터) 다이얼로그 열기 ────── */
+function openGlobalDialog(mode) {
+  if (!flatSentences.length) { alert('📂 먼저 JSON 파일을 로드해 주세요.'); return; }
+  const modeMap = { study:'all', listen:'all', section:'all', quiz:'en2kr' };
+  mode = modeMap[mode] || mode || 'all';
+  if (!['all','en2kr','kr2en'].includes(mode)) mode = 'all';
+
+  dlgCurrentSitId = null;
+  dlgSentences = filteredFlat.length ? [...filteredFlat] : [...flatSentences];
+  dlgIndex = 0;
+  dlgKnownIds.clear(); dlgUnknownIds.clear(); dlgAnswered.clear();
+
+  document.getElementById('dlgSitEmoji').textContent = '🌈';
+  document.getElementById('dlgSitName').textContent  = '전체 파닉스 학습 (' + dlgSentences.length + '문장)';
+  document.getElementById('dlgHeader').style.background =
+    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+
+  dlgSetMode(mode);
+  document.getElementById('dlgOverlay').classList.add('active');
+  dlgRenderSentence();
+  setTimeout(() => dlgPlayCurrent(), 400);
+}
+
+/* ────── 다이얼로그 닫기 ────── */
+function closeDlg() {
+  dlgStopAutoPlay();
+  window.speechSynthesis.cancel();
+  document.getElementById('dlgOverlay').classList.remove('active');
+  /* 카드 하이라이트 제거 */
+  document.querySelectorAll('.sentence-card.playing').forEach(c => c.classList.remove('playing'));
+}
+
+function closeDlgOnOverlay(e) {
+  if (e.target === document.getElementById('dlgOverlay')) closeDlg();
+}
+
+/* ────── 모드 전환 ────── */
+function dlgSetMode(mode) {
+  dlgMode = mode;
+
+  /* 탭 UI — 3개 탭: all | en2kr | kr2en */
+  ['all','en2kr','kr2en'].forEach(m => {
+    const t = document.getElementById('dlgTab-' + m);
+    if (t) t.classList.toggle('active', m === mode);
+  });
+
+  dlgStopAutoPlay();
+  dlgRevealedAnswer = false;
+  dlgRenderSentence();
+}
+
+/* ────── 현재 문장 렌더링 (3탭 버전) ────── */
+function dlgRenderSentence() {
+  if (!dlgSentences.length) return;
+  const s = dlgSentences[dlgIndex];
+  if (!s) return;
+
+  dlgRevealedAnswer = false;
+
+  /* ── 진행 정보 ── */
+  const total = dlgSentences.length;
+  document.getElementById('dlgProgressInfo').textContent =
+    '#' + (dlgIndex + 1);
+  document.getElementById('dlgProgressBar').style.width =
+    ((dlgIndex + 1) / total * 100).toFixed(1) + '%';
+
+  /* ── 이모지 이미지 타일 ── */
+  const numTile = document.getElementById('dlgNumTile');
+  const tileEmojis = getCardEmojis(s.english, s.sitEmoji || '📖');
+  const mainEmoji = tileEmojis[0] || s.sitEmoji || '📖';
+  numTile.innerHTML = `<span class="raw-emoji">${mainEmoji}</span>`;
+  numTile.onclick = () => dlgPlayCurrent();
+  if (typeof twemoji !== 'undefined') {
+    twemoji.parse(numTile, {
+      folder: 'svg', ext: '.svg',
+      base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
+    });
+  }
+
+  /* ── 문제 박스 슬라이드 애니메이션 ── */
+  const engEl = document.getElementById('dlgEnglish');
+  engEl.classList.remove('dlg-sentence-animate', 'kr-text');
+  void engEl.offsetWidth;
+  engEl.classList.add('dlg-sentence-animate');
+
+  /* ── 정답 박스 초기화 (숨김 상태) ── */
+  const answerBox    = document.getElementById('dlgAnswer');
+  const answerHidden = document.getElementById('dlgAnswerHidden');
+  const answerDetail = document.getElementById('dlgAnswerDetail');
+  const answerLabel  = document.getElementById('dlgAnswerLabel');
+  const modeLabel    = document.getElementById('dlgModeLabel');
+  const ttsBtn       = document.getElementById('dlgTtsBtn');
+
+  answerBox.classList.remove('revealed', 'all-mode');
+  answerHidden.style.display = 'block';
+  answerDetail.style.display = 'none';
+
+  /* ── 모드별 렌더링 ── */
+  if (dlgMode === 'all') {
+    /* 📖 전체 보기: 영어 문제 + 한국어 정답 즉시 표시 */
+    modeLabel.textContent = '📖 전체 보기';
+    engEl.textContent = s.english;
+
+    answerLabel.innerHTML = '💡 정답';
+    answerBox.classList.add('all-mode');
+    answerBox.style.cursor = 'default';
+    answerHidden.style.display = 'none';
+    answerDetail.style.display = 'block';
+
+    /* 정답 영역 채우기 */
+    _fillAnswerDetail(s, 'all');
+
+  } else if (dlgMode === 'en2kr') {
+    /* 🇺🇸→🇰🇷 영→한: 영어 문제, 한국어 숨김 */
+    modeLabel.innerHTML = '🇺🇸→🇰🇷 영어→한글';
+    engEl.textContent = s.english;
+
+    answerLabel.innerHTML = '💡 정답 — 탭하여 확인 👆';
+    answerBox.style.cursor = 'pointer';
+
+  } else if (dlgMode === 'kr2en') {
+    /* 🇰🇷→🇺🇸 한→영: 한국어 문제, 영어 숨김 */
+    modeLabel.innerHTML = '🇰🇷→🇺🇸 한글→영어';
+    engEl.textContent = s.answer || '';
+    engEl.classList.add('kr-text');
+
+    answerLabel.innerHTML = '💡 정답 — 탭하여 확인 👆';
+    answerBox.style.cursor = 'pointer';
+  }
+
+  /* ── 메인 카드 하이라이트 ── */
+  document.querySelectorAll('.sentence-card.playing').forEach(c => c.classList.remove('playing'));
+  const card = document.getElementById('card-' + s.id);
+  if (card) card.classList.add('playing');
+}
+
+/* 정답 상세 영역 채우기 (공통) */
+function _fillAnswerDetail(s, mode) {
+  const answerMainText = document.getElementById('dlgAnswerMainText');
+  const chunksArea     = document.getElementById('dlgChunksArea');
+  const tipsEl         = document.getElementById('dlgTips');
+
+  /* 정답 텍스트: en2kr/all → 한국어, kr2en → 영어 */
+  if (mode === 'kr2en') {
+    answerMainText.textContent = s.english || '';
+  } else {
+    answerMainText.textContent = s.answer || '';
+  }
+
+  /* 청크 */
+  if (s.chunks && s.chunks.length) {
+    chunksArea.innerHTML = s.chunks.map((c, i) =>
+      `<span class="chunk-pill ${CHUNK_COLORS[i % CHUNK_COLORS.length]}">${c}</span>`
+    ).join('');
+    chunksArea.style.display = 'flex';
+  } else {
+    chunksArea.style.display = 'none';
+  }
+
+  /* 팁 */
+  if (s.tips) {
+    tipsEl.textContent = '💡 ' + s.tips;
+    tipsEl.style.display = 'block';
+  } else {
+    tipsEl.style.display = 'none';
+  }
+}
+
+/* ────── 정답 공개 ────── */
+function dlgRevealAnswer() {
+  /* all 모드는 이미 공개 상태 */
+  if (dlgMode === 'all') return;
+  if (dlgRevealedAnswer) return;
+  dlgRevealedAnswer = true;
+
+  const s           = dlgSentences[dlgIndex];
+  if (!s) return;
+
+  const answerBox    = document.getElementById('dlgAnswer');
+  const answerHidden = document.getElementById('dlgAnswerHidden');
+  const answerDetail = document.getElementById('dlgAnswerDetail');
+  const answerLabel  = document.getElementById('dlgAnswerLabel');
+
+  /* 박스를 revealed 상태로 전환 */
+  answerBox.classList.add('revealed');
+  answerBox.style.cursor = 'default';
+  answerHidden.style.display = 'none';
+  answerDetail.style.display = 'block';
+
+  /* 정답 레이블 바운스 */
+  answerLabel.innerHTML = '✅ 정답';
+  answerLabel.classList.remove('reveal-drop');
+  void answerLabel.offsetWidth;
+  answerLabel.classList.add('reveal-drop');
+
+  /* 상세 내용 채우기 */
+  _fillAnswerDetail(s, dlgMode);
+
+  /* ── 게임 특수효과 ── */
+  const answerMainText = document.getElementById('dlgAnswerMainText');
+  const revealDetail   = document.getElementById('dlgRevealDetail');
+
+  /* 박스 팝 + 빛 번쩍임 */
+  answerBox.classList.remove('reveal-pop', 'reveal-glow');
+  void answerBox.offsetWidth;
+  answerBox.classList.add('reveal-pop', 'reveal-glow');
+
+  /* 청크/팁 아래서 올라오기 */
+  if (revealDetail) {
+    revealDetail.classList.remove('reveal-up');
+    void revealDetail.offsetWidth;
+    revealDetail.classList.add('reveal-up');
+  }
+
+  /* 정답 공개 후 자동 TTS */
+  setTimeout(() => dlgPlayCurrent(), 400);
+}
+
+/* ────── 학습 결과 마킹 ────── */
+function dlgMarkKnow() {
+  const s = dlgSentences[dlgIndex];
+  if (s) { dlgKnownIds.add(s.id); dlgUnknownIds.delete(s.id); }
+  dlgUpdateScore();
+  dlgNext();
+}
+
+function dlgMarkDontKnow() {
+  const s = dlgSentences[dlgIndex];
+  if (s) { dlgUnknownIds.add(s.id); dlgKnownIds.delete(s.id); }
+  dlgUpdateScore();
+  dlgNext();
+}
+
+function dlgUpdateScore() {
+  const total   = dlgSentences.length;
+  const known   = dlgKnownIds.size;
+  const unknown = dlgUnknownIds.size;
+  const remain  = total - known - unknown;
+  const k = document.getElementById('dlgScoreKnown');
+  const u = document.getElementById('dlgScoreUnknown');
+  const r = document.getElementById('dlgScoreRemain');
+  if (k) k.textContent = '✅ ' + known;
+  if (u) u.textContent = '😅 ' + unknown;
+  if (r) r.textContent = '📝 ' + remain + ' 남음';
+}
+
+/* ────── 네비게이션 ────── */
+function dlgPrev() {
+  dlgStopAutoPlay();
+  if (dlgIndex > 0) {
+    dlgIndex--;
+    dlgRenderSentence();
+    setTimeout(() => dlgPlayCurrent(), 300);
+  }
+}
+
+function dlgNext() {
+  if (dlgIndex < dlgSentences.length - 1) {
+    dlgIndex++;
+    dlgRenderSentence();
+    setTimeout(() => dlgPlayCurrent(), 300);
+  } else {
+    if (dlgRepeat) {
+      dlgIndex = 0;
+      dlgRenderSentence();
+      setTimeout(() => dlgPlayCurrent(), 300);
+    } else dlgStopAutoPlay();
+  }
+}
+
+function dlgGoFirst() {
+  dlgStopAutoPlay();
+  dlgIndex = 0;
+  dlgRenderSentence();
+}
+
+/* ────── 현재 문장 TTS 재생 ────── */
+function dlgPlayCurrent() {
+  if (!dlgSentences.length) return;
+  const s = dlgSentences[dlgIndex];
+  if (!s) return;
+
+  /* 항상 영어 TTS — 한→영 퀴즈에서 정답 공개 후 재생 */
+  const txt = s.english;
+
+  /* TTS 버튼 애니메이션 */
+  const ttsBtn  = document.getElementById('dlgTtsBtn');
+  const numTile = document.getElementById('dlgNumTile');
+  if (ttsBtn)  ttsBtn.classList.add('playing');
+  if (numTile) numTile.classList.add('playing');
+
+  window.speechSynthesis.cancel();
+  const dlgSpeedEl = document.getElementById('dlgSpeedSlider');
+  const rate = parseFloat(dlgSpeedEl ? dlgSpeedEl.value : document.getElementById('rateSlider').value);
+
+  const utt = new SpeechSynthesisUtterance(txt);
+  utt.lang   = 'en-US';
+  utt.rate   = rate;
+  utt.pitch  = parseFloat(document.getElementById('pitchSlider').value);
+  utt.volume = parseFloat(document.getElementById('volumeSlider').value);
+  if (selectedVoice) utt.voice = selectedVoice;
+  utt.onend = () => {
+    if (ttsBtn)  ttsBtn.classList.remove('playing');
+    if (numTile) numTile.classList.remove('playing');
+  };
+  window.speechSynthesis.speak(utt);
+}
+
+/* ────── 자동재생 ────── */
+function dlgToggleAutoPlay() {
+  if (dlgAutoPlaying && !dlgPaused) {
+    /* 일시정지 */
+    dlgPaused = true;
+    window.speechSynthesis.cancel();
+    clearTimeout(dlgAutoTimer);
+    const badge = document.getElementById('dlgAutoBadge');
+    badge.classList.add('paused');
+    document.getElementById('dlgAutoLabel').textContent = '일시정지';
+    document.getElementById('dlgEnglish').classList.remove('listening');
+  } else if (dlgAutoPlaying && dlgPaused) {
+    /* 재개 */
+    dlgPaused = false;
+    const badge = document.getElementById('dlgAutoBadge');
+    badge.classList.remove('paused');
+    document.getElementById('dlgAutoLabel').textContent = '자동재생 중';
+    dlgAutoPlayStep();
+  } else {
+    dlgStartAutoPlay();
+  }
+}
+
+function dlgStartAutoPlay() {
+  dlgAutoPlaying = true;
+  dlgPaused = false;
+  dlgIndex = 0;
+  const badge = document.getElementById('dlgAutoBadge');
+  badge.classList.add('visible');
+  badge.classList.remove('paused');
+  document.getElementById('dlgAutoLabel').textContent = '자동재생 중';
+  dlgRenderSentence();
+  dlgAutoPlayStep();
+}
+
+function dlgAutoPlayStep() {
+  if (!dlgAutoPlaying || dlgPaused) return;
+  if (!dlgSentences.length) return;
+
+  const s = dlgSentences[dlgIndex];
+  if (!s) { dlgStopAutoPlay(); return; }
+
+  /* 전체보기/자동재생 모드: 정답 자동 공개 */
+  if (dlgMode === 'all') {
+    /* all 모드는 이미 열려있음 (dlgRenderSentence에서 처리) */
+  }
+
+  /* 카드 하이라이트 & 스크롤 */
+  document.querySelectorAll('.sentence-card.playing').forEach(c => c.classList.remove('playing'));
+  const card = document.getElementById('card-' + s.id);
+  if (card) {
+    card.classList.add('playing');
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  /* TTS 버튼 + 이미지 타일 애니메이션 (자동재생) */
+  const emojiRowAuto = document.getElementById('dlgTtsBtn');
+  const numTileAuto  = document.getElementById('dlgNumTile');
+  if (emojiRowAuto) emojiRowAuto.classList.add('playing');
+  if (numTileAuto)  numTileAuto.classList.add('playing');
+
+  const dlgSpeedEl = document.getElementById('dlgSpeedSlider');
+  const rate = parseFloat(dlgSpeedEl ? dlgSpeedEl.value : document.getElementById('rateSlider').value);
+  window.speechSynthesis.cancel();
+
+  const utt = new SpeechSynthesisUtterance(s.english);
+  utt.lang   = 'en-US';
+  utt.rate   = rate;
+  utt.pitch  = parseFloat(document.getElementById('pitchSlider').value);
+  utt.volume = parseFloat(document.getElementById('volumeSlider').value);
+  if (selectedVoice) utt.voice = selectedVoice;
+
+  utt.onend = () => {
+    if (emojiRowAuto) emojiRowAuto.classList.remove('playing');
+    if (numTileAuto)  numTileAuto.classList.remove('playing');
+    if (!dlgAutoPlaying || dlgPaused) return;
+    const interval = getInterval();
+    dlgAutoTimer = setTimeout(() => {
+      if (!dlgAutoPlaying || dlgPaused) return;
+      if (dlgIndex < dlgSentences.length - 1) {
+        dlgIndex++;
+        dlgRenderSentence();
+        dlgAutoPlayStep();
+      } else {
+        if (dlgRepeat) { dlgIndex = 0; dlgRenderSentence(); dlgAutoPlayStep(); }
+        else dlgStopAutoPlay();
+      }
+    }, interval);
+  };
+  window.speechSynthesis.speak(utt);
+}
+
+function dlgStopAutoPlay() {
+  dlgAutoPlaying = false;
+  dlgPaused = false;
+  window.speechSynthesis.cancel();
+  clearTimeout(dlgAutoTimer);
+
+  const badge = document.getElementById('dlgAutoBadge');
+  if (badge) { badge.classList.remove('visible', 'paused'); }
+  const ttsBtnStop = document.getElementById('dlgTtsBtn');
+  if (ttsBtnStop) ttsBtnStop.classList.remove('playing');
+}
+
+function dlgToggleRepeat() {
+  dlgRepeat = !dlgRepeat;
+  const btn = document.getElementById('dlgRepeatBtn');
+  if (btn) {
+    btn.style.background = dlgRepeat ? '#667eea' : '#e0e0e0';
+    btn.style.color = dlgRepeat ? 'white' : '#555';
+    btn.title = dlgRepeat ? '🔁 반복 켜짐' : '반복 켜기/끄기';
+  }
+}
+
+/* ────── 다이얼로그 키보드 단축키 추가 ────── */
+document.addEventListener('keydown', function(dlgKeyEvt) {
+  const isOpen = document.getElementById('dlgOverlay').classList.contains('active');
+  if (!isOpen) return;
+
+  /* 입력 필드에 포커스 있으면 무시 */
+  const tag = dlgKeyEvt.target.tagName.toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+
+  switch (dlgKeyEvt.code) {
+    case 'Escape':
+      closeDlg();
+      break;
+    case 'ArrowRight':
+    case 'ArrowDown':
+      dlgKeyEvt.preventDefault();
+      if (dlgAutoPlaying) { /* 자동재생 중엔 건너뜀 */ break; }
+      dlgNext();
+      break;
+    case 'ArrowLeft':
+    case 'ArrowUp':
+      dlgKeyEvt.preventDefault();
+      dlgPrev();
+      break;
+    case 'Space':
+      dlgKeyEvt.preventDefault();
+      dlgToggleAutoPlay();
+      break;
+    case 'Enter':
+      dlgKeyEvt.preventDefault();
+      if (!dlgRevealedAnswer) dlgRevealAnswer();
+      else dlgPlayCurrent();
+      break;
+  }
+}, true); /* capture=true: Space 이벤트가 기존 핸들러보다 먼저 처리 */
+
 </script>
 </body>
 </html>
